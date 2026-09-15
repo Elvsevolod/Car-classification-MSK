@@ -1,0 +1,1 @@
+"""Minimal vehicle ReID baseline."""

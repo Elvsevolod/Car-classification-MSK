@@ -1,0 +1,10 @@
+.DS_Store
+.venv/
+.uv-cache/
+__pycache__/
+.pytest_cache/
+dataset/
+artifacts/
+output/
+.playwright-cli/
+:memory:.ses
