@@ -20,6 +20,9 @@ SHA-384 (checked at every runtime load):
 PyTorch→ONNX verification on a real crop: output `(1, 512)`, maximum
 absolute difference `1.22e-5`, cosine similarity `1.00000012`.
 
+The previous epoch-18 checkpoint remains available as
+`osnet_ain_x1_0_vehicle_reid_development.onnx` for reproducible comparison.
+
 ## Stock initialization checkpoint
 
 Model: `vehicle-reid-0001`, OSNet-AIN x1.0, 512-dimensional descriptor.

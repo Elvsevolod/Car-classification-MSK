@@ -1,0 +1,23 @@
+[
+  {
+    "epoch": 1,
+    "lr": {
+      "encoder": 5.9702820065551936e-05,
+      "head": 0.0005970282006555193
+    },
+    "train": {
+      "loss": 2.219789013527987,
+      "classification": 1.9770561812216776,
+      "metric": 0.14529701753666527,
+      "consistency": 0.11311385662932145,
+      "accuracy": 0.8728070175438597,
+      "metric_weight": 1.4948762510958067
+    },
+    "timing": {
+      "train_seconds": 43.56901329100947,
+      "epoch_seconds": 43.56901329100947,
+      "elapsed_seconds": 43.56901516698417,
+      "estimated_remaining_seconds": 0.0
+    }
+  }
+]

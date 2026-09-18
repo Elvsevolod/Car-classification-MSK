@@ -223,6 +223,33 @@ batch/single inference, кэш, API и отказ.
 Новый ML-код можно подключать за интерфейсом Encoder, сохранив HTTP-контракт.
 При замене весов обязательно пересчитать эмбеддинги и порог.
 
+## Дообучение OSNet
+
+Обучение вынесено в [`notebooks/train_osnet.ipynb`](notebooks/train_osnet.ipynb),
+а повторно используемая логика — в `training/`. Версионированные
+ноутбуки, конфигурации и результаты хранятся в [`OSNet-AIN-x1.0/`](OSNet-AIN-x1.0/):
+
+- `variant_01_initial` — первое дообучение;
+- `variant_02_hpo_bnneck_supcon` — staged Optuna HPO, `P=16/K=2`, BNNeck,
+  раздельный LR и SupCon; его checkpoint эпохи 5 активен в MVP;
+- `stage_02_inference` — flip TTA и потоковый k-reciprocal reranking;
+- `variant_03_gem` — square/letterbox и AvgPool/GeM; GeM отклонён;
+- `variant_04_training_strategy` — MixStyle, hard negatives, dynamic loss и
+  Circle Loss; прирост относительно активного MVP не подтверждён.
+
+Полная схема данных, аугментаций, loss, калибровки и артефактов описана в
+[`TRAINING.md`](TRAINING.md). Для обучения используйте отдельный `.venv`:
+
+```bash
+uv pip install --python .venv/bin/python -r requirements-train.txt
+uv pip check --python .venv/bin/python
+.venv/bin/python -m jupyter lab
+```
+
+Development-обучение использует 925 identity. Отдельные 307/309 identity
+остаются для calibration/validation; test query и test gallery в обучении
+и подборе гиперпараметров не участвуют.
+
 ## Источники
 
 - [OSNet vehicle-reid-0001 / Open Model Zoo](https://github.com/openvinotoolkit/open_model_zoo/blob/master/models/public/vehicle-reid-0001/README.md).
@@ -236,5 +263,5 @@ batch/single inference, кэш, API и отказ.
 
 Весь `dataset/` (изображения, CSV и README датасета), временные результаты
 и окружение исключены из Git. После клонирования датасет нужно разместить локально.
-Стоковый и активный HPO checkpoint входят в репозиторий.
+Стоковый, development- и активный HPO checkpoint входят в репозиторий.
 Автоматических commit/push нет.

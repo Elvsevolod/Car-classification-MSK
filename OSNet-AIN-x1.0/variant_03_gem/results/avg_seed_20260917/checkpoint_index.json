@@ -1,0 +1,31 @@
+{
+  "best": {
+    "map": {
+      "value": 0.7972871127758346,
+      "epoch": 14
+    },
+    "f1": {
+      "value": 0.8070953436807096,
+      "epoch": 1
+    },
+    "tnr": {
+      "value": 0.7580645161290323,
+      "epoch": 12
+    }
+  },
+  "last_epoch": 15,
+  "important_epoch_files": [
+    "epoch_01.pt",
+    "epoch_03.pt",
+    "epoch_04.pt",
+    "epoch_06.pt",
+    "epoch_07.pt",
+    "epoch_08.pt",
+    "epoch_09.pt",
+    "epoch_10.pt",
+    "epoch_11.pt",
+    "epoch_12.pt",
+    "epoch_13.pt",
+    "epoch_14.pt"
+  ]
+}

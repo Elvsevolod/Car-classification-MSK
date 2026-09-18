@@ -3,8 +3,16 @@
 .uv-cache/
 __pycache__/
 .pytest_cache/
+.ipynb_checkpoints/
 dataset/
 artifacts/
 output/
 .playwright-cli/
 :memory:.ses
+OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/weights/**/*.pt
+OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/weights/**/*.onnx
+OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/results/*.sqlite3
+OSNet-AIN-x1.0/variant_03_gem/weights/**/*.pt
+OSNet-AIN-x1.0/variant_03_gem/weights/**/*.onnx
+OSNet-AIN-x1.0/variant_04_training_strategy/weights/**/*.pt
+OSNet-AIN-x1.0/variant_04_training_strategy/weights/**/*.onnx
