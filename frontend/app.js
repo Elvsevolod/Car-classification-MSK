@@ -90,7 +90,7 @@ $('search').addEventListener('submit', async event => {
     for (const item of result.results) {
       const article = document.createElement('article');
       const image = document.createElement('img'); image.src = item.crop_url; image.alt = `Кандидат ${item.rank}`;
-      const text = document.createElement('p'); text.textContent = `#${item.rank} · cosine ${item.similarity.toFixed(4)}\n${item.image_id}`;
+      const text = document.createElement('p'); text.textContent = `#${item.rank} · rerank ${item.rerank_score.toFixed(4)} · cosine ${item.similarity.toFixed(4)}\n${item.image_id}`;
       const link = document.createElement('a'); link.href = `/api/images/gallery/${item.image_id}`; link.target = '_blank'; link.rel = 'noopener'; link.textContent = 'Полный кадр';
       article.append(image, text, link); $('results').append(article);
     }

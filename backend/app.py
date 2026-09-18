@@ -11,7 +11,8 @@ from fastapi.staticfiles import StaticFiles
 from PIL import Image, UnidentifiedImageError
 from pydantic import BaseModel, Field
 
-from .core import ARTIFACTS, DATASET, ROOT, Encoder, Gallery, bbox, crop_image, read_rows
+from .core import (ARTIFACTS, DATASET, MODEL_FINE_TUNED, MODEL_NAME, ROOT,
+                   Encoder, Gallery, bbox, crop_image, read_rows)
 
 MAX_UPLOAD_BYTES = 15 * 1024 * 1024
 MAX_PIXELS = 25_000_000
@@ -32,6 +33,7 @@ class Candidate(BaseModel):
     w: int
     h: int
     similarity: float
+    rerank_score: float
     crop_url: str
 
 
@@ -65,7 +67,7 @@ def create_app(dataset=DATASET, artifacts=ARTIFACTS):
         app.state.queries = {r["image_id"]: r for r in read_rows(dataset / "test_query.csv")}
         yield
 
-    app = FastAPI(title="Vehicle ReID · OSNet baseline", version="0.1.0", lifespan=lifespan)
+    app = FastAPI(title="Vehicle ReID · fine-tuned OSNet", version="0.2.0", lifespan=lifespan)
     app.mount("/static", StaticFiles(directory=ROOT / "frontend"), name="static")
 
     @app.get("/", include_in_schema=False)
@@ -74,17 +76,21 @@ def create_app(dataset=DATASET, artifacts=ARTIFACTS):
 
     @app.get("/api/health")
     def health():
+        from .rerank import ACTIVE_K1, ACTIVE_K2, ACTIVE_LAMBDA
         report = load_metrics(app.state.encoder, artifacts)
-        return {"status": "ready", "model": "vehicle-reid-0001 / OSNet-AIN x1.0", "fine_tuned": False,
+        return {"status": "ready", "model": MODEL_NAME, "fine_tuned": MODEL_FINE_TUNED,
                 "embedding_dim": 512, "device": "CPU", "gallery_size": len(app.state.gallery.rows),
                 "encoder_fingerprint": app.state.encoder.fingerprint,
-                "default_threshold": report["threshold"] if report else None}
+                "default_threshold": report["threshold"] if report else None,
+                "reranking": {"method": "streaming k-reciprocal", "k1": ACTIVE_K1,
+                              "k2": ACTIVE_K2, "lambda": ACTIVE_LAMBDA,
+                              "refusal_score": "maximum raw cosine"}}
 
     @app.get("/api/metrics")
-    def baseline_metrics():
+    def model_metrics():
         report = load_metrics(app.state.encoder, artifacts)
         if report is None:
-            raise HTTPException(404, "Run python -m backend.evaluate to measure the baseline")
+            raise HTTPException(404, "Run python -m backend.evaluate to measure the active model")
         return report
 
     @app.get("/api/queries")

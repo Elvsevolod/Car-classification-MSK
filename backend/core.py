@@ -15,8 +15,13 @@ ort.disable_telemetry_events()
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = Path(os.environ.get("DATASET_DIR", ROOT / "dataset"))
 ARTIFACTS = ROOT / "artifacts"
-MODEL = ROOT / "models/osnet_ain_x1_0_vehicle_reid.onnx"
-MODEL_SHA384 = "0515ce72f653c39780d5b87dfed7255d396dd2b1e8b6e91fbaacdfad1da189166343157273c02f3b0fede3050ef7abb7"
+STOCK_MODEL = ROOT / "models/osnet_ain_x1_0_vehicle_reid.onnx"
+STOCK_MODEL_SHA384 = "0515ce72f653c39780d5b87dfed7255d396dd2b1e8b6e91fbaacdfad1da189166343157273c02f3b0fede3050ef7abb7"
+MODEL = ROOT / "models/osnet_ain_x1_0_vehicle_reid_hpo_best_map.onnx"
+MODEL_SHA384 = "4832ca8134b31f84ec52b9a6a72aa90f9e55e0b8ab7d52d02820040536677d712df39b9c9604d6da21ee7bc823db6818"
+MODEL_NAME = "OSNet-AIN x1.0 / HPO best-mAP epoch 5"
+MODEL_FINE_TUNED = True
+MODEL_TRAINING_EPOCH = 5
 PREPROCESS = "exif-rgb-bbox-bilinear208-imagenet-l2-v1"
 
 
@@ -82,10 +87,17 @@ def rank(scores, top_k):
 
 class Encoder:
     def __init__(self, model_path=MODEL):
+        model_path = Path(model_path)
+        expected_checksum = {
+            MODEL.resolve(): MODEL_SHA384,
+            STOCK_MODEL.resolve(): STOCK_MODEL_SHA384,
+        }.get(model_path.resolve())
+        if expected_checksum is None:
+            raise ValueError(f"Unrecognized OSNet checkpoint: {model_path}")
         with open(model_path, "rb") as stream:
             checksum = hashlib.file_digest(stream, "sha384").hexdigest()
-        if checksum != MODEL_SHA384:
-            raise ValueError("OSNet checksum mismatch; expected the official unchanged checkpoint")
+        if checksum != expected_checksum:
+            raise ValueError("OSNet checksum mismatch for bundled checkpoint")
         self.model_sha256 = sha256(model_path)
         self.fingerprint = hashlib.sha256((self.model_sha256 + PREPROCESS).encode()).hexdigest()
         options = ort.SessionOptions()
@@ -95,31 +107,38 @@ class Encoder:
         self.session = ort.InferenceSession(str(model_path), sess_options=options, providers=["CPUExecutionProvider"])
         self.input_name = self.session.get_inputs()[0].name
 
-    def encode_batch(self, batch):
-        output = self.session.run(["output"], {self.input_name: np.stack(batch)})[0]
-        if output.shape != (len(batch), 512):
+    def encode_batch(self, batch, flip_tta=False):
+        inputs = np.stack(batch)
+        if flip_tta:
+            inputs = np.concatenate([inputs, np.ascontiguousarray(inputs[..., ::-1])])
+        output = self.session.run(["output"], {self.input_name: inputs})[0]
+        expected = len(batch) * (2 if flip_tta else 1)
+        if output.shape != (expected, 512):
             raise ValueError(f"Unexpected model output: {output.shape}")
+        if flip_tta:
+            original, mirrored = np.split(normalize(output), 2)
+            output = original + mirrored
         return normalize(output)
 
-    def encode(self, image, box):
-        return self.encode_batch([preprocess(image, box)])[0]
+    def encode(self, image, box, flip_tta=False):
+        return self.encode_batch([preprocess(image, box)], flip_tta)[0]
 
 
-def encode_rows(encoder, rows, dataset=DATASET, batch_size=16):
+def encode_rows(encoder, rows, dataset=DATASET, batch_size=16, flip_tta=False):
     result = []
     for start in range(0, len(rows), batch_size):
         batch = []
         for row in rows[start:start + batch_size]:
             with Image.open(dataset / "images" / f"{row['image_id']}.jpg") as image:
                 batch.append(preprocess(image, bbox(row)))
-        result.append(encoder.encode_batch(batch))
+        result.append(encoder.encode_batch(batch, flip_tta))
         if start % (batch_size * 10) == 0:
             print(f"OSNet: {min(start + batch_size, len(rows))}/{len(rows)}", flush=True)
     return np.concatenate(result)
 
 
 class Gallery:
-    """Persistent SQLite metadata/vectors, exact cosine search in memory."""
+    """Persistent vectors with streaming k-reciprocal search in memory."""
 
     def __init__(self, encoder, dataset=DATASET, db_path=ARTIFACTS / "gallery.sqlite3"):
         self.rows = read_rows(dataset / "test_gallery.csv")
@@ -149,12 +168,31 @@ class Gallery:
                     for i, (row, vector) in enumerate(zip(self.rows, self.vectors))
                 ])
                 db.execute("INSERT OR REPLACE INTO info VALUES ('fingerprint', ?)", (self.fingerprint,))
+        if len(self.rows) > 1:
+            from .rerank import ACTIVE_K1, ACTIVE_K2, KReciprocalReranker
+            self.reranker = KReciprocalReranker(
+                self.vectors, min(ACTIVE_K1, len(self.rows) - 1), min(ACTIVE_K2, len(self.rows)))
+        else:
+            self.reranker = None
+
+    def confidence(self, vector):
+        """Maximum raw cosine used only for the calibrated refusal decision."""
+        return float(np.max(self.vectors @ normalize(vector)))
 
     def search(self, vector, top_k=10, threshold=None):
-        scores = np.clip(self.vectors @ normalize(vector), -1, 1)
-        selected = rank(scores, top_k)
-        if threshold is not None:
-            selected = selected[scores[selected] >= threshold]
+        vector = normalize(vector)
+        scores = np.clip(self.vectors @ vector, -1, 1)
+        if threshold is not None and float(np.max(scores)) < threshold:
+            return []
+        if self.reranker is None:
+            selected = rank(scores, top_k)
+            rerank_scores = scores
+        else:
+            from .rerank import ACTIVE_LAMBDA
+            distances = self.reranker.distances(vector, ACTIVE_LAMBDA)
+            selected = np.argsort(distances, kind="stable")[:top_k]
+            rerank_scores = -distances
         return [{"rank": i + 1, **self.rows[int(index)], "similarity": float(scores[index]),
+                 "rerank_score": float(rerank_scores[index]),
                  "crop_url": f"/api/images/gallery/{self.rows[int(index)]['image_id']}?crop=true"}
                 for i, index in enumerate(selected)]

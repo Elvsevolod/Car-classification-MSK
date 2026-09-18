@@ -1,4 +1,4 @@
-"""Reproducible baseline, threshold calibration and official test exports."""
+"""Reproducible evaluation, threshold calibration and official test exports."""
 import argparse
 import csv
 import json
@@ -10,10 +10,15 @@ from collections import defaultdict
 import numpy as np
 from PIL import Image
 
-from .core import (ARTIFACTS, DATASET, MODEL, PREPROCESS, Encoder, Gallery,
-                   bbox, encode_rows, rank, read_rows, sha256)
+from .core import (ARTIFACTS, DATASET, MODEL, MODEL_FINE_TUNED, MODEL_NAME,
+                   MODEL_TRAINING_EPOCH, PREPROCESS, Encoder, Gallery, bbox,
+                   encode_rows, rank, read_rows, sha256)
+from .rerank import (ACTIVE_K1, ACTIVE_K2, ACTIVE_LAMBDA,
+                     rerank_protocol)
 
 SEED = 20260915
+SUBMISSION_HEADER = ["query_id"] + [f"gallery_id_{i}" for i in range(1, 11)]
+CANDIDATES_HEADER = ["query_id", "gallery_id", "confidence"]
 
 
 def make_splits(rows, frame_hashes, seed=SEED):
@@ -38,7 +43,7 @@ def make_splits(rows, frame_hashes, seed=SEED):
         groups[find(identity)].append(identity)
     groups = list(groups.values())
     random.Random(seed).shuffle(groups)
-    # 60% reserved for future fine-tuning, 20% calibration, 20% validation.
+    # 60% training, 20% calibration, 20% validation.
     a, b = int(len(groups) * .6), int(len(groups) * .8)
     return {name: sorted(i for group in part for i in group) for name, part in
             zip(("train", "calibration", "validation"), (groups[:a], groups[a:b], groups[b:]))}
@@ -71,50 +76,143 @@ def ranked_queries(queries, gallery, embeddings):
     output = []
     for query in queries:
         scores = np.clip(vectors @ embeddings[query["image_id"]], -1, 1)
-        # TЗ: all comparisons from the same camera are excluded.
-        eligible = np.array([i for i, r in enumerate(gallery) if r["camera_id"] != query["camera_id"]])
+        # Only same-vehicle + same-camera pairs are junk. Same-camera negatives remain.
+        eligible = np.array([
+            i for i, row in enumerate(gallery)
+            if not (row["vehicle_id"] == query["vehicle_id"] and row["camera_id"] == query["camera_id"])
+        ], dtype=np.int64)
         order = eligible[rank(scores[eligible], len(eligible))]
         matches = np.array([gallery[int(i)]["vehicle_id"] == query["vehicle_id"] for i in order])
         output.append((scores[order], matches))
     return output
 
 
-def metrics(ranked, threshold):
-    aps, inps, r1, r5 = [], [], [], []
-    tp = fp = total_relevant = unknown = true_negative = 0
-    for scores, matches in ranked:
+def metrics(ranked, threshold, acceptance_scores=None):
+    aps_at_10, full_aps, inps, r1, r5 = [], [], [], [], []
+    tp = fp = fn = unknown = true_negative = open_set_fp = 0
+    if acceptance_scores is None:
+        acceptance_scores = [scores[0] if len(scores) else -np.inf for scores, _ in ranked]
+    if len(acceptance_scores) != len(ranked):
+        raise ValueError("acceptance_scores must contain one value per query")
+    for (scores, matches), acceptance_score in zip(ranked, acceptance_scores):
         positions = np.flatnonzero(matches)
-        total_relevant += len(positions)
-        accepted = scores[:10] >= threshold
-        tp += int(np.sum(matches[:10] & accepted))
-        fp += int(np.sum(~matches[:10] & accepted))
+        accepted = bool(acceptance_score >= threshold)
         if len(positions):
-            aps.append(float(np.mean(np.arange(1, len(positions) + 1) / (positions + 1))))
+            top_matches = matches[:10]
+            precision = np.cumsum(top_matches) / np.arange(1, len(top_matches) + 1)
+            denominator = min(len(positions), 10)
+            aps_at_10.append(float(np.sum(precision * top_matches) / denominator))
+            full_aps.append(float(np.mean(np.arange(1, len(positions) + 1) / (positions + 1))))
             inps.append(float(len(positions) / (positions[-1] + 1)))
             r1.append(bool(matches[0]))
             r5.append(bool(np.any(matches[:5])))
+            if not accepted:
+                fn += 1
+            elif matches[0]:
+                tp += 1
+            else:
+                fp += 1
         else:
             unknown += 1
-            true_negative += int(not accepted.any())
-    fn = total_relevant - tp  # Includes positives beyond the returned top-10.
-    return {"mAP": float(np.mean(aps)) if aps else None,
+            if accepted:
+                fp += 1
+                open_set_fp += 1
+            else:
+                true_negative += 1
+    candidate_f1 = 2 * tp / (2 * tp + fp + fn) if 2 * tp + fp + fn else 0
+    tnr = true_negative / (true_negative + open_set_fp) if unknown else None
+    return {"mAP": float(np.mean(aps_at_10)) if aps_at_10 else None,
+            "mAP_at_10": float(np.mean(aps_at_10)) if aps_at_10 else None,
+            "full_mAP": float(np.mean(full_aps)) if full_aps else None,
             "Rank_1": float(np.mean(r1)) if r1 else None,
             "Rank_5": float(np.mean(r5)) if r5 else None,
             "mINP": float(np.mean(inps)) if inps else None,
             "candidate_precision": tp / (tp + fp) if tp + fp else 0,
-            "candidate_recall": tp / total_relevant if total_relevant else 0,
-            "candidate_F1": 2 * tp / (2 * tp + fp + fn) if 2 * tp + fp + fn else 0,
-            "TNR": true_negative / unknown if unknown else None,
-            "known_queries": len(aps), "unknown_queries": unknown,
-            "TP": tp, "FP": fp, "FN": fn, "true_refusals": true_negative}
+            "candidate_recall": tp / (tp + fn) if tp + fn else 0,
+            "candidate_F1": candidate_f1, "TNR": tnr,
+            "candidate_score": .7 * candidate_f1 + .3 * tnr if tnr is not None else None,
+            "known_queries": len(aps_at_10), "unknown_queries": unknown,
+            "TP": tp, "FP": fp, "FN": fn, "TN": true_negative,
+            "open_set_FP": open_set_fp, "true_refusals": true_negative}
 
 
-def calibrate(ranked):
-    # Search every distinct top-10 score, plus the all-refuse boundary.
-    # Equal F1 prefers the higher (more conservative) threshold.
-    values = np.unique(np.concatenate([s[:10] for s, _ in ranked])).astype(float)
-    choices = np.append(values, np.nextafter(1.0, 2.0))
-    return max(choices, key=lambda t: (metrics(ranked, float(t))["candidate_F1"], t)).item()
+def calibrate(ranked, acceptance_scores=None):
+    # Optimize the official 0.7 * F1 + 0.3 * TNR score on calibration only.
+    curve = threshold_curve(ranked, acceptance_scores)
+    if curve[0]["candidate_score"] is None:
+        raise ValueError("Refusal calibration requires open-set queries to define TNR")
+    return max(curve,
+               key=lambda item: (item["candidate_score"], item["candidate_F1"], item["threshold"]))["threshold"]
+
+
+def threshold_curve(ranked, acceptance_scores=None):
+    """Query-level metrics at every Top-1 score, plus the all-refuse boundary."""
+    if acceptance_scores is None:
+        acceptance_scores = [scores[0] if len(scores) else -np.inf for scores, _ in ranked]
+    values = np.unique(acceptance_scores).astype(float)
+    if not len(values):
+        raise ValueError("Cannot calibrate a refusal threshold without gallery scores")
+    choices = np.append(values, np.nextafter(values[-1], np.inf))
+    return [{"threshold": float(threshold), **metrics(ranked, float(threshold), acceptance_scores)}
+            for threshold in choices]
+
+
+def _read_strict_csv(path, expected_header):
+    with open(path, newline="", encoding="utf-8-sig") as stream:
+        reader = csv.reader(stream)
+        header = next(reader, None)
+        if header != expected_header:
+            raise ValueError(f"Invalid header in {path.name}: {header}; expected {expected_header}")
+        rows = list(reader)
+    if any(len(row) != len(expected_header) for row in rows):
+        raise ValueError(f"Invalid column count in {path.name}")
+    return rows
+
+
+def validate_artifacts(dataset=DATASET, output=ARTIFACTS):
+    """Validate the three submission artifacts against the published contract."""
+    query_ids = [row["image_id"] for row in read_rows(dataset / "test_query.csv")]
+    gallery_ids = [row["image_id"] for row in read_rows(dataset / "test_gallery.csv")]
+    query_set = set(query_ids)
+    gallery_set = set(gallery_ids)
+
+    embeddings = np.load(output / "embeddings.npy", allow_pickle=False)
+    if embeddings.ndim != 2 or embeddings.shape[0] != len(query_ids) + len(gallery_ids):
+        raise ValueError("embeddings.npy must be a 2D array with query rows followed by gallery rows")
+    if embeddings.dtype != np.float32 or embeddings.shape[1] < 1:
+        raise ValueError("embeddings.npy must have dtype float32 and a non-empty embedding dimension")
+    if not np.isfinite(embeddings).all() or np.any(np.linalg.norm(embeddings, axis=1) <= 1e-12):
+        raise ValueError("embeddings.npy contains non-finite or zero vectors")
+
+    submission = _read_strict_csv(output / "submission.csv", SUBMISSION_HEADER)
+    if [row[0] for row in submission] != query_ids:
+        raise ValueError("submission.csv must contain every query exactly once in test_query.csv order")
+    for row in submission:
+        candidates = row[1:]
+        if len(set(candidates)) != 10 or not set(candidates).issubset(gallery_set):
+            raise ValueError(f"submission.csv query {row[0]} must contain 10 distinct gallery IDs")
+
+    candidates = _read_strict_csv(output / "candidates.csv", CANDIDATES_HEADER)
+    seen_pairs = set()
+    accepted_queries = set()
+    for query_id, gallery_id, confidence in candidates:
+        if query_id not in query_set or gallery_id not in gallery_set:
+            raise ValueError("candidates.csv contains an unknown or empty query/gallery ID")
+        try:
+            score = float(confidence)
+        except ValueError as error:
+            raise ValueError("candidates.csv confidence must be numeric") from error
+        if not np.isfinite(score):
+            raise ValueError("candidates.csv confidence must be finite")
+        pair = query_id, gallery_id
+        if pair in seen_pairs:
+            raise ValueError(f"Duplicate candidate pair: {query_id}, {gallery_id}")
+        seen_pairs.add(pair)
+        accepted_queries.add(query_id)
+    return {"queries": len(query_ids), "gallery": len(gallery_ids),
+            "embedding_shape": list(embeddings.shape), "embedding_dtype": str(embeddings.dtype),
+            "submission_rows": len(submission), "candidate_rows": len(candidates),
+            "accepted_queries": len(accepted_queries), "refused_queries": len(query_ids) - len(accepted_queries)}
 
 
 def write_json(path, value):
@@ -132,9 +230,11 @@ def evaluate(encoder, dataset=DATASET, output=ARTIFACTS):
     selected = list(selected.values())
     features = encode_rows(encoder, selected, dataset)
     embeddings = dict(zip((r["image_id"] for r in selected), features))
-    cal = ranked_queries(*protocols["calibration"], embeddings)
-    val = ranked_queries(*protocols["validation"], embeddings)
-    threshold = calibrate(cal)
+    raw_cal = ranked_queries(*protocols["calibration"], embeddings)
+    raw_val = ranked_queries(*protocols["validation"], embeddings)
+    cal, cal_confidence = rerank_protocol(*protocols["calibration"], embeddings)
+    val, val_confidence = rerank_protocol(*protocols["validation"], embeddings)
+    threshold = calibrate(cal, cal_confidence)
     manifest = {"seed": SEED, "identities": splits, "train_csv_sha256": sha256(dataset / "train.csv"),
                 "frame_sha256": hashes,
                 "protocols": {name: {"query_ids": [r["image_id"] for r in q],
@@ -152,17 +252,26 @@ def evaluate(encoder, dataset=DATASET, output=ARTIFACTS):
         start = time.perf_counter()
         single()
         times.append((time.perf_counter() - start) * 1000)
-    report = {"model": "vehicle-reid-0001 / OSNet-AIN x1.0", "fine_tuned": False,
+    report = {"model": MODEL_NAME, "fine_tuned": MODEL_FINE_TUNED,
+              "training_stage": "development", "training_epoch": MODEL_TRAINING_EPOCH,
               "model_sha256": encoder.model_sha256, "encoder_fingerprint": encoder.fingerprint,
-              "preprocessing": PREPROCESS, "threshold": threshold, "threshold_metric": "top10 pairwise F1 on calibration only",
-              "confidence_definition": "cosine similarity, not a probability", "seed": SEED,
-              "calibration": metrics(cal, threshold), "validation": metrics(val, threshold),
+              "preprocessing": PREPROCESS, "threshold": threshold,
+              "threshold_metric": "query-level 0.7*F1 + 0.3*TNR on calibration raw cosine only",
+              "confidence_definition": "maximum raw cosine over gallery, not a probability", "seed": SEED,
+              "search": {"ranking": "streaming k-reciprocal", "k1": ACTIVE_K1,
+                         "k2": ACTIVE_K2, "lambda": ACTIVE_LAMBDA,
+                         "refusal": "maximum raw cosine"},
+              "calibration": metrics(cal, threshold, cal_confidence),
+              "validation": metrics(val, threshold, val_confidence),
+              "raw_baseline": {"calibration": metrics(raw_cal, threshold),
+                               "validation": metrics(raw_val, threshold)},
               "partition_identity_counts": {k: len(v) for k, v in splits.items()},
               "benchmark": {"platform": platform.platform(), "device": "CPU", "threads": 2,
                             "batch": 1, "includes": "JPEG decode + preprocessing + inference + L2",
                             "samples": 30, "median_ms": float(np.median(times)), "p95_ms": float(np.percentile(times, 95))},
               "weights_bytes": MODEL.stat().st_size,
-              "limitations": ["Local train holdout, not the organizer test score", "No model fine-tuning performed",
+              "limitations": ["Local train holdout, not the organizer test score",
+                              "Development checkpoint selected on local validation; not the final train+validation model",
                               "camera_id used only for validation splitting/filtering", "TNR uses 20% synthetic no-match identities",
                               "mAP/CMC/mINP exclude queries without a cross-camera match",
                               "Exact frame hashes detect exact copies only, not near-duplicates"]}
@@ -181,17 +290,17 @@ def export(encoder, report, dataset=DATASET, output=ARTIFACTS):
     threshold = report["threshold"]
     with open(output / "submission.csv", "w", newline="") as submission, open(output / "candidates.csv", "w", newline="") as candidates:
         writer, accepted = csv.writer(submission), csv.writer(candidates)
-        writer.writerow(["query_id"] + [f"gallery_id_{i}" for i in range(1, 11)])
-        accepted.writerow(["query_id", "gallery_id", "confidence"])
+        writer.writerow(SUBMISSION_HEADER)
+        accepted.writerow(CANDIDATES_HEADER)
         for query, vector in zip(queries, query_vectors):
             results = gallery.search(vector, 10)
             writer.writerow([query["image_id"]] + [r["image_id"] for r in results])
-            matches = [r for r in results if r["similarity"] >= threshold]
-            if not matches:
-                accepted.writerow([query["image_id"], "", ""])
-            for result in matches:
+            confidence = gallery.confidence(vector)
+            if confidence >= threshold:
+                result = results[0]
                 # Monotone [0,1] score, explicitly NOT calibrated probability.
-                accepted.writerow([query["image_id"], result["image_id"], (result["similarity"] + 1) / 2])
+                accepted.writerow([query["image_id"], result["image_id"], (confidence + 1) / 2])
+    validation = validate_artifacts(dataset, output)
     write_json(output / "export_manifest.json", {
         "model_sha256": encoder.model_sha256, "encoder_fingerprint": encoder.fingerprint,
         "gallery_fingerprint": gallery.fingerprint,
@@ -201,14 +310,22 @@ def export(encoder, report, dataset=DATASET, output=ARTIFACTS):
         "embedding_ids": [r["image_id"] for r in queries + gallery.rows],
         "shape": [len(queries) + len(gallery.rows), 512], "dtype": "float32", "l2_normalized": True,
         "cosine_threshold": threshold, "confidence_threshold": (threshold + 1) / 2,
-        "confidence": "(cosine_similarity + 1) / 2; not a probability",
-        "refusal_encoding": "query_id with empty gallery_id and confidence; confirm with organizers"})
+        "reranking": {"method": "streaming k-reciprocal", "k1": ACTIVE_K1,
+                      "k2": ACTIVE_K2, "lambda": ACTIVE_LAMBDA},
+        "confidence": "(maximum raw gallery cosine + 1) / 2; not a probability",
+        "refusal_encoding": "no candidates.csv rows for the refused query",
+        "validation": validation})
+    return validation
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--export", action="store_true", help="Also generate official test artifacts")
+    parser.add_argument("--validate-only", action="store_true", help="Validate existing submission artifacts")
     args = parser.parse_args()
+    if args.validate_only:
+        print(json.dumps(validate_artifacts(), ensure_ascii=False, indent=2))
+        raise SystemExit
     encoder = Encoder()
     report = evaluate(encoder)
     if args.export:
