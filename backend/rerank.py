@@ -2,6 +2,7 @@
 import numpy as np
 
 from .core import normalize
+from .scoring import ranked_queries
 
 ACTIVE_K1 = 20
 ACTIVE_K2 = 3
@@ -110,17 +111,10 @@ def rerank_protocol(queries, gallery, embeddings, k1=ACTIVE_K1, k2=ACTIVE_K2,
     """Rerank a labeled local protocol and return raw-cosine refusal scores."""
     gallery_vectors = np.stack([embeddings[row["image_id"]] for row in gallery])
     reranker = KReciprocalReranker(gallery_vectors, k1, k2)
-    ranked, confidence = [], []
+    scores = []
     for query in queries:
         vector = embeddings[query["image_id"]]
         distances = reranker.distances(vector, lambda_value)
-        raw_scores = gallery_vectors @ vector
-        eligible = np.array([
-            index for index, row in enumerate(gallery)
-            if not (row["vehicle_id"] == query["vehicle_id"] and row["camera_id"] == query["camera_id"])
-        ], dtype=np.int64)
-        order = eligible[np.argsort(distances[eligible], kind="stable")]
-        matches = np.array([gallery[int(index)]["vehicle_id"] == query["vehicle_id"] for index in order])
-        ranked.append((-distances[order], matches))
-        confidence.append(float(np.max(raw_scores[eligible])))
-    return ranked, confidence
+        scores.append(-distances)
+    ranked = ranked_queries(queries, gallery, embeddings, scores)
+    return ranked, ranked.confidence

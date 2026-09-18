@@ -131,12 +131,40 @@ curl 'http://127.0.0.1:8000/api/queries?limit=1'
 - `artifacts/splits.json` — списки identity и query/gallery ID, seed, хэши train-кадров;
 - `artifacts/baseline_metrics.json` — метрики активной модели, порог, веса/preprocessing и локальное время;
 - `artifacts/gallery.sqlite3` — рабочая галерея;
-- `artifacts/submission.csv` — 1110 query, по 10 gallery ID;
+- `artifacts/submission.csv` — без заголовка: 1110 query, по 10 gallery ID;
 - `artifacts/embeddings.npy` — `(1860, 512)`, L2-нормированный `float32`;
 - `artifacts/candidates.csv` — принятые кандидаты; отсутствие строк query означает отказ;
 - `artifacts/export_manifest.json` — порядок ID, хэши, параметры экспорта.
 
 ### Протокол оценки
+
+Источник формул — опубликованный организаторами [`evaluate.py`](evaluate.py).
+Он и [`example_submission/`](example_submission/) сохранены без изменений.
+`backend/scoring.py` только адаптирует предсказания к его функциям; своей копии
+формул метрик больше нет. Это относится и к MVP, и к обучению/HPO.
+
+Локальная оценка передаёт ровно первые `min(10, размер gallery)` кандидатов
+без предварительного удаления junk: фильтрацию выполняет официальный скрипт.
+F1/TNR/PR-AUC также считаются его функцией, включая обработку same-camera
+кандидатов и отсутствующих confidence при отказе. Справочные full mAP и mINP
+считаются по исходным эмбеддингам, не по реранкингу. Неопределённые `NaN`
+в наших JSON/API записываются как `null`, без изменения численных результатов.
+
+Пример содержит 5 query, 8 gallery и векторы `(13, 16)` — это только образец
+формата. Проверка: `.venv/bin/python -c "from pathlib import Path; from backend.evaluate import validate_artifacts; p = Path('example_submission'); print(validate_artifacts(p, p))"`.
+Для реального датасета с 750 gallery экспорт по-прежнему содержит Top-10.
+
+При наличии размеченного ground truth готовые файлы можно проверить напрямую:
+
+```bash
+.venv/bin/python evaluate.py --gt /path/to/ground_truth.csv \
+  --submission artifacts/submission.csv --candidates artifacts/candidates.csv \
+  --embeddings artifacts/embeddings.npy \
+  --query dataset/test_query.csv --gallery dataset/test_gallery.csv
+```
+
+Ground truth должен относиться именно к переданным query/gallery. Тестовой
+разметки организаторов в репозитории нет; пример не содержит эталонных метрик.
 
 У официальных test query/gallery нет `vehicle_id`, поэтому их mAP локально
 вычислить нельзя. Метрики ниже получены из размеченного `train.csv`:
@@ -153,7 +181,7 @@ curl 'http://127.0.0.1:8000/api/queries?limit=1'
 - mAP@10, Rank-1/5 и mINP считаются по query с хотя бы одним допустимым совпадением;
   query без совпадений участвуют в F1/TNR;
 - AP@10 нормируется на `min(n_pos, 10)`; справочный full mAP и mINP считаются
-  по полному ранжированию;
+  по полному cosine-ранжированию исходных эмбеддингов;
 - candidate F1 — micro F1 на уровне query, в расчёт входит только кандидат с
   максимальным confidence;
 - TNR — доля отказов среди query без совпадений;
@@ -165,37 +193,38 @@ curl 'http://127.0.0.1:8000/api/queries?limit=1'
 validation как на невиденных автомобилях. Хэши находят точные копии кадров,
 но не гарантируют отсутствия похожих соседних кадров.
 
-### HPO best-mAP checkpoint + streaming reranking, 17 сентября 2026
+### HPO best-mAP checkpoint + streaming reranking, официальный evaluator
 
 | Метрика | Calibration | Validation |
 |---|---:|---:|
 | mAP@10 | 78,72% | **81,47%** |
-| Full mAP, справочно | 80,22% | 82,82% |
+| Full mAP исходных эмбеддингов, справочно | 77,29% | 80,36% |
 | Rank-1 | 79,27% | **80,16%** |
 | Rank-5 | 87,80% | **88,26%** |
-| mINP | 76,62% | 79,44% |
+| mINP исходных эмбеддингов | 69,44% | 74,07% |
 | Candidate F1 | 72,64% | 72,86% |
 | TNR | 72,13% | 79,03% |
 | `0.7 * F1 + 0.3 * TNR` | 72,49% | **74,71%** |
 | Query с совпадениями / без | 246 / 61 | 247 / 62 |
 
-Cosine-порог: **0.5954670310020447**. Эти значения — локальная оценка
+Cosine-порог после повторной калибровки официальным кодом: **0.5948754549026489**.
+Эти значения — локальная оценка
 HPO best-mAP checkpoint с `k1=20`, `k2=3`, `lambda=0.5`, не оценка
 закрытого теста и не обещание качества
 на произвольных фотографиях. Порог применён к Top-1; изменение состава галереи
 может изменить распределение score и качество отказа.
 
 CPU, macOS ARM64, 2 потока, batch=1, 30 повторов после 3 прогревов:
-медиана **16,06 мс**, p95 **16,67 мс**, включая JPEG decode, crop/resize, OSNet
+медиана **15,35 мс**, p95 **16,44 мс**, включая JPEG decode, crop/resize, OSNet
 и L2-нормализацию. Это локальный справочный замер одного изображения,
 не замер GPU, серверной пропускной способности или результат жюри. Реранкинг
-занял в среднем **0,315 мс/query** и измеряется отдельно.
+измеряется отдельно (в предыдущем замере — **0,315 мс/query**).
 
 ### Соглашения для организаторов
 
 `query_id`/`gallery_id` трактуются как `image_id`. В `candidates.csv` поле
 `confidence=(maximum_raw_cosine+1)/2` — монотонный score в [0,1], **не калиброванная
-вероятность**. Соответствующий порог score — примерно 0.79773352.
+вероятность**. Соответствующий порог score — примерно 0.79743773.
 Отказ кодируется полным отсутствием строк этого query в `candidates.csv`.
 Ни test-разметка, ни номерные знаки для подбора порога не используются.
 
@@ -213,7 +242,9 @@ batch/single inference, кэш, API и отказ.
 
 - `backend/core.py` — обработка изображений, OSNet, SQLite и поиск;
 - `backend/app.py` — HTTP-контракт и выдача HTML;
-- `backend/evaluate.py` — разбиение, метрики, калибровка, экспорт;
+- `evaluate.py`, `example_submission/` — неизменённые файлы организаторов;
+- `backend/evaluate.py` — разбиение, запуск инференса, экспорт и проверка файлов;
+- `backend/scoring.py` — вызовы официальных метрик и подбор порога на calibration;
 - `frontend/index.html`, `frontend/app.js` — простой интерфейс;
 - `models/` — исходный ONNX, лицензия, контрольные суммы;
 - `tests/` — автоматические проверки.
