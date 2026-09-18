@@ -6,7 +6,7 @@ from PIL import Image
 
 from backend.app import create_app
 from backend.core import Encoder, Gallery, normalize, preprocess, rank, read_rows
-from backend.evaluate import (CANDIDATES_HEADER, SUBMISSION_HEADER, calibrate,
+from backend.evaluate import (CANDIDATES_HEADER, calibrate,
                               make_protocol, make_splits, metrics, ranked_queries,
                               threshold_curve, validate_artifacts)
 from backend.rerank import KReciprocalReranker
@@ -34,9 +34,19 @@ def test_ranking_is_cosine_and_ties_are_stable():
         normalize(np.zeros(512))
 
 
+def scoring_example():
+    queries = [{"image_id": "q", "vehicle_id": 1, "camera_id": 1},
+               {"image_id": "unknown", "vehicle_id": 2, "camera_id": 1}]
+    gallery = [{"image_id": "a", "vehicle_id": 1, "camera_id": 2},
+               {"image_id": "b", "vehicle_id": 3, "camera_id": 1},
+               {"image_id": "c", "vehicle_id": 1, "camera_id": 3}]
+    embeddings = {"q": [1, 0], "unknown": [0, 1], "a": [1, 0],
+                  "b": [.8, .6], "c": [.7, np.sqrt(.51)]}
+    return ranked_queries(queries, gallery, embeddings)
+
+
 def test_hand_computed_metrics_and_refusal():
-    ranked = [(np.array([.9, .8, .7]), np.array([True, False, True])),
-              (np.array([.6, .5]), np.array([False, False]))]
+    ranked = scoring_example()
     result = metrics(ranked, .75)
     assert result["mAP"] == pytest.approx((1 + 2 / 3) / 2)
     assert result["full_mAP"] == pytest.approx((1 + 2 / 3) / 2)
@@ -47,18 +57,22 @@ def test_hand_computed_metrics_and_refusal():
     assert result["candidate_score"] == 1
     assert (result["TP"], result["FP"], result["FN"], result["TN"]) == (1, 0, 0, 1)
     assert result["known_queries"] == result["unknown_queries"] == 1
-    assert calibrate(ranked) == pytest.approx(.9)
+    assert calibrate(ranked) == pytest.approx(1)
 
     curve = threshold_curve(ranked)
-    assert curve[-1]["threshold"] > .9
+    assert curve[-1]["threshold"] > 1
     assert curve[-1]["TNR"] == 1
-    assert max(curve, key=lambda item: (item["candidate_score"], item["candidate_F1"], item["threshold"]))["threshold"] == pytest.approx(.9)
+    assert metrics(ranked, curve[-1]["threshold"])["TP"] == 0
+    assert max(curve, key=lambda item: (item["candidate_score"], item["candidate_F1"], item["threshold"]))["threshold"] == pytest.approx(1)
 
 
 def test_map_at_10_penalizes_positive_below_cutoff():
-    matches = np.zeros(12, dtype=bool)
-    matches[[0, 10]] = True
-    result = metrics([(np.linspace(1, .1, 12), matches)], -1)
+    query = [{"image_id": "q", "vehicle_id": 1, "camera_id": 1}]
+    gallery = [{"image_id": f"g{i}", "vehicle_id": 1 if i in (0, 10) else 2,
+                "camera_id": 2} for i in range(12)]
+    embeddings = {"q": [1, 0], **{f"g{i}": [s, np.sqrt(1-s*s)]
+                                           for i, s in enumerate(np.linspace(1, .1, 12))}}
+    result = metrics(ranked_queries(query, gallery, embeddings), -1)
     assert result["mAP_at_10"] == pytest.approx(.5)
     assert result["full_mAP"] == pytest.approx((1 + 2 / 11) / 2)
     assert result["candidate_recall"] == 1
@@ -70,27 +84,27 @@ def test_camera_filter_removes_only_same_vehicle_and_camera():
                {"image_id": "b", "vehicle_id": 2, "camera_id": 1},
                {"image_id": "c", "vehicle_id": 1, "camera_id": 2}]
     ranked = ranked_queries(query, gallery, {k: np.array([1., 0.]) for k in "qabc"})
-    assert len(ranked[0][0]) == 2
-    assert ranked[0][1].tolist() == [False, True]
+    assert ranked.predictions["q"] == ["a", "b", "c"]
+    result = metrics(ranked, .5)
+    assert result["mAP_at_10"] == .5
+    assert result["Rank_1"] == 0  # Same-camera negative b remains after removing junk a.
+    assert result["TP"] == 1  # Organizer candidate_metrics accepts same-ID top a.
 
 
 def test_candidate_metrics_are_query_level_and_use_only_top_confidence():
-    ranked = [
-        (np.array([.9, .8]), np.array([True, False])),   # TP
-        (np.array([.85, .8]), np.array([False, True])), # FP: correct answer is not Top-1
-        (np.array([.4, .3]), np.array([True, False])),   # FN: refused
-        (np.array([.7, .6]), np.array([False, False])),  # FP: open-set accepted
-        (np.array([.2, .1]), np.array([False, False])),  # TN
-    ]
-    result = metrics(ranked, .5)
+    queries = [{"image_id": f"q{i}", "vehicle_id": i, "camera_id": 1} for i in range(5)]
+    gallery = [{"image_id": f"g{i}", "vehicle_id": i, "camera_id": 2} for i in range(3)]
+    embeddings = {row["image_id"]: [1, 0] for row in queries + gallery}
+    ranked = ranked_queries(queries, gallery, embeddings,
+                            [[3, 2, 1], [3, 2, 1], [1, 2, 3], [3, 2, 1], [3, 2, 1]])
+    result = metrics(ranked, .5, [.9, .85, .4, .7, .2])
     assert (result["TP"], result["FP"], result["FN"], result["TN"]) == (1, 2, 1, 1)
     assert result["candidate_F1"] == pytest.approx(2 / 5)
     assert result["TNR"] == pytest.approx(.5)
 
 
 def test_refusal_confidence_can_be_independent_from_reranked_order():
-    ranked = [(np.array([-.1, -.2]), np.array([True, False])),
-              (np.array([-.3, -.4]), np.array([False, False]))]
+    ranked = scoring_example()
     raw_cosine = [.8, .7]
     threshold = calibrate(ranked, raw_cosine)
     assert threshold == pytest.approx(.8)
@@ -146,7 +160,6 @@ def test_submission_artifact_validator(tmp_path):
     np.save(output / "embeddings.npy", np.ones((11, 4), dtype=np.float32))
     with open(output / "submission.csv", "w", newline="") as stream:
         writer = csv.writer(stream)
-        writer.writerow(SUBMISSION_HEADER)
         writer.writerow(query_ids + gallery_ids)
     with open(output / "candidates.csv", "w", newline="") as stream:
         writer = csv.writer(stream)
@@ -263,3 +276,14 @@ def test_gallery_cache_and_batch_parity(tiny_dataset, tmp_path):
         assert changed.fingerprint != gallery.fingerprint
     finally:
         path.write_bytes(original)
+
+
+def test_actual_export_has_no_submission_header(tiny_dataset, tmp_path):
+    from backend.evaluate import export
+    result = export(Encoder(), {"threshold": 1.0}, tiny_dataset, tmp_path)
+    assert result["submission_rows"] == 1
+    assert result["embedding_shape"] == [3, 512]
+    with (tmp_path / "submission.csv").open(newline="") as stream:
+        rows = list(csv.reader(stream))
+    assert rows[0][0] == read_rows(tiny_dataset / "test_query.csv")[0]["image_id"]
+    assert len(rows) == 1 and len(rows[0]) == 3

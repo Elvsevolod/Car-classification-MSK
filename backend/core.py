@@ -39,7 +39,7 @@ def read_rows(path):
     seen = set()
     for row in rows:
         identifier = row["image_id"]
-        if not re.fullmatch(r"[0-9a-f]{32}", identifier) or identifier in seen:
+        if not re.fullmatch(r"[A-Za-z0-9_-]+", identifier) or identifier in seen:
             raise ValueError(f"Invalid or duplicate image_id: {identifier}")
         seen.add(identifier)
         for key in ("x", "y", "w", "h", "vehicle_id", "camera_id"):

@@ -84,30 +84,13 @@ def rerank_components(queries, gallery, embeddings, k1, k2):
         raw_part, jaccard_part = reranker.components(vector)
         raw.append(raw_part)
         jaccard.append(jaccard_part)
-        eligible = [
-            index for index, row in enumerate(gallery)
-            if not (row["vehicle_id"] == query["vehicle_id"] and row["camera_id"] == query["camera_id"])
-        ]
-        cosine = gallery_vectors[eligible] @ vector
+        cosine = gallery_vectors @ vector
         raw_confidence.append(float(np.max(cosine)))
     query_seconds = time.perf_counter() - start
     return np.stack(raw), np.stack(jaccard), raw_confidence, {
         "gallery_graph_seconds": build_seconds,
         "mean_query_ms": query_seconds * 1000 / len(queries),
     }
-
-
-def ranked_from_distances(queries, gallery, distances):
-    output = []
-    for query, query_distances in zip(queries, distances):
-        eligible = np.array([
-            index for index, row in enumerate(gallery)
-            if not (row["vehicle_id"] == query["vehicle_id"] and row["camera_id"] == query["camera_id"])
-        ], dtype=np.int64)
-        order = eligible[np.argsort(query_distances[eligible], kind="stable")]
-        matches = np.array([gallery[int(index)]["vehicle_id"] == query["vehicle_id"] for index in order])
-        output.append((-query_distances[order], matches))
-    return output
 
 
 def evaluate_direct(protocols, embeddings):
@@ -126,10 +109,10 @@ def tune_reranking(protocols, embeddings):
         raw, jaccard, raw_confidence, timing = rerank_components(queries, gallery, embeddings, k1, k2)
         for lambda_value in LAMBDA_VALUES:
             distances = (1 - lambda_value) * jaccard + lambda_value * raw
-            ranked = ranked_from_distances(queries, gallery, distances)
+            ranked = ranked_queries(queries, gallery, embeddings, -distances)
             confidence_modes = {
                 "raw_cosine": raw_confidence,
-                "rerank_score": [scores[0] for scores, _ in ranked],
+                "rerank_score": -distances.min(axis=1),
             }
             for confidence_mode, confidence in confidence_modes.items():
                 threshold = calibrate(ranked, confidence)
@@ -145,8 +128,8 @@ def tune_reranking(protocols, embeddings):
     raw, jaccard, raw_confidence, timing = rerank_components(
         queries, gallery, embeddings, best["k1"], best["k2"])
     distances = (1 - best["lambda"]) * jaccard + best["lambda"] * raw
-    ranked = ranked_from_distances(queries, gallery, distances)
-    confidence = raw_confidence if best["confidence_mode"] == "raw_cosine" else [scores[0] for scores, _ in ranked]
+    ranked = ranked_queries(queries, gallery, embeddings, -distances)
+    confidence = raw_confidence if best["confidence_mode"] == "raw_cosine" else -distances.min(axis=1)
     validation = metrics(ranked, best["threshold"], confidence)
     return {"selected_on_calibration": best,
             "validation": validation,
