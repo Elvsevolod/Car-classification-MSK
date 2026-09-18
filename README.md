@@ -268,6 +268,15 @@ batch/single inference, кэш, API и отказ.
 - `variant_04_training_strategy` — MixStyle, hard negatives, dynamic loss и
   Circle Loss; прирост относительно активного MVP не подтверждён.
 
+Следующий backbone-эксперимент хранится отдельно в
+[`ResNet50-IBN/variant_05_gem_bnneck`](ResNet50-IBN/variant_05_gem_bnneck/):
+официальная ImageNet-инициализация IBN-Net, GeM, BNNeck, inner LR-screening и
+три seed. Он не подключается к MVP без подтверждённого прироста.
+
+Этот запуск завершён без прироста. Актуальный следующий эксперимент:
+[`ResNet50-IBN/variant_06_controlled_training`](ResNet50-IBN/variant_06_controlled_training/) —
+исправленное разбиение, явный бюджет обновлений и последовательные LR/pooling/loss абляции.
+
 Полная схема данных, аугментаций, loss, калибровки и артефактов описана в
 [`TRAINING.md`](TRAINING.md). Для обучения используйте отдельный `.venv`:
 

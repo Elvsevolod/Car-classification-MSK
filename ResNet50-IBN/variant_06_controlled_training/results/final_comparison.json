@@ -1,0 +1,7 @@
+{
+  "status": "not_promoted",
+  "inner_mAP_at_10": 0.48134209768563513,
+  "promotion_min_map": 0.5,
+  "reason": "Inner-only budget gate; no outer evaluation or final training",
+  "beats_active_reference": false
+}

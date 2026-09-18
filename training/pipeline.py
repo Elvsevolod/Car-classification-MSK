@@ -16,7 +16,8 @@ from torchvision import transforms
 from tqdm.auto import tqdm
 
 from backend.core import DATASET, STOCK_MODEL, bbox, crop_image, read_rows, sha256
-from backend.evaluate import SEED, calibrate, make_protocol, make_splits, metrics, ranked_queries, write_json
+from backend.evaluate import SEED, make_protocol, make_splits, write_json
+from backend.scoring import calibrate, metrics, ranked_queries
 from training.osnet import ReIDTrainerModel, export_encoder_onnx, load_encoder_from_onnx
 from training.preprocessing import ResizeCrop
 

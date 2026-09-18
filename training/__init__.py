@@ -1,1 +1,1 @@
-"""Training utilities for vehicle OSNet."""
+"""Training utilities for vehicle ReID experiments."""

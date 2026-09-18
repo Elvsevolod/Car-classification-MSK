@@ -16,9 +16,21 @@ from training.hpo import (CameraAwarePKBatchSampler, ExperimentConfig,
 from training.pipeline import (PKBatchSampler, batch_hard_triplet_loss, consistency_loss,
                                format_duration, mask_lower_center, progress_line)
 from training.preprocessing import LETTERBOX_FILL, preprocess_mode, resize_crop
+from training.resnet_ibn import (EMBEDDING_DIMENSION, IBN,
+                                 ResNet50IBNBackbone, ResNetIBNReIDModel)
 from training.stage3 import fit_stage3_seed
 from training.stage4 import SimilarityPKBatchSampler, fit_fixed_epochs
+from training.stage5 import stage5_config
 from backend.core import STOCK_MODEL
+
+
+def test_all_training_entrypoints_use_organizer_scoring():
+    from backend import scoring
+    from training import hpo, pipeline, stage3
+    for module in (hpo, pipeline, stage3):
+        assert module.metrics is scoring.metrics
+        assert module.calibrate is scoring.calibrate
+        assert module.ranked_queries is scoring.ranked_queries
 
 
 def test_pk_sampler_makes_p_by_k_batches():
@@ -158,6 +170,43 @@ def test_gem_experiment_loads_stock_weights_except_new_exponent():
     model, count = initialize_experiment(3, config, torch.device("cpu"))
     assert count > 500
     assert model.backbone.global_pool.p.item() == pytest.approx(3.)
+
+
+def test_resnet50_ibn_gem_bnneck_embedding_shape_and_last_stride():
+    model = ResNetIBNReIDModel(num_classes=7).eval()
+    assert isinstance(model.backbone.layer1[0].bn1, IBN)
+    assert isinstance(model.backbone.layer4[0].bn1, torch.nn.BatchNorm2d)
+    assert model.backbone.layer4[0].conv2.stride == (1, 1)
+    with torch.inference_mode():
+        logits, raw, embedding = model(torch.rand(2, 3, 64, 64))
+    assert logits.shape == (2, 7)
+    assert raw.shape == embedding.shape == (2, EMBEDDING_DIMENSION)
+
+
+def test_resnet50_ibn_pooling_validation():
+    with pytest.raises(ValueError, match="pooling"):
+        ResNet50IBNBackbone(pooling="maximum")
+    with pytest.raises(ValueError, match="last_stride"):
+        ResNet50IBNBackbone(last_stride=3)
+
+
+def test_stage5_changes_only_backbone_specific_recipe(tmp_path):
+    path = tmp_path / "selected_config.json"
+    path.write_text(json.dumps({
+        "epochs": 30,
+        "identities_per_batch": 16,
+        "images_per_identity": 2,
+        "encoder_lr": 1.2e-4,
+        "metric_loss": "supcon",
+        "metric_weight": 1.4,
+        "use_bnneck": True,
+    }))
+    config = stage5_config(path, epochs=6, seed=17, encoder_lr=3e-5)
+    assert config.epochs == 6 and config.seed == 17
+    assert config.encoder_lr == pytest.approx(3e-5)
+    assert config.pooling == "gem" and config.resize_mode == "square"
+    assert config.metric_loss == "supcon" and config.metric_weight == pytest.approx(1.4)
+    assert config.use_bnneck
 
 
 def test_mixstyle_is_training_only_and_keeps_shape(monkeypatch):

@@ -1,0 +1,107 @@
+[
+  {
+    "epoch": 1,
+    "lr": {
+      "encoder": 5e-05,
+      "head": 0.0005
+    },
+    "train": {
+      "loss": 11.778088335405316,
+      "classification": 6.944009713959276,
+      "metric": 3.16687087845384,
+      "consistency": 0.4430257777372996,
+      "accuracy": 0.0,
+      "metric_weight": 1.4948762510958067
+    },
+    "timing": {
+      "train_seconds": 51.46265545801725,
+      "epoch_seconds": 51.46265545801725,
+      "elapsed_seconds": 51.46265691699227,
+      "estimated_remaining_seconds": 205.8506276679691
+    }
+  },
+  {
+    "epoch": 2,
+    "lr": {
+      "encoder": 0.0001,
+      "head": 0.001
+    },
+    "train": {
+      "loss": 10.341075830292283,
+      "classification": 6.35220932542232,
+      "metric": 2.6280977642327024,
+      "consistency": 0.2666414981348473,
+      "accuracy": 0.04331140350877193,
+      "metric_weight": 1.4948762510958067
+    },
+    "timing": {
+      "train_seconds": 51.25284608302172,
+      "epoch_seconds": 51.25284608302172,
+      "elapsed_seconds": 102.95414208297734,
+      "estimated_remaining_seconds": 154.431213124466
+    }
+  },
+  {
+    "epoch": 3,
+    "lr": {
+      "encoder": 0.0001,
+      "head": 0.001
+    },
+    "train": {
+      "loss": 8.363377370332417,
+      "classification": 4.784610769204926,
+      "metric": 2.359751998332509,
+      "consistency": 0.22696211463526675,
+      "accuracy": 0.1825657894736842,
+      "metric_weight": 1.4948762510958067
+    },
+    "timing": {
+      "train_seconds": 51.045751625002595,
+      "epoch_seconds": 51.045751625002595,
+      "elapsed_seconds": 154.2565108749841,
+      "estimated_remaining_seconds": 102.83767391665606
+    }
+  },
+  {
+    "epoch": 4,
+    "lr": {
+      "encoder": 5.1000000000000006e-05,
+      "head": 0.00051
+    },
+    "train": {
+      "loss": 6.0742543538411455,
+      "classification": 2.9332211561370314,
+      "metric": 2.0706826636665747,
+      "consistency": 0.2021056732587647,
+      "accuracy": 0.5970394736842105,
+      "metric_weight": 1.4948762510958067
+    },
+    "timing": {
+      "train_seconds": 51.00977004197193,
+      "epoch_seconds": 51.00977004197193,
+      "elapsed_seconds": 205.50528699997813,
+      "estimated_remaining_seconds": 51.37632174999453
+    }
+  },
+  {
+    "epoch": 5,
+    "lr": {
+      "encoder": 2.0000000000000003e-06,
+      "head": 2e-05
+    },
+    "train": {
+      "loss": 4.898077379193222,
+      "classification": 1.9954809933377986,
+      "metric": 1.9136284213317067,
+      "consistency": 0.18589039382181669,
+      "accuracy": 0.8486842105263158,
+      "metric_weight": 1.4948762510958067
+    },
+    "timing": {
+      "train_seconds": 51.21257362500182,
+      "epoch_seconds": 51.21257362500182,
+      "elapsed_seconds": 256.95495316697634,
+      "estimated_remaining_seconds": 0.0
+    }
+  }
+]

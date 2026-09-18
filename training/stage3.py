@@ -11,7 +11,8 @@ from PIL import Image
 from torch.nn import functional as F
 
 from backend.core import DATASET, Encoder, bbox, normalize, sha256
-from backend.evaluate import SEED, calibrate, make_protocol, metrics, ranked_queries, write_json
+from backend.evaluate import SEED, make_protocol, write_json
+from backend.scoring import calibrate, metrics, ranked_queries
 from backend.rerank import ACTIVE_K1, ACTIVE_K2, ACTIVE_LAMBDA, rerank_protocol
 from training.hpo import (ExperimentConfig, ReIDExperimentModel, encode_experiment,
                           evaluate_experiment, make_optimizer, prepare_experiment,

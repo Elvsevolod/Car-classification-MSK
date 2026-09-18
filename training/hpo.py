@@ -18,7 +18,8 @@ from torch.utils.data import DataLoader, Sampler
 from tqdm.auto import tqdm
 
 from backend.core import DATASET, STOCK_MODEL
-from backend.evaluate import SEED, calibrate, make_protocol, metrics, ranked_queries, write_json
+from backend.evaluate import SEED, make_protocol, write_json
+from backend.scoring import calibrate, metrics, ranked_queries
 from training.osnet import VehicleOSNet, load_encoder_from_onnx
 from training.pipeline import VehicleDataset, format_duration, set_seed
 
