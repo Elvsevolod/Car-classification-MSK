@@ -29,9 +29,31 @@ python3.11 -m venv .venv
 Основная HTML-страница/API работают локально; стандартный Swagger `/docs`
 пока загружает свои JS/CSS с CDN. `/openapi.json` доступен без сети.
 
-Контейнеризация в эту версию не входит. Датасет ожидается в `dataset/`:
-`images/`, `train.csv`, `test_query.csv`, `test_gallery.csv`.
-Для другого пути можно задать `DATASET_DIR`.
+Датасет ожидается в `dataset/`: `images/`, `train.csv`, `test_query.csv`, `test_gallery.csv`. Для другого пути можно задать `DATASET_DIR`.
+### Запуск в Docker
+
+Поместите датасет в `./dataset`, затем запустите сервис одной командой:
+
+```bash
+docker compose up --build
+```
+
+API и интерфейс будут доступны по адресу http://127.0.0.1:8000. Датасет монтируется в контейнер только для чтения, а кэш gallery и артефакты экспорта сохраняются в Docker volume `artifacts` между перезапусками.
+
+Для экспорта файлов сдачи при работающем сервисе:
+
+```bash
+docker compose exec vehicle-reid python -m backend.evaluate --export
+docker compose cp vehicle-reid:/app/artifacts ./artifacts
+```
+
+Сборка образа загружает Python-зависимости. После сборки запуск контейнера не требует интернета: веса модели и зависимости уже находятся внутри образа.
+
+Compose также запускает внутренний PostgreSQL 16 с расширением pgvector; наружу его порт не публикуется. Пока `GALLERY_STORAGE=sqlite`, поэтому текущий алгоритм и baseline не меняются. Для изменения локальных учётных данных скопируйте `.env.example` в `.env`; файл `.env` не попадает в Git.
+
+Перед запуском FastAPI Compose автоматически выполняет `alembic upgrade head`: создаются расширение `vector`, таблицы `gallery_items` и `gallery_state`, а также таблица версии миграций. На чистой Docker БД ручной SQL не требуется.
+
+
 
 ## Что умеет страница
 

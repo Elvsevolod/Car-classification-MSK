@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.6-pg16-bookworm
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-vehicle_reid}
+      POSTGRES_USER: ${POSTGRES_USER:-vehicle_reid}
+      # Local development default only; override via an untracked .env file.
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vehicle-reid-local}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  vehicle-reid:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vehicle-reid:local
+    ports:
+      - "${PORT:-8000}:8000"
+    environment:
+      DATASET_DIR: /data
+      # SQLite stays the default until PostgreSQL parity tests are complete.
+      GALLERY_STORAGE: ${GALLERY_STORAGE:-sqlite}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-vehicle_reid}:${POSTGRES_PASSWORD:-vehicle-reid-local}@postgres:5432/${POSTGRES_DB:-vehicle_reid}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      # Place the organizer's dataset in ./dataset before starting.
+      - ./dataset:/data:ro
+      # Keeps the gallery cache and generated submission artifacts between restarts.
+      - artifacts:/app/artifacts
+    restart: unless-stopped
+
+volumes:
+  artifacts:
+  postgres_data:

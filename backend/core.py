@@ -3,12 +3,14 @@ import hashlib
 import json
 import os
 import re
-import sqlite3
 from pathlib import Path
 
 import numpy as np
 import onnxruntime as ort
 from PIL import Image, ImageOps
+from .database import DatabaseSettings
+from .gallery_repository import GalleryRepository, SQLiteGalleryRepository
+from .postgres_gallery_repository import PostgresGalleryRepository
 
 ort.disable_telemetry_events()
 
@@ -80,6 +82,16 @@ def normalize(vectors):
     return vectors / norms
 
 
+def gallery_repository_from_environment(db_path):
+    """Select the configured persistence backend without changing search semantics."""
+    storage = os.environ.get("GALLERY_STORAGE", "sqlite").strip().lower()
+    if storage == "sqlite":
+        return SQLiteGalleryRepository(db_path)
+    if storage == "postgres":
+        return PostgresGalleryRepository(DatabaseSettings.from_environment())
+    raise ValueError(f"Unsupported GALLERY_STORAGE: {storage}")
+
+
 def rank(scores, top_k):
     """Exact descending search; CSV order breaks equal-score ties."""
     return np.argsort(-scores, kind="stable")[:top_k]
@@ -137,10 +149,13 @@ def encode_rows(encoder, rows, dataset=DATASET, batch_size=16, flip_tta=False):
     return np.concatenate(result)
 
 
-class Gallery:
-    """Persistent vectors with streaming k-reciprocal search in memory."""
 
-    def __init__(self, encoder, dataset=DATASET, db_path=ARTIFACTS / "gallery.sqlite3"):
+
+class Gallery:
+    """Gallery vectors plus the unchanged in-memory streaming reranker."""
+
+    def __init__(self, encoder, dataset=DATASET, db_path=ARTIFACTS / "gallery.sqlite3",
+                 repository: GalleryRepository | None = None):
         self.rows = read_rows(dataset / "test_gallery.csv")
         self.dataset = dataset
         signature = hashlib.sha256(encoder.fingerprint.encode())
@@ -148,30 +163,18 @@ class Gallery:
         for row in self.rows:
             signature.update(sha256(dataset / "images" / f"{row['image_id']}.jpg").encode())
         self.fingerprint = signature.hexdigest()
-        db_path.parent.mkdir(parents=True, exist_ok=True)
-        with sqlite3.connect(db_path) as db:
-            db.execute("CREATE TABLE IF NOT EXISTS info (key TEXT PRIMARY KEY, value TEXT)")
-            db.execute("CREATE TABLE IF NOT EXISTS gallery (position INTEGER PRIMARY KEY, image_id TEXT UNIQUE, metadata TEXT, embedding BLOB)")
-            saved = db.execute("SELECT value FROM info WHERE key='fingerprint'").fetchone()
-            stored = db.execute("SELECT image_id, embedding FROM gallery ORDER BY position").fetchall()
-            if saved == (self.fingerprint,) and [r[0] for r in stored] == [r["image_id"] for r in self.rows]:
-                self.vectors = np.stack([np.frombuffer(r[1], dtype="<f4") for r in stored])
-                if self.vectors.shape != (len(self.rows), 512) or not np.isfinite(self.vectors).all():
-                    raise ValueError("Invalid gallery cache; remove artifacts/gallery.sqlite3 and restart")
-                if not np.allclose(np.linalg.norm(self.vectors, axis=1), 1, atol=1e-5):
-                    raise ValueError("Gallery cache contains non-normalized vectors")
-            else:
-                self.vectors = encode_rows(encoder, self.rows, dataset)
-                db.execute("DELETE FROM gallery")
-                db.executemany("INSERT INTO gallery VALUES (?, ?, ?, ?)", [
-                    (i, row["image_id"], json.dumps(row), vector.astype("<f4").tobytes())
-                    for i, (row, vector) in enumerate(zip(self.rows, self.vectors))
-                ])
-                db.execute("INSERT OR REPLACE INTO info VALUES ('fingerprint', ?)", (self.fingerprint,))
+        self.repository = repository or gallery_repository_from_environment(db_path)
+        self.vectors = self.repository.load(
+            self.fingerprint, [row["image_id"] for row in self.rows], 512
+        )
+        if self.vectors is None:
+            self.vectors = encode_rows(encoder, self.rows, dataset)
+            self.repository.replace(self.fingerprint, self.rows, self.vectors)
         if len(self.rows) > 1:
             from .rerank import ACTIVE_K1, ACTIVE_K2, KReciprocalReranker
             self.reranker = KReciprocalReranker(
-                self.vectors, min(ACTIVE_K1, len(self.rows) - 1), min(ACTIVE_K2, len(self.rows)))
+                self.vectors, min(ACTIVE_K1, len(self.rows) - 1), min(ACTIVE_K2, len(self.rows))
+            )
         else:
             self.reranker = None
 
@@ -192,7 +195,7 @@ class Gallery:
             distances = self.reranker.distances(vector, ACTIVE_LAMBDA)
             selected = np.argsort(distances, kind="stable")[:top_k]
             rerank_scores = -distances
-        return [{"rank": i + 1, **self.rows[int(index)], "similarity": float(scores[index]),
-                 "rerank_score": float(rerank_scores[index]),
-                 "crop_url": f"/api/images/gallery/{self.rows[int(index)]['image_id']}?crop=true"}
-                for i, index in enumerate(selected)]
+        return [{"rank": index + 1, **self.rows[int(row_index)], "similarity": float(scores[row_index]),
+                 "rerank_score": float(rerank_scores[row_index]),
+                 "crop_url": f"/api/images/gallery/{self.rows[int(row_index)]['image_id']}?crop=true"}
+                for index, row_index in enumerate(selected)]

@@ -1,0 +1,14 @@
+.git
+.DS_Store
+.venv
+.uv-cache
+__pycache__
+.pytest_cache
+dataset
+artifacts
+output
+.playwright-cli
+tests
+ORGANIZER_QA.md
+requirements-dev.in
+requirements-dev.txt
