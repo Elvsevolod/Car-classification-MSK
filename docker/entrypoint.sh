@@ -1,6 +1,7 @@
 #!/bin/sh
 set -eu
 
+# Проверяем mounted dataset, применяем миграции и только затем запускаем команду контейнера.
 : "${DATASET_DIR:?DATASET_DIR must point to the mounted dataset}"
 : "${DATABASE_URL:?DATABASE_URL must be configured}"
 

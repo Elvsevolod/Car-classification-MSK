@@ -1,3 +1,5 @@
+"""Ядро Vehicle ReID: BBox -> OSNet embedding -> PostgreSQL gallery -> Top-10."""
+
 import csv
 import hashlib
 import json
@@ -9,7 +11,7 @@ import numpy as np
 import onnxruntime as ort
 from PIL import Image, ImageOps
 from .database import DatabaseSettings
-from .gallery_repository import GalleryBuildState, GalleryRepository, SQLiteGalleryRepository
+from .gallery_repository import GalleryBuildState, GalleryRepository
 from .postgres_gallery_repository import PostgresGalleryRepository
 
 ort.disable_telemetry_events()
@@ -82,14 +84,12 @@ def normalize(vectors):
     return vectors / norms
 
 
-def gallery_repository_from_environment(db_path):
-    """Select the configured persistence backend without changing search semantics."""
-    storage = os.environ.get("GALLERY_STORAGE", "sqlite").strip().lower()
-    if storage == "sqlite":
-        return SQLiteGalleryRepository(db_path)
-    if storage == "postgres":
-        return PostgresGalleryRepository(DatabaseSettings.from_environment())
-    raise ValueError(f"Unsupported GALLERY_STORAGE: {storage}")
+def gallery_repository_from_environment():
+    """Create the only runtime gallery store: PostgreSQL with pgvector."""
+    storage = os.environ.get("GALLERY_STORAGE", "postgres").strip().lower()
+    if storage != "postgres":
+        raise ValueError("GALLERY_STORAGE must be postgres")
+    return PostgresGalleryRepository(DatabaseSettings.from_environment())
 
 
 def rank(scores, top_k):
@@ -154,8 +154,7 @@ def encode_rows(encoder, rows, dataset=DATASET, batch_size=16, flip_tta=False):
 class Gallery:
     """Gallery vectors plus the unchanged in-memory streaming reranker."""
 
-    def __init__(self, encoder, dataset=DATASET, db_path=ARTIFACTS / "gallery.sqlite3",
-                 repository: GalleryRepository | None = None):
+    def __init__(self, encoder, dataset=DATASET, repository: GalleryRepository | None = None):
         gallery_csv = dataset / "test_gallery.csv"
         self.rows = read_rows(gallery_csv)
         self.dataset = dataset
@@ -174,7 +173,7 @@ class Gallery:
         for row in self.rows:
             signature.update(self.image_sha256[row["image_id"]].encode())
         self.fingerprint = signature.hexdigest()
-        self.repository = repository or gallery_repository_from_environment(db_path)
+        self.repository = repository or gallery_repository_from_environment()
         self.vectors = self.repository.load(
             self.fingerprint, [row["image_id"] for row in self.rows], 512, self.build_state
         )

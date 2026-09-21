@@ -1,4 +1,4 @@
-"""PostgreSQL/pgvector gallery repository."""
+"""Постоянное PostgreSQL + pgvector хранилище эмбеддингов gallery и cosine-поиска."""
 from __future__ import annotations
 
 import json

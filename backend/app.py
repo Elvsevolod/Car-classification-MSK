@@ -1,3 +1,5 @@
+"""FastAPI-слой: валидирует изображение/BBox и возвращает поиск или отказ."""
+
 import io
 import json
 import time
@@ -60,11 +62,11 @@ def load_metrics(encoder, artifacts):
     return report
 
 
-def create_app(dataset=DATASET, artifacts=ARTIFACTS):
+def create_app(dataset=DATASET, artifacts=ARTIFACTS, gallery_repository=None):
     @asynccontextmanager
     async def lifespan(app):
         app.state.encoder = Encoder()
-        app.state.gallery = Gallery(app.state.encoder, dataset, artifacts / "gallery.sqlite3")
+        app.state.gallery = Gallery(app.state.encoder, dataset, repository=gallery_repository)
         app.state.queries = {r["image_id"]: r for r in read_rows(dataset / "test_query.csv")}
         yield
 

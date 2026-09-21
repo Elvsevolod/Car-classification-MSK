@@ -1,4 +1,7 @@
-"""Local split/inference/export runner. Metric formulas live in organizer evaluate.py."""
+"""Создаёт и проверяет конкурсные submission.csv, embeddings.npy и candidates.csv.
+
+Формулы метрик организаторов остаются в неизменённом evaluate.py в корне проекта.
+"""
 import argparse
 import csv
 import json
@@ -200,9 +203,9 @@ def evaluate(encoder, dataset=DATASET, output=ARTIFACTS):
     return report
 
 
-def export(encoder, report, dataset=DATASET, output=ARTIFACTS):
+def export(encoder, report, dataset=DATASET, output=ARTIFACTS, gallery_repository=None):
     queries = read_rows(dataset / "test_query.csv")
-    gallery = Gallery(encoder, dataset, output / "gallery.sqlite3")
+    gallery = Gallery(encoder, dataset, repository=gallery_repository)
     query_vectors = encode_rows(encoder, queries, dataset)
     np.save(output / "embeddings.npy", np.concatenate([query_vectors, gallery.vectors]).astype(np.float32))
     threshold = report["threshold"]

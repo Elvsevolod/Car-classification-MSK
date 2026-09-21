@@ -13,11 +13,11 @@
 - Реализованы экспорт и проверка `submission.csv`, `embeddings.npy`, `candidates.csv`.
 - Docker CPU-MVP подготовлен: `Dockerfile`, `docker-compose.yml`, `.dockerignore`.
 - Dataset находится в `dataset/` и исключён из Git.
-- Deployment storage gallery: PostgreSQL + pgvector exact cosine search; SQLite + NumPy сохранён как reference implementation.
+- Единственное runtime-хранилище gallery: PostgreSQL + pgvector exact cosine search.
 
 ## Цель ближайшего этапа
 
-Сделать воспроизводимый Docker-запуск сервиса на реальном датасете, затем заменить SQLite-хранилище gallery на PostgreSQL с pgvector без изменения публичного API.
+Сделать воспроизводимый Docker-запуск сервиса и экспорта на реальном датасете через PostgreSQL + pgvector без изменения публичного API.
 
 ## Этап 1. Проверка Docker MVP
 
@@ -68,16 +68,17 @@ created_at          timestamptz
 
 Критерий готовности: API, ranking, отказ и экспорт дают те же или эквивалентные результаты, а gallery и metadata сохраняются в PostgreSQL.
 
-## Этап 2.5. Multi-stage Docker deployment (TASK 8 — выполнено)
+## Этап 2.5. Multi-stage Docker deployment и one-command inference (TASK 8, 11 — выполнено)
 
-Источник задачи: CODEX_DOCKER_MULTISTAGE_DEPLOYMENT_PLAN.md. Выполняется после TASK 4–6: PostgreSQL gallery lifecycle, exact pgvector search и parity с SQLite.
+Источник задачи: CODEX_DOCKER_MULTISTAGE_DEPLOYMENT_PLAN.md. Выполняется после TASK 4–6: PostgreSQL gallery lifecycle и exact pgvector search.
 
 1. Перевести Dockerfile на multi-stage build: builder собирает зафиксированные Python-зависимости, runtime содержит только необходимые runtime-библиотеки, backend, frontend, ONNX-веса и миграции.
 2. Проверить dockerignore, non-root runtime, read-only dataset mount, отдельные volumes postgres_data и artifacts; секреты и env-файл не включать в image.
 3. Добавить явный startup/entrypoint: проверка конфигурации → alembic upgrade head → exec FastAPI. PostgreSQL ожидается через Compose healthcheck, без sleep.
 4. Добавить backend Docker healthcheck через API health, startup/shutdown-логи и проверить graceful shutdown.
 5. Провести cold start с пустым postgres_data, warm restart с cache hit без повторного inference и offline runtime-проверку уже собранных образов.
-6. Зафиксировать размер образа до/после; CPU-сценарий оставить основным, GPU вынести в отдельный Compose profile.
+6. Добавить profile `inference`: одна команда с PostgreSQL + pgvector, но без UI, генерирует submission.csv, embeddings.npy и candidates.csv из mounted dataset.
+7. Зафиксировать размер образа до/после; CPU-сценарий оставить основным, GPU вынести в отдельный Compose profile.
 
 Критерий готовности: docker compose up --build поднимает PostgreSQL и API одной командой; после сборки runtime не обращается к PyPI или источникам весов; cold/warm start и API health воспроизводимы.
 
@@ -97,6 +98,10 @@ created_at          timestamptz
 3. Сделать Swagger UI offline либо оставить доступным только `/openapi.json` в offline-режиме.
 4. Дополнить README: архитектура, запуск, конфигурация БД, схема данных, API, метрики, порог отказа и внешние лицензии.
 
+## Передача образа жюри
+
+Пошаговый план сборки и передачи prebuilt Linux x86_64 Docker-образа находится в [CONTEST_IMAGE_DELIVERY.md](CONTEST_IMAGE_DELIVERY.md). Он является дополнением к исходному коду, а не заменой репозитория.
+
 ## Этап 5. Подготовка сдачи и защиты
 
 1. Проверить offline-запуск уже собранных образов.
@@ -108,7 +113,7 @@ created_at          timestamptz
 
 1. Проверить Docker с добавленным датасетом.
 2. Реализовать PostgreSQL + pgvector и миграцию gallery.
-3. Запустить тесты и сравнить результаты SQLite и PostgreSQL.
+3. Запустить unit- и PostgreSQL integration-тесты, включая экспорт и API.
 4. Доработать frontend и offline Swagger.
 5. Подготовить артефакты, README и презентацию.
 

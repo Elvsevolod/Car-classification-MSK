@@ -16,6 +16,25 @@ services:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
 
+  inference:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vehicle-reid:local
+    profiles: ["inference"]
+    command: ["python", "-m", "backend.evaluate", "--export"]
+    environment:
+      DATASET_DIR: /data
+      GALLERY_STORAGE: postgres
+      DATABASE_URL: postgresql://${POSTGRES_USER:-vehicle_reid}:${POSTGRES_PASSWORD:-vehicle-reid-local}@postgres:5432/${POSTGRES_DB:-vehicle_reid}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./dataset:/data:ro
+      # Submission artifacts are written directly to the ignored host directory.
+      - ./artifacts:/app/artifacts
+
   vehicle-reid:
     build:
       context: .
@@ -25,8 +44,7 @@ services:
       - "${PORT:-8000}:8000"
     environment:
       DATASET_DIR: /data
-      # PostgreSQL is the deployment default; set sqlite only for reference/debug runs.
-      GALLERY_STORAGE: ${GALLERY_STORAGE:-postgres}
+      GALLERY_STORAGE: postgres
       DATABASE_URL: postgresql://${POSTGRES_USER:-vehicle_reid}:${POSTGRES_PASSWORD:-vehicle-reid-local}@postgres:5432/${POSTGRES_DB:-vehicle_reid}
     depends_on:
       postgres:

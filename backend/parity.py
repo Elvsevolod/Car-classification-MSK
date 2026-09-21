@@ -32,10 +32,10 @@ def verify(
     fixture = json.loads(Path(fixture_path).read_text(encoding="utf-8"))
     encoder = Encoder()
     sqlite_gallery = Gallery(
-        encoder, dataset, artifacts / "gallery.sqlite3", SQLiteGalleryRepository(artifacts / "gallery.sqlite3")
+        encoder, dataset, SQLiteGalleryRepository(artifacts / "gallery.sqlite3")
     )
     postgres_gallery = Gallery(
-        encoder, dataset, artifacts / "gallery.sqlite3", PostgresGalleryRepository(DatabaseSettings.from_environment())
+        encoder, dataset, PostgresGalleryRepository(DatabaseSettings.from_environment())
     )
 
     vector_difference = float(np.max(np.abs(sqlite_gallery.vectors - postgres_gallery.vectors)))

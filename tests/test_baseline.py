@@ -7,6 +7,7 @@ from PIL import Image
 
 from backend.app import create_app
 from backend.core import Encoder, Gallery, normalize, preprocess, rank, read_rows
+from backend.gallery_repository import SQLiteGalleryRepository
 from backend.evaluate import (CANDIDATES_HEADER, calibrate,
                               make_protocol, make_splits, metrics, ranked_queries,
                               threshold_curve, validate_artifacts)
@@ -197,7 +198,8 @@ def tiny_dataset(tmp_path_factory):
 
 @pytest.fixture(scope="module")
 def client(tiny_dataset, tmp_path_factory):
-    app = create_app(tiny_dataset, tmp_path_factory.mktemp("artifacts"))
+    artifacts = tmp_path_factory.mktemp("artifacts")
+    app = create_app(tiny_dataset, artifacts, SQLiteGalleryRepository(artifacts / "gallery.db"))
     with TestClient(app) as client:
         yield client
 
@@ -273,8 +275,9 @@ def test_frontend_and_openapi(client):
 
 def test_gallery_cache_and_batch_parity(tiny_dataset, tmp_path):
     encoder = Encoder()
-    gallery = Gallery(encoder, tiny_dataset, tmp_path / "gallery.db")
-    reloaded = Gallery(encoder, tiny_dataset, tmp_path / "gallery.db")
+    repository = SQLiteGalleryRepository(tmp_path / "gallery.db")
+    gallery = Gallery(encoder, tiny_dataset, repository=repository)
+    reloaded = Gallery(encoder, tiny_dataset, repository=repository)
     np.testing.assert_array_equal(gallery.vectors, reloaded.vectors)
     row = gallery.rows[0]
     with Image.open(tiny_dataset / "images" / f"{row['image_id']}.jpg") as image:
@@ -289,7 +292,7 @@ def test_gallery_cache_and_batch_parity(tiny_dataset, tmp_path):
     original = path.read_bytes()
     try:
         Image.new("RGB", (100, 80), "red").save(path)
-        changed = Gallery(encoder, tiny_dataset, tmp_path / "gallery.db")
+        changed = Gallery(encoder, tiny_dataset, repository=repository)
         assert changed.fingerprint != gallery.fingerprint
     finally:
         path.write_bytes(original)
@@ -297,7 +300,9 @@ def test_gallery_cache_and_batch_parity(tiny_dataset, tmp_path):
 
 def test_actual_export_has_no_submission_header(tiny_dataset, tmp_path):
     from backend.evaluate import export
-    result = export(Encoder(), {"threshold": 1.0}, tiny_dataset, tmp_path)
+    result = export(
+        Encoder(), {"threshold": 1.0}, tiny_dataset, tmp_path, SQLiteGalleryRepository(tmp_path / "gallery.db")
+    )
     assert result["submission_rows"] == 1
     assert result["embedding_shape"] == [3, 512]
     with (tmp_path / "submission.csv").open(newline="") as stream:

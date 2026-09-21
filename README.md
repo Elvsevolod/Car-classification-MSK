@@ -22,7 +22,7 @@ python3.11 -m venv .venv
 Остановка — Ctrl+C в терминале сервера.
 
 При первом старте автоматически вычисляются признаки всех 750 объектов
-`test_gallery.csv`. В Docker Compose они сохраняются в PostgreSQL + pgvector; повторные старты используют persistent gallery без повторного inference. SQLite остаётся reference-режимом для тестов и диагностики.
+`test_gallery.csv`. Во всех штатных режимах проекта они сохраняются в PostgreSQL + pgvector; повторные старты используют persistent gallery без повторного inference. SQLite не является доступным runtime-режимом.
 Кэш проверяется по весам, preprocessing, CSV и SHA-256 содержимого изображений;
 при изменениях галерея пересчитывается. Модель и галерея загружаются до готовности API.
 Скачивания весов при старте нет. Для установки зависимостей нужен интернет.
@@ -40,22 +40,29 @@ docker compose up --build
 
 API и интерфейс будут доступны по адресу http://127.0.0.1:8000. Датасет монтируется в контейнер только для чтения, а кэш gallery и артефакты экспорта сохраняются в Docker volume `artifacts` между перезапусками.
 
-Для экспорта файлов сдачи при работающем сервисе:
+### Один запуск для файлов сдачи
+
+После того как образы `vehicle-reid:local` и `pgvector/pgvector:0.8.6-pg16-bookworm` доступны на машине, одна команда запускает PostgreSQL + pgvector, читает `./dataset` и создаёт три файла в игнорируемой Git папке `./artifacts`:
 
 ```bash
-docker compose exec vehicle-reid python -m backend.evaluate --export
-docker compose cp vehicle-reid:/app/artifacts ./artifacts
+docker compose --profile inference run --rm inference
 ```
+
+Она создаёт `submission.csv`, `embeddings.npy` и `candidates.csv` непосредственно в игнорируемой Git папке `./artifacts`; для контроля также формируются manifest и локальный отчёт. И экспорт, и API используют одну PostgreSQL gallery.
+
+`docker compose up --build` предназначен для полного demo-сервиса с PostgreSQL + pgvector и веб-интерфейсом. Сборка чистой машины может скачать базовые образы и зависимости; offline-требование конкурса относится к выполнению уже подготовленного образа — runtime не скачивает пакеты или веса.
 
 Dockerfile использует два этапа: `builder` создаёт Python-окружение из зафиксированного `requirements.txt`, а минимальный `runtime` получает только готовый venv, код, веса и миграции. После сборки запуск контейнера не требует интернета: веса модели и зависимости уже находятся внутри образа. Runtime запускается от непривилегированного пользователя, проверяет наличие датасета, применяет миграции и стартует API.
 
 Compose ожидает готовности PostgreSQL, затем проверяет `/api/health` самого backend. Проверить итоговый статус можно командой `docker compose ps`.
 
-Compose запускает внутренний PostgreSQL 16 с расширением pgvector; наружу его порт не публикуется. `GALLERY_STORAGE=postgres` — default deployment-режим. `GALLERY_STORAGE=sqlite` оставлен только как reference/debug-режим. Для изменения локальных учётных данных скопируйте `.env.example` в `.env`; файл `.env` не попадает в Git.
+Compose запускает внутренний PostgreSQL 16 с расширением pgvector; наружу его порт не публикуется. `GALLERY_STORAGE` зафиксирован как `postgres` в Compose и не предназначен для переключения. Для изменения локальных учётных данных скопируйте `.env.example` в `.env`; файл `.env` не попадает в Git.
 
 Перед запуском FastAPI Compose автоматически выполняет `alembic upgrade head`: создаются расширение `vector`, таблицы `gallery_items` и `gallery_state`, а также таблица версии миграций. На чистой Docker БД ручной SQL не требуется.
 
 
+
+Подробные команды для запуска находятся в [docs/RUNBOOK.md](docs/RUNBOOK.md), а последний подтверждённый прогон — в [docs/TEST_SUMMARY.md](docs/TEST_SUMMARY.md).
 
 ## Тестирование
 
@@ -87,7 +94,7 @@ float32 / 255 → ImageNet normalization → ONNX OSNet → L2-нормализ�
 Одинаковая функция используется для галереи, запросов API и оценки модели.
 Конкретный ONNX ожидает RGB; не путать с BGR у конвертированного OpenVINO IR.
 
-В PostgreSQL + pgvector хранятся метаданные и float32-векторы объектов gallery. При старте из них строится статический k-reciprocal граф; raw cosine source в PostgreSQL-режиме — exact pgvector search. SQLite остаётся reference-реализацией. Каждый query
+В PostgreSQL + pgvector хранятся метаданные и float32-векторы объектов gallery. При старте из них строится статический k-reciprocal граф; raw cosine source — exact pgvector search. Каждый query
 обрабатывается независимо: порядок задаёт смесь Jaccard и cosine distance,
 а отказ — максимальный raw cosine. Другие query не используются.
 Отдельная векторная СУБД или приближённый индекс этой версии не нужны.
@@ -164,7 +171,7 @@ curl 'http://127.0.0.1:8000/api/queries?limit=1'
 
 - `artifacts/splits.json` — списки identity и query/gallery ID, seed, хэши train-кадров;
 - `artifacts/baseline_metrics.json` — метрики активной модели, порог, веса/preprocessing и локальное время;
-- PostgreSQL volume `postgres_data` — рабочая gallery; `artifacts/gallery.sqlite3` — SQLite reference cache;
+- PostgreSQL volume `postgres_data` — единственная рабочая gallery и метаданные;
 - `artifacts/submission.csv` — без заголовка: 1110 query, по 10 gallery ID;
 - `artifacts/embeddings.npy` — `(1860, 512)`, L2-нормированный `float32`;
 - `artifacts/candidates.csv` — принятые кандидаты; отсутствие строк query означает отказ;
