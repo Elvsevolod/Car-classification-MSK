@@ -9,3 +9,6 @@ artifacts/
 output/
 .playwright-cli/
 :memory:.ses
+
+web-ui/node_modules/
+web-ui/dist/

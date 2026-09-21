@@ -19,6 +19,8 @@ from .core import (ARTIFACTS, DATASET, MODEL_FINE_TUNED, MODEL_NAME, ROOT,
 
 MAX_UPLOAD_BYTES = 15 * 1024 * 1024
 MAX_PIXELS = 25_000_000
+FRONTEND = ROOT / "frontend"
+FRONTEND_DIST = FRONTEND / "dist"
 
 
 class QuerySearch(BaseModel):
@@ -73,7 +75,10 @@ def create_app(dataset=DATASET, artifacts=ARTIFACTS, gallery_repository=None):
 
     app = FastAPI(title="Vehicle ReID · fine-tuned OSNet", version="0.2.0", lifespan=lifespan,
                   docs_url=None, redoc_url=None)
-    app.mount("/static", StaticFiles(directory=ROOT / "frontend"), name="static")
+    static_dir = FRONTEND_DIST if FRONTEND_DIST.exists() else FRONTEND
+    # Swagger assets stay outside the Vite build and remain available offline.
+    app.mount("/static/vendor", StaticFiles(directory=FRONTEND / "vendor"), name="static-vendor")
+    app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
     @app.get("/docs", include_in_schema=False)
     def docs():
@@ -88,7 +93,7 @@ def create_app(dataset=DATASET, artifacts=ARTIFACTS, gallery_repository=None):
 
     @app.get("/", include_in_schema=False)
     def index():
-        return FileResponse(ROOT / "frontend/index.html")
+        return FileResponse(static_dir / "index.html")
 
     @app.get("/api/health")
     def health():

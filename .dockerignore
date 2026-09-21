@@ -14,3 +14,6 @@ ORGANIZER_QA.md
 !.env.example
 docs
 journal_devops
+
+web-ui/node_modules/
+web-ui/dist/

@@ -1,3 +1,14 @@
+FROM node:24.15.0-alpine AS frontend-builder
+
+WORKDIR /web-ui
+
+COPY web-ui/package.json web-ui/package-lock.json ./
+RUN npm ci
+
+COPY web-ui ./
+RUN npm run build
+
+
 FROM python:3.11-slim AS builder
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -48,6 +59,7 @@ COPY --chown=appuser:appuser evaluate.py ./
 COPY --chown=appuser:appuser alembic ./alembic
 COPY --chown=appuser:appuser backend ./backend
 COPY --chown=appuser:appuser frontend ./frontend
+COPY --from=frontend-builder --chown=appuser:appuser /web-ui/dist ./frontend/dist
 COPY --chown=appuser:appuser models ./models
 COPY --chown=appuser:appuser docker/entrypoint.sh /usr/local/bin/vehicle-reid-entrypoint
 
