@@ -36,7 +36,7 @@ docker image inspect pgvector/pgvector:0.8.6-pg16-bookworm \
 
 ```bash
 docker tag vehicle-reid:contest-amd64 vehicle-reid:local
-docker compose --profile inference run --rm inference
+docker compose --profile inference run --rm --pull never inference
 ```
 
 Убедиться, что в `./artifacts/` появились:
@@ -48,7 +48,7 @@ docker compose --profile inference run --rm inference
 Проверить форматы после экспорта:
 
 ```bash
-docker compose --profile inference run --rm \
+docker compose --profile inference run --rm --pull never \
   --entrypoint python inference -m backend.evaluate --validate-only
 ```
 
@@ -70,7 +70,7 @@ shasum -a 256 vehicle-reid-contest-amd64.tar > vehicle-reid-contest-amd64.tar.sh
 ```bash
 docker load --input vehicle-reid-contest-amd64.tar
 docker tag vehicle-reid:contest-amd64 vehicle-reid:local
-docker compose --profile inference run --rm inference
+docker compose --profile inference run --rm --pull never inference
 ```
 
 Для inference и полного demo-сервиса требуется также локально доступный образ `pgvector/pgvector:0.8.6-pg16-bookworm`; он является частью поставки PostgreSQL-only.

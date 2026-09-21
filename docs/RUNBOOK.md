@@ -18,6 +18,16 @@ docker compose up --build
 
 Compose запускает PostgreSQL 16 с pgvector, ждёт healthcheck БД, применяет Alembic-миграции и запускает FastAPI. Откройте http://127.0.0.1:8000.
 
+### Закрытый стенд без интернета
+
+После `docker load` заранее подготовленных образов используйте:
+
+```bash
+docker compose up -d --no-build --pull never
+```
+
+Команда запрещает сборку и скачивание образов.
+
 Проверка готовности:
 
 ```bash
@@ -37,7 +47,7 @@ docker compose down
 Команда использует тот же PostgreSQL + pgvector runtime, но не запускает веб-интерфейс:
 
 ```bash
-docker compose --profile inference run --rm inference
+docker compose --profile inference run --rm --pull never inference
 ```
 
 Файлы появятся в локальной папке `artifacts/`:

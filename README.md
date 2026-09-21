@@ -20,12 +20,12 @@ docker compose up --build
 
 Интерфейс и API: http://127.0.0.1:8000. Swagger: http://127.0.0.1:8000/docs. Compose ждёт готовности PostgreSQL, применяет миграции и создаёт/переиспользует gallery из 750 объектов.
 
-Для закрытого стенда используйте уже подготовленные локальные образы: тогда запускайте `docker compose up -d` без `--build`. Runtime не загружает веса или Python-пакеты. Порядок подготовки Linux x86_64 образов для жюри описан в [docs/CONTEST_IMAGE_DELIVERY.md](docs/CONTEST_IMAGE_DELIVERY.md).
+Для закрытого стенда используйте заранее загруженные локальные образы и запускайте `docker compose up -d --no-build --pull never`. Эта команда была проверена: она запрещает и сборку, и pull. Runtime не загружает веса или Python-пакеты. Порядок подготовки Linux x86_64 образов для жюри описан в [docs/CONTEST_IMAGE_DELIVERY.md](docs/CONTEST_IMAGE_DELIVERY.md).
 
 ### Экспорт файлов сдачи
 
 ```bash
-docker compose --profile inference run --rm inference
+docker compose --profile inference run --rm --pull never inference
 ```
 
 Команда создаёт в `./artifacts/` три обязательных файла: `submission.csv`, `embeddings.npy` и `candidates.csv`. Экспорт использует PostgreSQL + pgvector, но не поднимает веб-интерфейс.
