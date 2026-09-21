@@ -33,7 +33,7 @@ docker compose --profile inference run --rm --pull never inference
 Проверка созданных файлов:
 
 ```bash
-docker compose run --rm --no-deps --entrypoint python inference -m backend.evaluate --validate-only
+docker compose run --rm --no-deps --pull never --entrypoint python inference -m backend.evaluate --validate-only
 ```
 
 Полная инструкция, включая остановку и тесты, находится в [docs/RUNBOOK.md](docs/RUNBOOK.md). Последний проверенный прогон — в [docs/TEST_SUMMARY.md](docs/TEST_SUMMARY.md).
