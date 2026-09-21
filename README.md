@@ -7,62 +7,36 @@
 k-reciprocal reranking. Стоковый ONNX сохранён только как начальные веса для новых
 экспериментов. Случайные веса, детектор и OCR не используются.
 
-## Запуск
+## Быстрый запуск в Docker
 
-Из папки `Car-classification-MSK`, Python 3.11:
+Проект запускается через Docker Compose: FastAPI, PostgreSQL 16 + pgvector, локальный веб-интерфейс и offline Swagger UI находятся в контейнерах. Локальный Python/venv для обычного запуска не нужен.
 
-```bash
-python3.11 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
-.venv/bin/python -m backend
-```
-
-Если окружение уже установлено, достаточно последней команды.
-Открыть http://127.0.0.1:8000. Другой порт: `.venv/bin/python -m backend --port 8001`.
-Остановка — Ctrl+C в терминале сервера.
-
-При первом старте автоматически вычисляются признаки всех 750 объектов
-`test_gallery.csv`. Во всех штатных режимах проекта они сохраняются в PostgreSQL + pgvector; повторные старты используют persistent gallery без повторного inference. SQLite не является доступным runtime-режимом.
-Кэш проверяется по весам, preprocessing, CSV и SHA-256 содержимого изображений;
-при изменениях галерея пересчитывается. Модель и галерея загружаются до готовности API.
-Скачивания весов при старте нет. Для установки зависимостей нужен интернет.
-Основная HTML-страница/API, Swagger `/docs` и `/openapi.json` работают локально:
-Swagger UI assets находятся в `frontend/vendor/swagger-ui/` и включаются в Docker-образ.
-
-Датасет ожидается в `dataset/`: `images/`, `train.csv`, `test_query.csv`, `test_gallery.csv`. Для другого пути можно задать `DATASET_DIR`.
-### Запуск в Docker
-
-Поместите датасет в `./dataset`, затем запустите сервис одной командой:
+1. Поместите датасет в `./dataset`. Внутри должны быть `images/`, `train.csv`, `test_query.csv` и `test_gallery.csv`.
+2. Из корня репозитория выполните одну команду:
 
 ```bash
 docker compose up --build
 ```
 
-API и интерфейс будут доступны по адресу http://127.0.0.1:8000. Датасет монтируется в контейнер только для чтения, а кэш gallery и артефакты экспорта сохраняются в Docker volume `artifacts` между перезапусками.
+Интерфейс и API: http://127.0.0.1:8000. Swagger: http://127.0.0.1:8000/docs. Compose ждёт готовности PostgreSQL, применяет миграции и создаёт/переиспользует gallery из 750 объектов.
 
-### Один запуск для файлов сдачи
+Для закрытого стенда используйте уже подготовленные локальные образы: тогда запускайте `docker compose up -d` без `--build`. Runtime не загружает веса или Python-пакеты. Порядок подготовки Linux x86_64 образов для жюри описан в [docs/CONTEST_IMAGE_DELIVERY.md](docs/CONTEST_IMAGE_DELIVERY.md).
 
-После того как образы `vehicle-reid:local` и `pgvector/pgvector:0.8.6-pg16-bookworm` доступны на машине, одна команда запускает PostgreSQL + pgvector, читает `./dataset` и создаёт три файла в игнорируемой Git папке `./artifacts`:
+### Экспорт файлов сдачи
 
 ```bash
 docker compose --profile inference run --rm inference
 ```
 
-Она создаёт `submission.csv`, `embeddings.npy` и `candidates.csv` непосредственно в игнорируемой Git папке `./artifacts`; для контроля также формируются manifest и локальный отчёт. И экспорт, и API используют одну PostgreSQL gallery.
+Команда создаёт в `./artifacts/` три обязательных файла: `submission.csv`, `embeddings.npy` и `candidates.csv`. Экспорт использует PostgreSQL + pgvector, но не поднимает веб-интерфейс.
 
-`docker compose up --build` предназначен для полного demo-сервиса с PostgreSQL + pgvector и веб-интерфейсом. Сборка чистой машины может скачать базовые образы и зависимости; offline-требование конкурса относится к выполнению уже подготовленного образа — runtime не скачивает пакеты или веса.
+Проверка созданных файлов:
 
-Dockerfile использует два этапа: `builder` создаёт Python-окружение из зафиксированного `requirements.txt`, а минимальный `runtime` получает только готовый venv, код, веса и миграции. После сборки запуск контейнера не требует интернета: веса модели и зависимости уже находятся внутри образа. Runtime запускается от непривилегированного пользователя, проверяет наличие датасета, применяет миграции и стартует API.
+```bash
+docker compose run --rm --no-deps --entrypoint python inference -m backend.evaluate --validate-only
+```
 
-Compose ожидает готовности PostgreSQL, затем проверяет `/api/health` самого backend. Проверить итоговый статус можно командой `docker compose ps`.
-
-Compose запускает внутренний PostgreSQL 16 с расширением pgvector; наружу его порт не публикуется. `GALLERY_STORAGE` зафиксирован как `postgres` в Compose и не предназначен для переключения. Для изменения локальных учётных данных скопируйте `.env.example` в `.env`; файл `.env` не попадает в Git.
-
-Перед запуском FastAPI Compose автоматически выполняет `alembic upgrade head`: создаются расширение `vector`, таблицы `gallery_items` и `gallery_state`, а также таблица версии миграций. На чистой Docker БД ручной SQL не требуется.
-
-
-
-Подробные команды для запуска находятся в [docs/RUNBOOK.md](docs/RUNBOOK.md), а последний подтверждённый прогон — в [docs/TEST_SUMMARY.md](docs/TEST_SUMMARY.md).
+Полная инструкция, включая остановку и тесты, находится в [docs/RUNBOOK.md](docs/RUNBOOK.md). Последний проверенный прогон — в [docs/TEST_SUMMARY.md](docs/TEST_SUMMARY.md).
 
 ## Тестирование
 
