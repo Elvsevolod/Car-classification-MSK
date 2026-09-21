@@ -59,7 +59,7 @@ docker compose --profile inference run --rm --pull never inference
 Проверка уже созданных файлов:
 
 ```bash
-docker compose run --rm --no-deps --entrypoint python inference -m backend.evaluate --validate-only
+docker compose run --rm --no-deps --pull never --entrypoint python inference -m backend.evaluate --validate-only
 ```
 
 ## Тестирование
