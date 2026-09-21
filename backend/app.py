@@ -8,6 +8,7 @@ from contextlib import asynccontextmanager
 from typing import Annotated, Literal
 
 from fastapi import FastAPI, File, Form, HTTPException, Query, UploadFile
+from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
 from PIL import Image, UnidentifiedImageError
@@ -70,8 +71,20 @@ def create_app(dataset=DATASET, artifacts=ARTIFACTS, gallery_repository=None):
         app.state.queries = {r["image_id"]: r for r in read_rows(dataset / "test_query.csv")}
         yield
 
-    app = FastAPI(title="Vehicle ReID · fine-tuned OSNet", version="0.2.0", lifespan=lifespan)
+    app = FastAPI(title="Vehicle ReID · fine-tuned OSNet", version="0.2.0", lifespan=lifespan,
+                  docs_url=None, redoc_url=None)
     app.mount("/static", StaticFiles(directory=ROOT / "frontend"), name="static")
+
+    @app.get("/docs", include_in_schema=False)
+    def docs():
+        """Локальный Swagger UI: assets включены в образ, поэтому CDN не нужен."""
+        return get_swagger_ui_html(
+            openapi_url=app.openapi_url,
+            title=f"{app.title} · Swagger UI",
+            swagger_js_url="/static/vendor/swagger-ui/swagger-ui-bundle.js",
+            swagger_css_url="/static/vendor/swagger-ui/swagger-ui.css",
+            swagger_favicon_url="/static/vendor/swagger-ui/favicon-32x32.png",
+        )
 
     @app.get("/", include_in_schema=False)
     def index():

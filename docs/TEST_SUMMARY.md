@@ -8,6 +8,7 @@
 | Предупреждения | 2 upstream deprecation warnings (`Starlette TestClient` / `anyio`) |
 | PostgreSQL + pgvector | миграция, запись gallery, exact cosine search и invalidation cache проверены |
 | Docker Compose | `docker compose --profile inference config --quiet` прошёл |
+| Offline Swagger UI | `/docs` ссылается только на `/static/vendor/swagger-ui/`, без CDN |
 | API после перезапуска | `/api/health`: `PostgresGalleryRepository`, 750 объектов gallery |
 | Экспорт артефактов | успешно через PostgreSQL + pgvector |
 | `submission.csv` | 1110 строк, у каждого query Top-10 без заголовка |

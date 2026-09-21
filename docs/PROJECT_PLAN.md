@@ -95,7 +95,7 @@ created_at          timestamptz
 
 1. Доработать UX отображения результатов, ошибок и статуса загрузки gallery.
 2. Показать явно: rank, raw cosine, rerank score, confidence и отказ.
-3. Сделать Swagger UI offline либо оставить доступным только `/openapi.json` в offline-режиме.
+3. Offline Swagger UI выполнен: `/docs` использует локальные vendor assets внутри Docker-образа.
 4. Дополнить README: архитектура, запуск, конфигурация БД, схема данных, API, метрики, порог отказа и внешние лицензии.
 
 ## Передача образа жюри

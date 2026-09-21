@@ -271,6 +271,10 @@ def test_frontend_and_openapi(client):
                                    "k2": 3, "lambda": .5, "refusal_score": "maximum raw cosine"}
     schema = client.get("/openapi.json").json()
     assert "SearchResponse" in schema["components"]["schemas"]
+    docs = client.get("/docs").text
+    assert "/static/vendor/swagger-ui/swagger-ui-bundle.js" in docs
+    assert "/static/vendor/swagger-ui/swagger-ui.css" in docs
+    assert "https://" not in docs
 
 
 def test_gallery_cache_and_batch_parity(tiny_dataset, tmp_path):

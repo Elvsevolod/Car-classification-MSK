@@ -26,8 +26,8 @@ python3.11 -m venv .venv
 Кэш проверяется по весам, preprocessing, CSV и SHA-256 содержимого изображений;
 при изменениях галерея пересчитывается. Модель и галерея загружаются до готовности API.
 Скачивания весов при старте нет. Для установки зависимостей нужен интернет.
-Основная HTML-страница/API работают локально; стандартный Swagger `/docs`
-пока загружает свои JS/CSS с CDN. `/openapi.json` доступен без сети.
+Основная HTML-страница/API, Swagger `/docs` и `/openapi.json` работают локально:
+Swagger UI assets находятся в `frontend/vendor/swagger-ui/` и включаются в Docker-образ.
 
 Датасет ожидается в `dataset/`: `images/`, `train.csv`, `test_query.csv`, `test_gallery.csv`. Для другого пути можно задать `DATASET_DIR`.
 ### Запуск в Docker
