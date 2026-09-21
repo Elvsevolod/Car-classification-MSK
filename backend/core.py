@@ -9,7 +9,7 @@ import numpy as np
 import onnxruntime as ort
 from PIL import Image, ImageOps
 from .database import DatabaseSettings
-from .gallery_repository import GalleryRepository, SQLiteGalleryRepository
+from .gallery_repository import GalleryBuildState, GalleryRepository, SQLiteGalleryRepository
 from .postgres_gallery_repository import PostgresGalleryRepository
 
 ort.disable_telemetry_events()
@@ -156,20 +156,34 @@ class Gallery:
 
     def __init__(self, encoder, dataset=DATASET, db_path=ARTIFACTS / "gallery.sqlite3",
                  repository: GalleryRepository | None = None):
-        self.rows = read_rows(dataset / "test_gallery.csv")
+        gallery_csv = dataset / "test_gallery.csv"
+        self.rows = read_rows(gallery_csv)
         self.dataset = dataset
+        self.image_sha256 = {
+            row["image_id"]: sha256(dataset / "images" / f"{row['image_id']}.jpg")
+            for row in self.rows
+        }
+        self.build_state = GalleryBuildState(
+            encoder_fingerprint=encoder.fingerprint,
+            preprocessing_fingerprint=hashlib.sha256(PREPROCESS.encode()).hexdigest(),
+            csv_sha256=sha256(gallery_csv),
+            image_sha256=self.image_sha256,
+        )
         signature = hashlib.sha256(encoder.fingerprint.encode())
         signature.update(json.dumps(self.rows, sort_keys=True).encode())
         for row in self.rows:
-            signature.update(sha256(dataset / "images" / f"{row['image_id']}.jpg").encode())
+            signature.update(self.image_sha256[row["image_id"]].encode())
         self.fingerprint = signature.hexdigest()
         self.repository = repository or gallery_repository_from_environment(db_path)
         self.vectors = self.repository.load(
-            self.fingerprint, [row["image_id"] for row in self.rows], 512
+            self.fingerprint, [row["image_id"] for row in self.rows], 512, self.build_state
         )
         if self.vectors is None:
+            print("Gallery cache miss; building embeddings", flush=True)
             self.vectors = encode_rows(encoder, self.rows, dataset)
-            self.repository.replace(self.fingerprint, self.rows, self.vectors)
+            self.repository.replace(self.fingerprint, self.rows, self.vectors, self.build_state)
+        else:
+            print("Gallery cache hit; reusing persisted embeddings", flush=True)
         if len(self.rows) > 1:
             from .rerank import ACTIVE_K1, ACTIVE_K2, KReciprocalReranker
             self.reranker = KReciprocalReranker(
@@ -178,15 +192,40 @@ class Gallery:
         else:
             self.reranker = None
 
+    def _raw_scores(self, vector):
+        """Exact raw cosine scores; PostgreSQL is authoritative when configured."""
+        vector = normalize(vector)
+        search_cosine = getattr(self.repository, "search_cosine", None)
+        if search_cosine is None:
+            return np.clip(self.vectors @ vector, -1, 1)
+
+        # Full-gallery retrieval is intentional: k-reciprocal reranking can promote
+        # a candidate outside a raw Top-K. Restricting this set would change Top-10.
+        matches = search_cosine(vector, len(self.rows))
+        if len(matches) != len(self.rows):
+            raise ValueError("PostgreSQL cosine search returned an incomplete gallery")
+        scores = np.empty(len(self.rows), dtype=np.float32)
+        seen = np.zeros(len(self.rows), dtype=bool)
+        for position, similarity in matches:
+            if not 0 <= position < len(self.rows) or seen[position]:
+                raise ValueError("PostgreSQL cosine search returned invalid positions")
+            scores[position] = similarity
+            seen[position] = True
+        if not seen.all() or not np.isfinite(scores).all():
+            raise ValueError("PostgreSQL cosine search returned invalid scores")
+        return np.clip(scores, -1, 1)
+
     def confidence(self, vector):
         """Maximum raw cosine used only for the calibrated refusal decision."""
-        return float(np.max(self.vectors @ normalize(vector)))
+        return float(np.max(self._raw_scores(vector)))
 
-    def search(self, vector, top_k=10, threshold=None):
+    def search_with_confidence(self, vector, top_k=10, threshold=None):
+        """Return results and maximum raw cosine from one exact gallery search."""
         vector = normalize(vector)
-        scores = np.clip(self.vectors @ vector, -1, 1)
-        if threshold is not None and float(np.max(scores)) < threshold:
-            return []
+        scores = self._raw_scores(vector)
+        confidence = float(np.max(scores))
+        if threshold is not None and confidence < threshold:
+            return [], confidence
         if self.reranker is None:
             selected = rank(scores, top_k)
             rerank_scores = scores
@@ -195,7 +234,10 @@ class Gallery:
             distances = self.reranker.distances(vector, ACTIVE_LAMBDA)
             selected = np.argsort(distances, kind="stable")[:top_k]
             rerank_scores = -distances
-        return [{"rank": index + 1, **self.rows[int(row_index)], "similarity": float(scores[row_index]),
-                 "rerank_score": float(rerank_scores[row_index]),
-                 "crop_url": f"/api/images/gallery/{self.rows[int(row_index)]['image_id']}?crop=true"}
-                for index, row_index in enumerate(selected)]
+        return ([{"rank": index + 1, **self.rows[int(row_index)], "similarity": float(scores[row_index]),
+                  "rerank_score": float(rerank_scores[row_index]),
+                  "crop_url": f"/api/images/gallery/{self.rows[int(row_index)]['image_id']}?crop=true"}
+                 for index, row_index in enumerate(selected)], confidence)
+
+    def search(self, vector, top_k=10, threshold=None):
+        return self.search_with_confidence(vector, top_k, threshold)[0]

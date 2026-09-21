@@ -22,7 +22,7 @@ python3.11 -m venv .venv
 Остановка — Ctrl+C в терминале сервера.
 
 При первом старте автоматически вычисляются признаки всех 750 объектов
-`test_gallery.csv`. Следующие старты используют `artifacts/gallery.sqlite3`.
+`test_gallery.csv`. В Docker Compose они сохраняются в PostgreSQL + pgvector; повторные старты используют persistent gallery без повторного inference. SQLite остаётся reference-режимом для тестов и диагностики.
 Кэш проверяется по весам, preprocessing, CSV и SHA-256 содержимого изображений;
 при изменениях галерея пересчитывается. Модель и галерея загружаются до готовности API.
 Скачивания весов при старте нет. Для установки зависимостей нужен интернет.
@@ -47,13 +47,26 @@ docker compose exec vehicle-reid python -m backend.evaluate --export
 docker compose cp vehicle-reid:/app/artifacts ./artifacts
 ```
 
-Сборка образа загружает Python-зависимости. После сборки запуск контейнера не требует интернета: веса модели и зависимости уже находятся внутри образа.
+Dockerfile использует два этапа: `builder` создаёт Python-окружение из зафиксированного `requirements.txt`, а минимальный `runtime` получает только готовый venv, код, веса и миграции. После сборки запуск контейнера не требует интернета: веса модели и зависимости уже находятся внутри образа. Runtime запускается от непривилегированного пользователя, проверяет наличие датасета, применяет миграции и стартует API.
 
-Compose также запускает внутренний PostgreSQL 16 с расширением pgvector; наружу его порт не публикуется. Пока `GALLERY_STORAGE=sqlite`, поэтому текущий алгоритм и baseline не меняются. Для изменения локальных учётных данных скопируйте `.env.example` в `.env`; файл `.env` не попадает в Git.
+Compose ожидает готовности PostgreSQL, затем проверяет `/api/health` самого backend. Проверить итоговый статус можно командой `docker compose ps`.
+
+Compose запускает внутренний PostgreSQL 16 с расширением pgvector; наружу его порт не публикуется. `GALLERY_STORAGE=postgres` — default deployment-режим. `GALLERY_STORAGE=sqlite` оставлен только как reference/debug-режим. Для изменения локальных учётных данных скопируйте `.env.example` в `.env`; файл `.env` не попадает в Git.
 
 Перед запуском FastAPI Compose автоматически выполняет `alembic upgrade head`: создаются расширение `vector`, таблицы `gallery_items` и `gallery_state`, а также таблица версии миграций. На чистой Docker БД ручной SQL не требуется.
 
 
+
+## Тестирование
+
+Полный набор unit-, API-, экспортных и PostgreSQL + pgvector integration-тестов запускается в отдельной временной БД; production-образ и рабочие Docker volumes не затрагиваются:
+
+```bash
+docker compose -p vehicle-reid-tests -f docker-compose.test.yml up --build --abort-on-container-exit --exit-code-from tests
+docker compose -p vehicle-reid-tests -f docker-compose.test.yml down -v
+```
+
+Вторая команда удаляет только временные ресурсы проекта `vehicle-reid-tests`.
 
 ## Что умеет страница
 
@@ -74,8 +87,7 @@ float32 / 255 → ImageNet normalization → ONNX OSNet → L2-нормализ�
 Одинаковая функция используется для галереи, запросов API и оценки модели.
 Конкретный ONNX ожидает RGB; не путать с BGR у конвертированного OpenVINO IR.
 
-В SQLite хранятся метаданные и float32-векторы объектов галереи.
-При старте из них строится статический k-reciprocal граф. Каждый query
+В PostgreSQL + pgvector хранятся метаданные и float32-векторы объектов gallery. При старте из них строится статический k-reciprocal граф; raw cosine source в PostgreSQL-режиме — exact pgvector search. SQLite остаётся reference-реализацией. Каждый query
 обрабатывается независимо: порядок задаёт смесь Jaccard и cosine distance,
 а отказ — максимальный raw cosine. Другие query не используются.
 Отдельная векторная СУБД или приближённый индекс этой версии не нужны.
@@ -126,7 +138,7 @@ curl 'http://127.0.0.1:8000/api/queries?limit=1'
 
 на `POST /api/search/query` с `Content-Type: application/json`.
 Ответ содержит `results`: `rank, image_id, x, y, w, h, similarity, rerank_score, crop_url`,
-а также `query_id`, `mode`, `refused`, `threshold`, `threshold_source`,
+а также `query_id`, `mode`, `confidence`, `refused`, `threshold`, `threshold_source`,
 `gallery_size`, `elapsed_ms`, `encoder_fingerprint`.
 Для загруженного файла `query_id=null`.
 `similarity` и `rerank_score` — **не вероятности совпадения**.
@@ -152,7 +164,7 @@ curl 'http://127.0.0.1:8000/api/queries?limit=1'
 
 - `artifacts/splits.json` — списки identity и query/gallery ID, seed, хэши train-кадров;
 - `artifacts/baseline_metrics.json` — метрики активной модели, порог, веса/preprocessing и локальное время;
-- `artifacts/gallery.sqlite3` — рабочая галерея;
+- PostgreSQL volume `postgres_data` — рабочая gallery; `artifacts/gallery.sqlite3` — SQLite reference cache;
 - `artifacts/submission.csv` — без заголовка: 1110 query, по 10 gallery ID;
 - `artifacts/embeddings.npy` — `(1860, 512)`, L2-нормированный `float32`;
 - `artifacts/candidates.csv` — принятые кандидаты; отсутствие строк query означает отказ;
@@ -262,7 +274,7 @@ query-level F1/TNR на примерах с известным ответом, j
 файлов сдачи, разделение identity/кадров, реальную OSNet, согласованность
 batch/single inference, кэш, API и отказ.
 
-- `backend/core.py` — обработка изображений, OSNet, SQLite и поиск;
+- `backend/core.py` — обработка изображений, OSNet, repository selection и поиск;
 - `backend/app.py` — HTTP-контракт и выдача HTML;
 - `evaluate.py`, `example_submission/` — неизменённые файлы организаторов;
 - `backend/evaluate.py` — разбиение, запуск инференса, экспорт и проверка файлов;

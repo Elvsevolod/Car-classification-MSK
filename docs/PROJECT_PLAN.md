@@ -13,7 +13,7 @@
 - Реализованы экспорт и проверка `submission.csv`, `embeddings.npy`, `candidates.csv`.
 - Docker CPU-MVP подготовлен: `Dockerfile`, `docker-compose.yml`, `.dockerignore`.
 - Dataset находится в `dataset/` и исключён из Git.
-- Текущее хранилище gallery: SQLite + NumPy exact search. PostgreSQL + pgvector пока не подключены.
+- Deployment storage gallery: PostgreSQL + pgvector exact cosine search; SQLite + NumPy сохранён как reference implementation.
 
 ## Цель ближайшего этапа
 
@@ -68,7 +68,20 @@ created_at          timestamptz
 
 Критерий готовности: API, ranking, отказ и экспорт дают те же или эквивалентные результаты, а gallery и metadata сохраняются в PostgreSQL.
 
-## Этап 3. Тестирование
+## Этап 2.5. Multi-stage Docker deployment (TASK 8 — выполнено)
+
+Источник задачи: CODEX_DOCKER_MULTISTAGE_DEPLOYMENT_PLAN.md. Выполняется после TASK 4–6: PostgreSQL gallery lifecycle, exact pgvector search и parity с SQLite.
+
+1. Перевести Dockerfile на multi-stage build: builder собирает зафиксированные Python-зависимости, runtime содержит только необходимые runtime-библиотеки, backend, frontend, ONNX-веса и миграции.
+2. Проверить dockerignore, non-root runtime, read-only dataset mount, отдельные volumes postgres_data и artifacts; секреты и env-файл не включать в image.
+3. Добавить явный startup/entrypoint: проверка конфигурации → alembic upgrade head → exec FastAPI. PostgreSQL ожидается через Compose healthcheck, без sleep.
+4. Добавить backend Docker healthcheck через API health, startup/shutdown-логи и проверить graceful shutdown.
+5. Провести cold start с пустым postgres_data, warm restart с cache hit без повторного inference и offline runtime-проверку уже собранных образов.
+6. Зафиксировать размер образа до/после; CPU-сценарий оставить основным, GPU вынести в отдельный Compose profile.
+
+Критерий готовности: docker compose up --build поднимает PostgreSQL и API одной командой; после сборки runtime не обращается к PyPI или источникам весов; cold/warm start и API health воспроизводимы.
+
+## Этап 3. Тестирование (TASK 9 — выполнено)
 
 1. Unit-тесты BBox, preprocessing, L2-normalization, стабильной сортировки и threshold/refusal.
 2. Интеграционные тесты PostgreSQL: миграция, загрузка gallery, повторный старт без перерасчёта, invalidation кэша.

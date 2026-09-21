@@ -5,6 +5,7 @@ import json
 import platform
 import random
 import time
+from pathlib import Path
 from collections import defaultdict
 
 import numpy as np
@@ -239,11 +240,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--export", action="store_true", help="Also generate official test artifacts")
     parser.add_argument("--validate-only", action="store_true", help="Validate existing submission artifacts")
+    parser.add_argument("--output", type=Path, help="Directory for generated or validated artifacts")
     args = parser.parse_args()
+    output = args.output or ARTIFACTS
     if args.validate_only:
-        print(json.dumps(validate_artifacts(), ensure_ascii=False, indent=2))
+        print(json.dumps(validate_artifacts(output=output), ensure_ascii=False, indent=2))
         raise SystemExit
     encoder = Encoder()
-    report = evaluate(encoder)
+    report = evaluate(encoder, output=output)
     if args.export:
-        export(encoder, report)
+        export(encoder, report, output=output)

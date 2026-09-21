@@ -1,4 +1,5 @@
 import csv
+import io
 import numpy as np
 import pytest
 from fastapi.testclient import TestClient
@@ -209,6 +210,8 @@ def test_api_actual_osnet_matches_upload_and_query(client, tiny_dataset):
     by_id = client.post("/api/search/query", json={"query_id": row["image_id"]})
     assert uploaded.status_code == by_id.status_code == 200
     assert uploaded.json()["results"] == by_id.json()["results"]
+    assert uploaded.json()["confidence"] == pytest.approx(by_id.json()["confidence"])
+    assert -1 <= uploaded.json()["confidence"] <= 1
     assert "rerank_score" in uploaded.json()["results"][0]
     embedded = client.post("/api/embedding", data=data, files={"image": ("q.jpg", content)})
     assert embedded.status_code == 200
@@ -233,6 +236,19 @@ def test_api_bbox_bounds_and_file_type(client, tiny_dataset):
     assert client.post("/api/search", data={"x": 0, "y": 0, "w": -1, "h": 10}, files={"image": ("q.jpg", content)}).status_code == 422
 
 
+def test_api_rejects_unsupported_and_oversized_uploads(client):
+    gif = io.BytesIO()
+    Image.new("RGB", (10, 10), "red").save(gif, format="GIF")
+    data = {"x": 0, "y": 0, "w": 1, "h": 1}
+    unsupported = client.post("/api/search", data=data,
+                              files={"image": ("car.gif", gif.getvalue(), "image/gif")})
+    assert unsupported.status_code == 415
+
+    oversized = client.post("/api/search", data=data,
+                            files={"image": ("car.jpg", b"x" * (15 * 1024 * 1024 + 1), "image/jpeg")})
+    assert oversized.status_code == 413
+
+
 def test_api_refusal_and_no_fabricated_threshold(client):
     payload = {"query_id": "0" * 31 + "2", "mode": "candidates"}
     assert client.post("/api/search/query", json=payload).status_code == 409
@@ -240,6 +256,7 @@ def test_api_refusal_and_no_fabricated_threshold(client):
     assert response.status_code == 200
     assert response.json()["refused"] is True
     assert response.json()["results"] == []
+    assert -1 <= response.json()["confidence"] <= 1
 
 
 def test_frontend_and_openapi(client):

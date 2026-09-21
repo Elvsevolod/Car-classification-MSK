@@ -43,6 +43,7 @@ class SearchResponse(BaseModel):
     gallery_size: int
     threshold: float | None
     threshold_source: str | None
+    confidence: float
     refused: bool
     results: list[Candidate]
     elapsed_ms: float
@@ -80,6 +81,7 @@ def create_app(dataset=DATASET, artifacts=ARTIFACTS):
         report = load_metrics(app.state.encoder, artifacts)
         return {"status": "ready", "model": MODEL_NAME, "fine_tuned": MODEL_FINE_TUNED,
                 "embedding_dim": 512, "device": "CPU", "gallery_size": len(app.state.gallery.rows),
+                "gallery_storage": type(app.state.gallery.repository).__name__,
                 "encoder_fingerprint": app.state.encoder.fingerprint,
                 "default_threshold": report["threshold"] if report else None,
                 "reranking": {"method": "streaming k-reciprocal", "k1": ACTIVE_K1,
@@ -123,9 +125,10 @@ def create_app(dataset=DATASET, artifacts=ARTIFACTS):
                 threshold = report["threshold"]
         else:
             threshold = None
-        results = app.state.gallery.search(vector, top_k, threshold)
+        results, confidence = app.state.gallery.search_with_confidence(vector, top_k, threshold)
         return {"mode": mode, "query_id": query_id, "gallery_size": len(app.state.gallery.rows),
-                "threshold": threshold, "threshold_source": source, "refused": mode == "candidates" and not results,
+                "threshold": threshold, "threshold_source": source, "confidence": confidence,
+                "refused": mode == "candidates" and not results,
                 "results": results, "elapsed_ms": round((time.perf_counter() - started) * 1000, 3),
                 "encoder_fingerprint": app.state.encoder.fingerprint}
 

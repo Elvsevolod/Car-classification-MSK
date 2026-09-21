@@ -3,19 +3,34 @@ from __future__ import annotations
 
 import json
 import sqlite3
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Protocol
 
 import numpy as np
 
 
+@dataclass(frozen=True)
+class GalleryBuildState:
+    """Inputs that make a persisted gallery safe to reuse."""
+
+    encoder_fingerprint: str
+    preprocessing_fingerprint: str
+    csv_sha256: str
+    image_sha256: dict[str, str]
+
+
 class GalleryRepository(Protocol):
     """Persistent storage for gallery vectors and cache metadata."""
 
-    def load(self, fingerprint: str, image_ids: list[str], dimension: int) -> np.ndarray | None:
+    def load(
+        self, fingerprint: str, image_ids: list[str], dimension: int, state: GalleryBuildState
+    ) -> np.ndarray | None:
         """Return vectors in image_ids order, or None when the cache is stale."""
 
-    def replace(self, fingerprint: str, rows: list[dict], vectors: np.ndarray) -> None:
+    def replace(
+        self, fingerprint: str, rows: list[dict], vectors: np.ndarray, state: GalleryBuildState
+    ) -> None:
         """Atomically replace the persisted gallery with vectors in CSV order."""
 
 
@@ -32,7 +47,10 @@ class SQLiteGalleryRepository:
         db.execute("CREATE TABLE IF NOT EXISTS gallery (position INTEGER PRIMARY KEY, image_id TEXT UNIQUE, metadata TEXT, embedding BLOB)")
         return db
 
-    def load(self, fingerprint: str, image_ids: list[str], dimension: int) -> np.ndarray | None:
+    def load(
+        self, fingerprint: str, image_ids: list[str], dimension: int, state: GalleryBuildState
+    ) -> np.ndarray | None:
+        del state
         with self._connect() as db:
             saved = db.execute("SELECT value FROM info WHERE key='fingerprint'").fetchone()
             stored = db.execute("SELECT image_id, embedding FROM gallery ORDER BY position").fetchall()
@@ -45,7 +63,10 @@ class SQLiteGalleryRepository:
             raise ValueError("Gallery cache contains non-normalized vectors")
         return vectors
 
-    def replace(self, fingerprint: str, rows: list[dict], vectors: np.ndarray) -> None:
+    def replace(
+        self, fingerprint: str, rows: list[dict], vectors: np.ndarray, state: GalleryBuildState
+    ) -> None:
+        del state
         if len(rows) != len(vectors):
             raise ValueError("Gallery rows and vectors must have the same length")
         with self._connect() as db:

@@ -8,7 +8,9 @@ dataset
 artifacts
 output
 .playwright-cli
-tests
 ORGANIZER_QA.md
-requirements-dev.in
-requirements-dev.txt
+.env
+.env.*
+!.env.example
+docs
+journal_devops
