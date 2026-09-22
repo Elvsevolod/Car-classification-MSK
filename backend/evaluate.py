@@ -14,6 +14,7 @@ from collections import defaultdict
 import numpy as np
 from PIL import Image
 
+from .bootstrap import gallery_repository_from_environment
 from .core import (ARTIFACTS, DATASET, MODEL, MODEL_FINE_TUNED, MODEL_NAME, ROOT,
                    MODEL_TRAINING_EPOCH, PREPROCESS, Encoder, Gallery, bbox,
                    encode_rows, read_rows, sha256)
@@ -205,7 +206,8 @@ def evaluate(encoder, dataset=DATASET, output=ARTIFACTS):
 
 def export(encoder, report, dataset=DATASET, output=ARTIFACTS, gallery_repository=None):
     queries = read_rows(dataset / "test_query.csv")
-    gallery = Gallery(encoder, dataset, repository=gallery_repository)
+    repository = gallery_repository or gallery_repository_from_environment()
+    gallery = Gallery(encoder, dataset, repository=repository)
     query_vectors = encode_rows(encoder, queries, dataset)
     np.save(output / "embeddings.npy", np.concatenate([query_vectors, gallery.vectors]).astype(np.float32))
     threshold = report["threshold"]

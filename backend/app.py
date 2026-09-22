@@ -14,6 +14,7 @@ from fastapi.staticfiles import StaticFiles
 from PIL import Image, UnidentifiedImageError
 from pydantic import BaseModel, Field
 
+from .bootstrap import gallery_repository_from_environment
 from .core import (ARTIFACTS, DATASET, MODEL_FINE_TUNED, MODEL_NAME, ROOT,
                    Encoder, Gallery, bbox, crop_image, read_rows)
 
@@ -66,15 +67,18 @@ def load_metrics(encoder, artifacts):
 
 
 def create_app(dataset=DATASET, artifacts=ARTIFACTS, gallery_repository=None):
+    """Собирает API и позволяет тестам подменять датасет, артефакты и gallery-репозиторий."""
     @asynccontextmanager
     async def lifespan(app):
         app.state.encoder = Encoder()
-        app.state.gallery = Gallery(app.state.encoder, dataset, repository=gallery_repository)
+        repository = gallery_repository or gallery_repository_from_environment()
+        app.state.gallery = Gallery(app.state.encoder, dataset, repository=repository)
         app.state.queries = {r["image_id"]: r for r in read_rows(dataset / "test_query.csv")}
         yield
 
     app = FastAPI(title="Vehicle ReID · fine-tuned OSNet", version="0.2.0", lifespan=lifespan,
                   docs_url=None, redoc_url=None)
+    # Production всегда отдаёт Vite dist; исходный HTML/JS остаётся только fallback для локальных Python-тестов.
     static_dir = FRONTEND_DIST if FRONTEND_DIST.exists() else FRONTEND
     # Swagger assets stay outside the Vite build and remain available offline.
     app.mount("/static/vendor", StaticFiles(directory=FRONTEND / "vendor"), name="static-vendor")
@@ -135,6 +139,7 @@ def create_app(dataset=DATASET, artifacts=ARTIFACTS, gallery_repository=None):
         return Response(output.getvalue(), media_type="image/jpeg")
 
     def search(vector, top_k, mode, threshold, started, query_id=None):
+        """Единый путь поиска: порог влияет только на режим candidates, ranking всегда возвращает Top-K."""
         source = None
         if mode == "candidates":
             source = "manual" if threshold is not None else "calibration"
@@ -153,6 +158,7 @@ def create_app(dataset=DATASET, artifacts=ARTIFACTS, gallery_repository=None):
                 "encoder_fingerprint": app.state.encoder.fingerprint}
 
     def uploaded_embedding(upload, box):
+        """Ограничивает upload и передаёт в Encoder только проверенное JPEG/PNG изображение с BBox."""
         content = upload.file.read(MAX_UPLOAD_BYTES + 1)
         if len(content) > MAX_UPLOAD_BYTES:
             raise HTTPException(413, "Maximum image file size is 15 MiB")

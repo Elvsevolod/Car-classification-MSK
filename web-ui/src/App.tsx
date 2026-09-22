@@ -1,64 +1,13 @@
+// Демо-клиент использует только существующий /api: здесь нет ML-логики и прямого доступа к PostgreSQL.
 import { useEffect, useMemo, useRef, useState, type FormEvent, type PointerEvent } from 'react'
-import { Download, ExternalLink, Search, SquareDashedMousePointer } from 'lucide-react'
+import { SquareDashedMousePointer } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
+import { SearchForm } from '@/components/search-form'
+import { SearchResults } from '@/components/search-results'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-
-type Box = { x: number; y: number; w: number; h: number }
-type Query = Box & { image_id: string }
-type Candidate = Box & {
-  rank: number
-  image_id: string
-  similarity: number
-  rerank_score: number
-  crop_url: string
-}
-type SearchResult = {
-  confidence: number
-  elapsed_ms: number
-  refused: boolean
-  results: Candidate[]
-  threshold: number | null
-}
-type Health = { device: string; gallery_size: number; model: string }
+import { boxKeys, type Box, type Health, type Query, type SearchResult } from '@/types'
 
 const initialBox: Box = { x: 0, y: 0, w: 0, h: 0 }
-const boxKeys: (keyof Box)[] = ['x', 'y', 'w', 'h']
-
-function CandidateCard({ item }: { item: Candidate }) {
-  const compactId = item.image_id.length > 18
-    ? `${item.image_id.slice(0, 9)}…${item.image_id.slice(-7)}`
-    : item.image_id
-
-  return (
-    <article className="group bg-[#080808] p-3 transition-colors hover:bg-white/[.06]">
-      <a href={item.crop_url} target="_blank" rel="noreferrer" className="block overflow-hidden bg-white/5">
-        <img
-          className="h-40 w-full object-contain grayscale transition duration-300 group-hover:scale-[1.03] group-hover:grayscale-0"
-          src={item.crop_url}
-          alt={`Кандидат ${item.rank}`}
-        />
-      </a>
-      <div className="mt-3 flex items-center justify-between gap-2">
-        <span className="bg-white px-2 py-1 text-[10px] font-semibold tracking-[.1em] text-black uppercase">#{item.rank}</span>
-        <span className="text-[10px] text-white/55">cosine {item.similarity.toFixed(4)}</span>
-      </div>
-      <p className="mt-3 text-xs leading-5">
-        rerank {item.rerank_score.toFixed(4)}
-        <br />
-        <span className="text-white/55" title={item.image_id}>ID · {compactId}</span>
-      </p>
-      <a
-        className="mt-2 inline-flex items-center gap-1 text-xs text-white/70 underline underline-offset-4 hover:text-white"
-        href={`/api/images/gallery/${item.image_id}`}
-        target="_blank"
-        rel="noreferrer"
-      >
-        Полный кадр <ExternalLink className="size-3" />
-      </a>
-    </article>
-  )
-}
 
 function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -104,6 +53,7 @@ function App() {
 
   useEffect(() => { draw(box) }, [box])
 
+  // Загружаем неизменяемые для сессии данные один раз, чтобы UI сразу показывал состояние сервиса и query.
   useEffect(() => {
     void Promise.all([fetch('/api/health'), fetch('/api/queries?limit=1110'), fetch('/api/metrics')])
       .then(async ([healthResponse, queryResponse, metricsResponse]) => {
@@ -171,6 +121,7 @@ function App() {
     }
   }
 
+  // Canvas может быть уменьшен CSS; переводим координаты указателя обратно в пиксели исходного изображения.
   const getPoint = (event: PointerEvent<HTMLCanvasElement>): [number, number] | null => {
     const canvas = canvasRef.current
     if (!canvas || !imageRef.current) return null
@@ -234,7 +185,7 @@ function App() {
         <header className="flex items-center justify-between border-b border-white/20 pb-4 text-[11px] font-semibold tracking-[.14em] uppercase">
           <span className="flex items-center gap-3">
             <span className="grid size-6 place-items-center bg-white text-black">V</span>
-            Vehicle ReID / 01
+            Кейс от ASU_TEAM
           </span>
           <span className={health ? 'hidden text-white/60 sm:block' : 'hidden text-amber-200 sm:block'}>
             {health ? '● Система поиска готова' : '○ Проверяем сервис'}
@@ -253,68 +204,7 @@ function App() {
         </section>
 
         <section className="grid gap-5 py-5 lg:grid-cols-[360px_minmax(0,1fr)]">
-          <Card className="bg-white/[.04] text-white ring-white/15">
-            <CardHeader>
-              <CardTitle className="text-xs tracking-[.12em] uppercase">01 / Параметры поиска</CardTitle>
-              <CardDescription>Источник, BBox и режим.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form className="space-y-5" onSubmit={submit}>
-                <label className="grid gap-2 text-[10px] tracking-[.1em] text-white/55 uppercase">
-                  Файл JPEG или PNG
-                  <input className="h-10 border border-white/15 bg-black px-3 text-xs" type="file" accept="image/jpeg,image/png" onChange={(event) => void selectFile(event.target.files?.[0])} />
-                </label>
-
-                <div className="grid gap-2">
-                  <label className="text-[10px] tracking-[.1em] text-white/55 uppercase" htmlFor="query-filter">Официальный query</label>
-                  <input id="query-filter" className="h-10 border border-white/15 bg-black px-3 text-xs" placeholder="Введите часть ID" value={queryFilter} onChange={(event) => setQueryFilter(event.target.value)} />
-                  <div className="max-h-36 overflow-y-auto border border-white/10 bg-black">
-                    {visibleQueries.map((query) => (
-                      <button className={`block w-full border-b border-white/10 px-3 py-2 text-left text-xs break-all hover:bg-white/10 ${selectedQuery === query.image_id ? 'bg-white text-black hover:bg-white' : ''}`} key={query.image_id} type="button" onClick={() => void selectQuery(query.image_id)}>
-                        {query.image_id}
-                      </button>
-                    ))}
-                    {!visibleQueries.length && <p className="px-3 py-2 text-xs text-white/45">Совпадений не найдено</p>}
-                  </div>
-                  <p className="text-[10px] leading-4 text-white/45">Показано до 8 совпадений. Выбор подставляет BBox из официального CSV.</p>
-                </div>
-
-                <div className="border-t border-white/15 pt-5">
-                  <p className="mb-3 text-[10px] tracking-[.12em] text-white/55 uppercase">02 / Граница автомобиля</p>
-                  <div className="grid grid-cols-2 gap-3">
-                    {boxKeys.map((key) => (
-                      <label key={key} className="grid gap-2 text-[10px] tracking-[.1em] text-white/55 uppercase">
-                        {key}
-                        <input className="h-10 border border-white/15 bg-black px-3 text-xs" type="number" min="0" value={box[key] || ''} onChange={(event) => { setBox({ ...box, [key]: Math.max(0, Number(event.target.value) || 0) }); setResult(null) }} />
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="border-t border-white/15 pt-5">
-                  <p className="mb-3 text-[10px] tracking-[.12em] text-white/55 uppercase">03 / Режим</p>
-                  <label className="grid gap-2 text-[10px] tracking-[.1em] text-white/55 uppercase">
-                    Количество результатов
-                    <input className="h-10 border border-white/15 bg-black px-3 text-xs" type="number" min="1" max="100" value={topK} onChange={(event) => setTopK(Number(event.target.value))} />
-                  </label>
-                  <label className="mt-3 grid gap-2 text-[10px] tracking-[.1em] text-white/55 uppercase">
-                    Режим
-                    <select className="h-10 border border-white/15 bg-black px-3 text-xs" value={mode} onChange={(event) => setMode(event.target.value as typeof mode)}>
-                      <option value="ranking">Ранжирование</option>
-                      <option value="candidates">Кандидаты с отказом</option>
-                    </select>
-                  </label>
-                  <label className="mt-3 grid gap-2 text-[10px] tracking-[.1em] text-white/55 uppercase">
-                    Порог cosine
-                    <input className="h-10 border border-white/15 bg-black px-3 text-xs" type="number" min="-1" max="1" step="any" value={threshold} placeholder="Автоматически" onChange={(event) => setThreshold(event.target.value)} />
-                  </label>
-                </div>
-
-                <Button className="w-full rounded-none" disabled={!blob || busy} type="submit"><Search />{busy ? 'Поиск…' : 'Запустить поиск'}</Button>
-                <Button className="w-full rounded-none" variant="outline" disabled={!result} type="button" onClick={download}><Download />Скачать JSON</Button>
-              </form>
-            </CardContent>
-          </Card>
+          <SearchForm box={box} blob={blob} busy={busy} hasResult={result !== null} mode={mode} queryFilter={queryFilter} selectedQuery={selectedQuery} threshold={threshold} topK={topK} visibleQueries={visibleQueries} onBoxChange={(key, value) => { setBox({ ...box, [key]: Math.max(0, Number(value) || 0) }); setResult(null) }} onDownload={download} onModeChange={setMode} onQueryFilterChange={setQueryFilter} onSelectFile={selectFile} onSelectQuery={selectQuery} onSubmit={submit} onThresholdChange={setThreshold} onTopKChange={setTopK} />
 
           <Card className="min-w-0 bg-white/[.04] text-white ring-white/15">
             <CardHeader className="border-b border-white/15">
@@ -336,24 +226,7 @@ function App() {
 
         <p className="bg-white px-4 py-3 text-xs text-black">{status}</p>
 
-        {result && (
-          <section className={`mt-5 border p-5 ${result.refused ? 'border-white/30 bg-white/[.04]' : 'border-white bg-white text-black'}`}>
-            <p className="text-[10px] font-semibold tracking-[.14em] uppercase">{result.refused ? 'Решение / отказ' : 'Решение / совпадение найдено'}</p>
-            <div className="mt-3 grid gap-3 text-sm sm:grid-cols-3">
-              <p>{result.refused ? 'Подходящих кандидатов выше порога нет.' : `Возвращено кандидатов: ${result.results.length}.`}</p>
-              <p>Confidence: {result.confidence.toFixed(4)}</p>
-              <p>Порог: {result.threshold?.toFixed(4) ?? 'не применялся'}</p>
-            </div>
-          </section>
-        )}
-
-        <section className="mt-5 border-t border-white/20 pt-5">
-          <p className="mb-3 text-[10px] tracking-[.14em] text-white/55 uppercase">04 / Результаты поиска</p>
-          <p className="mb-4 text-xs text-white/55">Reranking определяет порядок; максимальный raw cosine применяется только для отказа.</p>
-          <div className="grid min-h-40 grid-cols-[repeat(auto-fill,minmax(185px,1fr))] gap-px bg-white/15">
-            {result?.results.map((item) => <CandidateCard item={item} key={item.image_id} />) ?? <div className="p-5 text-xs tracking-[.1em] text-white/45 uppercase">Результаты поиска появятся здесь</div>}
-          </div>
-        </section>
+        <SearchResults result={result} />
 
         <section className="mt-5 grid gap-4 border-t border-white/20 pt-5 lg:grid-cols-[1fr_auto]">
           <details className="bg-white/[.04] p-4 text-xs">

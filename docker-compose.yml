@@ -1,4 +1,5 @@
 services:
+  # Единственное постоянное runtime-хранилище gallery и pgvector-эмбеддингов.
   postgres:
     image: pgvector/pgvector:0.8.6-pg16-bookworm
     environment:
@@ -16,6 +17,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
 
+  # Одноразовый конкурсный batch-пайплайн: создаёт три файла сдачи без web-интерфейса.
   inference:
     build:
       context: .
@@ -35,6 +37,7 @@ services:
       # Submission artifacts are written directly to the ignored host directory.
       - ./artifacts:/app/artifacts
 
+  # Демонстрационный HTTP-сервис: FastAPI, React и локальный Swagger UI.
   vehicle-reid:
     build:
       context: .

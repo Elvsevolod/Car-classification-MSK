@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 
 class PostgresGalleryRepository:
-    """Persistent gallery storage while preserving full-gallery reranking semantics."""
+    """Хранит gallery в PostgreSQL и возвращает полный exact cosine-рейтинг для неизменного reranking."""
 
     def __init__(self, settings: "DatabaseSettings"):
         self.database_url = settings.url
