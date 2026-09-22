@@ -16,7 +16,7 @@
 docker compose up --build
 ```
 
-Compose запускает PostgreSQL 16 с pgvector, ждёт healthcheck БД, применяет Alembic-миграции и запускает FastAPI. Откройте http://127.0.0.1:8000.
+Compose сначала запускает `dataset-init`: он читает `./dataset` и один раз копирует его в именованный Docker volume. Поэтому сервис работает и при правах `700` на исходной папке в Linux; первый запуск требует ещё около 7 ГБ Docker-диска и занимает больше времени. Затем Compose запускает PostgreSQL 16 с pgvector, ждёт healthcheck БД, применяет Alembic-миграции и запускает FastAPI. Откройте http://127.0.0.1:8000.
 
 ### Закрытый стенд без интернета
 

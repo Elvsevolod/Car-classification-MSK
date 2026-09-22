@@ -18,7 +18,7 @@ k-reciprocal reranking. Стоковый ONNX сохранён только ка
 docker compose up --build
 ```
 
-Интерфейс и API: http://127.0.0.1:8000. Swagger: http://127.0.0.1:8000/docs. Compose ждёт готовности PostgreSQL, применяет миграции и создаёт/переиспользует gallery из 750 объектов.
+Интерфейс и API: http://127.0.0.1:8000. Swagger: http://127.0.0.1:8000/docs. Перед стартом приложения `dataset-init` автоматически копирует внешний датасет в именованный Docker volume: это устраняет зависимость от прав исходной папки (включая Linux `700`), но на первом запуске требует ещё около 7 ГБ Docker-диска. Затем Compose ждёт готовности PostgreSQL, применяет миграции и создаёт/переиспользует gallery из 750 объектов.
 
 Для закрытого стенда используйте заранее загруженные локальные образы и запускайте `docker compose up -d --no-build --pull never`. Эта команда была проверена: она запрещает и сборку, и pull. Runtime не загружает веса или Python-пакеты. Порядок подготовки Linux x86_64 образов для жюри описан в [docs/CONTEST_IMAGE_DELIVERY.md](docs/CONTEST_IMAGE_DELIVERY.md).
 
@@ -28,7 +28,7 @@ docker compose up --build
 docker compose --profile inference run --rm --pull never inference
 ```
 
-Команда создаёт в `./artifacts/` три обязательных файла: `submission.csv`, `embeddings.npy` и `candidates.csv`. Экспорт использует PostgreSQL + pgvector, но не поднимает веб-интерфейс.
+Команда создаёт в `./artifacts/` три обязательных файла: `submission.csv`, `embeddings.npy` и `candidates.csv`. Экспорт использует PostgreSQL + pgvector, но не поднимает веб-интерфейс; подготовленный dataset volume переиспользуется без повторного копирования.
 
 Проверка созданных файлов:
 

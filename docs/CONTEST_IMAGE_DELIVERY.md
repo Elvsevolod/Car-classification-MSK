@@ -39,6 +39,8 @@ docker tag vehicle-reid:contest-amd64 vehicle-reid:local
 docker compose --profile inference run --rm --pull never inference
 ```
 
+Перед export Compose автоматически выполнит `dataset-init`: сервис копирует внешний датасет во внутренний Docker volume, поэтому права исходной папки на Linux не влияют на non-root runtime. На первом запуске требуется дополнительное место, примерно равное размеру датасета.
+
 Убедиться, что в `./artifacts/` появились:
 
 - `submission.csv`;

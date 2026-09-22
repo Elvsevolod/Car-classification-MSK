@@ -67,6 +67,7 @@ COPY --chown=appuser:appuser frontend ./frontend
 COPY --from=frontend-builder --chown=appuser:appuser /web-ui/dist ./frontend/dist
 COPY --chown=appuser:appuser models ./models
 COPY --chown=appuser:appuser docker/entrypoint.sh /usr/local/bin/vehicle-reid-entrypoint
+COPY --chown=appuser:appuser --chmod=755 docker/dataset-init.sh /usr/local/bin/vehicle-reid-dataset-init
 
 USER appuser
 

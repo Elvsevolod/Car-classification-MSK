@@ -1,4 +1,20 @@
 services:
+  # Одноразово подготавливает dataset во внутреннем volume, поэтому права исходной папки на Linux не влияют на runtime.
+  dataset-init:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vehicle-reid:local
+    user: "0:0"
+    entrypoint: ["/usr/local/bin/vehicle-reid-dataset-init"]
+    environment:
+      SOURCE_DATASET_DIR: /source
+      TARGET_DATASET_DIR: /dataset-cache/dataset
+    volumes:
+      - ./dataset:/source:ro
+      - dataset_cache:/dataset-cache
+    restart: "no"
+
   # Единственное постоянное runtime-хранилище gallery и pgvector-эмбеддингов.
   postgres:
     image: pgvector/pgvector:0.8.6-pg16-bookworm
@@ -24,16 +40,20 @@ services:
       dockerfile: Dockerfile
     image: vehicle-reid:local
     profiles: ["inference"]
+    # One-shot export creates files in the host bind mount; root avoids host UID/GID permission dependence.
+    user: "0:0"
     command: ["python", "-m", "backend.evaluate", "--export"]
     environment:
-      DATASET_DIR: /data
+      DATASET_DIR: /dataset-cache/dataset
       GALLERY_STORAGE: postgres
       DATABASE_URL: postgresql://${POSTGRES_USER:-vehicle_reid}:${POSTGRES_PASSWORD:-vehicle-reid-local}@postgres:5432/${POSTGRES_DB:-vehicle_reid}
     depends_on:
       postgres:
         condition: service_healthy
+      dataset-init:
+        condition: service_completed_successfully
     volumes:
-      - ./dataset:/data:ro
+      - dataset_cache:/dataset-cache:ro
       # Submission artifacts are written directly to the ignored host directory.
       - ./artifacts:/app/artifacts
 
@@ -46,12 +66,14 @@ services:
     ports:
       - "${PORT:-8000}:8000"
     environment:
-      DATASET_DIR: /data
+      DATASET_DIR: /dataset-cache/dataset
       GALLERY_STORAGE: postgres
       DATABASE_URL: postgresql://${POSTGRES_USER:-vehicle_reid}:${POSTGRES_PASSWORD:-vehicle-reid-local}@postgres:5432/${POSTGRES_DB:-vehicle_reid}
     depends_on:
       postgres:
         condition: service_healthy
+      dataset-init:
+        condition: service_completed_successfully
     healthcheck:
       test: ["CMD", "python", "-c", "from urllib.request import urlopen; assert urlopen('http://127.0.0.1:8000/api/health', timeout=2).status == 200"]
       interval: 10s
@@ -59,12 +81,13 @@ services:
       retries: 12
       start_period: 45s
     volumes:
-      # Place the organizer's dataset in ./dataset before starting.
-      - ./dataset:/data:ro
+      # The source dataset is prepared once by dataset-init; runtime only reads the internal cache.
+      - dataset_cache:/dataset-cache:ro
       # Keeps the gallery cache and generated submission artifacts between restarts.
       - artifacts:/app/artifacts
     restart: unless-stopped
 
 volumes:
+  dataset_cache:
   artifacts:
   postgres_data:
