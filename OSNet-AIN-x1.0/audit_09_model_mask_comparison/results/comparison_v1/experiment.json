@@ -1,0 +1,1327 @@
+{
+  "signature": {
+    "version": 1,
+    "query": [
+      {
+        "image_id": "0823b8f0347f40ebacd37cff8a90647c",
+        "x": 661,
+        "y": 104,
+        "w": 615,
+        "h": 618,
+        "vehicle_id": 1144,
+        "camera_id": 48
+      },
+      {
+        "image_id": "08cc0c94595a46899afa6c2bbd1a66d6",
+        "x": 483,
+        "y": 421,
+        "w": 881,
+        "h": 452,
+        "vehicle_id": 862,
+        "camera_id": 90
+      },
+      {
+        "image_id": "48837aad5bac4791aa9508613a435612",
+        "x": 664,
+        "y": 406,
+        "w": 1141,
+        "h": 562,
+        "vehicle_id": 811,
+        "camera_id": 81
+      },
+      {
+        "image_id": "3e40ee225d41446d905736bd2d8cb49c",
+        "x": 253,
+        "y": 337,
+        "w": 598,
+        "h": 566,
+        "vehicle_id": 341,
+        "camera_id": 89
+      },
+      {
+        "image_id": "b51e2b0f39cb467c82fc6c3a5fe0f228",
+        "x": 183,
+        "y": 226,
+        "w": 1017,
+        "h": 544,
+        "vehicle_id": 1470,
+        "camera_id": 43
+      },
+      {
+        "image_id": "b94be87b5ced41f5868f2dfb415100e4",
+        "x": 0,
+        "y": 308,
+        "w": 437,
+        "h": 420,
+        "vehicle_id": 403,
+        "camera_id": 89
+      },
+      {
+        "image_id": "5d9370e7362848cf846b363b5a4b9d91",
+        "x": 1267,
+        "y": 176,
+        "w": 652,
+        "h": 730,
+        "vehicle_id": 830,
+        "camera_id": 43
+      },
+      {
+        "image_id": "f18ab39ae20d4379ba65743e95264cee",
+        "x": 825,
+        "y": 409,
+        "w": 489,
+        "h": 395,
+        "vehicle_id": 116,
+        "camera_id": 72
+      },
+      {
+        "image_id": "e52eca4132fe40c49fe5371fd9afbc0c",
+        "x": 110,
+        "y": 130,
+        "w": 871,
+        "h": 700,
+        "vehicle_id": 1213,
+        "camera_id": 5
+      },
+      {
+        "image_id": "1b79126c6b3a4b079d0a07604b9da83e",
+        "x": 339,
+        "y": 590,
+        "w": 629,
+        "h": 490,
+        "vehicle_id": 321,
+        "camera_id": 12
+      },
+      {
+        "image_id": "81d524c4219b47889ce40e18ebb8e165",
+        "x": 120,
+        "y": 387,
+        "w": 714,
+        "h": 507,
+        "vehicle_id": 494,
+        "camera_id": 90
+      },
+      {
+        "image_id": "e899dbb76abc434d92b62b7817fc228d",
+        "x": 474,
+        "y": 318,
+        "w": 737,
+        "h": 538,
+        "vehicle_id": 1206,
+        "camera_id": 54
+      },
+      {
+        "image_id": "b8e3c226a7dd4eb9a81dc4e6effecc9a",
+        "x": 1035,
+        "y": 484,
+        "w": 717,
+        "h": 319,
+        "vehicle_id": 1307,
+        "camera_id": 90
+      },
+      {
+        "image_id": "90fc30ada28f414d9f2d823bcb9abd26",
+        "x": 570,
+        "y": 296,
+        "w": 884,
+        "h": 641,
+        "vehicle_id": 519,
+        "camera_id": 86
+      },
+      {
+        "image_id": "9c16dfbed48045e1b51a492627aa7fa9",
+        "x": 449,
+        "y": 501,
+        "w": 657,
+        "h": 579,
+        "vehicle_id": 634,
+        "camera_id": 36
+      },
+      {
+        "image_id": "4b3f1e50bdbf4fe2bf3004bde4b35d3c",
+        "x": 274,
+        "y": 440,
+        "w": 659,
+        "h": 470,
+        "vehicle_id": 917,
+        "camera_id": 19
+      },
+      {
+        "image_id": "7277425f6c8741a6b067b6749cc87756",
+        "x": 806,
+        "y": 0,
+        "w": 385,
+        "h": 449,
+        "vehicle_id": 1318,
+        "camera_id": 77
+      },
+      {
+        "image_id": "2e372f399c824622b20528b660f6ca9f",
+        "x": 1313,
+        "y": 384,
+        "w": 553,
+        "h": 299,
+        "vehicle_id": 764,
+        "camera_id": 11
+      },
+      {
+        "image_id": "01d60f6e097b4f53afed1724c2accb42",
+        "x": 467,
+        "y": 271,
+        "w": 931,
+        "h": 629,
+        "vehicle_id": 49,
+        "camera_id": 24
+      },
+      {
+        "image_id": "fd4c087eff3f472aa12b5bb81ab005fa",
+        "x": 1222,
+        "y": 475,
+        "w": 697,
+        "h": 580,
+        "vehicle_id": 279,
+        "camera_id": 16
+      },
+      {
+        "image_id": "46527d56cfbb422a890a67fc8c4b217f",
+        "x": 19,
+        "y": 221,
+        "w": 1293,
+        "h": 683,
+        "vehicle_id": 515,
+        "camera_id": 54
+      },
+      {
+        "image_id": "7186166b47c844e8b1c1199cfedfc82d",
+        "x": 195,
+        "y": 417,
+        "w": 598,
+        "h": 404,
+        "vehicle_id": 643,
+        "camera_id": 89
+      },
+      {
+        "image_id": "223439fd2d1940b18ee45b59cbca62cf",
+        "x": 266,
+        "y": 245,
+        "w": 742,
+        "h": 430,
+        "vehicle_id": 273,
+        "camera_id": 51
+      },
+      {
+        "image_id": "c2d61037a77c4adb9b47105ad8c2407c",
+        "x": 686,
+        "y": 451,
+        "w": 589,
+        "h": 388,
+        "vehicle_id": 346,
+        "camera_id": 90
+      },
+      {
+        "image_id": "4d7282104dc24dcfa0378736c26d5086",
+        "x": 435,
+        "y": 168,
+        "w": 441,
+        "h": 334,
+        "vehicle_id": 410,
+        "camera_id": 92
+      },
+      {
+        "image_id": "875b504d30e24500bc46d805e9ded9f5",
+        "x": 1258,
+        "y": 407,
+        "w": 650,
+        "h": 501,
+        "vehicle_id": 34,
+        "camera_id": 89
+      },
+      {
+        "image_id": "9c611d9a9fd24f0c9ab0343acb2b1d0c",
+        "x": 176,
+        "y": 300,
+        "w": 661,
+        "h": 497,
+        "vehicle_id": 1477,
+        "camera_id": 90
+      },
+      {
+        "image_id": "0999c8eb17a14a96b83246ea26830037",
+        "x": 473,
+        "y": 341,
+        "w": 655,
+        "h": 622,
+        "vehicle_id": 399,
+        "camera_id": 86
+      },
+      {
+        "image_id": "1f4202c2f1a14fee8220f4f7173ec7b2",
+        "x": 583,
+        "y": 355,
+        "w": 899,
+        "h": 433,
+        "vehicle_id": 202,
+        "camera_id": 90
+      },
+      {
+        "image_id": "6cc7049513304bbeaacf9e368d82ca6e",
+        "x": 182,
+        "y": 187,
+        "w": 803,
+        "h": 500,
+        "vehicle_id": 1503,
+        "camera_id": 24
+      },
+      {
+        "image_id": "cae85d2846bc4be08debaebcffcc921f",
+        "x": 753,
+        "y": 178,
+        "w": 973,
+        "h": 559,
+        "vehicle_id": 1096,
+        "camera_id": 85
+      },
+      {
+        "image_id": "2931c3afb1c94b8490215aefa353e4c6",
+        "x": 541,
+        "y": 471,
+        "w": 636,
+        "h": 438,
+        "vehicle_id": 307,
+        "camera_id": 12
+      }
+    ],
+    "gallery": [
+      {
+        "image_id": "ae9c781126ac445d9844f2398d7daf74",
+        "x": 20,
+        "y": 126,
+        "w": 637,
+        "h": 539,
+        "vehicle_id": 830,
+        "camera_id": 90
+      },
+      {
+        "image_id": "ef9e041bfce44fd7b128114196226822",
+        "x": 20,
+        "y": 146,
+        "w": 636,
+        "h": 546,
+        "vehicle_id": 830,
+        "camera_id": 90
+      },
+      {
+        "image_id": "f0bf98fce7274a7c9ac968d2db8b3614",
+        "x": 21,
+        "y": 133,
+        "w": 635,
+        "h": 557,
+        "vehicle_id": 830,
+        "camera_id": 90
+      },
+      {
+        "image_id": "15688fbde4284f0f9a4bc54f3a04a4cd",
+        "x": 1282,
+        "y": 223,
+        "w": 637,
+        "h": 376,
+        "vehicle_id": 116,
+        "camera_id": 92
+      },
+      {
+        "image_id": "639d396c1c584671a79eec69f735bf8e",
+        "x": 401,
+        "y": 382,
+        "w": 442,
+        "h": 383,
+        "vehicle_id": 116,
+        "camera_id": 29
+      },
+      {
+        "image_id": "9aef4ff8b419400bb51a01fef6c818ee",
+        "x": 1283,
+        "y": 223,
+        "w": 635,
+        "h": 378,
+        "vehicle_id": 116,
+        "camera_id": 92
+      },
+      {
+        "image_id": "ea35c34c61984d62a3c886c3df76853c",
+        "x": 1282,
+        "y": 222,
+        "w": 637,
+        "h": 373,
+        "vehicle_id": 116,
+        "camera_id": 92
+      },
+      {
+        "image_id": "676f7365eac64582b6c8a3d94c68c9dd",
+        "x": 196,
+        "y": 555,
+        "w": 636,
+        "h": 323,
+        "vehicle_id": 1213,
+        "camera_id": 59
+      },
+      {
+        "image_id": "ed7c3b52d1f345458cebbbcefbe93eef",
+        "x": 195,
+        "y": 574,
+        "w": 638,
+        "h": 326,
+        "vehicle_id": 1213,
+        "camera_id": 59
+      },
+      {
+        "image_id": "5f6f063cab6c4c5999508e16ef20151f",
+        "x": 376,
+        "y": 280,
+        "w": 719,
+        "h": 402,
+        "vehicle_id": 321,
+        "camera_id": 51
+      },
+      {
+        "image_id": "6918ce9cd29d46a5a2de033c95dc8413",
+        "x": 689,
+        "y": 435,
+        "w": 702,
+        "h": 474,
+        "vehicle_id": 321,
+        "camera_id": 61
+      },
+      {
+        "image_id": "72f342eeda8b457692e051074264e273",
+        "x": 354,
+        "y": 287,
+        "w": 720,
+        "h": 399,
+        "vehicle_id": 321,
+        "camera_id": 51
+      },
+      {
+        "image_id": "ae3d517d663b45f8aaac46bc0e483aa6",
+        "x": 688,
+        "y": 434,
+        "w": 703,
+        "h": 477,
+        "vehicle_id": 321,
+        "camera_id": 61
+      },
+      {
+        "image_id": "dde22e13be5f43b1abc446acc37c5084",
+        "x": 363,
+        "y": 290,
+        "w": 720,
+        "h": 399,
+        "vehicle_id": 321,
+        "camera_id": 51
+      },
+      {
+        "image_id": "4f91f129fcdb4df4a2408bb519847a08",
+        "x": 948,
+        "y": 323,
+        "w": 552,
+        "h": 377,
+        "vehicle_id": 494,
+        "camera_id": 89
+      },
+      {
+        "image_id": "5299584cc1c64543b8573bdc062c5062",
+        "x": 965,
+        "y": 286,
+        "w": 626,
+        "h": 360,
+        "vehicle_id": 494,
+        "camera_id": 12
+      },
+      {
+        "image_id": "9291889c85e5438a91573136274f11e0",
+        "x": 1032,
+        "y": 256,
+        "w": 609,
+        "h": 372,
+        "vehicle_id": 494,
+        "camera_id": 12
+      },
+      {
+        "image_id": "be08a332fbb146ecb0ada46d191aa516",
+        "x": 1032,
+        "y": 265,
+        "w": 609,
+        "h": 343,
+        "vehicle_id": 494,
+        "camera_id": 12
+      },
+      {
+        "image_id": "c60b5c24401c4b8aad2fe1d5de63f2e8",
+        "x": 974,
+        "y": 326,
+        "w": 526,
+        "h": 375,
+        "vehicle_id": 494,
+        "camera_id": 89
+      },
+      {
+        "image_id": "01f81f8a83714c89b4c40377964f85aa",
+        "x": 711,
+        "y": 428,
+        "w": 463,
+        "h": 421,
+        "vehicle_id": 1206,
+        "camera_id": 51
+      },
+      {
+        "image_id": "70915757add244688c1c658dd43b1614",
+        "x": 653,
+        "y": 489,
+        "w": 587,
+        "h": 481,
+        "vehicle_id": 1206,
+        "camera_id": 53
+      },
+      {
+        "image_id": "a63c1d6383474e67b31789e673ec0c5d",
+        "x": 711,
+        "y": 430,
+        "w": 464,
+        "h": 420,
+        "vehicle_id": 1206,
+        "camera_id": 51
+      },
+      {
+        "image_id": "fa371f33d8324150832b6b35bb03072b",
+        "x": 334,
+        "y": 312,
+        "w": 831,
+        "h": 438,
+        "vehicle_id": 1206,
+        "camera_id": 65
+      },
+      {
+        "image_id": "125711ac83d847579529fc054cf82e31",
+        "x": 801,
+        "y": 27,
+        "w": 315,
+        "h": 369,
+        "vehicle_id": 1307,
+        "camera_id": 78
+      },
+      {
+        "image_id": "28fe35368f5b41a9b6cd5b4c84e99daf",
+        "x": 801,
+        "y": 26,
+        "w": 405,
+        "h": 367,
+        "vehicle_id": 1307,
+        "camera_id": 78
+      },
+      {
+        "image_id": "cd525b5ba18947e8a0f04a2e2fd0d6f0",
+        "x": 801,
+        "y": 30,
+        "w": 315,
+        "h": 363,
+        "vehicle_id": 1307,
+        "camera_id": 78
+      },
+      {
+        "image_id": "c51bab7de421417e928c144fd438181a",
+        "x": 177,
+        "y": 168,
+        "w": 981,
+        "h": 840,
+        "vehicle_id": 519,
+        "camera_id": 24
+      },
+      {
+        "image_id": "fcd5777c5672413fa3ac9173969224f7",
+        "x": 178,
+        "y": 173,
+        "w": 981,
+        "h": 834,
+        "vehicle_id": 519,
+        "camera_id": 24
+      },
+      {
+        "image_id": "98338db0304a46dfb4ce001887c4d4f1",
+        "x": 209,
+        "y": 195,
+        "w": 749,
+        "h": 472,
+        "vehicle_id": 634,
+        "camera_id": 65
+      },
+      {
+        "image_id": "dda7e0b34acf494591b24b9392b64de1",
+        "x": 209,
+        "y": 197,
+        "w": 750,
+        "h": 472,
+        "vehicle_id": 634,
+        "camera_id": 65
+      },
+      {
+        "image_id": "e8da8d1e76f7493d9664bdcc2ae46be8",
+        "x": 209,
+        "y": 196,
+        "w": 749,
+        "h": 473,
+        "vehicle_id": 634,
+        "camera_id": 65
+      },
+      {
+        "image_id": "3c482bd54ff64cf58f14610520bd0b6a",
+        "x": 639,
+        "y": 224,
+        "w": 851,
+        "h": 578,
+        "vehicle_id": 917,
+        "camera_id": 6
+      },
+      {
+        "image_id": "bffe74b137e64418b951cc00629b7e71",
+        "x": 659,
+        "y": 257,
+        "w": 745,
+        "h": 604,
+        "vehicle_id": 917,
+        "camera_id": 6
+      },
+      {
+        "image_id": "69056714e8ea45f79bd84fe58f580117",
+        "x": 190,
+        "y": 107,
+        "w": 800,
+        "h": 547,
+        "vehicle_id": 1318,
+        "camera_id": 68
+      },
+      {
+        "image_id": "73bebdf31567411aa8b2ad5a9ac2ec1e",
+        "x": 940,
+        "y": 157,
+        "w": 398,
+        "h": 368,
+        "vehicle_id": 1318,
+        "camera_id": 51
+      },
+      {
+        "image_id": "b4694c0fedab4581ad38ba8c469692d3",
+        "x": 950,
+        "y": 158,
+        "w": 396,
+        "h": 369,
+        "vehicle_id": 1318,
+        "camera_id": 51
+      },
+      {
+        "image_id": "bedb9f58194e4edca9629eb330358178",
+        "x": 199,
+        "y": 106,
+        "w": 800,
+        "h": 540,
+        "vehicle_id": 1318,
+        "camera_id": 68
+      },
+      {
+        "image_id": "bf26db5795684094b6320a39ee8fa283",
+        "x": 953,
+        "y": 160,
+        "w": 397,
+        "h": 368,
+        "vehicle_id": 1318,
+        "camera_id": 51
+      },
+      {
+        "image_id": "ea0ad821f06e492984e6b2a090afb052",
+        "x": 174,
+        "y": 109,
+        "w": 801,
+        "h": 543,
+        "vehicle_id": 1318,
+        "camera_id": 68
+      },
+      {
+        "image_id": "0b332766c60d4613afaf13720f54b1f7",
+        "x": 793,
+        "y": 0,
+        "w": 560,
+        "h": 423,
+        "vehicle_id": 764,
+        "camera_id": 71
+      },
+      {
+        "image_id": "63a770bcfe3248e88e08e2368fd2e37b",
+        "x": 791,
+        "y": 0,
+        "w": 550,
+        "h": 426,
+        "vehicle_id": 764,
+        "camera_id": 71
+      },
+      {
+        "image_id": "746d00eb787c4bee91edd0e4c6fd7ab7",
+        "x": 805,
+        "y": 0,
+        "w": 382,
+        "h": 289,
+        "vehicle_id": 764,
+        "camera_id": 36
+      },
+      {
+        "image_id": "946112b62a4741b6a96ad68f31768be8",
+        "x": 788,
+        "y": 0,
+        "w": 553,
+        "h": 424,
+        "vehicle_id": 764,
+        "camera_id": 71
+      },
+      {
+        "image_id": "efb256892bd342bdb8e49c7e47fdddb8",
+        "x": 1058,
+        "y": 191,
+        "w": 421,
+        "h": 371,
+        "vehicle_id": 764,
+        "camera_id": 42
+      },
+      {
+        "image_id": "f7b63c3a89aa4ea9b8ba6b24383d5389",
+        "x": 805,
+        "y": 0,
+        "w": 368,
+        "h": 290,
+        "vehicle_id": 764,
+        "camera_id": 36
+      },
+      {
+        "image_id": "ce7672c87706456b8e21774bd2e4a0f4",
+        "x": 732,
+        "y": 288,
+        "w": 409,
+        "h": 390,
+        "vehicle_id": 49,
+        "camera_id": 78
+      },
+      {
+        "image_id": "9e4b093047094517be71b1911a668559",
+        "x": 176,
+        "y": 184,
+        "w": 1019,
+        "h": 623,
+        "vehicle_id": 279,
+        "camera_id": 94
+      },
+      {
+        "image_id": "ba939a59a75c4b3b9af8d8404f2b9b43",
+        "x": 171,
+        "y": 185,
+        "w": 1024,
+        "h": 624,
+        "vehicle_id": 279,
+        "camera_id": 94
+      },
+      {
+        "image_id": "f74a0f9e24e946d6bf7dedc5a61facaa",
+        "x": 0,
+        "y": 197,
+        "w": 1140,
+        "h": 638,
+        "vehicle_id": 279,
+        "camera_id": 94
+      },
+      {
+        "image_id": "0970e383702e496989709b9906751c5a",
+        "x": 269,
+        "y": 237,
+        "w": 906,
+        "h": 678,
+        "vehicle_id": 515,
+        "camera_id": 24
+      },
+      {
+        "image_id": "7aa75e92d37e4efab0547da5527e81bf",
+        "x": 268,
+        "y": 237,
+        "w": 906,
+        "h": 678,
+        "vehicle_id": 515,
+        "camera_id": 24
+      },
+      {
+        "image_id": "b94745d05226411994cfd60d42d58c41",
+        "x": 897,
+        "y": 82,
+        "w": 789,
+        "h": 562,
+        "vehicle_id": 515,
+        "camera_id": 24
+      },
+      {
+        "image_id": "24062c6260c548ca9dd9cff050f91888",
+        "x": 1440,
+        "y": 419,
+        "w": 471,
+        "h": 412,
+        "vehicle_id": 643,
+        "camera_id": 90
+      },
+      {
+        "image_id": "6a4c1a1f962f4f56bf5757a0390d37a2",
+        "x": 1441,
+        "y": 421,
+        "w": 469,
+        "h": 410,
+        "vehicle_id": 643,
+        "camera_id": 90
+      },
+      {
+        "image_id": "e33f4e72f97b4053b7f077bc13c63e31",
+        "x": 1444,
+        "y": 417,
+        "w": 470,
+        "h": 412,
+        "vehicle_id": 643,
+        "camera_id": 90
+      },
+      {
+        "image_id": "501476598a6449cb89b7b0874e1bc302",
+        "x": 865,
+        "y": 56,
+        "w": 376,
+        "h": 324,
+        "vehicle_id": 273,
+        "camera_id": 12
+      },
+      {
+        "image_id": "a75d2d21d18f4241906b433045162bf2",
+        "x": 626,
+        "y": 351,
+        "w": 888,
+        "h": 632,
+        "vehicle_id": 273,
+        "camera_id": 50
+      },
+      {
+        "image_id": "b4b90d32121a4d25b09ae1bc30edfc3d",
+        "x": 651,
+        "y": 369,
+        "w": 899,
+        "h": 619,
+        "vehicle_id": 273,
+        "camera_id": 50
+      },
+      {
+        "image_id": "f2640cad334741c197d663128530ae5e",
+        "x": 866,
+        "y": 53,
+        "w": 374,
+        "h": 326,
+        "vehicle_id": 273,
+        "camera_id": 12
+      },
+      {
+        "image_id": "faf6507789b24177a10aafc75c82c6f7",
+        "x": 629,
+        "y": 353,
+        "w": 890,
+        "h": 606,
+        "vehicle_id": 273,
+        "camera_id": 50
+      },
+      {
+        "image_id": "616f535d978341ae8759b5cf6a91bbdb",
+        "x": 298,
+        "y": 366,
+        "w": 610,
+        "h": 509,
+        "vehicle_id": 346,
+        "camera_id": 89
+      },
+      {
+        "image_id": "7a922f5bc281427faa2f9d07aa30ec36",
+        "x": 299,
+        "y": 365,
+        "w": 609,
+        "h": 509,
+        "vehicle_id": 346,
+        "camera_id": 89
+      },
+      {
+        "image_id": "c1d55c65ffc64e11ac153b873683bda1",
+        "x": 299,
+        "y": 367,
+        "w": 610,
+        "h": 507,
+        "vehicle_id": 346,
+        "camera_id": 89
+      },
+      {
+        "image_id": "44210ffbcb8b4196b0e97f29a29adb44",
+        "x": 419,
+        "y": 567,
+        "w": 516,
+        "h": 328,
+        "vehicle_id": 410,
+        "camera_id": 59
+      },
+      {
+        "image_id": "b90c1217b4fa46cb90ab4ad43c813b58",
+        "x": 420,
+        "y": 562,
+        "w": 515,
+        "h": 334,
+        "vehicle_id": 410,
+        "camera_id": 59
+      },
+      {
+        "image_id": "018e773167e84cb486519d5ce4ad9a56",
+        "x": 524,
+        "y": 388,
+        "w": 926,
+        "h": 510,
+        "vehicle_id": 34,
+        "camera_id": 81
+      },
+      {
+        "image_id": "d7f1ce4556dd4f5ab9316c2b4e4209ec",
+        "x": 234,
+        "y": 372,
+        "w": 854,
+        "h": 498,
+        "vehicle_id": 34,
+        "camera_id": 81
+      },
+      {
+        "image_id": "ec8608661f12468e9b3a880a08c8fdd3",
+        "x": 525,
+        "y": 386,
+        "w": 926,
+        "h": 512,
+        "vehicle_id": 34,
+        "camera_id": 81
+      },
+      {
+        "image_id": "38d86d7aa16f4021b8ae859e49c2782d",
+        "x": 948,
+        "y": 245,
+        "w": 474,
+        "h": 443,
+        "vehicle_id": 1477,
+        "camera_id": 89
+      },
+      {
+        "image_id": "782b3cfabdfb4249b585ab7119c63c36",
+        "x": 1037,
+        "y": 452,
+        "w": 882,
+        "h": 487,
+        "vehicle_id": 1477,
+        "camera_id": 43
+      },
+      {
+        "image_id": "8e478fe28d3a40c8ad637bf8bd0be86a",
+        "x": 402,
+        "y": 52,
+        "w": 1264,
+        "h": 740,
+        "vehicle_id": 1477,
+        "camera_id": 43
+      },
+      {
+        "image_id": "b90c82fcf7e24b46a7d230e7779ec854",
+        "x": 909,
+        "y": 243,
+        "w": 516,
+        "h": 445,
+        "vehicle_id": 1477,
+        "camera_id": 89
+      },
+      {
+        "image_id": "e35f8a1e83ee4da3923d28a54c728868",
+        "x": 904,
+        "y": 264,
+        "w": 516,
+        "h": 439,
+        "vehicle_id": 1477,
+        "camera_id": 89
+      },
+      {
+        "image_id": "3106fef0fe814cc8b8483736e4c6b2dc",
+        "x": 473,
+        "y": 537,
+        "w": 1034,
+        "h": 441,
+        "vehicle_id": 399,
+        "camera_id": 7
+      },
+      {
+        "image_id": "3f4aafb3a3a94e009eb936cae206a61e",
+        "x": 474,
+        "y": 541,
+        "w": 1033,
+        "h": 444,
+        "vehicle_id": 399,
+        "camera_id": 7
+      },
+      {
+        "image_id": "7130c7a62bd34fd2a46dd0ac833dd9bf",
+        "x": 1308,
+        "y": 369,
+        "w": 611,
+        "h": 387,
+        "vehicle_id": 399,
+        "camera_id": 89
+      },
+      {
+        "image_id": "eb441cd0b3b84809a8938c01f525c2fb",
+        "x": 488,
+        "y": 542,
+        "w": 1019,
+        "h": 445,
+        "vehicle_id": 399,
+        "camera_id": 7
+      },
+      {
+        "image_id": "f446cd8fdf7746cca4e63b6de2b9534d",
+        "x": 184,
+        "y": 325,
+        "w": 468,
+        "h": 328,
+        "vehicle_id": 399,
+        "camera_id": 3
+      },
+      {
+        "image_id": "96c0357d26ce40eaa498eaa2817e461f",
+        "x": 609,
+        "y": 378,
+        "w": 754,
+        "h": 471,
+        "vehicle_id": 202,
+        "camera_id": 89
+      },
+      {
+        "image_id": "a79474a99ddd49c08179d894e5776b7d",
+        "x": 609,
+        "y": 377,
+        "w": 755,
+        "h": 472,
+        "vehicle_id": 202,
+        "camera_id": 89
+      },
+      {
+        "image_id": "cad76c30ad0c47e0afbfeb30575817bb",
+        "x": 608,
+        "y": 290,
+        "w": 754,
+        "h": 548,
+        "vehicle_id": 202,
+        "camera_id": 89
+      },
+      {
+        "image_id": "495095229aca434daf13ea33340b9bc5",
+        "x": 569,
+        "y": 528,
+        "w": 632,
+        "h": 405,
+        "vehicle_id": 1503,
+        "camera_id": 62
+      },
+      {
+        "image_id": "513d06889e484ec3b4346fa38679985c",
+        "x": 647,
+        "y": 514,
+        "w": 649,
+        "h": 406,
+        "vehicle_id": 1503,
+        "camera_id": 62
+      },
+      {
+        "image_id": "c953a73c74704c158517a4c9704689f3",
+        "x": 637,
+        "y": 518,
+        "w": 660,
+        "h": 406,
+        "vehicle_id": 1503,
+        "camera_id": 62
+      },
+      {
+        "image_id": "20226d27ec7f423994c07fa2875d503e",
+        "x": 211,
+        "y": 420,
+        "w": 569,
+        "h": 476,
+        "vehicle_id": 1096,
+        "camera_id": 89
+      },
+      {
+        "image_id": "478c4e4a35d7432f8d7f16153b1702c4",
+        "x": 1033,
+        "y": 260,
+        "w": 802,
+        "h": 559,
+        "vehicle_id": 1096,
+        "camera_id": 90
+      },
+      {
+        "image_id": "6c3395385d064f4ba64c931500a11d32",
+        "x": 371,
+        "y": 179,
+        "w": 840,
+        "h": 570,
+        "vehicle_id": 1096,
+        "camera_id": 69
+      },
+      {
+        "image_id": "7e29f5128c614f33af5b1db3ee942468",
+        "x": 1377,
+        "y": 603,
+        "w": 542,
+        "h": 476,
+        "vehicle_id": 1096,
+        "camera_id": 90
+      },
+      {
+        "image_id": "b221dae7fb7a4bcfbecc9727bdffc2ba",
+        "x": 7,
+        "y": 311,
+        "w": 550,
+        "h": 535,
+        "vehicle_id": 1096,
+        "camera_id": 89
+      },
+      {
+        "image_id": "ede6b60cb44348ce9bf3699b700920ff",
+        "x": 943,
+        "y": 414,
+        "w": 862,
+        "h": 514,
+        "vehicle_id": 1096,
+        "camera_id": 15
+      },
+      {
+        "image_id": "ef158e53208b4687b48dced341014504",
+        "x": 340,
+        "y": 450,
+        "w": 676,
+        "h": 494,
+        "vehicle_id": 1096,
+        "camera_id": 61
+      },
+      {
+        "image_id": "024fe7192186464684751b6725cbc70d",
+        "x": 72,
+        "y": 245,
+        "w": 754,
+        "h": 478,
+        "vehicle_id": 307,
+        "camera_id": 94
+      },
+      {
+        "image_id": "1d12f8e88a414b088c6126fb9754456b",
+        "x": 71,
+        "y": 243,
+        "w": 754,
+        "h": 481,
+        "vehicle_id": 307,
+        "camera_id": 94
+      },
+      {
+        "image_id": "81bf7f7f25974b92a4bcc5e0935c0dac",
+        "x": 73,
+        "y": 243,
+        "w": 752,
+        "h": 480,
+        "vehicle_id": 307,
+        "camera_id": 94
+      }
+    ],
+    "frames": {
+      "0823b8f0347f40ebacd37cff8a90647c": "b15d0b9c4f3214d51e567649b708973620d1cd58e9d32d53c370ff04e1dbee8a",
+      "08cc0c94595a46899afa6c2bbd1a66d6": "acf70a601231eb96358cc12d5dca2e0fdddd60526e0a2eb074d8173471319b7f",
+      "48837aad5bac4791aa9508613a435612": "71018105d5f2835b66162406f06fa1ae68c569df391c56af5a53ef82fa10eeb3",
+      "3e40ee225d41446d905736bd2d8cb49c": "b626dbcb39bfd1b1792a1f04387af1d25cb550cf39fc4aebe13df44c1d877abe",
+      "b51e2b0f39cb467c82fc6c3a5fe0f228": "1d7d342fc836d5646f13bd7311911506fa27eb3b5b431730fbe71a446e5583c9",
+      "b94be87b5ced41f5868f2dfb415100e4": "99ff3e190377357cee669ea0d03175086149c842d15e99545d80698dc9d3002a",
+      "5d9370e7362848cf846b363b5a4b9d91": "5a30f2b2d1309411bbd49f766943f9722ee783e4902ade8779d655a6e8566838",
+      "f18ab39ae20d4379ba65743e95264cee": "6ee23527a9ac8d6dd52bdfbf692370d9deab2e2b7af8604c321e2efd516efd05",
+      "e52eca4132fe40c49fe5371fd9afbc0c": "f2bd06ee438acdb76c2b1f825b37d88fee6cecfca3e5a901b8cb607dbf8d27e5",
+      "1b79126c6b3a4b079d0a07604b9da83e": "dc19583e5caa1e1b84c168404ccb06a9202ac73e570dafd206e3c0b3447769b1",
+      "81d524c4219b47889ce40e18ebb8e165": "8b0fa93a7cea186e9dab3a480287960a32663af142ddcf7c9ee71fec0f0bb41a",
+      "e899dbb76abc434d92b62b7817fc228d": "a9f5a5487dcc731d8db86ab5dcb63bb4f5f40e1c821956198dbdf4c2f79cfe3d",
+      "b8e3c226a7dd4eb9a81dc4e6effecc9a": "d62615007d42a6e320473d8378c6a81eaa849520094ea6c9ae0cb6d19a7ca532",
+      "90fc30ada28f414d9f2d823bcb9abd26": "9c12096275589a179be96fe57372b8569e8f5064c9c4cb2acfcd9134dd3f32ae",
+      "9c16dfbed48045e1b51a492627aa7fa9": "9b02f025d569f81c37cb744b43c80a645f84ab6f4b6704630c337536c261589e",
+      "4b3f1e50bdbf4fe2bf3004bde4b35d3c": "f0523749c696b190a270e65d30e5793da10b4b5452b13c4de057d83c306f830d",
+      "7277425f6c8741a6b067b6749cc87756": "972a863cbdbabf50fb2da360a9f0c4159e4e5fb58902e1c552f50a4a63273640",
+      "2e372f399c824622b20528b660f6ca9f": "15678a85cee433613ec9f6a3cbaf0811bd1e9025acafec681919ac7017435ad6",
+      "01d60f6e097b4f53afed1724c2accb42": "485712938c323474d1a8e1925f57ef23074e21315dfcaa233779b531acb1ca17",
+      "fd4c087eff3f472aa12b5bb81ab005fa": "64c0e87bdf5be9b811fada5133a960da5404a86d9f00f424f0ecd5c370e2bb40",
+      "46527d56cfbb422a890a67fc8c4b217f": "7b710c28a6838ba939271f81a81fff446a3ad00bf81ee4530d8122687468bbb1",
+      "7186166b47c844e8b1c1199cfedfc82d": "daf505edccbd4f669c2b7a4b24a53ebd7f91dac4fe13eb9e614ed1baa2f680d5",
+      "223439fd2d1940b18ee45b59cbca62cf": "00a4264803180773e8921c350d611c03cb8d328da9283a0ed4f2ab02e838589c",
+      "c2d61037a77c4adb9b47105ad8c2407c": "7e8858cb425ee68fa644d1178f874abcbf8962cbfa2ad7380f668a7713946fd6",
+      "4d7282104dc24dcfa0378736c26d5086": "c866206eb6dd97f266ed958dc7985bbd4edd161a9bb35e48d27085366f282e9e",
+      "875b504d30e24500bc46d805e9ded9f5": "112a78363c5370df5b762a77baedab2be6f6cae6c290e6e766b2e95fb8844c74",
+      "9c611d9a9fd24f0c9ab0343acb2b1d0c": "b019ac85e92ba7abc1115872ca6d30fae4614995160ebe1622dc1647c2283bf7",
+      "0999c8eb17a14a96b83246ea26830037": "9a74d7dafcaddc6c17623aff2cb5d0859a831cd2befa93b2a8b0c27b55525729",
+      "1f4202c2f1a14fee8220f4f7173ec7b2": "346f9f33a89c56d5a9479eef8ab104fcd0f3fedbea2330fe973a3e36159dcd7b",
+      "6cc7049513304bbeaacf9e368d82ca6e": "83def9902a84ee5a5ac7a5b148b05ed1b9549569c5dcb759c26228de57f5973e",
+      "cae85d2846bc4be08debaebcffcc921f": "b2b372b9ddc90680aea8acbff976f1c67482b313b7ce994354eb2ed7f421467a",
+      "2931c3afb1c94b8490215aefa353e4c6": "b05ac319364ddb8cb12303c4060aa82627bef47b4a5e636a671d87debc3fb88b",
+      "ae9c781126ac445d9844f2398d7daf74": "5b162277ae05acb354c2907cd770846424bda1edc559b981a740b3b090ea309e",
+      "ef9e041bfce44fd7b128114196226822": "d5f0ce5fe07639c03700a17cf06999279a277ffbf132165aedd34b991f5636f8",
+      "f0bf98fce7274a7c9ac968d2db8b3614": "8a74d89d9ab9a0ce2b669ed7edda683fb07ca169fa65e308df72172849d24856",
+      "15688fbde4284f0f9a4bc54f3a04a4cd": "7fefc9d89d0b9e1c06011033938d874c44338be6476640fe56decdf5006ecd1d",
+      "639d396c1c584671a79eec69f735bf8e": "024142767254386ee7f613d0e4ff9a316f5a6505d294caee1d09bda9a66319f4",
+      "9aef4ff8b419400bb51a01fef6c818ee": "76d527969656a66bf24f7c7b16f5675edb3de3c1e3fed44c7cba04d4e6e686bb",
+      "ea35c34c61984d62a3c886c3df76853c": "d02cca13448dba57012df3e1d526bd8e3875b238975d271127fa4d70b1bb877c",
+      "676f7365eac64582b6c8a3d94c68c9dd": "67c75931e185282e31ae479afdb48edba39e9b76c651438054bcc2ef16eb8d6e",
+      "ed7c3b52d1f345458cebbbcefbe93eef": "de946e1a644ebc6a91b7cf4601300b2d6cefe1e3bc837dc1b5b864ef22797178",
+      "5f6f063cab6c4c5999508e16ef20151f": "cd58433ef7ebd3bdc2458994bcd596c106ad133db9a33c89c345c24f0d9a032f",
+      "6918ce9cd29d46a5a2de033c95dc8413": "1d6c77c23a555fe8d74f3fb25abf717e640b8744fd5656d23fccac9246178c4a",
+      "72f342eeda8b457692e051074264e273": "2849876fecc3bbd7f3f8b8561f5b2ad35577955706888b6aabca1ab33f4b0a32",
+      "ae3d517d663b45f8aaac46bc0e483aa6": "c9457dbc385829273907d04c8a1bff0837ad22762f87b44cb7712f9fa889224d",
+      "dde22e13be5f43b1abc446acc37c5084": "217144c0b5967757195bce094122638a0bd14f99ec33a058a13d0c1d4e8b90a2",
+      "4f91f129fcdb4df4a2408bb519847a08": "befa6423c9be483a5cf035ca26cb39cf3dfe438d995fdaeb82bf77a1bd2ccf56",
+      "5299584cc1c64543b8573bdc062c5062": "e7acc0da95522d5ac67b5f021a8bc065f60c2cde1ce84ee1f237215e9e313101",
+      "9291889c85e5438a91573136274f11e0": "f31b60215c7048e09d3757d6f074aafbd489031e37b33e018548dfdd992a7371",
+      "be08a332fbb146ecb0ada46d191aa516": "d02f85b92c32681afd7b0fe87e7b4bd6df69ab3dac15979d04702f61a55fe08a",
+      "c60b5c24401c4b8aad2fe1d5de63f2e8": "8e5d43db70bd8680c6c84df0a586343c2bb0d08cf32063ff77842e068da9408c",
+      "01f81f8a83714c89b4c40377964f85aa": "ebf9dbb095ec97e4d5dd976ce3d26f2de7eb7c308cd12fcd4877e3e29053230f",
+      "70915757add244688c1c658dd43b1614": "ad3236a743bd1643d3951386a053fc6ac39caf82664ea985ce6bf5c9a5649bbe",
+      "a63c1d6383474e67b31789e673ec0c5d": "5b8a413e0b06f9b265817fe5558b5e0a930d76b1a88aa95fb612caad578e0b5f",
+      "fa371f33d8324150832b6b35bb03072b": "db3e269497657570df3462ef39a1f7798596afaddb986a5946a280da5914cddc",
+      "125711ac83d847579529fc054cf82e31": "4169687b3a7a2ed83f0a3c8ac80e87e237aa2bace2be3b7c3ce09bcc73a7ed1e",
+      "28fe35368f5b41a9b6cd5b4c84e99daf": "8784b69e7bee922479828427f1c08a331ec84fdace653f4134f7f679afe9a4ac",
+      "cd525b5ba18947e8a0f04a2e2fd0d6f0": "c4e23faadb30cc3cd588ed1de7de46518f5d9dc6d1fa25178939f4982af621fc",
+      "c51bab7de421417e928c144fd438181a": "cffbe584edfd639a24a9275b72a5432acc2a7bea8e26d28402e4e13e9de02694",
+      "fcd5777c5672413fa3ac9173969224f7": "c3a36b7b3fac56eb31986ed24284ce9f2612981f21cdb6386e446300bb5c76b0",
+      "98338db0304a46dfb4ce001887c4d4f1": "57532083052e8db4dc2075cbe443eee4d0d1dcbc9a3ea09eeb93731f54b249e0",
+      "dda7e0b34acf494591b24b9392b64de1": "c051ab4600522a43d5f63e0b8e96c86f512de593a20f264f71771d83b5fbca52",
+      "e8da8d1e76f7493d9664bdcc2ae46be8": "7d1333e814a8019b795f95d6260f97b53ed9f402430f4c7b78e42e5495ea408e",
+      "3c482bd54ff64cf58f14610520bd0b6a": "738bbc2165e0dbd1421813d24513d505730a5b148c6e188ed7eb5d266e81e0bd",
+      "bffe74b137e64418b951cc00629b7e71": "6de16b76213a200a5df277aa3238aaf5a1ec235a36183d91892c72e24cd88742",
+      "69056714e8ea45f79bd84fe58f580117": "564ae9701efb7a4f3c5b659f97a73e8e4b555134b5e67997ca8897565860123c",
+      "73bebdf31567411aa8b2ad5a9ac2ec1e": "25ee7f1b4586583c7fd82abdae3fe1246306240b498946a9368d1df1b995519e",
+      "b4694c0fedab4581ad38ba8c469692d3": "24401003c1c5714d34aee3bf67b7c70156c14d8cbdcc951be7860431c5f240cc",
+      "bedb9f58194e4edca9629eb330358178": "355dbdd923a6c10c5c6fb3a883f5af2fe6929aaf79f4d6090fca9f7196c0997c",
+      "bf26db5795684094b6320a39ee8fa283": "db75ce9b4df3ce237337657e3f6ec3b418db0d72d462d332ef404773f4a0d9b2",
+      "ea0ad821f06e492984e6b2a090afb052": "e2d7e6c09f158f9f72d5f4fcc3d170108461070504891709cae7d645add16ca0",
+      "0b332766c60d4613afaf13720f54b1f7": "f8aeed39cad84662ea9db73e9cfe5a923e1eb1ff5a1b235e5cc9d26bc297e66a",
+      "63a770bcfe3248e88e08e2368fd2e37b": "aa76b80dbaf88f313fa9ad1ff9732b337be47ceaf8adf961b9ac4e53adabb787",
+      "746d00eb787c4bee91edd0e4c6fd7ab7": "ca5538f66f9bf5e5b39321a3abb695b815293a5e0a98a4930928538cb5fd8c35",
+      "946112b62a4741b6a96ad68f31768be8": "6feb45ee061e00fc5e13aea51053036e551a942491dd5c02dda7d9399b9138ea",
+      "efb256892bd342bdb8e49c7e47fdddb8": "f1d639564a5f47cecb121c24ad54e5b4c7b9c9415e0d4f22629d96acd4b9a4f6",
+      "f7b63c3a89aa4ea9b8ba6b24383d5389": "c247ec880f4c97977c1470b4dda0f426a4eab7f02d65033d591315b12f82aa5f",
+      "ce7672c87706456b8e21774bd2e4a0f4": "d3603c104bc705d30eac109e9c5b8ed6bdcbbc7c7bf2eb456854a3fbe1ea388b",
+      "9e4b093047094517be71b1911a668559": "3c3b4ba72c32112450eeb59fde8fc9c38ea670da097a6f6dad62f663f337a63b",
+      "ba939a59a75c4b3b9af8d8404f2b9b43": "cd1c799735943c13172041df755afa73e0a92f1548d5a0bef4ef5a1f606ae2d5",
+      "f74a0f9e24e946d6bf7dedc5a61facaa": "819f4cfdc00e41ecb15d18c50183bf6657763a99be0d6d756f4dc35ef864ed7c",
+      "0970e383702e496989709b9906751c5a": "bf933d6cabd63fb84c8cf0f51a88d2b98ebfd6e8d7bb1708a953b94cf85ff7da",
+      "7aa75e92d37e4efab0547da5527e81bf": "0185d0a503fa591db9d75d7781d7c80418ad6381543711dbe2e3c0f32a27ae3e",
+      "b94745d05226411994cfd60d42d58c41": "f1840177f18a28fd9f9c434d4ca3766ada0b7e2174bf74d0708af50266a902b0",
+      "24062c6260c548ca9dd9cff050f91888": "5a27a8511f63217257f7e83ff330f81ffaebe2a305eeffd390b24d45e37950a7",
+      "6a4c1a1f962f4f56bf5757a0390d37a2": "1f5be2716c39b594337925ed5106538a1641ef9690c34b7a9ec4b935ba7b8614",
+      "e33f4e72f97b4053b7f077bc13c63e31": "14fb8fa098d6997a0755d8dfd75f947ada425f9585c31c66992699ae12073a28",
+      "501476598a6449cb89b7b0874e1bc302": "c1ea4eabdf41202552ce743711ccbccae9d8901209c98b39aeb369a86c1649c2",
+      "a75d2d21d18f4241906b433045162bf2": "463494afa8d4ecbd4f10559d19fed79f7ca22793024b72a9f3f97a976e48200e",
+      "b4b90d32121a4d25b09ae1bc30edfc3d": "19399771cb0610291474f0acb308aa2eb9bf44ae15a36815749482c09b15c8e6",
+      "f2640cad334741c197d663128530ae5e": "44438bd8d0b8fd09f2c83f9196223f4cd345218ab68e037123667cff8840ebc4",
+      "faf6507789b24177a10aafc75c82c6f7": "1fd1e849e10584211c972cca07f58ad0edab1a24321f6da8ceeb0e311922d05c",
+      "616f535d978341ae8759b5cf6a91bbdb": "736a4e77bb712d76b7245a4bb199e0106de343a02727e152f151637258c48d42",
+      "7a922f5bc281427faa2f9d07aa30ec36": "77319b50efb2140fac12d0671903338b7e107d79392d29d975f958c56ae43ac8",
+      "c1d55c65ffc64e11ac153b873683bda1": "0cfcd5d98b9998a7e78e0a21ed562cc7808c2233fc431ab39d082467849466a8",
+      "44210ffbcb8b4196b0e97f29a29adb44": "915b1282f0461353d9a2213c74afe821c7e4b171a9de9d99341ee284f4e24b87",
+      "b90c1217b4fa46cb90ab4ad43c813b58": "27ad07319edc13bea0cbb7b78c1ce95defa5317a6ea5b357b9a54655df29c852",
+      "018e773167e84cb486519d5ce4ad9a56": "bef8156cc389d2e4077300717fd4602b4b2acb308d52e52e0f1019da7f775e24",
+      "d7f1ce4556dd4f5ab9316c2b4e4209ec": "9e6ef9cc0fdd0a7c30f3e7983f8e410fce06989ddccef4f82fe4f63449376411",
+      "ec8608661f12468e9b3a880a08c8fdd3": "ad4866d81657827a50d863a7cf78c1533880564a8a513ffcc6ac6da3d9a78c7f",
+      "38d86d7aa16f4021b8ae859e49c2782d": "b1cea4fd120cf6a31b2ff3067f895f8466e1bb6a2e14698fda09a5a933bb02ac",
+      "782b3cfabdfb4249b585ab7119c63c36": "632a9bc505b1e01fe6cde54a6be8f0f479757654d472b2777a020691377fa6e5",
+      "8e478fe28d3a40c8ad637bf8bd0be86a": "fc59833d486d207d38a491eacd1b48ad417d8ea2677219d1005c1be3179ccc4a",
+      "b90c82fcf7e24b46a7d230e7779ec854": "79f417effac2ba295a752abd221aa6bfa993b156a1b6de1ccbc014c8d941586f",
+      "e35f8a1e83ee4da3923d28a54c728868": "365515637244baf50f2c1b4ae0e0d76004712b1d56429fb9917086215893e332",
+      "3106fef0fe814cc8b8483736e4c6b2dc": "d21850857b0ce5d28bcd9fd096fbe12ba1f7a1bdef6a112d02e6978f9b6eb149",
+      "3f4aafb3a3a94e009eb936cae206a61e": "c771cd7c2a6fcc003de46db945d46f9e3bab458b53e891e9f2c1d287a586fea3",
+      "7130c7a62bd34fd2a46dd0ac833dd9bf": "09d3c1b83e1292171462b897bfde435407818c8e3bc0d083cca4de6db0343ff3",
+      "eb441cd0b3b84809a8938c01f525c2fb": "8a05b3559f3e658414c2ca575150b4c412c08908ab8b824169c08167de40845e",
+      "f446cd8fdf7746cca4e63b6de2b9534d": "1a1b7d5a1b6ac1f563f771740cb0e3a6a57be9acd13ff3e8165308c70e143826",
+      "96c0357d26ce40eaa498eaa2817e461f": "c70f1e85cbe433e544778c820a31b4010b5cdbbfd7a782185894ac5050fd333d",
+      "a79474a99ddd49c08179d894e5776b7d": "c1a9bae1844623893aa91bc6e7d86942de85b35648924e4821422f03f5d53592",
+      "cad76c30ad0c47e0afbfeb30575817bb": "acef4d5cee92c09d83e21c8030f3911e46f8aa14236a35d15ca3eda985b32f00",
+      "495095229aca434daf13ea33340b9bc5": "4944565fb7e25267786cba95dbdbd6764494d791d0e658c3a51b484396478e4e",
+      "513d06889e484ec3b4346fa38679985c": "a70f4d2cfd0a6c8240af04790d47962b3242e7b150eeaea6e93de4d991ae0d2a",
+      "c953a73c74704c158517a4c9704689f3": "0d75c1d78ac2f34a1041305cd7745eead5af470c3b0f575a289f30a67dbd3695",
+      "20226d27ec7f423994c07fa2875d503e": "ca63615ec87591ec792cd74ac33f02e536a47385c05ef5dae9a85f7f000bb001",
+      "478c4e4a35d7432f8d7f16153b1702c4": "832879774a5bd16677f56113f416d927488c68504f6b164684ecc49befe73726",
+      "6c3395385d064f4ba64c931500a11d32": "620e348d6578f90f436e649dff73d5d396ab3304c18348528c8f1fbf54b357b8",
+      "7e29f5128c614f33af5b1db3ee942468": "36278c962e6ee7d65eee2f1108e4141406e4e3839d26b99cd2dc3f9148cced09",
+      "b221dae7fb7a4bcfbecc9727bdffc2ba": "e42aa6f5b98fef029f1d52eb261bc305a09f359bde36313b2a395cc728915213",
+      "ede6b60cb44348ce9bf3699b700920ff": "b765097b0ed8f7d396d049841ff3c7d3cba0769e6c72d55e61348f1889216c5e",
+      "ef158e53208b4687b48dced341014504": "5c0f9e5fb2ea93e0a86bdcabcff5d7ee2cef1214967446f6a590720837ad4db6",
+      "024fe7192186464684751b6725cbc70d": "26e8cf3757bb0eabc0dcb513846d522c7bcfcfcb745590e4752141b6e09a5b02",
+      "1d12f8e88a414b088c6126fb9754456b": "cb4bc3fd6bebad0ff4c5da904e83c085177b37e2e95d4012899d45b5cad9f7a8",
+      "81bf7f7f25974b92a4bcc5e0935c0dac": "f57387c15f66555f5a282dacc0e0e1f4d9b7f55d8a6e825cc56135f46b883c1b"
+    },
+    "source_sha256": {
+      "manual_plan": "6b459e1b557b3049f4968e0fc1f69bc2a133e9e59b543555944ed24a427a0871",
+      "manual": "c11b0aa2134168353d8cdb69dfd5f0e3acd1f27c2d07886f7213fddc440b316a",
+      "manual_provenance": "1c7702681e4b6bdec648f12f9f6e7a24f5b031d0e3f94b0c8a2c1e5a215e0782",
+      "split": "f33aa044510baa1d30f9475fd76cecb7d5100e8f4b7f3c9829ca34389e62942b",
+      "baseline": "f56e7e1b03c2a2d3138d699981c065d00d93a506ca5c5138a1a53856fa89a5d5",
+      "training_protocol": "76eb1026ab9ac8a01d10271cf87e0a96723da58d9b0bc5effc1e5dd2f231a6be",
+      "training_run": "6f6581c2c59ac080fb39ce89f97cb292b21c41984099bb71258007c4afcf4dc0",
+      "automatic_masks": "b052f7ab540c33620c7882014b52c75fa6ee06594e83191cb0ac5182fe5b30ff",
+      "new_evaluation": "e414c177f9da839b6f60af50d7770d840f1afc0dac554d19801c6c7ff299bf43",
+      "detector_plan": "633cdb6a0060a466c014dee8f19504915c2b0cfc6c5a5495feb29b4e63e34e5f",
+      "detector_calibration": "87d8945e72bb0051c362faa93f89f1aca7536e51c4f614e6ff27a01892d820a6",
+      "detector_weights": "7309199f0dbda8c23bf6306bb20580e9d3f03c0710a9071da53c949960e89f95",
+      "train_csv": "bd1df45b052ae9aabb7fd356898e244875f8cad2f111a3f76977c1b90bce9268",
+      "mvp_weights": "01466f503232467224774b6e3bafe6c4393b1de30b47b1bd714908a62f2006a2",
+      "masked_weights": "2978b9cb32fb6c5422caa3d0c909e2d84df34f327fa2820cfdbdf885f72f9712"
+    },
+    "thresholds": {
+      "mvp": 0.5948754549026489,
+      "masked_trained": 0.5620952844619751
+    },
+    "reranking": {
+      "k1": 20,
+      "k2": 3,
+      "lambda": 0.5
+    },
+    "preprocess": "exif-rgb-bbox-bilinear208-imagenet-l2-v1",
+    "flip_tta": false,
+    "fill_rgb": [
+      0,
+      0,
+      0
+    ],
+    "mask_policy": {
+      "confidence": 0.2,
+      "margin": 0.1
+    },
+    "manual_source": "masks-7.json",
+    "manual_sample_fingerprint": "628174f4951711c3921db63c3185d33c0e48ecc20fdfc89c9c03a2831f0673af",
+    "detector_device": "cpu",
+    "code_sha256": {
+      "training/mask_model_comparison.py": "28848b5ea74a881bb1d1ea49ade48e6c52eb4d64b9167181bb82d625ffd899ba",
+      "training/audit.py": "071a8d7d415779fe2e89955abd3da02dd41f4ce859c7fc9519eba48d9206c879",
+      "training/mask_reid_ablation.py": "f1562358388153c8072e430f66eb3bf887695c34e434258cddc7c3fc896b2470",
+      "training/mask_detection.py": "fc81199dd669cf029af5b1680b94e46a656c7bec072772e50252c7e4523d12e9",
+      "backend/core.py": "30a461ae7ac640a35968173085dc68f7452a62e5d5545df32a0777779e7bf871",
+      "backend/rerank.py": "7490f288e42a8d42540604e2ad165f40805100f0a1ce42967e13e17af09adc7f",
+      "backend/scoring.py": "3b183baca71086621124777369d7ae12e24e6b0412c58203dc513dd24c898055",
+      "evaluate.py": "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3"
+    },
+    "runtime": {
+      "numpy": "2.4.6",
+      "onnxruntime": "1.30.0",
+      "Pillow": "12.3.0"
+    }
+  },
+  "fingerprint": "c12ec42ed0ae2cdfbbe5f43adcdcdae3580730cab8cdb1ad9d98a7ffc937adf2"
+}

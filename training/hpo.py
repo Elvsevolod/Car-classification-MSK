@@ -166,6 +166,18 @@ def split_hpo_identities(train_identities, seed=SEED, validation_fraction=.2):
     return sorted(identities[validation_size:]), sorted(identities[:validation_size])
 
 
+def hpo_identities(split):
+    """Use an explicitly audited inner split when an experiment supplies one."""
+    if "hpo_identities" not in split:
+        return split_hpo_identities(split["identities"]["train"], SEED)
+    train, validation = (split["hpo_identities"][key] for key in ("train", "validation"))
+    all_ids = train + validation
+    if (not train or not validation or len(set(all_ids)) != len(all_ids)
+            or set(all_ids) != set(split["identities"]["train"])):
+        raise ValueError("Invalid explicit HPO identity split")
+    return sorted(train), sorted(validation)
+
+
 def prepare_experiment(rows, identities, config, dataset=DATASET):
     config.validate()
     identities = sorted(identities)
@@ -449,7 +461,7 @@ def run_hpo(rows, split, device, results_dir, weights_dir, target_trials=16,
     weights_dir = Path(weights_dir)
     trials_dir = results_dir / "trials"
     trials_dir.mkdir(parents=True, exist_ok=True)
-    hpo_train, hpo_validation = split_hpo_identities(split["identities"]["train"], SEED)
+    hpo_train, hpo_validation = hpo_identities(split)
     write_json(results_dir / "hpo_split.json", {
         "seed": SEED, "train_identities": hpo_train, "validation_identities": hpo_validation,
         "outer_calibration_and_validation_used_by_hpo": False,
@@ -582,7 +594,7 @@ def continue_top_candidates(rows, split, study, device, results_dir, weights_dir
                             top_k=4, target_epochs=20, dataset=DATASET):
     """Continue the best completed HPO trials from epoch 8 to epoch 20."""
     results_dir, weights_dir = Path(results_dir), Path(weights_dir)
-    hpo_train, hpo_validation = split_hpo_identities(split["identities"]["train"], SEED)
+    hpo_train, hpo_validation = hpo_identities(split)
     candidates = []
     for trial in _rank_complete_trials(study, top_k):
         config = config_from_trial(trial, target_epochs, seed=SEED)
@@ -616,7 +628,7 @@ def run_finalist_seeds(rows, split, study, stage2_summary, device, results_dir, 
                        seeds=(SEED, SEED + 1, SEED + 2), dataset=DATASET):
     """Retrain the two finalists independently and rank them by mean seed mAP."""
     results_dir, weights_dir = Path(results_dir), Path(weights_dir)
-    hpo_train, hpo_validation = split_hpo_identities(split["identities"]["train"], SEED)
+    hpo_train, hpo_validation = hpo_identities(split)
     trial_lookup = {trial.number: trial for trial in study.trials}
     finalists = []
     for candidate in stage2_summary["candidates"][:top_k]:

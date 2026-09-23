@@ -1,0 +1,1578 @@
+{
+  "version": 1,
+  "fingerprint": "628174f4951711c3921db63c3185d33c0e48ecc20fdfc89c9c03a2831f0673af",
+  "images": {
+    "0823b8f0347f40ebacd37cff8a90647c": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          34,
+          549,
+          276,
+          618
+        ]
+      ]
+    },
+    "08cc0c94595a46899afa6c2bbd1a66d6": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          59,
+          253,
+          210,
+          326
+        ]
+      ]
+    },
+    "48837aad5bac4791aa9508613a435612": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          8,
+          380,
+          120,
+          451
+        ]
+      ]
+    },
+    "3e40ee225d41446d905736bd2d8cb49c": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          221,
+          422,
+          389,
+          464
+        ]
+      ]
+    },
+    "b51e2b0f39cb467c82fc6c3a5fe0f228": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          0,
+          392,
+          145,
+          459
+        ],
+        [
+          484,
+          443,
+          641,
+          509
+        ]
+      ]
+    },
+    "b94be87b5ced41f5868f2dfb415100e4": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          207,
+          270,
+          321,
+          305
+        ]
+      ]
+    },
+    "5d9370e7362848cf846b363b5a4b9d91": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          30,
+          521,
+          213,
+          593
+        ]
+      ]
+    },
+    "f18ab39ae20d4379ba65743e95264cee": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          128,
+          285,
+          319,
+          322
+        ]
+      ]
+    },
+    "e52eca4132fe40c49fe5371fd9afbc0c": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          585,
+          547,
+          798,
+          646
+        ]
+      ]
+    },
+    "1b79126c6b3a4b079d0a07604b9da83e": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          118,
+          302,
+          310,
+          368
+        ]
+      ]
+    },
+    "81d524c4219b47889ce40e18ebb8e165": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          209,
+          12,
+          337,
+          51
+        ],
+        [
+          49,
+          393,
+          211,
+          453
+        ]
+      ]
+    },
+    "e899dbb76abc434d92b62b7817fc228d": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          86,
+          406,
+          313,
+          478
+        ]
+      ]
+    },
+    "b8e3c226a7dd4eb9a81dc4e6effecc9a": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          60,
+          235,
+          229,
+          291
+        ]
+      ]
+    },
+    "90fc30ada28f414d9f2d823bcb9abd26": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          471,
+          341,
+          728,
+          395
+        ],
+        [
+          141,
+          75,
+          210,
+          144
+        ]
+      ]
+    },
+    "9c16dfbed48045e1b51a492627aa7fa9": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          141,
+          376,
+          386,
+          435
+        ],
+        [
+          408,
+          7,
+          552,
+          50
+        ]
+      ]
+    },
+    "4b3f1e50bdbf4fe2bf3004bde4b35d3c": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          337,
+          229,
+          564,
+          284
+        ]
+      ]
+    },
+    "7277425f6c8741a6b067b6749cc87756": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          123,
+          377,
+          272,
+          428
+        ]
+      ]
+    },
+    "2e372f399c824622b20528b660f6ca9f": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          59,
+          211,
+          182,
+          251
+        ]
+      ]
+    },
+    "01d60f6e097b4f53afed1724c2accb42": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          153,
+          409,
+          451,
+          499
+        ],
+        [
+          576,
+          109,
+          658,
+          206
+        ]
+      ]
+    },
+    "fd4c087eff3f472aa12b5bb81ab005fa": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          529,
+          362,
+          674,
+          429
+        ]
+      ]
+    },
+    "46527d56cfbb422a890a67fc8c4b217f": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          0,
+          200,
+          27,
+          234
+        ],
+        [
+          983,
+          315,
+          1221,
+          404
+        ]
+      ]
+    },
+    "7186166b47c844e8b1c1199cfedfc82d": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          356,
+          187,
+          522,
+          246
+        ]
+      ]
+    },
+    "223439fd2d1940b18ee45b59cbca62cf": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          487,
+          192,
+          659,
+          244
+        ]
+      ]
+    },
+    "c2d61037a77c4adb9b47105ad8c2407c": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          72,
+          221,
+          238,
+          270
+        ]
+      ]
+    },
+    "4d7282104dc24dcfa0378736c26d5086": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          194,
+          229,
+          359,
+          274
+        ]
+      ]
+    },
+    "875b504d30e24500bc46d805e9ded9f5": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          33,
+          3,
+          72,
+          36
+        ],
+        [
+          368,
+          374,
+          560,
+          430
+        ]
+      ]
+    },
+    "9c611d9a9fd24f0c9ab0343acb2b1d0c": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          59,
+          315,
+          163,
+          449
+        ],
+        [
+          46,
+          376,
+          214,
+          451
+        ]
+      ]
+    },
+    "0999c8eb17a14a96b83246ea26830037": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          135,
+          535,
+          393,
+          609
+        ]
+      ]
+    },
+    "1f4202c2f1a14fee8220f4f7173ec7b2": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          71,
+          251,
+          232,
+          309
+        ]
+      ]
+    },
+    "6cc7049513304bbeaacf9e368d82ca6e": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          571,
+          361,
+          749,
+          435
+        ]
+      ]
+    },
+    "cae85d2846bc4be08debaebcffcc921f": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          27,
+          328,
+          175,
+          434
+        ],
+        [
+          775,
+          141,
+          832,
+          212
+        ],
+        [
+          65,
+          0,
+          125,
+          42
+        ]
+      ]
+    },
+    "2931c3afb1c94b8490215aefa353e4c6": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          82,
+          316,
+          287,
+          374
+        ]
+      ]
+    },
+    "ae9c781126ac445d9844f2398d7daf74": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          113,
+          413,
+          304,
+          460
+        ]
+      ]
+    },
+    "ef9e041bfce44fd7b128114196226822": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          111,
+          423,
+          307,
+          471
+        ]
+      ]
+    },
+    "f0bf98fce7274a7c9ac968d2db8b3614": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          113,
+          431,
+          303,
+          485
+        ]
+      ]
+    },
+    "15688fbde4284f0f9a4bc54f3a04a4cd": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          75,
+          186,
+          239,
+          234
+        ]
+      ]
+    },
+    "639d396c1c584671a79eec69f735bf8e": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          101,
+          189,
+          253,
+          244
+        ]
+      ]
+    },
+    "9aef4ff8b419400bb51a01fef6c818ee": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          74,
+          183,
+          236,
+          239
+        ]
+      ]
+    },
+    "ea35c34c61984d62a3c886c3df76853c": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          73,
+          185,
+          237,
+          238
+        ],
+        [
+          250,
+          66,
+          321,
+          112
+        ]
+      ]
+    },
+    "676f7365eac64582b6c8a3d94c68c9dd": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          46,
+          167,
+          170,
+          219
+        ]
+      ]
+    },
+    "ed7c3b52d1f345458cebbbcefbe93eef": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          46,
+          171,
+          173,
+          222
+        ]
+      ]
+    },
+    "5f6f063cab6c4c5999508e16ef20151f": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          504,
+          170,
+          665,
+          227
+        ]
+      ]
+    },
+    "6918ce9cd29d46a5a2de033c95dc8413": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          400,
+          213,
+          611,
+          270
+        ]
+      ]
+    },
+    "72f342eeda8b457692e051074264e273": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          511,
+          164,
+          668,
+          222
+        ]
+      ]
+    },
+    "ae3d517d663b45f8aaac46bc0e483aa6": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          400,
+          215,
+          611,
+          267
+        ],
+        [
+          70,
+          33,
+          166,
+          76
+        ]
+      ]
+    },
+    "dde22e13be5f43b1abc446acc37c5084": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          510,
+          167,
+          664,
+          220
+        ]
+      ]
+    },
+    "4f91f129fcdb4df4a2408bb519847a08": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          306,
+          155,
+          476,
+          210
+        ]
+      ]
+    },
+    "5299584cc1c64543b8573bdc062c5062": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          38,
+          252,
+          172,
+          290
+        ]
+      ]
+    },
+    "9291889c85e5438a91573136274f11e0": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          41,
+          262,
+          171,
+          303
+        ]
+      ]
+    },
+    "be08a332fbb146ecb0ada46d191aa516": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          42,
+          252,
+          172,
+          293
+        ]
+      ]
+    },
+    "c60b5c24401c4b8aad2fe1d5de63f2e8": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          279,
+          152,
+          452,
+          204
+        ]
+      ]
+    },
+    "01f81f8a83714c89b4c40377964f85aa": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          89,
+          289,
+          268,
+          341
+        ]
+      ]
+    },
+    "70915757add244688c1c658dd43b1614": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          185,
+          250,
+          432,
+          305
+        ]
+      ]
+    },
+    "a63c1d6383474e67b31789e673ec0c5d": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          90,
+          287,
+          275,
+          338
+        ]
+      ]
+    },
+    "fa371f33d8324150832b6b35bb03072b": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          641,
+          241,
+          791,
+          301
+        ]
+      ]
+    },
+    "125711ac83d847579529fc054cf82e31": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          91,
+          311,
+          217,
+          349
+        ]
+      ]
+    },
+    "28fe35368f5b41a9b6cd5b4c84e99daf": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          91,
+          310,
+          216,
+          340
+        ]
+      ]
+    },
+    "cd525b5ba18947e8a0f04a2e2fd0d6f0": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          91,
+          308,
+          221,
+          343
+        ]
+      ]
+    },
+    "c51bab7de421417e928c144fd438181a": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          196,
+          602,
+          505,
+          691
+        ]
+      ]
+    },
+    "fcd5777c5672413fa3ac9173969224f7": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          583,
+          203,
+          695,
+          333
+        ],
+        [
+          188,
+          589,
+          504,
+          686
+        ]
+      ]
+    },
+    "98338db0304a46dfb4ce001887c4d4f1": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          527,
+          239,
+          679,
+          318
+        ],
+        [
+          0,
+          0,
+          68,
+          27
+        ]
+      ]
+    },
+    "dda7e0b34acf494591b24b9392b64de1": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          529,
+          236,
+          683,
+          322
+        ],
+        [
+          0,
+          0,
+          69,
+          26
+        ]
+      ]
+    },
+    "e8da8d1e76f7493d9664bdcc2ae46be8": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          528,
+          242,
+          679,
+          319
+        ],
+        [
+          0,
+          0,
+          61,
+          31
+        ]
+      ]
+    },
+    "3c482bd54ff64cf58f14610520bd0b6a": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          59,
+          438,
+          267,
+          513
+        ],
+        [
+          773,
+          99,
+          851,
+          145
+        ]
+      ]
+    },
+    "bffe74b137e64418b951cc00629b7e71": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          82,
+          463,
+          313,
+          536
+        ]
+      ]
+    },
+    "69056714e8ea45f79bd84fe58f580117": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          459,
+          289,
+          694,
+          359
+        ],
+        [
+          0,
+          0,
+          84,
+          36
+        ]
+      ]
+    },
+    "73bebdf31567411aa8b2ad5a9ac2ec1e": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          85,
+          233,
+          238,
+          289
+        ]
+      ]
+    },
+    "b4694c0fedab4581ad38ba8c469692d3": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          81,
+          234,
+          236,
+          282
+        ]
+      ]
+    },
+    "bedb9f58194e4edca9629eb330358178": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          456,
+          282,
+          691,
+          356
+        ],
+        [
+          11,
+          43,
+          179,
+          92
+        ]
+      ]
+    },
+    "bf26db5795684094b6320a39ee8fa283": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          85,
+          234,
+          237,
+          279
+        ]
+      ]
+    },
+    "ea0ad821f06e492984e6b2a090afb052": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          462,
+          284,
+          696,
+          358
+        ]
+      ]
+    },
+    "0b332766c60d4613afaf13720f54b1f7": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          117,
+          258,
+          321,
+          309
+        ]
+      ]
+    },
+    "63a770bcfe3248e88e08e2368fd2e37b": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          119,
+          257,
+          317,
+          312
+        ]
+      ]
+    },
+    "746d00eb787c4bee91edd0e4c6fd7ab7": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          75,
+          177,
+          217,
+          218
+        ]
+      ]
+    },
+    "946112b62a4741b6a96ad68f31768be8": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          123,
+          259,
+          325,
+          306
+        ]
+      ]
+    },
+    "efb256892bd342bdb8e49c7e47fdddb8": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          0,
+          275,
+          155,
+          332
+        ]
+      ]
+    },
+    "f7b63c3a89aa4ea9b8ba6b24383d5389": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          75,
+          177,
+          217,
+          218
+        ]
+      ]
+    },
+    "ce7672c87706456b8e21774bd2e4a0f4": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          89,
+          315,
+          271,
+          350
+        ]
+      ]
+    },
+    "9e4b093047094517be71b1911a668559": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          658,
+          357,
+          892,
+          427
+        ]
+      ]
+    },
+    "ba939a59a75c4b3b9af8d8404f2b9b43": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          658,
+          360,
+          904,
+          424
+        ]
+      ]
+    },
+    "f74a0f9e24e946d6bf7dedc5a61facaa": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          827,
+          352,
+          1035,
+          425
+        ]
+      ]
+    },
+    "0970e383702e496989709b9906751c5a": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          71,
+          511,
+          294,
+          598
+        ]
+      ]
+    },
+    "7aa75e92d37e4efab0547da5527e81bf": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          78,
+          511,
+          296,
+          591
+        ]
+      ]
+    },
+    "b94745d05226411994cfd60d42d58c41": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          37,
+          404,
+          198,
+          491
+        ]
+      ]
+    },
+    "24062c6260c548ca9dd9cff050f91888": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          87,
+          297,
+          259,
+          346
+        ]
+      ]
+    },
+    "6a4c1a1f962f4f56bf5757a0390d37a2": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          83,
+          299,
+          259,
+          344
+        ]
+      ]
+    },
+    "e33f4e72f97b4053b7f077bc13c63e31": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          88,
+          302,
+          258,
+          348
+        ]
+      ]
+    },
+    "501476598a6449cb89b7b0874e1bc302": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          93,
+          162,
+          227,
+          201
+        ]
+      ]
+    },
+    "a75d2d21d18f4241906b433045162bf2": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          418,
+          326,
+          722,
+          397
+        ]
+      ]
+    },
+    "b4b90d32121a4d25b09ae1bc30edfc3d": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          424,
+          341,
+          725,
+          401
+        ]
+      ]
+    },
+    "f2640cad334741c197d663128530ae5e": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          93,
+          168,
+          227,
+          205
+        ]
+      ]
+    },
+    "faf6507789b24177a10aafc75c82c6f7": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          421,
+          329,
+          669,
+          394
+        ]
+      ]
+    },
+    "616f535d978341ae8759b5cf6a91bbdb": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          179,
+          381,
+          434,
+          437
+        ]
+      ]
+    },
+    "7a922f5bc281427faa2f9d07aa30ec36": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          181,
+          384,
+          429,
+          437
+        ]
+      ]
+    },
+    "c1d55c65ffc64e11ac153b873683bda1": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          183,
+          381,
+          428,
+          435
+        ]
+      ]
+    },
+    "44210ffbcb8b4196b0e97f29a29adb44": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          56,
+          235,
+          206,
+          269
+        ]
+      ]
+    },
+    "b90c1217b4fa46cb90ab4ad43c813b58": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          54,
+          236,
+          204,
+          277
+        ]
+      ]
+    },
+    "018e773167e84cb486519d5ce4ad9a56": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          672,
+          247,
+          863,
+          321
+        ]
+      ]
+    },
+    "d7f1ce4556dd4f5ab9316c2b4e4209ec": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          586,
+          248,
+          785,
+          328
+        ],
+        [
+          78,
+          199,
+          262,
+          297
+        ]
+      ]
+    },
+    "ec8608661f12468e9b3a880a08c8fdd3": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          673,
+          250,
+          861,
+          331
+        ]
+      ]
+    },
+    "38d86d7aa16f4021b8ae859e49c2782d": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          278,
+          359,
+          387,
+          395
+        ]
+      ]
+    },
+    "782b3cfabdfb4249b585ab7119c63c36": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          21,
+          321,
+          161,
+          385
+        ],
+        [
+          658,
+          374,
+          771,
+          433
+        ]
+      ]
+    },
+    "8e478fe28d3a40c8ad637bf8bd0be86a": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          0,
+          597,
+          128,
+          663
+        ]
+      ]
+    },
+    "b90c82fcf7e24b46a7d230e7779ec854": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          287,
+          350,
+          454,
+          399
+        ]
+      ]
+    },
+    "e35f8a1e83ee4da3923d28a54c728868": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          291,
+          343,
+          444,
+          396
+        ]
+      ]
+    },
+    "3106fef0fe814cc8b8483736e4c6b2dc": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          335,
+          3,
+          429,
+          82
+        ],
+        [
+          946,
+          0,
+          1009,
+          66
+        ],
+        [
+          804,
+          234,
+          960,
+          284
+        ]
+      ]
+    },
+    "3f4aafb3a3a94e009eb936cae206a61e": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          803,
+          230,
+          961,
+          289
+        ]
+      ]
+    },
+    "7130c7a62bd34fd2a46dd0ac833dd9bf": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          132,
+          88,
+          194,
+          142
+        ],
+        [
+          442,
+          303,
+          593,
+          355
+        ]
+      ]
+    },
+    "eb441cd0b3b84809a8938c01f525c2fb": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          224,
+          0,
+          308,
+          49
+        ],
+        [
+          787,
+          234,
+          950,
+          291
+        ]
+      ]
+    },
+    "f446cd8fdf7746cca4e63b6de2b9534d": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          233,
+          264,
+          369,
+          304
+        ]
+      ]
+    },
+    "96c0357d26ce40eaa498eaa2817e461f": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          501,
+          344,
+          670,
+          388
+        ]
+      ]
+    },
+    "a79474a99ddd49c08179d894e5776b7d": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          504,
+          338,
+          675,
+          393
+        ]
+      ]
+    },
+    "cad76c30ad0c47e0afbfeb30575817bb": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          502,
+          425,
+          669,
+          479
+        ],
+        [
+          449,
+          66,
+          515,
+          87
+        ]
+      ]
+    },
+    "495095229aca434daf13ea33340b9bc5": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          354,
+          296,
+          546,
+          343
+        ],
+        [
+          42,
+          0,
+          186,
+          33
+        ]
+      ]
+    },
+    "513d06889e484ec3b4346fa38679985c": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          383,
+          294,
+          568,
+          340
+        ],
+        [
+          0,
+          10,
+          104,
+          49
+        ],
+        [
+          0,
+          317,
+          53,
+          372
+        ],
+        [
+          162,
+          0,
+          227,
+          14
+        ]
+      ]
+    },
+    "c953a73c74704c158517a4c9704689f3": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          396,
+          292,
+          580,
+          339
+        ],
+        [
+          0,
+          11,
+          116,
+          42
+        ]
+      ]
+    },
+    "20226d27ec7f423994c07fa2875d503e": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          129,
+          319,
+          342,
+          374
+        ]
+      ]
+    },
+    "478c4e4a35d7432f8d7f16153b1702c4": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          442,
+          389,
+          684,
+          455
+        ]
+      ]
+    },
+    "6c3395385d064f4ba64c931500a11d32": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          434,
+          361,
+          694,
+          430
+        ]
+      ]
+    },
+    "7e29f5128c614f33af5b1db3ee942468": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          0,
+          11,
+          136,
+          79
+        ]
+      ]
+    },
+    "b221dae7fb7a4bcfbecc9727bdffc2ba": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          148,
+          382,
+          353,
+          451
+        ]
+      ]
+    },
+    "ede6b60cb44348ce9bf3699b700920ff": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          547,
+          320,
+          773,
+          394
+        ]
+      ]
+    },
+    "ef158e53208b4687b48dced341014504": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          106,
+          340,
+          308,
+          397
+        ]
+      ]
+    },
+    "024fe7192186464684751b6725cbc70d": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          438,
+          202,
+          668,
+          263
+        ]
+      ]
+    },
+    "1d12f8e88a414b088c6126fb9754456b": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          438,
+          204,
+          672,
+          272
+        ]
+      ]
+    },
+    "81bf7f7f25974b92a4bcc5e0935c0dac": {
+      "reviewed": true,
+      "rectangles": [
+        [
+          439,
+          202,
+          669,
+          268
+        ]
+      ]
+    }
+  }
+}

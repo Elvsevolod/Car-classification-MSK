@@ -1,0 +1,27 @@
+{
+  "signature": {
+    "experiment": "a0728012de2dafcadb3bdc8e883c7c07686f58e1e7e903dc72267812aeb5cb1e",
+    "condition": "oof",
+    "training_sha256": "176dc99994e9997a83ade08ec9856cd3103bdd1fa3fd9b775a32d0baccc44b30",
+    "weights_sha256": "d328528745fe8debd26b02bdf619faab1e15f58c88894ccf284761be41a6f157"
+  },
+  "sha256": "a9a556d9d63a1b14f7930bc3ab08390ee2369e47c957a94bcd0c12ad94a4a972",
+  "bytes": 615,
+  "config": {
+    "name": "scalar_linear",
+    "features": "scalar",
+    "hidden": 0,
+    "lr": 0.01,
+    "weight_decay": 0.001,
+    "seed": 20260915
+  },
+  "dimension": 8,
+  "max_absolute_error": 4.76837158203125e-07,
+  "batches_checked": [
+    1,
+    50,
+    100
+  ],
+  "normalization_included": true,
+  "fingerprint": "e1d6df8e4f236bdaeb6dc12777d449f195df1b77818364be31f9b7214fae3b2b"
+}

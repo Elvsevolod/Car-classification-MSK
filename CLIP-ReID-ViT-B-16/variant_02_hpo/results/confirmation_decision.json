@@ -1,0 +1,7 @@
+{
+  "winner": "trial_011",
+  "run": true,
+  "gain_over_variant_1": 0.039785158961543665,
+  "minimum_gain": 0.005,
+  "reason": "Budget gate on inner validation, not statistical significance"
+}

@@ -1,0 +1,1469 @@
+{
+  "version": 1,
+  "source": "automatic_prediction_not_reviewed",
+  "fingerprint": "628174f4951711c3921db63c3185d33c0e48ecc20fdfc89c9c03a2831f0673af",
+  "coordinates": "crop_xyxy_pixels_exclusive",
+  "model": "egoblur_lp",
+  "images": {
+    "0823b8f0347f40ebacd37cff8a90647c": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "08cc0c94595a46899afa6c2bbd1a66d6": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          80,
+          330,
+          147,
+          372
+        ]
+      ],
+      "confidences": [
+        0.3997558653354645
+      ]
+    },
+    "48837aad5bac4791aa9508613a435612": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          128,
+          451,
+          149,
+          476
+        ]
+      ],
+      "confidences": [
+        0.6173703074455261
+      ]
+    },
+    "3e40ee225d41446d905736bd2d8cb49c": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          220,
+          425,
+          389,
+          466
+        ]
+      ],
+      "confidences": [
+        0.9228189587593079
+      ]
+    },
+    "b51e2b0f39cb467c82fc6c3a5fe0f228": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          88,
+          351,
+          159,
+          379
+        ]
+      ],
+      "confidences": [
+        0.9680326581001282
+      ]
+    },
+    "b94be87b5ced41f5868f2dfb415100e4": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          204,
+          268,
+          322,
+          299
+        ]
+      ],
+      "confidences": [
+        0.7924321889877319
+      ]
+    },
+    "5d9370e7362848cf846b363b5a4b9d91": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          55,
+          532,
+          183,
+          586
+        ]
+      ],
+      "confidences": [
+        0.7354907989501953
+      ]
+    },
+    "f18ab39ae20d4379ba65743e95264cee": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          158,
+          281,
+          289,
+          320
+        ]
+      ],
+      "confidences": [
+        0.7933467626571655
+      ]
+    },
+    "e52eca4132fe40c49fe5371fd9afbc0c": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          797,
+          488,
+          859,
+          598
+        ],
+        [
+          603,
+          538,
+          794,
+          661
+        ]
+      ],
+      "confidences": [
+        0.36128273606300354,
+        0.30604666471481323
+      ]
+    },
+    "1b79126c6b3a4b079d0a07604b9da83e": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          213,
+          453,
+          320,
+          490
+        ]
+      ],
+      "confidences": [
+        0.4414122700691223
+      ]
+    },
+    "81d524c4219b47889ce40e18ebb8e165": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "e899dbb76abc434d92b62b7817fc228d": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          121,
+          418,
+          277,
+          463
+        ]
+      ],
+      "confidences": [
+        0.7440944910049438
+      ]
+    },
+    "b8e3c226a7dd4eb9a81dc4e6effecc9a": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "90fc30ada28f414d9f2d823bcb9abd26": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          539,
+          305,
+          653,
+          333
+        ]
+      ],
+      "confidences": [
+        0.8035708665847778
+      ]
+    },
+    "9c16dfbed48045e1b51a492627aa7fa9": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          227,
+          349,
+          292,
+          371
+        ]
+      ],
+      "confidences": [
+        0.4108266532421112
+      ]
+    },
+    "4b3f1e50bdbf4fe2bf3004bde4b35d3c": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "7277425f6c8741a6b067b6749cc87756": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          146,
+          396,
+          252,
+          418
+        ]
+      ],
+      "confidences": [
+        0.7378307580947876
+      ]
+    },
+    "2e372f399c824622b20528b660f6ca9f": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          76,
+          214,
+          163,
+          243
+        ]
+      ],
+      "confidences": [
+        0.749313473701477
+      ]
+    },
+    "01d60f6e097b4f53afed1724c2accb42": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          253,
+          371,
+          363,
+          409
+        ]
+      ],
+      "confidences": [
+        0.9806711673736572
+      ]
+    },
+    "fd4c087eff3f472aa12b5bb81ab005fa": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          556,
+          282,
+          667,
+          315
+        ],
+        [
+          554,
+          374,
+          671,
+          422
+        ]
+      ],
+      "confidences": [
+        0.7349036931991577,
+        0.26528337597846985
+      ]
+    },
+    "46527d56cfbb422a890a67fc8c4b217f": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          1011,
+          119,
+          1073,
+          135
+        ]
+      ],
+      "confidences": [
+        0.3048178255558014
+      ]
+    },
+    "7186166b47c844e8b1c1199cfedfc82d": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "223439fd2d1940b18ee45b59cbca62cf": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          512,
+          199,
+          632,
+          238
+        ]
+      ],
+      "confidences": [
+        0.49062854051589966
+      ]
+    },
+    "c2d61037a77c4adb9b47105ad8c2407c": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "4d7282104dc24dcfa0378736c26d5086": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          249,
+          239,
+          305,
+          264
+        ]
+      ],
+      "confidences": [
+        0.8079807162284851
+      ]
+    },
+    "875b504d30e24500bc46d805e9ded9f5": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "9c611d9a9fd24f0c9ab0343acb2b1d0c": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "0999c8eb17a14a96b83246ea26830037": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          184,
+          544,
+          349,
+          593
+        ]
+      ],
+      "confidences": [
+        0.6972992420196533
+      ]
+    },
+    "1f4202c2f1a14fee8220f4f7173ec7b2": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "6cc7049513304bbeaacf9e368d82ca6e": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          602,
+          352,
+          690,
+          388
+        ],
+        [
+          598,
+          380,
+          715,
+          431
+        ]
+      ],
+      "confidences": [
+        0.5317060947418213,
+        0.458636999130249
+      ]
+    },
+    "cae85d2846bc4be08debaebcffcc921f": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "2931c3afb1c94b8490215aefa353e4c6": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          115,
+          324,
+          258,
+          371
+        ]
+      ],
+      "confidences": [
+        0.8403428196907043
+      ]
+    },
+    "ae9c781126ac445d9844f2398d7daf74": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          144,
+          417,
+          276,
+          456
+        ]
+      ],
+      "confidences": [
+        0.6079613566398621
+      ]
+    },
+    "ef9e041bfce44fd7b128114196226822": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          143,
+          423,
+          278,
+          462
+        ]
+      ],
+      "confidences": [
+        0.5724647641181946
+      ]
+    },
+    "f0bf98fce7274a7c9ac968d2db8b3614": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          142,
+          436,
+          275,
+          474
+        ]
+      ],
+      "confidences": [
+        0.3488366901874542
+      ]
+    },
+    "15688fbde4284f0f9a4bc54f3a04a4cd": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "639d396c1c584671a79eec69f735bf8e": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          128,
+          198,
+          251,
+          237
+        ]
+      ],
+      "confidences": [
+        0.7074155211448669
+      ]
+    },
+    "9aef4ff8b419400bb51a01fef6c818ee": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          100,
+          185,
+          211,
+          231
+        ]
+      ],
+      "confidences": [
+        0.3001382052898407
+      ]
+    },
+    "ea35c34c61984d62a3c886c3df76853c": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          102,
+          185,
+          204,
+          231
+        ]
+      ],
+      "confidences": [
+        0.5272204875946045
+      ]
+    },
+    "676f7365eac64582b6c8a3d94c68c9dd": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "ed7c3b52d1f345458cebbbcefbe93eef": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "5f6f063cab6c4c5999508e16ef20151f": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "6918ce9cd29d46a5a2de033c95dc8413": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "72f342eeda8b457692e051074264e273": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "ae3d517d663b45f8aaac46bc0e483aa6": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          521,
+          429,
+          610,
+          474
+        ],
+        [
+          434,
+          217,
+          576,
+          265
+        ]
+      ],
+      "confidences": [
+        0.6193991303443909,
+        0.25644999742507935
+      ]
+    },
+    "dde22e13be5f43b1abc446acc37c5084": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "4f91f129fcdb4df4a2408bb519847a08": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          369,
+          285,
+          413,
+          301
+        ]
+      ],
+      "confidences": [
+        0.5511062145233154
+      ]
+    },
+    "5299584cc1c64543b8573bdc062c5062": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          60,
+          255,
+          151,
+          289
+        ]
+      ],
+      "confidences": [
+        0.6417604684829712
+      ]
+    },
+    "9291889c85e5438a91573136274f11e0": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          60,
+          267,
+          151,
+          301
+        ],
+        [
+          1,
+          266,
+          23,
+          319
+        ]
+      ],
+      "confidences": [
+        0.5168303847312927,
+        0.3228181302547455
+      ]
+    },
+    "be08a332fbb146ecb0ada46d191aa516": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "c60b5c24401c4b8aad2fe1d5de63f2e8": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          342,
+          283,
+          386,
+          299
+        ]
+      ],
+      "confidences": [
+        0.34356749057769775
+      ]
+    },
+    "01f81f8a83714c89b4c40377964f85aa": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          118,
+          295,
+          245,
+          333
+        ]
+      ],
+      "confidences": [
+        0.3892507255077362
+      ]
+    },
+    "70915757add244688c1c658dd43b1614": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          222,
+          261,
+          391,
+          303
+        ]
+      ],
+      "confidences": [
+        0.6974226236343384
+      ]
+    },
+    "a63c1d6383474e67b31789e673ec0c5d": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          121,
+          296,
+          246,
+          332
+        ]
+      ],
+      "confidences": [
+        0.3468669056892395
+      ]
+    },
+    "fa371f33d8324150832b6b35bb03072b": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          668,
+          259,
+          766,
+          306
+        ]
+      ],
+      "confidences": [
+        0.5257095098495483
+      ]
+    },
+    "125711ac83d847579529fc054cf82e31": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          111,
+          316,
+          198,
+          341
+        ]
+      ],
+      "confidences": [
+        0.7012408375740051
+      ]
+    },
+    "28fe35368f5b41a9b6cd5b4c84e99daf": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          110,
+          315,
+          198,
+          339
+        ]
+      ],
+      "confidences": [
+        0.7730560302734375
+      ]
+    },
+    "cd525b5ba18947e8a0f04a2e2fd0d6f0": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          111,
+          312,
+          197,
+          335
+        ]
+      ],
+      "confidences": [
+        0.8239517211914062
+      ]
+    },
+    "c51bab7de421417e928c144fd438181a": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          313,
+          685,
+          382,
+          721
+        ]
+      ],
+      "confidences": [
+        0.2726115584373474
+      ]
+    },
+    "fcd5777c5672413fa3ac9173969224f7": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "98338db0304a46dfb4ce001887c4d4f1": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "dda7e0b34acf494591b24b9392b64de1": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          553,
+          262,
+          609,
+          294
+        ]
+      ],
+      "confidences": [
+        0.6418161392211914
+      ]
+    },
+    "e8da8d1e76f7493d9664bdcc2ae46be8": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "3c482bd54ff64cf58f14610520bd0b6a": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          88,
+          446,
+          234,
+          502
+        ]
+      ],
+      "confidences": [
+        0.2917305827140808
+      ]
+    },
+    "bffe74b137e64418b951cc00629b7e71": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "69056714e8ea45f79bd84fe58f580117": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "73bebdf31567411aa8b2ad5a9ac2ec1e": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          100,
+          307,
+          150,
+          362
+        ]
+      ],
+      "confidences": [
+        0.8546391725540161
+      ]
+    },
+    "b4694c0fedab4581ad38ba8c469692d3": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "bedb9f58194e4edca9629eb330358178": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          524,
+          398,
+          634,
+          438
+        ]
+      ],
+      "confidences": [
+        0.4982686936855316
+      ]
+    },
+    "bf26db5795684094b6320a39ee8fa283": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          100,
+          304,
+          152,
+          363
+        ]
+      ],
+      "confidences": [
+        0.720849871635437
+      ]
+    },
+    "ea0ad821f06e492984e6b2a090afb052": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "0b332766c60d4613afaf13720f54b1f7": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          150,
+          266,
+          292,
+          301
+        ]
+      ],
+      "confidences": [
+        0.38019928336143494
+      ]
+    },
+    "63a770bcfe3248e88e08e2368fd2e37b": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          152,
+          268,
+          289,
+          300
+        ]
+      ],
+      "confidences": [
+        0.7926258444786072
+      ]
+    },
+    "746d00eb787c4bee91edd0e4c6fd7ab7": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "946112b62a4741b6a96ad68f31768be8": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          156,
+          266,
+          298,
+          301
+        ]
+      ],
+      "confidences": [
+        0.8210165500640869
+      ]
+    },
+    "efb256892bd342bdb8e49c7e47fdddb8": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "f7b63c3a89aa4ea9b8ba6b24383d5389": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "ce7672c87706456b8e21774bd2e4a0f4": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          133,
+          318,
+          245,
+          349
+        ]
+      ],
+      "confidences": [
+        0.7331972718238831
+      ]
+    },
+    "9e4b093047094517be71b1911a668559": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          691,
+          367,
+          860,
+          415
+        ]
+      ],
+      "confidences": [
+        0.5220837593078613
+      ]
+    },
+    "ba939a59a75c4b3b9af8d8404f2b9b43": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          710,
+          286,
+          848,
+          360
+        ]
+      ],
+      "confidences": [
+        0.48541060090065
+      ]
+    },
+    "f74a0f9e24e946d6bf7dedc5a61facaa": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          858,
+          363,
+          1014,
+          420
+        ]
+      ],
+      "confidences": [
+        0.432470440864563
+      ]
+    },
+    "0970e383702e496989709b9906751c5a": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "7aa75e92d37e4efab0547da5527e81bf": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          291,
+          530,
+          365,
+          570
+        ]
+      ],
+      "confidences": [
+        0.46876630187034607
+      ]
+    },
+    "b94745d05226411994cfd60d42d58c41": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "24062c6260c548ca9dd9cff050f91888": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "6a4c1a1f962f4f56bf5757a0390d37a2": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          116,
+          296,
+          233,
+          336
+        ]
+      ],
+      "confidences": [
+        0.6216603517532349
+      ]
+    },
+    "e33f4e72f97b4053b7f077bc13c63e31": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          117,
+          300,
+          233,
+          339
+        ]
+      ],
+      "confidences": [
+        0.6263949871063232
+      ]
+    },
+    "501476598a6449cb89b7b0874e1bc302": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          112,
+          168,
+          209,
+          195
+        ]
+      ],
+      "confidences": [
+        0.7821558117866516
+      ]
+    },
+    "a75d2d21d18f4241906b433045162bf2": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "b4b90d32121a4d25b09ae1bc30edfc3d": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "f2640cad334741c197d663128530ae5e": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          113,
+          169,
+          207,
+          198
+        ]
+      ],
+      "confidences": [
+        0.5574595928192139
+      ]
+    },
+    "faf6507789b24177a10aafc75c82c6f7": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          702,
+          516,
+          794,
+          605
+        ]
+      ],
+      "confidences": [
+        0.35843390226364136
+      ]
+    },
+    "616f535d978341ae8759b5cf6a91bbdb": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          227,
+          389,
+          393,
+          427
+        ]
+      ],
+      "confidences": [
+        0.721686601638794
+      ]
+    },
+    "7a922f5bc281427faa2f9d07aa30ec36": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          224,
+          389,
+          391,
+          427
+        ]
+      ],
+      "confidences": [
+        0.6772287487983704
+      ]
+    },
+    "c1d55c65ffc64e11ac153b873683bda1": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          225,
+          387,
+          392,
+          426
+        ]
+      ],
+      "confidences": [
+        0.7595953345298767
+      ]
+    },
+    "44210ffbcb8b4196b0e97f29a29adb44": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          129,
+          242,
+          159,
+          262
+        ]
+      ],
+      "confidences": [
+        0.3043995797634125
+      ]
+    },
+    "b90c1217b4fa46cb90ab4ad43c813b58": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          86,
+          240,
+          185,
+          267
+        ]
+      ],
+      "confidences": [
+        0.28302764892578125
+      ]
+    },
+    "018e773167e84cb486519d5ce4ad9a56": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "d7f1ce4556dd4f5ab9316c2b4e4209ec": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          644,
+          307,
+          738,
+          328
+        ]
+      ],
+      "confidences": [
+        0.6760164499282837
+      ]
+    },
+    "ec8608661f12468e9b3a880a08c8fdd3": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "38d86d7aa16f4021b8ae859e49c2782d": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          297,
+          362,
+          388,
+          396
+        ]
+      ],
+      "confidences": [
+        0.4716179370880127
+      ]
+    },
+    "782b3cfabdfb4249b585ab7119c63c36": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          44,
+          331,
+          140,
+          374
+        ]
+      ],
+      "confidences": [
+        0.7985162734985352
+      ]
+    },
+    "8e478fe28d3a40c8ad637bf8bd0be86a": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          18,
+          607,
+          128,
+          664
+        ]
+      ],
+      "confidences": [
+        0.719533383846283
+      ]
+    },
+    "b90c82fcf7e24b46a7d230e7779ec854": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          313,
+          358,
+          429,
+          393
+        ]
+      ],
+      "confidences": [
+        0.37247639894485474
+      ]
+    },
+    "e35f8a1e83ee4da3923d28a54c728868": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          318,
+          351,
+          430,
+          386
+        ]
+      ],
+      "confidences": [
+        0.509635329246521
+      ]
+    },
+    "3106fef0fe814cc8b8483736e4c6b2dc": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          830,
+          237,
+          942,
+          278
+        ]
+      ],
+      "confidences": [
+        0.25150203704833984
+      ]
+    },
+    "3f4aafb3a3a94e009eb936cae206a61e": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          829,
+          238,
+          943,
+          280
+        ]
+      ],
+      "confidences": [
+        0.542910635471344
+      ]
+    },
+    "7130c7a62bd34fd2a46dd0ac833dd9bf": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          465,
+          316,
+          569,
+          348
+        ]
+      ],
+      "confidences": [
+        0.35976076126098633
+      ]
+    },
+    "eb441cd0b3b84809a8938c01f525c2fb": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          813,
+          238,
+          931,
+          280
+        ]
+      ],
+      "confidences": [
+        0.41423192620277405
+      ]
+    },
+    "f446cd8fdf7746cca4e63b6de2b9534d": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          249,
+          271,
+          349,
+          297
+        ]
+      ],
+      "confidences": [
+        0.8389997482299805
+      ]
+    },
+    "96c0357d26ce40eaa498eaa2817e461f": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          527,
+          345,
+          645,
+          381
+        ]
+      ],
+      "confidences": [
+        0.7318753600120544
+      ]
+    },
+    "a79474a99ddd49c08179d894e5776b7d": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          523,
+          346,
+          646,
+          383
+        ]
+      ],
+      "confidences": [
+        0.7163727879524231
+      ]
+    },
+    "cad76c30ad0c47e0afbfeb30575817bb": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          446,
+          62,
+          518,
+          86
+        ],
+        [
+          528,
+          435,
+          645,
+          470
+        ]
+      ],
+      "confidences": [
+        0.45104455947875977,
+        0.3408346176147461
+      ]
+    },
+    "495095229aca434daf13ea33340b9bc5": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          380,
+          299,
+          510,
+          336
+        ]
+      ],
+      "confidences": [
+        0.32914412021636963
+      ]
+    },
+    "513d06889e484ec3b4346fa38679985c": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          463,
+          105,
+          554,
+          141
+        ],
+        [
+          412,
+          297,
+          541,
+          331
+        ]
+      ],
+      "confidences": [
+        0.4108288884162903,
+        0.3581957519054413
+      ]
+    },
+    "c953a73c74704c158517a4c9704689f3": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          471,
+          105,
+          566,
+          138
+        ],
+        [
+          416,
+          297,
+          550,
+          332
+        ]
+      ],
+      "confidences": [
+        0.4536008834838867,
+        0.3017045259475708
+      ]
+    },
+    "20226d27ec7f423994c07fa2875d503e": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          162,
+          323,
+          302,
+          363
+        ]
+      ],
+      "confidences": [
+        0.8158296942710876
+      ]
+    },
+    "478c4e4a35d7432f8d7f16153b1702c4": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "6c3395385d064f4ba64c931500a11d32": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          474,
+          368,
+          656,
+          414
+        ]
+      ],
+      "confidences": [
+        0.6361075043678284
+      ]
+    },
+    "7e29f5128c614f33af5b1db3ee942468": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "b221dae7fb7a4bcfbecc9727bdffc2ba": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          176,
+          394,
+          321,
+          435
+        ]
+      ],
+      "confidences": [
+        0.7798745036125183
+      ]
+    },
+    "ede6b60cb44348ce9bf3699b700920ff": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "ef158e53208b4687b48dced341014504": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          140,
+          347,
+          276,
+          385
+        ]
+      ],
+      "confidences": [
+        0.789678692817688
+      ]
+    },
+    "024fe7192186464684751b6725cbc70d": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "1d12f8e88a414b088c6126fb9754456b": {
+      "reviewed": false,
+      "rectangles": [],
+      "confidences": []
+    },
+    "81bf7f7f25974b92a4bcc5e0935c0dac": {
+      "reviewed": false,
+      "rectangles": [
+        [
+          474,
+          218,
+          634,
+          256
+        ]
+      ],
+      "confidences": [
+        0.33606040477752686
+      ]
+    }
+  }
+}

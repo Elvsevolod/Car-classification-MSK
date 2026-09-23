@@ -1,0 +1,37 @@
+{
+  "purpose": "local_inference_only_no_external_training_data_imported",
+  "input_size": 640,
+  "confidence": 0.25,
+  "match_iou": 0.5,
+  "region_coverage_threshold": 0.9,
+  "models": [
+    {
+      "id": "yolov9_t",
+      "format": "yolov9_end2end",
+      "path": "weights/yolov9_t/yolo-v9-t-640-license-plates-end2end.onnx",
+      "sha256": "c3c1026ca7d0585dd88084d68182dd897113712fa734ae1557ca70174440c076",
+      "author": "ankandrew / open-image-models",
+      "source": "https://github.com/ankandrew/open-image-models",
+      "url": "https://github.com/ankandrew/open-image-models/releases/download/assets/yolo-v9-t-640-license-plates-end2end.onnx",
+      "source_commit": "f22000e02b30642f317cdba7755c0631638b109e",
+      "license_note": "Wrapper code is MIT; this does not independently establish the license of pretrained weights. Check upstream YOLOv9 and weight terms before redistribution.",
+      "weight_license_verified": false,
+      "nms": {"embedded": true, "iou": 0.45, "score_floor": 0.001, "max_per_class": 100},
+      "padding_inverse": "fractional_half_padding_as_in_publisher_code"
+    },
+    {
+      "id": "yolo11n",
+      "format": "yolo11_raw",
+      "path": "weights/yolo11n/license-plate-finetune-v1n.onnx",
+      "sha256": "693133a1db97a3ba1e90068986f80afb72c3fcddb681e57181a89a9a3dc351d6",
+      "author": "morsetechlab",
+      "source": "https://huggingface.co/morsetechlab/yolov11-license-plate-detection",
+      "revision": "251a30d7daedca065f56e04b0af04052c907c68f",
+      "url": "https://huggingface.co/morsetechlab/yolov11-license-plate-detection/resolve/251a30d7daedca065f56e04b0af04052c907c68f/license-plate-finetune-v1n.onnx",
+      "license": "AGPL-3.0 (model card and ONNX metadata)",
+      "training_source_declared": "Roboflow license-plate-recognition-rxg4e version 11; model card warns of upstream train/test contamination",
+      "nms": {"embedded": false, "iou": 0.45},
+      "padding_inverse": "integer_left_top_as_in_Ultralytics_ONNX_example"
+    }
+  ]
+}

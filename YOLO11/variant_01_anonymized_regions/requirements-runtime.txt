@@ -1,0 +1,8 @@
+# Extras installed with --no-deps into artifacts/yolo11_runtime, not the project venv.
+# The existing ML environment supplies torch, torchvision, numpy, Pillow, matplotlib, requests, PyYAML, psutil.
+ultralytics==8.3.241
+ultralytics-thop==2.0.18
+polars==1.35.2
+polars-runtime-32==1.35.2
+opencv-python-headless==4.13.0.92
+scipy==1.17.1

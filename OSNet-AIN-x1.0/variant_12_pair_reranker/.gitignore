@@ -1,0 +1,5 @@
+results/**/weights/**/*.pt
+results/**/weights/**/*.onnx
+results/**/cache/*.npz
+results/**/validation/embeddings.npy
+results/**/*.tmp

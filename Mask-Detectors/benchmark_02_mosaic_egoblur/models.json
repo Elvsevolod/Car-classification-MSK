@@ -1,0 +1,64 @@
+{
+  "purpose": "local_inference_only_no_restoration_no_training",
+  "models": [
+    {
+      "id": "deepmosaics",
+      "path": "weights/deepmosaics/mosaic_position.pth",
+      "sha256": "8415ed600960ad4babde790c6d193b191df46a35b581eb372d1fccea8cebcc3d",
+      "author": "HypoX64",
+      "source": "https://github.com/HypoX64/DeepMosaics",
+      "source_commit": "b311aaac319439a0a1e8004b4a64c4222c55f38c",
+      "weight_release_folder": "DeepMosaics_V0.5.1/pretrained_models/mosaic",
+      "download_url": "https://drive.google.com/file/d/11uUaHPVq5zubGP9_xAOb5O1vPu9GK0XR/view",
+      "official_distribution_root": "https://drive.google.com/drive/folders/1LTERcN33McoiztYEwBxMuRjjgxh4DEPs",
+      "architecture": "BiSeNet, ResNet18 context backbone, num_classes=1",
+      "code_license": "GPL-3.0",
+      "weight_license_note": "Separate license of the Google Drive checkpoint is not explicitly documented in the inspected release; do not infer it solely from the code license.",
+      "source_files": {
+        "models/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "models/BiSeNet_model.py": "717f3a96bc83baed89d569e358502c8ebc68778ab6c5418921671f67f8bb4d71",
+        "models/model_util.py": "eb443ad71b94a907d56589226f6c0897a89eb24828d3c7390f4b0f28b3cb3241"
+      },
+      "input": "BGR float32 / 255, NCHW, shortest side 360",
+      "mask_threshold_uint8": 64,
+      "postprocess_variants": ["threshold_only", "publisher_box_blur_then_threshold_64_div_5"],
+      "region_policy": "all connected components, no size filter, exclusive integer xyxy bounding rectangles"
+    },
+    {
+      "id": "egoblur_lp",
+      "path": "weights/egoblur/ego_blur_lp.jit",
+      "sha256": "d0be72e015e30f0123a9194419bbb2fdcb6916faf81096e3fa2b50bcd1a85ade",
+      "archive_sha256": "d4811e08e11bcc7f35207a4412a27e6db0fe9fed6a42c78a565f8fabb45d1963",
+      "author": "Meta Project Aria",
+      "source": "https://huggingface.co/projectaria/EgoBlur",
+      "revision": "9c0b319ad09d0346e8294d7bf569593d3ab865c0",
+      "download_file": "ego_blur_lp.zip",
+      "generation": "Gen1",
+      "license": "Apache-2.0, publisher README and HF metadata",
+      "parameters": 104584410,
+      "input": "BGR uint8 CHW original crop, preprocessing inside TorchScript",
+      "confidence": 0.25,
+      "confidence_note": "Predeclared comparison threshold; official demo default is 0.9",
+      "nms_iou": 0.3,
+      "expansion": 1.0
+    },
+    {
+      "id": "egoblur_face",
+      "path": "weights/egoblur/ego_blur_face.jit",
+      "sha256": "6eb2f6eb51fd1193d29b048aa7d1750a74fc5673d6e803231e25501cbf51567c",
+      "archive_sha256": "2240fd030194fb8b0021856c51d5e28abc864503beb81f22ee7646c866205889",
+      "author": "Meta Project Aria",
+      "source": "https://huggingface.co/projectaria/EgoBlur",
+      "revision": "9c0b319ad09d0346e8294d7bf569593d3ab865c0",
+      "download_file": "ego_blur_face.zip",
+      "download_note": "hf downloader stalled; identical pinned resolve URL downloaded with curl, archive SHA-256 matches HF LFS object ID",
+      "generation": "Gen1",
+      "license": "Apache-2.0, publisher README and HF metadata",
+      "input": "BGR uint8 CHW original crop, preprocessing inside TorchScript",
+      "confidence": 0.25,
+      "confidence_note": "Predeclared comparison threshold; official demo default is 0.9",
+      "nms_iou": 0.3,
+      "expansion": 1.0
+    }
+  ]
+}

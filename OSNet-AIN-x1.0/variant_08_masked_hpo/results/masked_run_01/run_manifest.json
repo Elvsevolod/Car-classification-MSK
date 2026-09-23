@@ -1,0 +1,27 @@
+{
+  "signature": {
+    "protocol": "17f3ad358732876aa0bf5e941b4dde20e06da3ae5694e354e6f4a0ab0991ccfd",
+    "mask_cache_sha256": "b052f7ab540c33620c7882014b52c75fa6ee06594e83191cb0ac5182fe5b30ff",
+    "budget": {
+      "trials": 16,
+      "trial_epochs": 8,
+      "top_candidates": 4,
+      "promotion_epochs": 20,
+      "finalists": 2,
+      "finalist_epochs": 30,
+      "seeds": [
+        20260915,
+        20260916,
+        20260917
+      ],
+      "outer_epochs": 30
+    },
+    "mask_policy": {
+      "confidence": 0.2,
+      "margin": 0.1
+    },
+    "initializer": "stock ONNX; not current MVP weights",
+    "selection": "HPO inner; selected checkpoint on outer calibration only"
+  },
+  "fingerprint": "96b2f50ceb38f5ca9570bd5efa53ad31730e8cc73c2c2382aeccfcc63102e960"
+}

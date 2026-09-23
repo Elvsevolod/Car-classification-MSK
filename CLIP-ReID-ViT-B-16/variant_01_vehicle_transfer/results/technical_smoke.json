@@ -1,0 +1,16 @@
+{
+  "device": "mps",
+  "dtype": "float32",
+  "batch_size": 32,
+  "prompt_batch": 64,
+  "adam_steps_checked": true,
+  "stage1_loss": 8.74543285369873,
+  "stage2_loss": 10.78928279876709,
+  "forward_backward_seconds": 6.652893165999558,
+  "parameter_count": 126838528,
+  "image_weights_bytes": 348769296,
+  "not_official_performance_benchmark": true,
+  "mps_current_bytes": 1624305920,
+  "mps_driver_bytes": 10284449792,
+  "mps_recommended_bytes": 17179885568
+}

@@ -19,7 +19,7 @@ from backend.core import DATASET, STOCK_MODEL, bbox, crop_image, read_rows, sha2
 from backend.evaluate import SEED, make_protocol, make_splits, write_json
 from backend.scoring import calibrate, metrics, ranked_queries
 from training.osnet import ReIDTrainerModel, export_encoder_onnx, load_encoder_from_onnx
-from training.preprocessing import ResizeCrop
+from training.preprocessing import ResizeCrop, mask_crop
 
 
 @dataclass
@@ -207,6 +207,8 @@ class VehicleDataset(Dataset):
         row = self.rows[index]
         with Image.open(self.dataset / "images" / f"{row['image_id']}.jpg") as image:
             cropped = crop_image(image, bbox(row)).convert("RGB")
+            if "mask_rectangles" in row:
+                cropped = mask_crop(cropped, row["mask_rectangles"])
             clean = self.clean_transform(cropped)
             if self.augment:
                 return clean, self.robust_transform(cropped), row["label"], row["image_id"]

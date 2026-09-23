@@ -1,0 +1,27 @@
+{
+  "signature": {
+    "experiment": "c54599f9efc8c39cfb03b02ef9ffa4adfc754b04104de3741e04d7e89d1d75db",
+    "inner_selection": "6726bd12776dd77f2b2dd4eaaea8873c0c3be8b26de94e07079cb9e7cfe5a0bb",
+    "weights": "4d4e1aeeac1228d6a38be80fb528c112c14a29db0517dc9a281253249bd5b1a4",
+    "OSNet": "01466f503232467224774b6e3bafe6c4393b1de30b47b1bd714908a62f2006a2"
+  },
+  "sha256": "8d947ce4ec140480bacb366adaf45f7f729218aebfe8ab3832fa6500a0f62450",
+  "bytes": 615,
+  "config": {
+    "name": "scalar_linear",
+    "features": "scalar",
+    "hidden": 0,
+    "lr": 0.01,
+    "weight_decay": 0.001,
+    "seed": 20260915
+  },
+  "dimension": 8,
+  "max_absolute_error": 4.76837158203125e-07,
+  "batches_checked": [
+    1,
+    50,
+    100
+  ],
+  "normalization_included": true,
+  "fingerprint": "efa46a82fd1037cbf35bcc6b803376a59e0662269732f921c6188fd5ff237b1c"
+}

@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "protocol": "47ae5c0c79d5cedc906a07bd06258eaa2ed8e298ab40acda449e52f5a80fa5a7",
+  "plan": {
+    "trials": 12,
+    "screen_epochs": 15,
+    "top_k": 4,
+    "promotion_epochs": 35,
+    "finalists": 2,
+    "final_epochs": 60,
+    "prune_after_epoch": 12,
+    "extra_seeds": [
+      20260916,
+      20260917
+    ],
+    "confirmation_min_gain": 0.005
+  },
+  "search_space": {
+    "image_lr": [
+      2e-06,
+      2e-05
+    ],
+    "head_lr_multiplier": [
+      1.0,
+      5.0,
+      10.0,
+      20.0
+    ],
+    "weight_decay": [
+      1e-06,
+      0.001
+    ],
+    "batch_layout": [
+      "8x4",
+      "16x2"
+    ],
+    "id_loss_weight": [
+      0.25,
+      0.5,
+      1.0
+    ]
+  },
+  "anchors": [
+    {
+      "image_lr": 5e-06,
+      "head_lr_multiplier": 1.0,
+      "weight_decay": 0.0001,
+      "batch_layout": "8x4",
+      "id_loss_weight": 0.25
+    },
+    {
+      "image_lr": 5e-06,
+      "head_lr_multiplier": 10.0,
+      "weight_decay": 0.0001,
+      "batch_layout": "8x4",
+      "id_loss_weight": 0.25
+    },
+    {
+      "image_lr": 5e-06,
+      "head_lr_multiplier": 1.0,
+      "weight_decay": 0.0001,
+      "batch_layout": "16x2",
+      "id_loss_weight": 0.25
+    },
+    {
+      "image_lr": 5e-06,
+      "head_lr_multiplier": 1.0,
+      "weight_decay": 0.0001,
+      "batch_layout": "8x4",
+      "id_loss_weight": 1.0
+    }
+  ],
+  "prompt_config": {
+    "seed": 20260915,
+    "prompt_epochs": 60,
+    "image_epochs": 60,
+    "prompt_batch": 64,
+    "identities_per_batch": 8,
+    "images_per_identity": 4,
+    "prefer_cross_camera": true,
+    "prompt_lr": 0.00035,
+    "image_lr": 5e-06,
+    "weight_decay": 0.0001,
+    "eval_batch": 16
+  },
+  "code": {
+    "training/clip_hpo.py": "53f0012230299e88298018023c3ca4ce512c79b1b05ad044228a4d6de0fb802e",
+    "training/clip_experiment.py": "0c0be24c12cb56ba9e9cfd317984dfe177840b7c63a93a9aed67a71fffc98a82",
+    "training/clip_reid.py": "d15541c88d26657183b8acdc101d8db31c945b97e07ad5d01c8a72298f296ef3",
+    "training/clip_source.py": "3d43d5a0b09b59db25551278306708d3148c8ce0e3df7d93e013501d733e90f4",
+    "training/vendor/clip_reid/model.py": "6cd4621f8fb7d20cf80a3362f939ceb6c88d7cbf11b10d841da4a7d539dc65a2",
+    "training/stage6.py": "1e6f64fa0217b360d7925029f1900b982756523acdf590753d1670a59bfdc35e",
+    "training/hpo.py": "569dedd6c496517a1f0d4d81fc42f88c87ac24df8b2a806809afe338c6895351",
+    "training/pipeline.py": "e00c9361483719c5ed51e9db8f782dd59eb4c3ab8db4ce16265dd590345d3933",
+    "backend/core.py": "30a461ae7ac640a35968173085dc68f7452a62e5d5545df32a0777779e7bf871",
+    "backend/evaluate.py": "5deb8394e139c98f60f77ac8cfde7b7163f45c52e299f5a4b9f9103a36fd60e8",
+    "backend/scoring.py": "3b183baca71086621124777369d7ae12e24e6b0412c58203dc513dd24c898055",
+    "evaluate.py": "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3"
+  },
+  "packages": {
+    "torch": "2.14.0",
+    "torchvision": "0.29.0",
+    "numpy": "2.4.6",
+    "optuna": "4.9.0",
+    "Pillow": "12.3.0"
+  },
+  "device": "mps"
+}

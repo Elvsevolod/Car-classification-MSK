@@ -1,0 +1,16 @@
+{
+  "model": "YOLO11n",
+  "author": "Ultralytics",
+  "pretraining": "COCO object detection, 80 classes; public pretrained weights, not imported raw training images",
+  "source": "https://github.com/ultralytics/assets/releases/tag/v8.3.0",
+  "url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt",
+  "asset_release": "v8.3.0",
+  "path": "yolo11n.pt",
+  "sha256": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+  "downloaded": "2026-09-20",
+  "runtime": "ultralytics==8.3.241",
+  "license": "AGPL-3.0 or separate Ultralytics Enterprise license, per official YOLO11 documentation",
+  "license_source": "https://docs.ultralytics.com/models/yolo11/",
+  "target_class": "anonymized_region",
+  "note": "Official PyTorch checkpoint, not the old third-party license-plate ONNX. Hash checked before loading. No OCR or restoration. Not yet fine-tuned."
+}

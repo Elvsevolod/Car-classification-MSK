@@ -1,0 +1,646 @@
+{
+  "date": "2026-09-22",
+  "cache_images": 3600,
+  "cache_identities": 925,
+  "method": "Lowest mean cross-camera same-label cosine, six distinct IDs; seen-encoder cache, not unbiased noise estimate. No training or label changes.",
+  "visual_review_candidates": [
+    {
+      "image_id": "64017d118a8a40d4818bdfc29999fe8e",
+      "vehicle_id": 936,
+      "cross_camera_mean_cosine": -0.04372898489236832,
+      "peers": 4
+    },
+    {
+      "image_id": "af9c329528224fcba61d9856282a1b88",
+      "vehicle_id": 1317,
+      "cross_camera_mean_cosine": 0.07055794447660446,
+      "peers": 7
+    },
+    {
+      "image_id": "8d90b954abde478bb14ca0404f8aa1e2",
+      "vehicle_id": 538,
+      "cross_camera_mean_cosine": 0.07463391870260239,
+      "peers": 3
+    },
+    {
+      "image_id": "77bd3557bf6a42f9ac8f375020f5abb4",
+      "vehicle_id": 1476,
+      "cross_camera_mean_cosine": 0.1238059476017952,
+      "peers": 4
+    },
+    {
+      "image_id": "7a450c66d40c425aac9c3c46ba01ffbb",
+      "vehicle_id": 1513,
+      "cross_camera_mean_cosine": 0.13329444825649261,
+      "peers": 1
+    },
+    {
+      "image_id": "05cd40d3848e46d4b5f520fc743be8dd",
+      "vehicle_id": 1118,
+      "cross_camera_mean_cosine": 0.17660170793533325,
+      "peers": 4
+    }
+  ],
+  "ranked_candidates": [
+    {
+      "image_id": "64017d118a8a40d4818bdfc29999fe8e",
+      "vehicle_id": 936,
+      "cross_camera_mean_cosine": -0.04372898489236832,
+      "peers": 4
+    },
+    {
+      "image_id": "af9c329528224fcba61d9856282a1b88",
+      "vehicle_id": 1317,
+      "cross_camera_mean_cosine": 0.07055794447660446,
+      "peers": 7
+    },
+    {
+      "image_id": "8d90b954abde478bb14ca0404f8aa1e2",
+      "vehicle_id": 538,
+      "cross_camera_mean_cosine": 0.07463391870260239,
+      "peers": 3
+    },
+    {
+      "image_id": "77bd3557bf6a42f9ac8f375020f5abb4",
+      "vehicle_id": 1476,
+      "cross_camera_mean_cosine": 0.1238059476017952,
+      "peers": 4
+    },
+    {
+      "image_id": "7a450c66d40c425aac9c3c46ba01ffbb",
+      "vehicle_id": 1513,
+      "cross_camera_mean_cosine": 0.13329444825649261,
+      "peers": 1
+    },
+    {
+      "image_id": "05cd40d3848e46d4b5f520fc743be8dd",
+      "vehicle_id": 1118,
+      "cross_camera_mean_cosine": 0.17660170793533325,
+      "peers": 4
+    },
+    {
+      "image_id": "6deeed3427f54d84a9eb2aeb8af19e9f",
+      "vehicle_id": 709,
+      "cross_camera_mean_cosine": 0.19453401863574982,
+      "peers": 1
+    },
+    {
+      "image_id": "99a7f08abba544738fdde45d8f929821",
+      "vehicle_id": 1481,
+      "cross_camera_mean_cosine": 0.22695603966712952,
+      "peers": 1
+    },
+    {
+      "image_id": "075bbc3982a5427f973b4883d1764cef",
+      "vehicle_id": 562,
+      "cross_camera_mean_cosine": 0.24455085396766663,
+      "peers": 4
+    },
+    {
+      "image_id": "75d99cef4f384abc885c0dabc22d86d7",
+      "vehicle_id": 1481,
+      "cross_camera_mean_cosine": 0.25013867020606995,
+      "peers": 1
+    },
+    {
+      "image_id": "f11cdae6a9ca45e7a58b17f421d52b82",
+      "vehicle_id": 838,
+      "cross_camera_mean_cosine": 0.2557457685470581,
+      "peers": 1
+    },
+    {
+      "image_id": "d187220369124c7ea326750417415292",
+      "vehicle_id": 196,
+      "cross_camera_mean_cosine": 0.2595389485359192,
+      "peers": 1
+    },
+    {
+      "image_id": "7abaae0e5abb44188966179925e98a56",
+      "vehicle_id": 661,
+      "cross_camera_mean_cosine": 0.26278457045555115,
+      "peers": 3
+    },
+    {
+      "image_id": "ebd4e907a2be402fadc04a8c1ddb446c",
+      "vehicle_id": 196,
+      "cross_camera_mean_cosine": 0.2644970118999481,
+      "peers": 1
+    },
+    {
+      "image_id": "6bd0ca46f9334ef5a3a1fbe01c797af0",
+      "vehicle_id": 1481,
+      "cross_camera_mean_cosine": 0.2726312577724457,
+      "peers": 3
+    },
+    {
+      "image_id": "18aad17e15d7490ca9884f9f37250f20",
+      "vehicle_id": 196,
+      "cross_camera_mean_cosine": 0.28309905529022217,
+      "peers": 3
+    },
+    {
+      "image_id": "5b76cd98085248d7a72e249a86ac1dfc",
+      "vehicle_id": 627,
+      "cross_camera_mean_cosine": 0.28397971391677856,
+      "peers": 1
+    },
+    {
+      "image_id": "72cd17dd42be4279bef9b19997b65988",
+      "vehicle_id": 1404,
+      "cross_camera_mean_cosine": 0.2955540418624878,
+      "peers": 4
+    },
+    {
+      "image_id": "de0ef0c5e9bf438d807932ca29fec8d6",
+      "vehicle_id": 1228,
+      "cross_camera_mean_cosine": 0.3120265007019043,
+      "peers": 1
+    },
+    {
+      "image_id": "a93f1043ff4c461fb0dfeb62b9112358",
+      "vehicle_id": 187,
+      "cross_camera_mean_cosine": 0.3181132674217224,
+      "peers": 5
+    },
+    {
+      "image_id": "d9bdba9a92df4fef8620b930c87e05fe",
+      "vehicle_id": 196,
+      "cross_camera_mean_cosine": 0.3252611756324768,
+      "peers": 1
+    },
+    {
+      "image_id": "15176bdecb8d4a1e90b73a82e4bbd577",
+      "vehicle_id": 1228,
+      "cross_camera_mean_cosine": 0.3278907239437103,
+      "peers": 3
+    },
+    {
+      "image_id": "6b67e84480724a2799d863817777ef4d",
+      "vehicle_id": 375,
+      "cross_camera_mean_cosine": 0.33220136165618896,
+      "peers": 4
+    },
+    {
+      "image_id": "f922e04aa66c4a8a8b0cfe08475903a0",
+      "vehicle_id": 1025,
+      "cross_camera_mean_cosine": 0.33289653062820435,
+      "peers": 6
+    },
+    {
+      "image_id": "a03ab6d09073499283b4fa10d1ae4c48",
+      "vehicle_id": 1228,
+      "cross_camera_mean_cosine": 0.3344764709472656,
+      "peers": 1
+    },
+    {
+      "image_id": "6833b87ac592429f9b019bc03e5cbaaa",
+      "vehicle_id": 1228,
+      "cross_camera_mean_cosine": 0.33716917037963867,
+      "peers": 1
+    },
+    {
+      "image_id": "f11a5e33b9b84bd6b1901f99448c6c03",
+      "vehicle_id": 1481,
+      "cross_camera_mean_cosine": 0.3407990634441376,
+      "peers": 1
+    },
+    {
+      "image_id": "f5aff930a69c4f7a9c6e259865ea7f28",
+      "vehicle_id": 42,
+      "cross_camera_mean_cosine": 0.34120088815689087,
+      "peers": 1
+    },
+    {
+      "image_id": "f890635d8d7c4f37b723c13a3db62ef6",
+      "vehicle_id": 42,
+      "cross_camera_mean_cosine": 0.34697890281677246,
+      "peers": 2
+    },
+    {
+      "image_id": "4ffc13e61a2f423985e0cff42f92f105",
+      "vehicle_id": 42,
+      "cross_camera_mean_cosine": 0.3527570068836212,
+      "peers": 1
+    },
+    {
+      "image_id": "49fc033ff0c4497f9150947d7f85838a",
+      "vehicle_id": 1073,
+      "cross_camera_mean_cosine": 0.3530067205429077,
+      "peers": 4
+    },
+    {
+      "image_id": "88420cfc9c284ff6ad6e04f04d5cb516",
+      "vehicle_id": 927,
+      "cross_camera_mean_cosine": 0.3624459505081177,
+      "peers": 1
+    },
+    {
+      "image_id": "560fd9d6654943e691d558996e505b2e",
+      "vehicle_id": 661,
+      "cross_camera_mean_cosine": 0.36462464928627014,
+      "peers": 3
+    },
+    {
+      "image_id": "082e59741e6047178e7a7313479d0dbe",
+      "vehicle_id": 942,
+      "cross_camera_mean_cosine": 0.36689817905426025,
+      "peers": 1
+    },
+    {
+      "image_id": "ac44320dadc1450bae2920c3dd3ca634",
+      "vehicle_id": 677,
+      "cross_camera_mean_cosine": 0.36773574352264404,
+      "peers": 4
+    },
+    {
+      "image_id": "5a91f4af0b2c4fb0ba7ec79134087cb1",
+      "vehicle_id": 528,
+      "cross_camera_mean_cosine": 0.36948010325431824,
+      "peers": 6
+    },
+    {
+      "image_id": "e965a6af9bb64cbdabb2ff0fa9e2c022",
+      "vehicle_id": 1317,
+      "cross_camera_mean_cosine": 0.3700594902038574,
+      "peers": 6
+    },
+    {
+      "image_id": "206d262c341240e093cb36e4dbe38a11",
+      "vehicle_id": 1317,
+      "cross_camera_mean_cosine": 0.37546804547309875,
+      "peers": 6
+    },
+    {
+      "image_id": "e4cb2ad94e6c4ef89a436f8f86f322c0",
+      "vehicle_id": 1317,
+      "cross_camera_mean_cosine": 0.38366222381591797,
+      "peers": 6
+    },
+    {
+      "image_id": "e1c0c9826bfd41f59c2ad6309e7c4fa0",
+      "vehicle_id": 1172,
+      "cross_camera_mean_cosine": 0.38567736744880676,
+      "peers": 4
+    },
+    {
+      "image_id": "520be426fc5049c682b1d2c9256ac37a",
+      "vehicle_id": 187,
+      "cross_camera_mean_cosine": 0.3903573453426361,
+      "peers": 5
+    },
+    {
+      "image_id": "9d407091e3aa4f9db885a8db0fe20167",
+      "vehicle_id": 1050,
+      "cross_camera_mean_cosine": 0.3910144865512848,
+      "peers": 5
+    },
+    {
+      "image_id": "ef856b5706b54af6b38faaea03546f60",
+      "vehicle_id": 324,
+      "cross_camera_mean_cosine": 0.4012245237827301,
+      "peers": 6
+    },
+    {
+      "image_id": "d4f13bcbad4847399b85bd9c8eb16008",
+      "vehicle_id": 538,
+      "cross_camera_mean_cosine": 0.40376725792884827,
+      "peers": 3
+    },
+    {
+      "image_id": "21ee0d1e670c4c978472ee339d7e4c8a",
+      "vehicle_id": 1404,
+      "cross_camera_mean_cosine": 0.40490490198135376,
+      "peers": 5
+    },
+    {
+      "image_id": "3775c5870cbf400680f496a8bed08066",
+      "vehicle_id": 1317,
+      "cross_camera_mean_cosine": 0.40854305028915405,
+      "peers": 7
+    },
+    {
+      "image_id": "e7e27cc64c314b6db99dd9047e7243e4",
+      "vehicle_id": 1197,
+      "cross_camera_mean_cosine": 0.41073405742645264,
+      "peers": 1
+    },
+    {
+      "image_id": "303e679cd0b24ec3b78144a039c7951e",
+      "vehicle_id": 1317,
+      "cross_camera_mean_cosine": 0.41153451800346375,
+      "peers": 6
+    },
+    {
+      "image_id": "d7adc6daaa964fbcbb5196dccf726281",
+      "vehicle_id": 384,
+      "cross_camera_mean_cosine": 0.41165661811828613,
+      "peers": 2
+    },
+    {
+      "image_id": "27edc82ea5e74d089056073c4a32bfe8",
+      "vehicle_id": 1197,
+      "cross_camera_mean_cosine": 0.41168004274368286,
+      "peers": 1
+    },
+    {
+      "image_id": "6b2056a09c3e43f097300b09a16e13cf",
+      "vehicle_id": 225,
+      "cross_camera_mean_cosine": 0.4127756357192993,
+      "peers": 4
+    },
+    {
+      "image_id": "4f65b3005e844e168b9376850d101471",
+      "vehicle_id": 1197,
+      "cross_camera_mean_cosine": 0.4131273329257965,
+      "peers": 3
+    },
+    {
+      "image_id": "bbb5673aaf8942f0aa704b303e6f2ccc",
+      "vehicle_id": 636,
+      "cross_camera_mean_cosine": 0.4134838879108429,
+      "peers": 7
+    },
+    {
+      "image_id": "50934dc4ae9046838cd233f03d2dabd5",
+      "vehicle_id": 31,
+      "cross_camera_mean_cosine": 0.4156804084777832,
+      "peers": 1
+    },
+    {
+      "image_id": "712d062389254052ba45495f3ecd37c8",
+      "vehicle_id": 1197,
+      "cross_camera_mean_cosine": 0.4169679582118988,
+      "peers": 1
+    },
+    {
+      "image_id": "ae8106e2902441caa44a256311a34b35",
+      "vehicle_id": 187,
+      "cross_camera_mean_cosine": 0.41709989309310913,
+      "peers": 7
+    },
+    {
+      "image_id": "13701b6e3cd24c3980bcaa2f4c34e7ff",
+      "vehicle_id": 661,
+      "cross_camera_mean_cosine": 0.41732239723205566,
+      "peers": 3
+    },
+    {
+      "image_id": "aeea3a385c8a4186a0bba296d4b42db9",
+      "vehicle_id": 986,
+      "cross_camera_mean_cosine": 0.4199906587600708,
+      "peers": 6
+    },
+    {
+      "image_id": "4ed97330a22e40839050ae563fdb97ff",
+      "vehicle_id": 813,
+      "cross_camera_mean_cosine": 0.4203193187713623,
+      "peers": 1
+    },
+    {
+      "image_id": "0094d599949c4a02880eccf896788e76",
+      "vehicle_id": 1170,
+      "cross_camera_mean_cosine": 0.4226587116718292,
+      "peers": 4
+    },
+    {
+      "image_id": "ea50ba25b8044775ac220cefba621407",
+      "vehicle_id": 1170,
+      "cross_camera_mean_cosine": 0.42340147495269775,
+      "peers": 4
+    },
+    {
+      "image_id": "01e04259e68f488ca893ff2868adc2d0",
+      "vehicle_id": 969,
+      "cross_camera_mean_cosine": 0.424515962600708,
+      "peers": 5
+    },
+    {
+      "image_id": "0ef9a67d828b4715bfdf02730bea7465",
+      "vehicle_id": 951,
+      "cross_camera_mean_cosine": 0.4247317910194397,
+      "peers": 5
+    },
+    {
+      "image_id": "5cb265d9313c4bd1ae3619e55c81ad28",
+      "vehicle_id": 158,
+      "cross_camera_mean_cosine": 0.42478489875793457,
+      "peers": 1
+    },
+    {
+      "image_id": "170e633814124955a733d528ddb18096",
+      "vehicle_id": 813,
+      "cross_camera_mean_cosine": 0.4268828332424164,
+      "peers": 3
+    },
+    {
+      "image_id": "3530c03f68d249c4857c66bc6bb734bd",
+      "vehicle_id": 1404,
+      "cross_camera_mean_cosine": 0.42758429050445557,
+      "peers": 4
+    },
+    {
+      "image_id": "c04fdc1b564b4ed9a212263c6e55b089",
+      "vehicle_id": 661,
+      "cross_camera_mean_cosine": 0.4283022880554199,
+      "peers": 4
+    },
+    {
+      "image_id": "0f942924a01e4416a80ebfbfdd2fee05",
+      "vehicle_id": 187,
+      "cross_camera_mean_cosine": 0.42854294180870056,
+      "peers": 5
+    },
+    {
+      "image_id": "a99e5dc02a504d6c9410356e242deb2f",
+      "vehicle_id": 813,
+      "cross_camera_mean_cosine": 0.42860838770866394,
+      "peers": 1
+    },
+    {
+      "image_id": "71361c1b7bac4399a6b4cfed619a1662",
+      "vehicle_id": 901,
+      "cross_camera_mean_cosine": 0.4293926954269409,
+      "peers": 6
+    },
+    {
+      "image_id": "86a94e2d2c394e3096bbae6001197b35",
+      "vehicle_id": 1118,
+      "cross_camera_mean_cosine": 0.4301389157772064,
+      "peers": 3
+    },
+    {
+      "image_id": "411a5035e678406390fcb5365ca05147",
+      "vehicle_id": 1404,
+      "cross_camera_mean_cosine": 0.4306114614009857,
+      "peers": 5
+    },
+    {
+      "image_id": "408fcf00621c45ba922f0019cb577717",
+      "vehicle_id": 813,
+      "cross_camera_mean_cosine": 0.4317207336425781,
+      "peers": 1
+    },
+    {
+      "image_id": "d936647330794abea674bdeb2787c357",
+      "vehicle_id": 1513,
+      "cross_camera_mean_cosine": 0.43447113037109375,
+      "peers": 3
+    },
+    {
+      "image_id": "c77f5263ef81462290a5305d030a298d",
+      "vehicle_id": 927,
+      "cross_camera_mean_cosine": 0.4357486367225647,
+      "peers": 2
+    },
+    {
+      "image_id": "0876b47e0783477ba5b18aa61a447058",
+      "vehicle_id": 158,
+      "cross_camera_mean_cosine": 0.43605947494506836,
+      "peers": 1
+    },
+    {
+      "image_id": "f3cf59fe5eb941698bb8ca9d41286c2d",
+      "vehicle_id": 497,
+      "cross_camera_mean_cosine": 0.4376245141029358,
+      "peers": 7
+    },
+    {
+      "image_id": "152332ff9bf14bdc82a573097f331abb",
+      "vehicle_id": 986,
+      "cross_camera_mean_cosine": 0.4401332437992096,
+      "peers": 6
+    },
+    {
+      "image_id": "482eeeff627a45b482af3482f8cd1998",
+      "vehicle_id": 931,
+      "cross_camera_mean_cosine": 0.44155675172805786,
+      "peers": 1
+    },
+    {
+      "image_id": "6c1714d5c0974fdcadb95cd46d982669",
+      "vehicle_id": 1404,
+      "cross_camera_mean_cosine": 0.4421945810317993,
+      "peers": 4
+    },
+    {
+      "image_id": "182fef9452834a06b3551fd07ff9798b",
+      "vehicle_id": 158,
+      "cross_camera_mean_cosine": 0.44238385558128357,
+      "peers": 3
+    },
+    {
+      "image_id": "557b7059e5854c40afa4fad4e1645974",
+      "vehicle_id": 27,
+      "cross_camera_mean_cosine": 0.44308754801750183,
+      "peers": 3
+    },
+    {
+      "image_id": "35c062b9817d45458aeb43461966a2a0",
+      "vehicle_id": 958,
+      "cross_camera_mean_cosine": 0.44332000613212585,
+      "peers": 1
+    },
+    {
+      "image_id": "113c73e746ee4c2b938f64400ca08ae0",
+      "vehicle_id": 1187,
+      "cross_camera_mean_cosine": 0.4435584247112274,
+      "peers": 3
+    },
+    {
+      "image_id": "fb79e4ff7df44017a6fb594c4f350897",
+      "vehicle_id": 661,
+      "cross_camera_mean_cosine": 0.4439151883125305,
+      "peers": 4
+    },
+    {
+      "image_id": "a764040c54b74140bea40324c6af698c",
+      "vehicle_id": 62,
+      "cross_camera_mean_cosine": 0.44394397735595703,
+      "peers": 3
+    },
+    {
+      "image_id": "3c780ad3dead4ff1a7dffaef048f5c27",
+      "vehicle_id": 1118,
+      "cross_camera_mean_cosine": 0.4445061981678009,
+      "peers": 3
+    },
+    {
+      "image_id": "f2089248dba44a5d92db3920761a5ab7",
+      "vehicle_id": 1317,
+      "cross_camera_mean_cosine": 0.4446335732936859,
+      "peers": 7
+    },
+    {
+      "image_id": "4af3056a3e3443f69037e4048ae04a86",
+      "vehicle_id": 1471,
+      "cross_camera_mean_cosine": 0.44477349519729614,
+      "peers": 5
+    },
+    {
+      "image_id": "61b241450d134d0e935327acaf7434ae",
+      "vehicle_id": 538,
+      "cross_camera_mean_cosine": 0.4458446502685547,
+      "peers": 3
+    },
+    {
+      "image_id": "5f235239ae7b4af6801b068c5e3fa383",
+      "vehicle_id": 931,
+      "cross_camera_mean_cosine": 0.44601693749427795,
+      "peers": 1
+    },
+    {
+      "image_id": "d55a2b4ed9a34aa6b4c85609730ab48f",
+      "vehicle_id": 1172,
+      "cross_camera_mean_cosine": 0.4460495114326477,
+      "peers": 4
+    },
+    {
+      "image_id": "07a949b6306d4d0194b827af1f329a34",
+      "vehicle_id": 931,
+      "cross_camera_mean_cosine": 0.4469851553440094,
+      "peers": 3
+    },
+    {
+      "image_id": "9ec9b82183ce4d458f2f75436be6c9af",
+      "vehicle_id": 538,
+      "cross_camera_mean_cosine": 0.44967734813690186,
+      "peers": 4
+    },
+    {
+      "image_id": "15cbf0238f404fbf88ce95a1b198a579",
+      "vehicle_id": 866,
+      "cross_camera_mean_cosine": 0.4500970244407654,
+      "peers": 1
+    },
+    {
+      "image_id": "7cacb0af3b49460f91e1436a3007ede7",
+      "vehicle_id": 1118,
+      "cross_camera_mean_cosine": 0.4509454667568207,
+      "peers": 3
+    },
+    {
+      "image_id": "25bbe5742321407aac247eb60317c0dd",
+      "vehicle_id": 676,
+      "cross_camera_mean_cosine": 0.4531627297401428,
+      "peers": 1
+    },
+    {
+      "image_id": "a1a5365c33b04b45aaf53d8de2998018",
+      "vehicle_id": 676,
+      "cross_camera_mean_cosine": 0.4531627297401428,
+      "peers": 1
+    },
+    {
+      "image_id": "5d56ece3870b49138abb6415c7c41299",
+      "vehicle_id": 931,
+      "cross_camera_mean_cosine": 0.4533817172050476,
+      "peers": 1
+    },
+    {
+      "image_id": "1bcb7e52c7ba4034a69aad49d0ea2167",
+      "vehicle_id": 1390,
+      "cross_camera_mean_cosine": 0.4540562629699707,
+      "peers": 4
+    }
+  ]
+}

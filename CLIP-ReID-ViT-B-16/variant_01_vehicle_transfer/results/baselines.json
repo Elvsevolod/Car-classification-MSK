@@ -1,0 +1,29 @@
+{
+  "signature": {
+    "protocol": "47ae5c0c79d5cedc906a07bd06258eaa2ed8e298ab40acda449e52f5a80fa5a7",
+    "clip_sha256": "71f6f2723be4d563f1df201133daa53f57bee2a67266486559d5ce453a60f805",
+    "osnet_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+    "preprocess": "exif-rgb-exact-bbox-bilinear256-mean0.5-std0.5-beforeBN-concat1280-l2-v1",
+    "adapter_sha256": "d15541c88d26657183b8acdc101d8db31c945b97e07ad5d01c8a72298f296ef3"
+  },
+  "clip_vehicle_pretrained": {
+    "mAP_at_10": 0.37525172124783396,
+    "Rank_1": 0.41496598639455784,
+    "Rank_5": 0.6122448979591837,
+    "full_mAP": 0.4084473680155955,
+    "mINP": 0.3131690921459996,
+    "known_queries": 147,
+    "unknown_queries": 37
+  },
+  "osnet_stock": {
+    "mAP_at_10": 0.6521145767452862,
+    "Rank_1": 0.6666666666666666,
+    "Rank_5": 0.8231292517006803,
+    "full_mAP": 0.6758722457086503,
+    "mINP": 0.6086549252450054,
+    "known_queries": 147,
+    "unknown_queries": 37
+  },
+  "active_osnet_excluded": "Already trained on all 925 development IDs; inner leakage",
+  "no_refusal_threshold_or_outer_tuning": true
+}

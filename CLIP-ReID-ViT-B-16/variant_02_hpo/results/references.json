@@ -1,0 +1,7 @@
+{
+  "clip_variant_1": 0.7182085782158669,
+  "clean_osnet": 0.7787153115214339,
+  "protocol": "47ae5c0c79d5cedc906a07bd06258eaa2ed8e298ab40acda449e52f5a80fa5a7",
+  "selection_metric": "organizer raw inner mAP@10",
+  "outer_test_used": false
+}

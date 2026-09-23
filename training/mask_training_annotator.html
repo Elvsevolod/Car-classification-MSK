@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru"><meta charset="utf-8"><title>YOLO11 — разметка анонимизации</title>
+<style>
+body{font:16px sans-serif;margin:24px;max-width:1600px}button,input,select{font:inherit;margin:4px;padding:7px}canvas{display:block;max-width:100%;height:auto;border:1px solid #aaa}#canvas{touch-action:none}.panels{display:flex;gap:20px;flex-wrap:wrap}.panels section{flex:1 1 500px;min-width:0}#message{color:#a21b00;white-space:pre-wrap}li button{padding:3px}small{display:block}#status{font-weight:bold}.help{max-width:1050px}
+</style>
+<h1>YOLO11: проверка областей анонимизации</h1>
+<p class="help">Обведите <b>все искусственно замазанные участки внутри кропа</b>, включая края блюра/мозаики, лица и участки соседних машин. Не размечайте обычную нерезкость, тени, фары и предполагаемое место невидимого номера. Не объединяйте раздельные участки одной большой рамкой.</p>
+<p class="help">Автоматические рамки — только подсказки. Красную рамку можно удалить в списке и нарисовать заново мышью. Добавьте пропущенные области. Если размытия действительно нет, удалите ошибочные рамки и всё равно нажмите «Проверено». <b>«Далее» не подтверждает проверку.</b></p>
+<p id="status"></p><p id="source"></p>
+<label>Часть <select id="split"><option value="all">Все</option><option value="train">Обучение</option><option value="val">Подбор настроек</option><option value="holdout">Контроль без подсказок</option></select></label>
+<label>Номер <input id="jump" type="number" min="1" value="1" style="width:90px"></label><button id="go">Перейти</button>
+<button id="previous">Назад</button><button id="next">Далее</button><button id="unreviewed">Следующий непроверенный</button>
+<div class="panels"><section><h2>Полный кадр</h2><p>Зелёная рамка — BBox организаторов. Здесь рисовать не нужно.</p><canvas id="frame"></canvas><small id="bbox-info"></small></section>
+<section><h2>Кроп для разметки</h2><canvas id="canvas"></canvas><small>Для мелких участков можно увеличить масштаб страницы браузера.</small>
+<button id="undo">Отменить изменение</button><button id="clear">Удалить все рамки</button><button id="review">Проверено</button>
+<details id="proposal-tools"><summary>Подсказки моделей</summary><p>Замена рамок сбросит отметку «Проверено». Сначала сохраните нужные исправления.</p><button id="deep">Заменить на DeepMosaics</button><button id="yolo">Заменить на YOLO11n</button></details>
+<ol id="rectangles"></ol></section></div>
+<hr><button id="save">Скачать разметку JSON</button><label>Загрузить сохранённый JSON <input id="load" type="file" accept=".json"></label>
+<p>Скачивайте JSON каждые 20–30 кадров и перед закрытием. Автосохранение браузера — дополнительная страховка, не замена файлу. Для этого набора нужен новый JSON; masks-7.json относится к прежним 126 кадрам.</p>
+<p id="message" role="status"></p>
+<script>
+const data = __PAYLOAD__;
+const plan=data.plan, allIds=Object.keys(plan.images), byId=id=>document.getElementById(id);
+const canvas=byId('canvas'), ctx=canvas.getContext('2d'), frame=byId('frame'), fctx=frame.getContext('2d');
+const clone=x=>JSON.parse(JSON.stringify(x)), key='yolo11-masks-'+plan.fingerprint;
+function proposals(id){
+  const p=data.suggestions[id]; if(!p)return [];
+  const result=clone(p.deepmosaics);
+  for(const r of p.yolo11n){
+    const area=(r[2]-r[0])*(r[3]-r[1]);
+    const duplicate=result.some(s=>Math.max(0,Math.min(r[2],s[2])-Math.max(r[0],s[0]))*Math.max(0,Math.min(r[3],s[3])-Math.max(r[1],s[1]))/Math.min(area,(s[2]-s[0])*(s[3]-s[1]))>.75);
+    if(!duplicate)result.push(r);
+  }return result;
+}
+let annotations={version:1,fingerprint:plan.fingerprint,images:Object.fromEntries(allIds.map(id=>[id,{reviewed:false,rectangles:proposals(id)}]))};
+let ids=allIds,index=0,start=null,loaded=false,picture=null,history={};
+function validate(value){
+  if(value.fingerprint!==plan.fingerprint||!value.images||Object.keys(value.images).length!==allIds.length)throw Error('JSON относится к другому набору или содержит не все кадры');
+  for(const id of allIds){const v=value.images[id],s=plan.images[id];
+    if(!v||typeof v.reviewed!=='boolean'||!Array.isArray(v.rectangles))throw Error('Неверная запись '+id);
+    for(const r of v.rectangles)if(!Array.isArray(r)||r.length!==4||!r.every(Number.isInteger)||!(0<=r[0]&&r[0]<r[2]&&r[2]<=s.width&&0<=r[1]&&r[1]<r[3]&&r[3]<=s.height))throw Error('Неверная рамка '+id);
+  }return value;
+}
+try{const saved=localStorage.getItem(key);if(saved)annotations=validate(JSON.parse(saved));}catch(e){byId('message').textContent='Автосохранение не загружено: '+e.message;}
+function current(){return annotations.images[ids[index]];}
+function persist(){try{localStorage.setItem(key,JSON.stringify(annotations));}catch(e){byId('message').textContent='Автосохранение недоступно: скачайте JSON.';}}
+function mutate(action){if(!loaded)return;const id=ids[index];(history[id]||=[]).push(clone(current()));action(current());current().reviewed=false;persist();draw();}
+function draw(preview){
+  if(!loaded)return;const s=plan.images[ids[index]],v=current();ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(picture,0,0);
+  ctx.strokeStyle='#ff2020';ctx.lineWidth=Math.max(2,s.width/500);
+  for(const r of [...v.rectangles,...(preview?[preview]:[])])ctx.strokeRect(r[0],r[1],r[2]-r[0],r[3]-r[1]);
+  const done=Object.values(annotations.images).filter(x=>x.reviewed).length;
+  byId('status').textContent=`${index+1}/${ids.length} · ${ids[index]} · ${s.split} · ${v.reviewed?'ПРОВЕРЕНО':'НЕ ПРОВЕРЕНО'} · всего ${done}/${allIds.length}`;
+  byId('jump').value=index+1;byId('jump').max=ids.length;
+  byId('rectangles').replaceChildren();v.rectangles.forEach((r,n)=>{const li=document.createElement('li');li.textContent=r.join(', ')+' ';const b=document.createElement('button');b.textContent='Удалить рамку '+(n+1);b.onclick=()=>mutate(item=>item.rectangles.splice(n,1));li.append(b);byId('rectangles').append(li);});
+}
+async function show(){
+  start=null;loaded=false;const id=ids[index],s=plan.images[id],context=data.frames[id],img=new Image(),full=new Image();
+  img.src=data.pictures[id];full.src=context.picture;await Promise.all([img.decode(),full.decode()]);if(ids[index]!==id)return;
+  picture=img;canvas.width=s.width;canvas.height=s.height;frame.width=full.width;frame.height=full.height;
+  fctx.drawImage(full,0,0);const [x,y,w,h]=s.bbox,sx=full.width/context.width,sy=full.height/context.height;
+  fctx.strokeStyle='black';fctx.lineWidth=5;fctx.strokeRect(x*sx,y*sy,w*sx,h*sy);fctx.strokeStyle='#00ff00';fctx.lineWidth=3;fctx.strokeRect(x*sx,y*sy,w*sx,h*sy);
+  byId('bbox-info').textContent=`BBox x,y,w,h: ${s.bbox.join(', ')} · кроп ${s.width}×${s.height}`;
+  byId('proposal-tools').hidden=s.split==='holdout';byId('source').textContent=s.split==='holdout'?'Контроль: разметка с нуля, без подсказок моделей.':'Начальные рамки: DeepMosaics + неперекрывающиеся предложения YOLO11n. Они НЕ проверены человеком.';
+  loaded=true;draw();
+}
+function point(e){const b=canvas.getBoundingClientRect(),s=plan.images[ids[index]];return [Math.round(Math.max(0,Math.min(s.width,(e.clientX-b.left-canvas.clientLeft)/canvas.clientWidth*s.width))),Math.round(Math.max(0,Math.min(s.height,(e.clientY-b.top-canvas.clientTop)/canvas.clientHeight*s.height)))];}
+function rect(a,b){return [Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[0],b[0]),Math.max(a[1],b[1])];}
+canvas.onpointerdown=e=>{if(!loaded)return;start=point(e);canvas.setPointerCapture(e.pointerId);};
+canvas.onpointermove=e=>{if(start)draw(rect(start,point(e)));};
+canvas.onpointerup=e=>{if(!start)return;const r=rect(start,point(e));start=null;if(r[0]<r[2]&&r[1]<r[3])mutate(v=>v.rectangles.push(r));};
+canvas.onpointercancel=()=>{start=null;draw();};
+byId('undo').onclick=()=>{const previous=(history[ids[index]]||[]).pop();if(previous){annotations.images[ids[index]]=previous;persist();draw();}};
+byId('clear').onclick=()=>{if(confirm('Удалить все рамки текущего кропа?'))mutate(v=>v.rectangles=[]);};
+byId('review').onclick=()=>{if(loaded){current().reviewed=true;persist();draw();}};
+byId('previous').onclick=()=>{index=Math.max(0,index-1);show();};byId('next').onclick=()=>{index=Math.min(ids.length-1,index+1);show();};
+byId('go').onclick=()=>{index=Math.max(0,Math.min(ids.length-1,Number(byId('jump').value)-1||0));show();};
+byId('split').onchange=e=>{ids=allIds.filter(i=>e.target.value==='all'||plan.images[i].split===e.target.value);index=0;show();};
+byId('unreviewed').onclick=()=>{for(let n=1;n<=ids.length;n++){const j=(index+n)%ids.length;if(!annotations.images[ids[j]].reviewed){index=j;show();return;}}byId('message').textContent='Эта часть полностью проверена. Скачайте JSON.';};
+for(const [button,model] of [['deep','deepmosaics'],['yolo','yolo11n']])byId(button).onclick=()=>{if(data.suggestions[ids[index]]&&confirm('Заменить текущие рамки подсказками?'))mutate(v=>v.rectangles=clone(data.suggestions[ids[index]][model]));};
+byId('save').onclick=()=>{const url=URL.createObjectURL(new Blob([JSON.stringify(annotations,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=`yolo11-masks-${plan.fingerprint.slice(0,8)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);byId('message').textContent='JSON скачан. Сохраните этот файл отдельно от предыдущего аудита.';};
+byId('load').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;const value=validate(JSON.parse(await file.text()));if(!confirm('Заменить текущую разметку содержимым выбранного JSON?'))return;annotations=value;history={};persist();await show();byId('message').textContent='JSON загружен.';}catch(error){byId('message').textContent=error.message;}finally{e.target.value='';}};
+show().catch(e=>byId('message').textContent=e.message);
+</script></html>

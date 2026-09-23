@@ -11,6 +11,19 @@ IMAGENET_STD = np.array([.229, .224, .225], dtype=np.float32)
 LETTERBOX_FILL = tuple(int(round(value * 255)) for value in IMAGENET_MEAN)
 
 
+def mask_crop(crop, rectangles):
+    """Opaque crop-local xyxy masks, before resize/augmentation; never edit the source."""
+    masked = crop.copy()
+    for rectangle in rectangles:
+        if len(rectangle) != 4 or any(type(v) is not int for v in rectangle):
+            raise ValueError("Mask rectangles must contain four integer coordinates")
+        x1, y1, x2, y2 = rectangle
+        if not (0 <= x1 < x2 <= crop.width and 0 <= y1 < y2 <= crop.height):
+            raise ValueError("Mask rectangle is outside the crop")
+        masked.paste((0, 0, 0), (x1, y1, x2, y2))
+    return masked
+
+
 def resize_crop(crop, mode, size=IMAGE_SIZE):
     """Resize a PIL crop either by distortion or aspect-ratio preserving padding."""
     if mode == "square":

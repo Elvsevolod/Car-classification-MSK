@@ -1,0 +1,14 @@
+{
+  "sha256": "6551b3ce998fa7d9efad987ddfde9bcd12967dd9e125dc4a15bbc6ec5eedc182",
+  "bytes": 345304607,
+  "batches_checked": [
+    1,
+    2
+  ],
+  "embedding_dimension": 1280,
+  "max_absolute_error": 4.4330954551696777e-07,
+  "minimum_cosine": 1.000000238418579,
+  "image_only": true,
+  "mvp_changed": false,
+  "exporter": "torch.onnx legacy dynamo=False, opset 17 (pinned torch environment)"
+}

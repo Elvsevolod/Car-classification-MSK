@@ -1,0 +1,1329 @@
+{
+  "date": "2026-09-22",
+  "purpose": "diagnostics, not hyperparameter selection",
+  "late_oof_review": {
+    "source": "OSNet-AIN-x1.0/variant_13_oof_pair_reranker/results/run_01/report.json",
+    "source_sha256": "9043a5cbde08d2e2372131fb992daaae3cc9b91a2a68c4c5869cbd135b2a76ce",
+    "status": "completed; README preparation status is stale",
+    "additional_fold_history_files_reviewed": 3,
+    "additional_fold_history_records_reviewed": 15,
+    "validation_map": {
+      "mvp": 0.8146886982413298,
+      "osnet_neighbors": 0.8171906796906797,
+      "oof": 0.8181130711393869,
+      "matched_in_sample": 0.8190558126084442,
+      "previous_head": 0.81776444315918
+    },
+    "fold_gradient_steps": [190, 190, 190],
+    "fold_raw_map": [0.7655421903354235, 0.7388280745902698, 0.7019547952423969],
+    "oof_vs_neighbors_delta_pp": 0.0922,
+    "oof_vs_neighbors_95pct_ci_pp": [-0.0174, 0.2305],
+    "note": "This research did not launch training; existing results were read during final verification."
+  },
+  "sources": {
+    "models/osnet_ain_x1_0_vehicle_reid_hpo_best_map.onnx": "01466f503232467224774b6e3bafe6c4393b1de30b47b1bd714908a62f2006a2",
+    "evaluate.py": "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3",
+    "artifacts/splits.json": "f33aa044510baa1d30f9475fd76cecb7d5100e8f4b7f3c9829ca34389e62942b",
+    "training/osnet.py": "c22c31cfe131dd4fa9b2aa44341134a852adea21101dcec44fd02bed4772d42f",
+    "training/hpo.py": "e7b6086570758e6a09754a99ac3522e10b79d8b54d384cb5def21c4e742dfebb",
+    "training/pipeline.py": "216147e5223b297a6ec8f88f8ea83baaa0543d68476c6f13096689a53d9bb85e"
+  },
+  "data": {
+    "all_train_images": 9556,
+    "development_images": 5717,
+    "development_identities": 925,
+    "images_per_identity": {
+      "min": 4.0,
+      "q25": 6.0,
+      "median": 6.0,
+      "q75": 7.0,
+      "max": 8.0
+    },
+    "cameras_per_identity": {
+      "min": 2.0,
+      "q25": 2.0,
+      "median": 2.0,
+      "q75": 3.0,
+      "max": 8.0
+    },
+    "bbox_min_side": {
+      "min": 147.0,
+      "q25": 414.0,
+      "median": 485.0,
+      "q75": 570.0,
+      "max": 1050.0
+    },
+    "bbox_area_sqrt": {
+      "min": 182.4828759089466,
+      "q25": 491.5933278635909,
+      "median": 574.7721287606072,
+      "q75": 670.9023773992756,
+      "max": 1104.581368664165
+    }
+  },
+  "sampler": {
+    "updates_per_epoch": 57,
+    "records": [
+      {
+        "epochs": 1,
+        "updates": 57,
+        "presentations": 1824,
+        "unique_images": 1824,
+        "unique_fraction": 0.31904845198530696
+      },
+      {
+        "epochs": 5,
+        "updates": 285,
+        "presentations": 9120,
+        "unique_images": 4747,
+        "unique_fraction": 0.83033059296834
+      },
+      {
+        "epochs": 10,
+        "updates": 570,
+        "presentations": 18240,
+        "unique_images": 5517,
+        "unique_fraction": 0.9650166171068743
+      },
+      {
+        "epochs": 30,
+        "updates": 1710,
+        "presentations": 54720,
+        "unique_images": 5715,
+        "unique_fraction": 0.9996501661710687
+      }
+    ],
+    "note": "Replayed current sampler only; does not prove exact historical RNG state."
+  },
+  "input_affine_probe": {
+    "count": 12,
+    "image_ids": [
+      "000fced9a580495599a6e9b12fbe0050",
+      "14c52fee69cc4ae3a8666d34bd8bc7ef",
+      "2c6181c68d844d699472fae702944d38",
+      "41eb470705024a64892964e71c7b2205",
+      "560fd9d6654943e691d558996e505b2e",
+      "6b2056a09c3e43f097300b09a16e13cf",
+      "80123243e2334e36af495207a2caef36",
+      "954b5da485f94634a090640b1ad5d37a",
+      "aa063cb94a8843b78408f0100fc75c83",
+      "bf45bfd0da414192813943a8cb4f8f44",
+      "d52956fbab7a4000b07327d7e8adcc64",
+      "ea96cf5695b64754be32d444ce89ebc6"
+    ],
+    "results": {
+      "per_channel_shift": {
+        "max_embedding_absolute_difference": 1.8402934074401855e-06,
+        "cosine_min": 0.9999999403953552,
+        "cosine_mean": 1.0
+      },
+      "per_channel_scale_shift": {
+        "max_embedding_absolute_difference": 1.601874828338623e-06,
+        "cosine_min": 1.0,
+        "cosine_mean": 1.0
+      }
+    },
+    "shift_normalized_rgb": [
+      0.3,
+      -0.25,
+      0.2
+    ],
+    "scale": [
+      0.9,
+      1.1,
+      1.05
+    ],
+    "limitation": "Affine perturbation of normalized tensors without clipping; not realistic recoloring or a retrieval benchmark."
+  },
+  "validation_diagnostic": {
+    "query": 309,
+    "gallery": 896,
+    "known": 247,
+    "reproduced_map": 0.8146886982413298,
+    "any_positive_in_raw_top50": 242,
+    "all_positive_fraction_in_raw_top50_macro": 0.9635627530364372,
+    "oracle_top50_map": 0.9635627530364372,
+    "npos": {
+      "min": 1.0,
+      "q25": 3.0,
+      "median": 3.0,
+      "q75": 5.0,
+      "max": 7.0
+    },
+    "strata": {
+      "min_side_lt64": {
+        "n": 0,
+        "mAP": null,
+        "rank1": null
+      },
+      "min_side_64_127": {
+        "n": 0,
+        "mAP": null,
+        "rank1": null
+      },
+      "min_side_ge128": {
+        "n": 247,
+        "mAP": 0.8146886982413298,
+        "rank1": 0.8016194331983806
+      },
+      "aspect_gt1_5": {
+        "n": 92,
+        "mAP": 0.7914590522199217,
+        "rank1": 0.782608695652174
+      },
+      "aspect_le1_5": {
+        "n": 155,
+        "mAP": 0.8284766171701656,
+        "rank1": 0.8129032258064516
+      },
+      "one_positive": {
+        "n": 4,
+        "mAP": 1.0,
+        "rank1": 1.0
+      },
+      "multi_positive": {
+        "n": 243,
+        "mAP": 0.8116383064428332,
+        "rank1": 0.7983539094650206
+      }
+    },
+    "missing_top50": [
+      {
+        "id": "cd6712e74b7f4341ac9c85c405cdcf9d",
+        "n_positive": 3,
+        "min_side": 385,
+        "aspect_ratio": 2.0805194805194804,
+        "ap": 0.0,
+        "rank1": 0.0,
+        "positive_in_raw_top50": 0,
+        "first_positive_rank": 739,
+        "raw_confidence": 0.40380170941352844,
+        "accepted": false
+      },
+      {
+        "id": "5a9d755ffd6142ff9b2002054d5f5a83",
+        "n_positive": 4,
+        "min_side": 254,
+        "aspect_ratio": 4.003937007874016,
+        "ap": 0.0,
+        "rank1": 0.0,
+        "positive_in_raw_top50": 0,
+        "first_positive_rank": 580,
+        "raw_confidence": 0.3231537342071533,
+        "accepted": false
+      },
+      {
+        "id": "6a35d140d5b3443082983ddb92385946",
+        "n_positive": 2,
+        "min_side": 300,
+        "aspect_ratio": 2.55,
+        "ap": 0.0,
+        "rank1": 0.0,
+        "positive_in_raw_top50": 0,
+        "first_positive_rank": 769,
+        "raw_confidence": 0.38966765999794006,
+        "accepted": false
+      },
+      {
+        "id": "290fcee71d28483c96c331adbf68a7a6",
+        "n_positive": 3,
+        "min_side": 588,
+        "aspect_ratio": 1.1904761904761905,
+        "ap": 0.0,
+        "rank1": 0.0,
+        "positive_in_raw_top50": 0,
+        "first_positive_rank": 94,
+        "raw_confidence": 0.5120747089385986,
+        "accepted": false
+      },
+      {
+        "id": "a76c648b5cb443a4912f970d74f4b494",
+        "n_positive": 3,
+        "min_side": 450,
+        "aspect_ratio": 1.7777777777777777,
+        "ap": 0.0,
+        "rank1": 0.0,
+        "positive_in_raw_top50": 0,
+        "first_positive_rank": 179,
+        "raw_confidence": 0.4957447648048401,
+        "accepted": false
+      }
+    ],
+    "limitation": "Reused development validation, fixed gallery; diagnostic slices are not independent experiments."
+  },
+  "histories": [
+    {
+      "path": "OSNet-AIN-x1.0/variant_01_initial/results/history.json",
+      "records": 20,
+      "best_recorded_map": [
+        18,
+        0.7739921679882028
+      ],
+      "first_recorded_map": [
+        1,
+        0.6278018056756891
+      ],
+      "last_recorded_map": [
+        20,
+        0.7694450673606955
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/results/selected_run_02/history.json",
+      "records": 30,
+      "best_recorded_map": [
+        5,
+        0.8106164597681462
+      ],
+      "first_recorded_map": [
+        1,
+        0.764395332405812
+      ],
+      "last_recorded_map": [
+        30,
+        0.8052257529090399
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/results/stage2_top4/trial_005/history.json",
+      "records": 20,
+      "best_recorded_map": [
+        20,
+        0.821311750886527
+      ],
+      "first_recorded_map": [
+        1,
+        0.7741819348481955
+      ],
+      "last_recorded_map": [
+        20,
+        0.821311750886527
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/results/stage2_top4/trial_008/history.json",
+      "records": 20,
+      "best_recorded_map": [
+        13,
+        0.8156589515505215
+      ],
+      "first_recorded_map": [
+        1,
+        0.7635213697785639
+      ],
+      "last_recorded_map": [
+        20,
+        0.8145028935258847
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/results/stage2_top4/trial_012/history.json",
+      "records": 20,
+      "best_recorded_map": [
+        17,
+        0.8209121829716856
+      ],
+      "first_recorded_map": [
+        1,
+        0.7717045791621302
+      ],
+      "last_recorded_map": [
+        20,
+        0.8179763727990317
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/results/stage2_top4/trial_015/history.json",
+      "records": 20,
+      "best_recorded_map": [
+        18,
+        0.8208444684878371
+      ],
+      "first_recorded_map": [
+        1,
+        0.7751109237856529
+      ],
+      "last_recorded_map": [
+        20,
+        0.8169638771563998
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/results/stage3_top2_seeds/trial_005_seed_20260915/history.json",
+      "records": 30,
+      "best_recorded_map": [
+        14,
+        0.8253007390245733
+      ],
+      "first_recorded_map": [
+        1,
+        0.7741819348481955
+      ],
+      "last_recorded_map": [
+        30,
+        0.8224361660904476
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/results/stage3_top2_seeds/trial_005_seed_20260916/history.json",
+      "records": 30,
+      "best_recorded_map": [
+        20,
+        0.85616639584993
+      ],
+      "first_recorded_map": [
+        1,
+        0.7782663097996181
+      ],
+      "last_recorded_map": [
+        30,
+        0.8454021316639471
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/results/stage3_top2_seeds/trial_005_seed_20260917/history.json",
+      "records": 30,
+      "best_recorded_map": [
+        23,
+        0.8570345905719884
+      ],
+      "first_recorded_map": [
+        1,
+        0.810160302758828
+      ],
+      "last_recorded_map": [
+        30,
+        0.853145034039082
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/results/stage3_top2_seeds/trial_012_seed_20260915/history.json",
+      "records": 30,
+      "best_recorded_map": [
+        23,
+        0.8210703397930298
+      ],
+      "first_recorded_map": [
+        1,
+        0.7717045791621302
+      ],
+      "last_recorded_map": [
+        30,
+        0.8132441634939245
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/results/stage3_top2_seeds/trial_012_seed_20260916/history.json",
+      "records": 30,
+      "best_recorded_map": [
+        27,
+        0.8675399048682622
+      ],
+      "first_recorded_map": [
+        1,
+        0.7773176526421189
+      ],
+      "last_recorded_map": [
+        30,
+        0.8648990734538984
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/results/stage3_top2_seeds/trial_012_seed_20260917/history.json",
+      "records": 30,
+      "best_recorded_map": [
+        13,
+        0.8476747024519315
+      ],
+      "first_recorded_map": [
+        1,
+        0.8077360665344315
+      ],
+      "last_recorded_map": [
+        30,
+        0.8474318486732904
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_03_gem/results/avg_seed_20260915/history.json",
+      "records": 9,
+      "best_recorded_map": [
+        5,
+        0.7914551335603967
+      ],
+      "first_recorded_map": [
+        1,
+        0.7844887325150482
+      ],
+      "last_recorded_map": [
+        9,
+        0.7670073803250494
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_03_gem/results/avg_seed_20260916/history.json",
+      "records": 6,
+      "best_recorded_map": [
+        2,
+        0.8134506137137716
+      ],
+      "first_recorded_map": [
+        1,
+        0.7989724081265436
+      ],
+      "last_recorded_map": [
+        6,
+        0.7846208469892679
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_03_gem/results/avg_seed_20260917/history.json",
+      "records": 15,
+      "best_recorded_map": [
+        14,
+        0.7972871127758346
+      ],
+      "first_recorded_map": [
+        1,
+        0.7778603215915245
+      ],
+      "last_recorded_map": [
+        15,
+        0.7963368203781737
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_03_gem/results/gem_seed_20260915/history.json",
+      "records": 8,
+      "best_recorded_map": [
+        4,
+        0.7793839299102456
+      ],
+      "first_recorded_map": [
+        1,
+        0.7677657284236231
+      ],
+      "last_recorded_map": [
+        8,
+        0.7701847299873615
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_03_gem/results/gem_seed_20260916/history.json",
+      "records": 8,
+      "best_recorded_map": [
+        4,
+        0.8013723411091832
+      ],
+      "first_recorded_map": [
+        1,
+        0.782152397171194
+      ],
+      "last_recorded_map": [
+        8,
+        0.7936431241412445
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_03_gem/results/gem_seed_20260917/history.json",
+      "records": 7,
+      "best_recorded_map": [
+        3,
+        0.7882708526505519
+      ],
+      "first_recorded_map": [
+        1,
+        0.7652266885161622
+      ],
+      "last_recorded_map": [
+        7,
+        0.7867636046771385
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_04_training_strategy/results/final_seeds/control_seed_20260915/history.json",
+      "records": 1,
+      "best_recorded_map": null,
+      "first_recorded_map": null,
+      "last_recorded_map": null,
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_04_training_strategy/results/final_seeds/control_seed_20260916/history.json",
+      "records": 1,
+      "best_recorded_map": null,
+      "first_recorded_map": null,
+      "last_recorded_map": null,
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_04_training_strategy/results/final_seeds/control_seed_20260917/history.json",
+      "records": 1,
+      "best_recorded_map": null,
+      "first_recorded_map": null,
+      "last_recorded_map": null,
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_04_training_strategy/results/final_seeds/strategy_seed_20260915/history.json",
+      "records": 1,
+      "best_recorded_map": null,
+      "first_recorded_map": null,
+      "last_recorded_map": null,
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_04_training_strategy/results/final_seeds/strategy_seed_20260916/history.json",
+      "records": 1,
+      "best_recorded_map": null,
+      "first_recorded_map": null,
+      "last_recorded_map": null,
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_04_training_strategy/results/final_seeds/strategy_seed_20260917/history.json",
+      "records": 1,
+      "best_recorded_map": null,
+      "first_recorded_map": null,
+      "last_recorded_map": null,
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_04_training_strategy/results/screening/baseline/history.json",
+      "records": 8,
+      "best_recorded_map": [
+        1,
+        0.9483532895140038
+      ],
+      "first_recorded_map": [
+        1,
+        0.9483532895140038
+      ],
+      "last_recorded_map": [
+        8,
+        0.9271040938898081
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_04_training_strategy/results/screening/circle_loss/history.json",
+      "records": 8,
+      "best_recorded_map": [
+        1,
+        0.9425517481767482
+      ],
+      "first_recorded_map": [
+        1,
+        0.9425517481767482
+      ],
+      "last_recorded_map": [
+        8,
+        0.9078844916344917
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_04_training_strategy/results/screening/dynamic_weights/history.json",
+      "records": 8,
+      "best_recorded_map": [
+        1,
+        0.9445684332291475
+      ],
+      "first_recorded_map": [
+        1,
+        0.9445684332291475
+      ],
+      "last_recorded_map": [
+        8,
+        0.9233422963780108
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_04_training_strategy/results/screening/hard_negatives/history.json",
+      "records": 8,
+      "best_recorded_map": [
+        1,
+        0.9475799013299013
+      ],
+      "first_recorded_map": [
+        1,
+        0.9475799013299013
+      ],
+      "last_recorded_map": [
+        8,
+        0.9256574686931831
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_04_training_strategy/results/screening/mixstyle/history.json",
+      "records": 8,
+      "best_recorded_map": [
+        1,
+        0.9419437549794694
+      ],
+      "first_recorded_map": [
+        1,
+        0.9419437549794694
+      ],
+      "last_recorded_map": [
+        8,
+        0.9251026919776919
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_08_masked_hpo/results/masked_run_01/selected/history.json",
+      "records": 30,
+      "best_recorded_map": [
+        16,
+        0.7864939562094034
+      ],
+      "first_recorded_map": [
+        1,
+        0.7040776920524308
+      ],
+      "last_recorded_map": [
+        30,
+        0.7837895289100284
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_08_masked_hpo/results/masked_run_01/stage2_top4/trial_001/history.json",
+      "records": 20,
+      "best_recorded_map": [
+        16,
+        0.794564207064207
+      ],
+      "first_recorded_map": [
+        1,
+        0.7318556056056056
+      ],
+      "last_recorded_map": [
+        20,
+        0.7887104068354068
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_08_masked_hpo/results/masked_run_01/stage2_top4/trial_002/history.json",
+      "records": 20,
+      "best_recorded_map": [
+        16,
+        0.7879530359441074
+      ],
+      "first_recorded_map": [
+        1,
+        0.7216482298625155
+      ],
+      "last_recorded_map": [
+        20,
+        0.78631791868399
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_08_masked_hpo/results/masked_run_01/stage2_top4/trial_005/history.json",
+      "records": 20,
+      "best_recorded_map": [
+        19,
+        0.8057318926068927
+      ],
+      "first_recorded_map": [
+        1,
+        0.7489043316275459
+      ],
+      "last_recorded_map": [
+        20,
+        0.8041953560703561
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_08_masked_hpo/results/masked_run_01/stage2_top4/trial_007/history.json",
+      "records": 20,
+      "best_recorded_map": [
+        17,
+        0.7980119341280055
+      ],
+      "first_recorded_map": [
+        1,
+        0.7378052797695656
+      ],
+      "last_recorded_map": [
+        20,
+        0.7908993751404465
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_08_masked_hpo/results/masked_run_01/stage3_top2_seeds/trial_005_seed_20260915/history.json",
+      "records": 30,
+      "best_recorded_map": [
+        12,
+        0.8086230873730873
+      ],
+      "first_recorded_map": [
+        1,
+        0.7489043316275459
+      ],
+      "last_recorded_map": [
+        30,
+        0.7963611826111826
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_08_masked_hpo/results/masked_run_01/stage3_top2_seeds/trial_005_seed_20260916/history.json",
+      "records": 30,
+      "best_recorded_map": [
+        17,
+        0.8147733447733447
+      ],
+      "first_recorded_map": [
+        1,
+        0.7565245730424303
+      ],
+      "last_recorded_map": [
+        30,
+        0.8076150257400256
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_08_masked_hpo/results/masked_run_01/stage3_top2_seeds/trial_005_seed_20260917/history.json",
+      "records": 30,
+      "best_recorded_map": [
+        17,
+        0.8255412491573205
+      ],
+      "first_recorded_map": [
+        1,
+        0.7716865462401177
+      ],
+      "last_recorded_map": [
+        30,
+        0.8214593100753815
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_08_masked_hpo/results/masked_run_01/stage3_top2_seeds/trial_007_seed_20260915/history.json",
+      "records": 30,
+      "best_recorded_map": [
+        9,
+        0.8006951083736797
+      ],
+      "first_recorded_map": [
+        1,
+        0.7378052797695656
+      ],
+      "last_recorded_map": [
+        30,
+        0.7826681145431146
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_08_masked_hpo/results/masked_run_01/stage3_top2_seeds/trial_007_seed_20260916/history.json",
+      "records": 30,
+      "best_recorded_map": [
+        4,
+        0.807112839880697
+      ],
+      "first_recorded_map": [
+        1,
+        0.7458739862311291
+      ],
+      "last_recorded_map": [
+        30,
+        0.7927240633490634
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "OSNet-AIN-x1.0/variant_08_masked_hpo/results/masked_run_01/stage3_top2_seeds/trial_007_seed_20260917/history.json",
+      "records": 30,
+      "best_recorded_map": [
+        12,
+        0.802614719311148
+      ],
+      "first_recorded_map": [
+        1,
+        0.7528137576351862
+      ],
+      "last_recorded_map": [
+        30,
+        0.7967115840330126
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_01_vehicle_transfer/results/image_history.json",
+      "records": 60,
+      "best_recorded_map": [
+        53,
+        0.7182085782158669
+      ],
+      "first_recorded_map": [
+        1,
+        0.5088209516610878
+      ],
+      "last_recorded_map": [
+        60,
+        0.7128709102688694
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_01_vehicle_transfer/results/osnet_control/history.json",
+      "records": 16,
+      "best_recorded_map": [
+        11,
+        0.7787153115214339
+      ],
+      "first_recorded_map": [
+        1,
+        0.7160310004576282
+      ],
+      "last_recorded_map": [
+        16,
+        0.7607486335426081
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_01_vehicle_transfer/results/prompt_history.json",
+      "records": 60,
+      "best_recorded_map": null,
+      "first_recorded_map": null,
+      "last_recorded_map": null,
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/prompts/20260915/prompt_history.json",
+      "records": 60,
+      "best_recorded_map": null,
+      "first_recorded_map": null,
+      "last_recorded_map": null,
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/prompts/20260916/prompt_history.json",
+      "records": 60,
+      "best_recorded_map": null,
+      "first_recorded_map": null,
+      "last_recorded_map": null,
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/prompts/20260917/prompt_history.json",
+      "records": 60,
+      "best_recorded_map": null,
+      "first_recorded_map": null,
+      "last_recorded_map": null,
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/runs/trial_000/image_history.json",
+      "records": 15,
+      "best_recorded_map": [
+        15,
+        0.6724467942883882
+      ],
+      "first_recorded_map": [
+        1,
+        0.5088209516610878
+      ],
+      "last_recorded_map": [
+        15,
+        0.6724467942883882
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/runs/trial_001/image_history.json",
+      "records": 15,
+      "best_recorded_map": [
+        15,
+        0.6926112576549894
+      ],
+      "first_recorded_map": [
+        1,
+        0.508787657920311
+      ],
+      "last_recorded_map": [
+        15,
+        0.6926112576549894
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/runs/trial_002/image_history.json",
+      "records": 15,
+      "best_recorded_map": [
+        15,
+        0.6833449025868852
+      ],
+      "first_recorded_map": [
+        1,
+        0.526312133318936
+      ],
+      "last_recorded_map": [
+        15,
+        0.6833449025868852
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/runs/trial_003/image_history.json",
+      "records": 15,
+      "best_recorded_map": [
+        15,
+        0.6813671129827592
+      ],
+      "first_recorded_map": [
+        1,
+        0.5110561314472879
+      ],
+      "last_recorded_map": [
+        15,
+        0.6813671129827592
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/runs/trial_004/image_history.json",
+      "records": 35,
+      "best_recorded_map": [
+        16,
+        0.7382379898293406
+      ],
+      "first_recorded_map": [
+        1,
+        0.5662383471907281
+      ],
+      "last_recorded_map": [
+        35,
+        0.6859671510327487
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/runs/trial_005/image_history.json",
+      "records": 15,
+      "best_recorded_map": [
+        10,
+        0.6925764599112509
+      ],
+      "first_recorded_map": [
+        1,
+        0.5942593620970685
+      ],
+      "last_recorded_map": [
+        15,
+        0.6838578961440963
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/runs/trial_006/image_history.json",
+      "records": 15,
+      "best_recorded_map": [
+        14,
+        0.7245712241812825
+      ],
+      "first_recorded_map": [
+        1,
+        0.5667750512903574
+      ],
+      "last_recorded_map": [
+        15,
+        0.721120327949774
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/runs/trial_007/image_history.json",
+      "records": 12,
+      "best_recorded_map": [
+        12,
+        0.6489483677068711
+      ],
+      "first_recorded_map": [
+        1,
+        0.4693338102436741
+      ],
+      "last_recorded_map": [
+        12,
+        0.6489483677068711
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/runs/trial_008/image_history.json",
+      "records": 35,
+      "best_recorded_map": [
+        14,
+        0.7338174358934806
+      ],
+      "first_recorded_map": [
+        1,
+        0.5698832019580319
+      ],
+      "last_recorded_map": [
+        35,
+        0.702603750494907
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/runs/trial_009/image_history.json",
+      "records": 60,
+      "best_recorded_map": [
+        23,
+        0.755430794010726
+      ],
+      "first_recorded_map": [
+        1,
+        0.5656516574883922
+      ],
+      "last_recorded_map": [
+        60,
+        0.7387172911492639
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/runs/trial_010/image_history.json",
+      "records": 12,
+      "best_recorded_map": [
+        12,
+        0.6504316874141947
+      ],
+      "first_recorded_map": [
+        1,
+        0.48243346393735115
+      ],
+      "last_recorded_map": [
+        12,
+        0.6504316874141947
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/runs/trial_011/image_history.json",
+      "records": 60,
+      "best_recorded_map": [
+        33,
+        0.7579937371774106
+      ],
+      "first_recorded_map": [
+        1,
+        0.5701962531044164
+      ],
+      "last_recorded_map": [
+        60,
+        0.7418317856243026
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/runs/trial_011_seed_20260916/image_history.json",
+      "records": 60,
+      "best_recorded_map": [
+        23,
+        0.7523329014145341
+      ],
+      "first_recorded_map": [
+        1,
+        0.5691043083900227
+      ],
+      "last_recorded_map": [
+        60,
+        0.732642096143068
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "CLIP-ReID-ViT-B-16/variant_02_hpo/results/runs/trial_011_seed_20260917/image_history.json",
+      "records": 60,
+      "best_recorded_map": [
+        21,
+        0.7563723769931253
+      ],
+      "first_recorded_map": [
+        1,
+        0.5601054408913981
+      ],
+      "last_recorded_map": [
+        60,
+        0.7424996914865719
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "ResNet50-IBN/variant_05_gem_bnneck/results/final_seeds/seed_20260915/history.json",
+      "records": 5,
+      "best_recorded_map": null,
+      "first_recorded_map": null,
+      "last_recorded_map": null,
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "ResNet50-IBN/variant_05_gem_bnneck/results/final_seeds/seed_20260916/history.json",
+      "records": 5,
+      "best_recorded_map": null,
+      "first_recorded_map": null,
+      "last_recorded_map": null,
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "ResNet50-IBN/variant_05_gem_bnneck/results/final_seeds/seed_20260917/history.json",
+      "records": 5,
+      "best_recorded_map": null,
+      "first_recorded_map": null,
+      "last_recorded_map": null,
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "ResNet50-IBN/variant_05_gem_bnneck/results/screening/lr_1e-04/history.json",
+      "records": 6,
+      "best_recorded_map": [
+        5,
+        0.29925916350023496
+      ],
+      "first_recorded_map": [
+        1,
+        0.14607553982553984
+      ],
+      "last_recorded_map": [
+        6,
+        0.2930615819901534
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "ResNet50-IBN/variant_05_gem_bnneck/results/screening/lr_3e-05/history.json",
+      "records": 6,
+      "best_recorded_map": [
+        5,
+        0.22626492563992562
+      ],
+      "first_recorded_map": [
+        1,
+        0.11957663020163019
+      ],
+      "last_recorded_map": [
+        6,
+        0.2227203095953096
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "ResNet50-IBN/variant_05_gem_bnneck/results/screening/lr_6e-05/history.json",
+      "records": 6,
+      "best_recorded_map": [
+        4,
+        0.27154894690608977
+      ],
+      "first_recorded_map": [
+        1,
+        0.14537242599742597
+      ],
+      "last_recorded_map": [
+        6,
+        0.2631543022614451
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "ResNet50-IBN/variant_06_controlled_training/results/screening/avg_pool/history.json",
+      "records": 12,
+      "best_recorded_map": [
+        7,
+        0.4280230716625274
+      ],
+      "first_recorded_map": [
+        1,
+        0.22371243206277222
+      ],
+      "last_recorded_map": [
+        12,
+        0.4269339421331647
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "ResNet50-IBN/variant_06_controlled_training/results/screening/lr_1e-04_gem_supcon/history.json",
+      "records": 20,
+      "best_recorded_map": [
+        16,
+        0.42580183925422027
+      ],
+      "first_recorded_map": [
+        1,
+        0.20031125148472087
+      ],
+      "last_recorded_map": [
+        20,
+        0.42513248080789384
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "ResNet50-IBN/variant_06_controlled_training/results/screening/lr_3e-04_gem_supcon/history.json",
+      "records": 20,
+      "best_recorded_map": [
+        20,
+        0.41517522277240454
+      ],
+      "first_recorded_map": [
+        1,
+        0.2324341580925643
+      ],
+      "last_recorded_map": [
+        20,
+        0.41517522277240454
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    },
+    {
+      "path": "ResNet50-IBN/variant_06_controlled_training/results/screening/triplet/history.json",
+      "records": 20,
+      "best_recorded_map": [
+        16,
+        0.48134209768563513
+      ],
+      "first_recorded_map": [
+        1,
+        0.20223715941403014
+      ],
+      "last_recorded_map": [
+        20,
+        0.47874874023683545
+      ],
+      "semantics": "Historical protocol; masked selected validation field actually means calibration."
+    }
+  ]
+}

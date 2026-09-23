@@ -1,0 +1,26 @@
+{
+  "source_file": "/Users/elvsevolod/Downloads/masks-6.json",
+  "import_date": "2026-09-20",
+  "role": "human_reference_for_masking_audit_not_detector_training",
+  "validation": {
+    "reviewed": 126,
+    "masked_crops": 126,
+    "empty_crops": 0,
+    "rectangles": 140,
+    "rectangles_per_crop": {
+      "1": 114,
+      "2": 10,
+      "3": 2
+    },
+    "query_masked": 32,
+    "gallery_masked": 94,
+    "sample_fingerprint": "628174f4951711c3921db63c3185d33c0e48ecc20fdfc89c9c03a2831f0673af",
+    "source_sha256": "151027ad5b2ee97d89c54d543a36a0667e65b06bf8550066a9396f75fb2da545",
+    "annotations_sha256": "145ccfad0435ae3354c5a08370c7c3c3f6add53a10640a303f89cea536df2dcb",
+    "model_sha256": "01466f503232467224774b6e3bafe6c4393b1de30b47b1bd714908a62f2006a2",
+    "large_rectangles": [],
+    "tiny_rectangles": [],
+    "existing_destination": false,
+    "existing_audit_result": false
+  }
+}

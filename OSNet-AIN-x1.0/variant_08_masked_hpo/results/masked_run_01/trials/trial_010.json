@@ -1,0 +1,272 @@
+[
+  {
+    "epoch": 1,
+    "lr": {
+      "encoder": 5.631000397778494e-05,
+      "head": 0.0002815500198889247
+    },
+    "train": {
+      "loss": 7.20344148511472,
+      "classification": 6.6225076032721475,
+      "metric": 1.037516409288282,
+      "consistency": 0.1869031103408855,
+      "accuracy": 0.0,
+      "metric_weight": 0.5175822411931896
+    },
+    "threshold": 0.4690360724925995,
+    "validation": {
+      "mAP": 0.7472564081939082,
+      "mAP_at_10": 0.7472564081939082,
+      "full_mAP": 0.762900003725718,
+      "mINP": 0.7050025659659208,
+      "Rank_1": 0.7567567567567568,
+      "Rank_5": 0.8918918918918919,
+      "candidate_precision": 0.8125,
+      "candidate_recall": 0.7878787878787878,
+      "candidate_F1": 0.8,
+      "TNR": 0.7837837837837838,
+      "PR_AUC": 0.918979415366694,
+      "candidate_score": 0.795135135135135,
+      "known_queries": 148,
+      "unknown_queries": 37,
+      "TP": 104,
+      "FP": 24,
+      "FN": 28,
+      "TN": 29,
+      "open_set_FP": 8,
+      "true_refusals": 29
+    },
+    "timing": {
+      "train_seconds": 35.28501925000455,
+      "evaluation_seconds": 11.299567582958844,
+      "epoch_seconds": 46.584586832963396,
+      "elapsed_seconds": 46.58458720904309,
+      "estimated_remaining_seconds": 326.09211046330165
+    }
+  },
+  {
+    "epoch": 2,
+    "lr": {
+      "encoder": 0.00011262000795556988,
+      "head": 0.0005631000397778494
+    },
+    "train": {
+      "loss": 6.51762430564217,
+      "classification": 6.1724766959314765,
+      "metric": 0.6024768384902374,
+      "consistency": 0.14173402361895726,
+      "accuracy": 0.11005434782608696,
+      "metric_weight": 0.5175822411931896
+    },
+    "threshold": 0.5140560865402222,
+    "validation": {
+      "mAP": 0.7529109466609467,
+      "mAP_at_10": 0.7529109466609467,
+      "full_mAP": 0.7683352028202853,
+      "mINP": 0.7022872449199041,
+      "Rank_1": 0.777027027027027,
+      "Rank_5": 0.8918918918918919,
+      "candidate_precision": 0.828125,
+      "candidate_recall": 0.7910447761194029,
+      "candidate_F1": 0.8091603053435115,
+      "TNR": 0.7837837837837838,
+      "PR_AUC": 0.9140846206913725,
+      "candidate_score": 0.8015473488755931,
+      "known_queries": 148,
+      "unknown_queries": 37,
+      "TP": 106,
+      "FP": 22,
+      "FN": 28,
+      "TN": 29,
+      "open_set_FP": 8,
+      "true_refusals": 29
+    },
+    "timing": {
+      "train_seconds": 35.366987625020556,
+      "evaluation_seconds": 11.30805904197041,
+      "epoch_seconds": 46.675046666990966,
+      "elapsed_seconds": 93.65189216699218,
+      "estimated_remaining_seconds": 280.95567650097655
+    }
+  },
+  {
+    "epoch": 3,
+    "lr": {
+      "encoder": 0.00011262000795556988,
+      "head": 0.0005631000397778494
+    },
+    "train": {
+      "loss": 5.5640099670576015,
+      "classification": 5.3077380138894785,
+      "metric": 0.43776041172120883,
+      "consistency": 0.1263279190853886,
+      "accuracy": 0.46059782608695654,
+      "metric_weight": 0.5175822411931896
+    },
+    "threshold": 0.5362645387649536,
+    "validation": {
+      "mAP": 0.7668090411840411,
+      "mAP_at_10": 0.7668090411840411,
+      "full_mAP": 0.7801139289184434,
+      "mINP": 0.7199126229662738,
+      "Rank_1": 0.7702702702702703,
+      "Rank_5": 0.8986486486486487,
+      "candidate_precision": 0.8062015503875969,
+      "candidate_recall": 0.8,
+      "candidate_F1": 0.8030888030888031,
+      "TNR": 0.8108108108108109,
+      "PR_AUC": 0.922811521681291,
+      "candidate_score": 0.8054054054054054,
+      "known_queries": 148,
+      "unknown_queries": 37,
+      "TP": 104,
+      "FP": 25,
+      "FN": 26,
+      "TN": 30,
+      "open_set_FP": 7,
+      "true_refusals": 30
+    },
+    "timing": {
+      "train_seconds": 35.454407749988604,
+      "evaluation_seconds": 11.376414833008312,
+      "epoch_seconds": 46.830822582996916,
+      "elapsed_seconds": 140.88726254203357,
+      "estimated_remaining_seconds": 234.81210423672263
+    }
+  },
+  {
+    "epoch": 4,
+    "lr": {
+      "encoder": 0.00010208083922526258,
+      "head": 0.0005104041961263129
+    },
+    "train": {
+      "loss": 4.625143175539763,
+      "classification": 4.429608396861864,
+      "metric": 0.324788812385953,
+      "consistency": 0.11669202067929765,
+      "accuracy": 0.6671195652173914,
+      "metric_weight": 0.5175822411931896
+    },
+    "threshold": 0.5432252287864685,
+    "validation": {
+      "mAP": 0.7624673780923781,
+      "mAP_at_10": 0.7624673780923781,
+      "full_mAP": 0.7758353571227186,
+      "mINP": 0.7242689564320266,
+      "Rank_1": 0.7635135135135135,
+      "Rank_5": 0.9054054054054054,
+      "candidate_precision": 0.8211382113821138,
+      "candidate_recall": 0.7593984962406015,
+      "candidate_F1": 0.7890624999999999,
+      "TNR": 0.8108108108108109,
+      "PR_AUC": 0.9159587945456865,
+      "candidate_score": 0.7955869932432431,
+      "known_queries": 148,
+      "unknown_queries": 37,
+      "TP": 101,
+      "FP": 22,
+      "FN": 32,
+      "TN": 30,
+      "open_set_FP": 7,
+      "true_refusals": 30
+    },
+    "timing": {
+      "train_seconds": 35.74228079197928,
+      "evaluation_seconds": 11.2101665000082,
+      "epoch_seconds": 46.95244729198748,
+      "elapsed_seconds": 188.22869875002652,
+      "estimated_remaining_seconds": 188.22869875002652
+    }
+  },
+  {
+    "epoch": 5,
+    "lr": {
+      "encoder": 7.448893727614795e-05,
+      "head": 0.0003724446863807398
+    },
+    "train": {
+      "loss": 3.782024533852287,
+      "classification": 3.6339258214701777,
+      "metric": 0.23619088773494182,
+      "consistency": 0.10997312515974045,
+      "accuracy": 0.8186141304347826,
+      "metric_weight": 0.5175822411931896
+    },
+    "threshold": 0.538333535194397,
+    "validation": {
+      "mAP": 0.7623655798655798,
+      "mAP_at_10": 0.7623655798655798,
+      "full_mAP": 0.774723022157836,
+      "mINP": 0.7144049117439901,
+      "Rank_1": 0.7567567567567568,
+      "Rank_5": 0.8986486486486487,
+      "candidate_precision": 0.8203125,
+      "candidate_recall": 0.7954545454545454,
+      "candidate_F1": 0.8076923076923076,
+      "TNR": 0.8108108108108109,
+      "PR_AUC": 0.9216022438109598,
+      "candidate_score": 0.8086278586278586,
+      "known_queries": 148,
+      "unknown_queries": 37,
+      "TP": 105,
+      "FP": 23,
+      "FN": 27,
+      "TN": 30,
+      "open_set_FP": 7,
+      "true_refusals": 30
+    },
+    "timing": {
+      "train_seconds": 35.597463082987815,
+      "evaluation_seconds": 11.232695624988992,
+      "epoch_seconds": 46.83015870797681,
+      "elapsed_seconds": 235.2616217500181,
+      "estimated_remaining_seconds": 141.15697305001083
+    }
+  },
+  {
+    "epoch": 6,
+    "lr": {
+      "encoder": 4.038347083853334e-05,
+      "head": 0.0002019173541926667
+    },
+    "train": {
+      "loss": 3.211566536322884,
+      "classification": 3.0716344480929165,
+      "metric": 0.2236357328036557,
+      "consistency": 0.10287575488505156,
+      "accuracy": 0.8994565217391305,
+      "metric_weight": 0.5175822411931896
+    },
+    "threshold": 0.5286465287208557,
+    "validation": {
+      "mAP": 0.7716713141713141,
+      "mAP_at_10": 0.7716713141713141,
+      "full_mAP": 0.7838078826419592,
+      "mINP": 0.7234662982362934,
+      "Rank_1": 0.777027027027027,
+      "Rank_5": 0.918918918918919,
+      "candidate_precision": 0.813953488372093,
+      "candidate_recall": 0.7954545454545454,
+      "candidate_F1": 0.8045977011494252,
+      "TNR": 0.7837837837837838,
+      "PR_AUC": 0.921787869262587,
+      "candidate_score": 0.7983535259397327,
+      "known_queries": 148,
+      "unknown_queries": 37,
+      "TP": 105,
+      "FP": 24,
+      "FN": 27,
+      "TN": 29,
+      "open_set_FP": 8,
+      "true_refusals": 29
+    },
+    "timing": {
+      "train_seconds": 35.644182125048246,
+      "evaluation_seconds": 11.239001916954294,
+      "epoch_seconds": 46.88318404200254,
+      "elapsed_seconds": 282.3581565420027,
+      "estimated_remaining_seconds": 94.1193855140009
+    }
+  }
+]

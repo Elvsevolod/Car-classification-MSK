@@ -1,0 +1,19 @@
+{
+  "device": "mps",
+  "batch": 32,
+  "layout": "16x2",
+  "head_lr_multiplier": 10,
+  "backward_and_adam_checked": true,
+  "seconds": 2.2190727920096833,
+  "diagnostics": {
+    "loss": 21.32392692565918,
+    "id_loss": 13.214605331420898,
+    "triplet": 1.1072096824645996,
+    "image_text": 7.002110958099365,
+    "accuracy_head_768": 0.0,
+    "accuracy_head_512": 0.0,
+    "accuracy_image_text": 0.0
+  },
+  "not_a_quality_result": true,
+  "saved_training_weights": false
+}

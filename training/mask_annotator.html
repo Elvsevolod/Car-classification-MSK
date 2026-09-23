@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru"><meta charset="utf-8"><title>Разметка анонимизированных областей</title>
+<style>body{font:16px sans-serif;max-width:1400px;margin:24px auto;padding:0 12px}button{margin:5px;padding:8px}canvas{display:block;max-width:100%;height:auto;border:1px solid #aaa;touch-action:none}small{display:block}.panels{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start}.panels section{flex:1 1 420px;min-width:0}#frame{touch-action:auto}#bbox-info{margin:8px 0}</style>
+<h1>Точные маски: ручная проверка</h1>
+<p>Обведите ВСЕ уже размытые области внутри кропа (номер/лицо), включая границу блюра.
+Не угадывайте невидимый номер и не закрывайте всю нижнюю часть автомобиля. Растягивайте прямоугольник мышью.</p>
+<p>«Проверено» нужно нажать и для кадров без областей. «Далее» само по себе проверку не подтверждает.
+Периодически скачивайте JSON: browser storage может быть недоступен для локальных файлов.</p>
+<p id="status"></p>
+<div class="panels">
+<section><h2>Полный кадр</h2><p>Зелёная рамка — BBox целевого автомобиля от организаторов. Здесь рисовать не нужно.</p>
+<canvas id="frame" aria-label="Полный кадр с BBox целевого автомобиля"></canvas><small id="bbox-info"></small></section>
+<section><h2>Кроп целевого автомобиля</h2><p>Это область внутри зелёной рамки. Рисуйте маски здесь; они будут красными.</p>
+<canvas id="canvas" aria-label="Кроп для разметки масок"></canvas>
+<button id="previous">Назад</button><button id="next">Далее</button>
+<button id="undo">Убрать последнюю</button><button id="review">Проверено</button>
+</section></div>
+<button id="save">Скачать masks.json</button><label>Загрузить сохранённую разметку <input id="load" type="file" accept=".json"></label>
+<small id="message"></small>
+<script>
+const data = __PAYLOAD__;
+const plan = data.plan, ids = Object.keys(plan.images), canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d'), status = document.getElementById('status'), message = document.getElementById('message');
+const frameCanvas = document.getElementById('frame'), frameCtx = frameCanvas.getContext('2d');
+const bboxInfo = document.getElementById('bbox-info');
+let annotations = {version:1,fingerprint:plan.fingerprint,images:{}}, index = 0, start = null;
+const picture = new Image(), framePicture = new Image();
+try { const saved = localStorage.getItem(plan.fingerprint); if(saved) annotations=JSON.parse(saved); } catch(e) {}
+function item(){return annotations.images[ids[index]] ||= {reviewed:false,rectangles:[]};}
+function persist(){try{localStorage.setItem(plan.fingerprint,JSON.stringify(annotations));}catch(e){message.textContent='Автосохранение недоступно — скачивайте JSON.';}}
+function redraw(preview){
+  ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(picture,0,0,canvas.width,canvas.height);
+  const size=plan.images[ids[index]], sx=canvas.width/size.width, sy=canvas.height/size.height;
+  ctx.strokeStyle='red';ctx.lineWidth=2;
+  for(const r of [...item().rectangles,...(preview?[preview]:[])]) ctx.strokeRect(r[0]*sx,r[1]*sy,(r[2]-r[0])*sx,(r[3]-r[1])*sy);
+  status.textContent=`${index+1}/${ids.length} · ${ids[index]} · ${size.width}×${size.height} · ${item().reviewed?'ПРОВЕРЕНО':'НЕ ПРОВЕРЕНО'} · всего проверено ${Object.values(annotations.images).filter(x=>x.reviewed).length}`;
+}
+function show(){
+  start=null;
+  const id=ids[index], frame=data.frames[id], [x,y,w,h]=plan.images[id].bbox;
+  picture.onload=()=>{canvas.width=picture.width;canvas.height=picture.height;redraw();};
+  picture.src=data.pictures[id];
+  framePicture.onload=()=>{
+    frameCanvas.width=framePicture.width;frameCanvas.height=framePicture.height;
+    frameCtx.drawImage(framePicture,0,0);
+    const sx=frameCanvas.width/frame.width, sy=frameCanvas.height/frame.height;
+    frameCtx.strokeStyle='black';frameCtx.lineWidth=5;frameCtx.strokeRect(x*sx,y*sy,w*sx,h*sy);
+    frameCtx.strokeStyle='#00ff00';frameCtx.lineWidth=3;frameCtx.strokeRect(x*sx,y*sy,w*sx,h*sy);
+  };
+  framePicture.src=frame.picture;
+  bboxInfo.textContent=`${id} · BBox (x, y, w, h): ${x}, ${y}, ${w}, ${h} · кадр ${frame.width}×${frame.height}`;
+}
+function point(e){const b=canvas.getBoundingClientRect(),size=plan.images[ids[index]];return [Math.round(Math.max(0,Math.min(size.width,(e.clientX-b.left-canvas.clientLeft)/canvas.clientWidth*size.width))),Math.round(Math.max(0,Math.min(size.height,(e.clientY-b.top-canvas.clientTop)/canvas.clientHeight*size.height)))];}
+function rect(a,b){return [Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[0],b[0]),Math.max(a[1],b[1])];}
+canvas.onpointerdown=e=>{start=point(e);canvas.setPointerCapture(e.pointerId);};
+canvas.onpointermove=e=>{if(start)redraw(rect(start,point(e)));};
+canvas.onpointerup=e=>{if(!start)return;const r=rect(start,point(e));start=null;if(r[2]>r[0]&&r[3]>r[1]){item().rectangles.push(r);item().reviewed=false;persist();}redraw();};
+canvas.onpointercancel=()=>{start=null;redraw();};
+document.getElementById('previous').onclick=()=>{index=Math.max(0,index-1);show();};
+document.getElementById('next').onclick=()=>{index=Math.min(ids.length-1,index+1);show();};
+document.getElementById('undo').onclick=()=>{item().rectangles.pop();item().reviewed=false;persist();redraw();};
+document.getElementById('review').onclick=()=>{item().reviewed=true;persist();redraw();};
+document.getElementById('save').onclick=()=>{const url=URL.createObjectURL(new Blob([JSON.stringify(annotations,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='masks.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+document.getElementById('load').onchange=async e=>{try{const loaded=JSON.parse(await e.target.files[0].text());if(loaded.fingerprint!==plan.fingerprint||!loaded.images)throw Error('Другой набор кропов');for(const [id,v] of Object.entries(loaded.images)){if(!plan.images[id]||!Array.isArray(v.rectangles))throw Error('Неверный формат');}annotations=loaded;persist();show();}catch(err){message.textContent=err.message;}};
+show();
+</script></html>

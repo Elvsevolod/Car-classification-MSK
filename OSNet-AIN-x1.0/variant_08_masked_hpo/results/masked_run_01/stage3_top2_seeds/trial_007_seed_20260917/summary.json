@@ -1,0 +1,27 @@
+{
+  "best_epoch": 12,
+  "best_mAP": 0.802614719311148,
+  "best_validation": {
+    "mAP": 0.802614719311148,
+    "mAP_at_10": 0.802614719311148,
+    "full_mAP": 0.8179331773325333,
+    "mINP": 0.7592035876191077,
+    "Rank_1": 0.8108108108108109,
+    "Rank_5": 0.9256756756756757,
+    "candidate_precision": 0.8307692307692308,
+    "candidate_recall": 0.8181818181818182,
+    "candidate_F1": 0.8244274809160306,
+    "TNR": 0.8378378378378378,
+    "PR_AUC": 0.9165617093097443,
+    "candidate_score": 0.8284505879925727,
+    "known_queries": 148,
+    "unknown_queries": 37,
+    "TP": 108,
+    "FP": 22,
+    "FN": 24,
+    "TN": 31,
+    "open_set_FP": 6,
+    "true_refusals": 31
+  },
+  "completed_epochs": 30
+}
