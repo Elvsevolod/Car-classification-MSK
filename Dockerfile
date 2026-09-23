@@ -1,3 +1,16 @@
+# Этап 1: собирает статический React bundle; Node не попадает в конечный образ.
+FROM node:24.15.0-alpine AS frontend-builder
+
+WORKDIR /web-ui
+
+COPY web-ui/package.json web-ui/package-lock.json ./
+RUN npm ci
+
+COPY web-ui ./
+RUN npm run build
+
+
+# Этап 2: устанавливает зафиксированные Python-зависимости в отдельное виртуальное окружение.
 FROM python:3.11-slim AS builder
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -11,6 +24,7 @@ RUN python -m venv /opt/venv \
     && /opt/venv/bin/python -m pip install --no-cache-dir -r requirements.txt
 
 
+# Отдельная цель для CI: использует зависимости разработки и не влияет на runtime-образ.
 FROM builder AS test
 
 WORKDIR /app
@@ -23,6 +37,7 @@ COPY evaluate.py ./
 COPY alembic ./alembic
 COPY backend ./backend
 COPY frontend ./frontend
+COPY --from=frontend-builder /web-ui/dist ./frontend/dist
 COPY models ./models
 COPY example_submission ./example_submission
 COPY tests ./tests
@@ -30,6 +45,7 @@ COPY tests ./tests
 CMD ["sh", "-c", "/opt/venv/bin/alembic upgrade head && /opt/venv/bin/python -m pytest -q"]
 
 
+# Конечный офлайн runtime: только backend, ONNX-веса, собранный frontend и venv.
 FROM python:3.11-slim AS runtime
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -48,6 +64,7 @@ COPY --chown=appuser:appuser evaluate.py ./
 COPY --chown=appuser:appuser alembic ./alembic
 COPY --chown=appuser:appuser backend ./backend
 COPY --chown=appuser:appuser frontend ./frontend
+COPY --from=frontend-builder --chown=appuser:appuser /web-ui/dist ./frontend/dist
 COPY --chown=appuser:appuser models ./models
 COPY --chown=appuser:appuser docker/entrypoint.sh /usr/local/bin/vehicle-reid-entrypoint
 COPY --chown=appuser:appuser --chmod=755 docker/dataset-init.sh /usr/local/bin/vehicle-reid-dataset-init

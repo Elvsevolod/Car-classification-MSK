@@ -4,7 +4,7 @@
 
 Проект решает задачу Vehicle Re-Identification: по изображению автомобиля и BBox получить embedding, найти похожие объекты в gallery, вернуть Top-10 и корректно отказаться при отсутствии уверенного совпадения.
 
-Рабочая ветка: `devops`.
+Рабочая ветка: `devops` (в неё влит `web`; дальше это единая ветка поставки).
 
 ## Текущее состояние
 
@@ -91,13 +91,12 @@ created_at          timestamptz
 5. Smoke-test Docker Compose на реальном датасете.
 6. Замеры latency batch=1 и throughput; отдельно зафиксировать CPU/GPU окружение.
 
-## Этап 4. Web-интерфейс (ветка `web`)
+## Этап 4. Web-интерфейс (выполнено, влито в `devops`)
 
-1. Создать ветку `web` от актуальной `devops`; backend API и PostgreSQL-схему не менять без отдельной задачи.
-2. Перевести `frontend/` на React + TypeScript + Tailwind и локально подключаемые shadcn/ui-компоненты. Shadcn является исходным кодом компонентов, а не CDN-зависимостью runtime.
-3. Собрать интерфейс из готовых API: статус gallery, загрузка JPEG/PNG, BBox, Top-10, confidence, отказ, список query и JSON-экспорт.
-4. Сохранить доступность: keyboard-навигация, понятные ошибки, состояния загрузки и контрастные статусы.
-5. Включить production frontend build в Docker-образ и проверить UI через Compose. Offline Swagger UI уже выполнен.
+1. React + TypeScript + Tailwind и локальные shadcn/ui-компоненты собраны в `web-ui/`; runtime не использует CDN.
+2. Интерфейс использует существующие `/api/*`: статус gallery, JPEG/PNG, BBox, Top-N, confidence, отказ, официальный query и JSON-экспорт.
+3. Production frontend bundle включён в Docker-образ; offline Swagger UI сохранён.
+4. Browser smoke-тесты покрывают успешный Top-N и отказ в режиме candidates на ширине 390 px.
 
 Критерий готовности: интерфейс работает только с существующими `/api/*`, не требует интернета после сборки и показывает сценарий защиты: изображение + BBox → Top-10 либо отказ.
 
@@ -129,8 +128,8 @@ created_at          timestamptz
 ## Актуальный порядок работы
 
 1. На `devops`: подготовить linux/amd64 delivery archive и воспроизвести обязательный batch-export на чистом офлайн-стенде.
-2. На `web`: добавить UI smoke/e2e-test и подготовить два демонстрационных сценария — успешный поиск и отказ.
-3. Подготовить GPU benchmark/profile для performance-баллов.
+2. На единой ветке `devops`: зафиксировать на целевом Linux `amd64` UI и два демонстрационных сценария — успешный поиск и отказ.
+3. Подготовить GPU benchmark/profile для performance-баллов (ML/GPU-задача).
 4. Сформировать финальные артефакты, презентацию и демонстрацию.
 
 ## Ограничения

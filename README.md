@@ -1,6 +1,6 @@
 # Vehicle ReID: MVP с дообученной OSNet
 
-Минимальный локальный сервис: Python/FastAPI + обычные HTML/JavaScript.
+Минимальный локальный сервис: Python/FastAPI + React/TypeScript/Tailwind веб-интерфейс.
 Модель — **автомобильная OSNet-AIN x1.0 (`vehicle-reid-0001`),
 дообученная на 925 train identity**. MVP использует HPO best-mAP checkpoint
 эпохи 5 с BNNeck, Supervised Contrastive Loss и потоковым

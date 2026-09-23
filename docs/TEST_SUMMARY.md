@@ -1,6 +1,6 @@
 # Итоги тестирования
 
-Дата последнего полного прогона: 21 сентября 2026 года. Тесты запускались в изолированном Docker Compose-проекте с временной PostgreSQL 16 + pgvector БД; рабочие контейнеры и volumes не использовались.
+Дата последнего полного прогона: 23 сентября 2026 года. Тесты запускались в изолированном Docker Compose-проекте с временной PostgreSQL 16 + pgvector БД; рабочие контейнеры и volumes не использовались.
 
 | Проверка | Результат |
 |---|---|
@@ -10,6 +10,8 @@
 | Docker Compose | `docker compose --profile inference config --quiet` прошёл |
 | Offline Swagger UI | `/docs` ссылается только на `/static/vendor/swagger-ui/`, без CDN |
 | API после перезапуска | `/api/health`: `PostgresGalleryRepository`, 750 объектов gallery |
+| React production build | TypeScript и Vite build прошли; lint без ошибок (одно известное предупреждение Fast Refresh) |
+| Browser smoke-test | 2/2: официальный query → Top-N и `candidates` → отказ на ширине 390 px без горизонтального overflow |
 | Экспорт артефактов | успешно через PostgreSQL + pgvector |
 | `submission.csv` | 1110 строк, у каждого query Top-10 без заголовка |
 | `embeddings.npy` | shape `(1860, 512)`, `float32`, L2-нормированные векторы |

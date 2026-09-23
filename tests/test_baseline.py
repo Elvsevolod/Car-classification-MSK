@@ -262,8 +262,13 @@ def test_api_refusal_and_no_fabricated_threshold(client):
 
 
 def test_frontend_and_openapi(client):
-    assert client.get("/").status_code == 200
-    assert client.get("/static/app.js").status_code == 200
+    index = client.get("/")
+    assert index.status_code == 200
+    # Docker tests serve the React production bundle; source-only pytest keeps the documented legacy fallback.
+    if "/static/assets/" in index.text:
+        assert "/static/assets/" in index.text
+    else:
+        assert client.get("/static/app.js").status_code == 200
     health = client.get("/api/health").json()
     assert health["fine_tuned"] is True
     assert "epoch 5" in health["model"]
