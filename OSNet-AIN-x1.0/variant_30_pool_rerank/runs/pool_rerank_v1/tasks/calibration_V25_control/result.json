@@ -1,0 +1,31 @@
+{
+  "system": {
+    "name": "V25_control",
+    "pool_k": null
+  },
+  "split": "calibration",
+  "threshold": 0.534365177154541,
+  "ranking": {
+    "n_scored": 246,
+    "n_openset_excluded": 61,
+    "mAP@10": 0.826409928470033,
+    "Rank-1": 0.8414634146341463,
+    "Rank-5": 0.9024390243902439
+  },
+  "candidates": {
+    "TP": 181,
+    "FP": 39,
+    "FN": 44,
+    "TN": 43,
+    "n_openset_queries": 61,
+    "Precision": 0.8227272727272728,
+    "Recall": 0.8044444444444444,
+    "F1": 0.8134831460674156,
+    "TNR": 0.7049180327868853,
+    "PR-AUC": 0.9190438844563414,
+    "C": 0.7809136120832565,
+    "open_set_FP": 18
+  },
+  "protocol_sha256": "7084dc8a0b795ddf1d569b81adc1d76a0918dddd52a52a50d5fb50595fdd8ce9",
+  "candidate_unchanged": true
+}

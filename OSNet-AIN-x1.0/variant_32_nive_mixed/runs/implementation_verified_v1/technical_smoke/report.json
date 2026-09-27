@@ -1,0 +1,145 @@
+{
+  "signature": "18cf2c779202cbcf09e42541a4f789716d6a31ceacdfcb232243c465c23c7ce1",
+  "status": "passed",
+  "arms": {
+    "N0_target_extra": {
+      "updates": [
+        {
+          "aux_loss": 6.787752628326416,
+          "aux_ce": 6.649942398071289,
+          "aux_metric": 0.07953723520040512,
+          "aux_consistency": 0.08378558605909348,
+          "aux_accuracy": 0.0,
+          "weighted_aux_backbone_grad_norm": 1.6014842987060547,
+          "main_backbone_grad_norm": 3.723680019378662,
+          "main_loss": 1.1889879703521729,
+          "main_ce": 1.1032559871673584,
+          "main_metric": 0.04427649825811386,
+          "main_consistency": 0.0865866169333458,
+          "main_accuracy": 1.0,
+          "total_loss": 2.885926127433777,
+          "gradient_norm": 4.289913177490234
+        },
+        {
+          "aux_loss": 7.0452375411987305,
+          "aux_ce": 6.552826404571533,
+          "aux_metric": 0.3132636547088623,
+          "aux_consistency": 0.10686225444078445,
+          "aux_accuracy": 0.0,
+          "weighted_aux_backbone_grad_norm": 2.8159070014953613,
+          "main_backbone_grad_norm": 5.090006351470947,
+          "main_loss": 1.2880167961120605,
+          "main_ce": 1.194806694984436,
+          "main_metric": 0.048034604638814926,
+          "main_consistency": 0.09482751786708832,
+          "main_accuracy": 0.9375,
+          "total_loss": 3.049326181411743,
+          "gradient_norm": 6.164762496948242
+        },
+        {
+          "weighted_aux_backbone_grad_norm": 0.0,
+          "main_backbone_grad_norm": 7.927155494689941,
+          "main_loss": 1.2956711053848267,
+          "main_ce": 1.122171401977539,
+          "main_metric": 0.10234929621219635,
+          "main_consistency": 0.09082245826721191,
+          "main_accuracy": 1.0,
+          "total_loss": 1.2956711053848267,
+          "gradient_norm": 7.942989826202393
+        }
+      ],
+      "export": {
+        "identity": {
+          "signature": "18cf2c779202cbcf09e42541a4f789716d6a31ceacdfcb232243c465c23c7ce1",
+          "checkpoint": {
+            "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_32_nive_mixed/runs/implementation_verified_v1/technical_smoke/N0_target_extra.pt",
+            "sha256": "5da3d3e3fc5bf63f6ab08a2d9a439466eb3df188101b098d8f51e80bbd75fb58"
+          }
+        },
+        "dimension": 512,
+        "input_size": 256,
+        "heads_exported": false,
+        "preprocessing": "same organizer bbox, RGB, bilinear256, ImageNet normalization, L2",
+        "max_onnx_error": 5.774199962615967e-07,
+        "max_batch_error": 1.4901161193847656e-07,
+        "threshold": null,
+        "promoted": false,
+        "GPU_verified": false,
+        "files": {
+          "encoder.pt": "a5bcf961d38a914a6cdded2f653eb4c6b63349c4ea579f21f56aa3bcbe050f66",
+          "encoder.onnx": "90776ab26ceab7157454a0591a2cf6e6caa87970f47db82a950df65dfa1a0384"
+        }
+      }
+    },
+    "N1_nive_mixed": {
+      "updates": [
+        {
+          "aux_loss": 11.094005584716797,
+          "aux_ce": 6.592096328735352,
+          "aux_metric": 2.9476873874664307,
+          "aux_consistency": 0.42301619052886963,
+          "aux_accuracy": 0.0,
+          "weighted_aux_backbone_grad_norm": 20.677072525024414,
+          "main_backbone_grad_norm": 3.7224903106689453,
+          "main_loss": 1.1887062788009644,
+          "main_ce": 1.1032559871673584,
+          "main_metric": 0.04427649825811386,
+          "main_consistency": 0.08533880114555359,
+          "main_accuracy": 1.0,
+          "total_loss": 3.9622076749801636,
+          "gradient_norm": 21.062702178955078
+        },
+        {
+          "aux_loss": 9.705164909362793,
+          "aux_ce": 6.648189544677734,
+          "aux_metric": 1.991417407989502,
+          "aux_consistency": 0.35465675592422485,
+          "aux_accuracy": 0.0,
+          "weighted_aux_backbone_grad_norm": 15.893933296203613,
+          "main_backbone_grad_norm": 5.083695888519287,
+          "main_loss": 1.2899179458618164,
+          "main_ce": 1.1949970722198486,
+          "main_metric": 0.047867532819509506,
+          "main_consistency": 0.10351352393627167,
+          "main_accuracy": 0.9375,
+          "total_loss": 3.7162091732025146,
+          "gradient_norm": 16.856393814086914
+        },
+        {
+          "weighted_aux_backbone_grad_norm": 0.0,
+          "main_backbone_grad_norm": 7.831137657165527,
+          "main_loss": 1.2944941520690918,
+          "main_ce": 1.1221082210540771,
+          "main_metric": 0.10073012113571167,
+          "main_consistency": 0.09661124646663666,
+          "main_accuracy": 1.0,
+          "total_loss": 1.2944941520690918,
+          "gradient_norm": 7.847097873687744
+        }
+      ],
+      "export": {
+        "identity": {
+          "signature": "18cf2c779202cbcf09e42541a4f789716d6a31ceacdfcb232243c465c23c7ce1",
+          "checkpoint": {
+            "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_32_nive_mixed/runs/implementation_verified_v1/technical_smoke/N1_nive_mixed.pt",
+            "sha256": "91605da92affcabd623aedbfe1b077bca1a72de4a4e984a508a94bd30692fd40"
+          }
+        },
+        "dimension": 512,
+        "input_size": 256,
+        "heads_exported": false,
+        "preprocessing": "same organizer bbox, RGB, bilinear256, ImageNet normalization, L2",
+        "max_onnx_error": 6.332993507385254e-07,
+        "max_batch_error": 1.564621925354004e-07,
+        "threshold": null,
+        "promoted": false,
+        "GPU_verified": false,
+        "files": {
+          "encoder.pt": "e2d9b95b3fde003d40623432cf336e146fa2b13503736ff5e6255e3ac7c7b914",
+          "encoder.onnx": "a4df27c0b9cd8c1e56d72fe2467fc29316a35b355b3ab28c6a0b095a4bb18f72"
+        }
+      }
+    }
+  },
+  "note": "Technical only: 3 disposable updates/arm, not quality evidence"
+}

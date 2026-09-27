@@ -1,0 +1,19 @@
+{
+  "signature": "467976b0985cbace3d9915df2b578c755e1abd48bc9cf19815e84e9987813a35",
+  "selection_split": "calibration",
+  "selected": {
+    "name": "raw_pool50",
+    "pool_k": 50
+  },
+  "evaluations": [
+    {
+      "name": "V25_control",
+      "pool_k": null
+    },
+    {
+      "name": "raw_pool50",
+      "pool_k": 50
+    }
+  ],
+  "promoted": false
+}

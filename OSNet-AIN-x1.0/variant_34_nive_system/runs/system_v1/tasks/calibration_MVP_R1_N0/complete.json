@@ -1,0 +1,10 @@
+{
+  "signature": "67de8e3832c009820492fa1d2ebd3513246d56d5bad9871ec17bbeb2806351b6",
+  "files": {
+    "result.json": "d16a4a223d49103b33385cb0c77de6c33541c9d7f3184f58db1fa9bdbfe21a9e",
+    "export/submission.csv": "65d3ac6678dac5c93f09806cddd33a303c0c063f84352aaf2a5d5fac7bce3d28",
+    "export/candidates.csv": "d3bf167176fa98c7a07770a8ff6fbabca359faee2c4ef341e282d13a8292938e",
+    "export/embedding_order.json": "3e7e09e4f91d5162b310a44557c7510b83cd4b9dbbf9d78e54b293fb9ea66e6f",
+    "export/embeddings.npy": "8b054a7168c39767b7994c811ac7734e40d4269ed21a20f67b689ed5d1593dc0"
+  }
+}

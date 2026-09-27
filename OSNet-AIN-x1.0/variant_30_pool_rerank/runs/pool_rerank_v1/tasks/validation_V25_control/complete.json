@@ -1,0 +1,10 @@
+{
+  "signature": "467976b0985cbace3d9915df2b578c755e1abd48bc9cf19815e84e9987813a35",
+  "artifacts": {
+    "tasks/validation_V25_control/result.json": "c0193cc0996aad7eb6c2143ddcda6ad8967d85c1138a90fc4af255c4f894804b",
+    "tasks/validation_V25_control/export/submission.csv": "ca61b438c719ebd7de5e9e73a0264d3ab5ec1f74ba27ae0302b887c48250d14c",
+    "tasks/validation_V25_control/export/candidates.csv": "2e05c16033b96b527020adec5c66f9bb3825934ff36819d5be3b5cd6d368b990",
+    "tasks/validation_V25_control/export/embedding_order.json": "435e120e1b46b03ba61e28c94ca6f771227f5f0646b5d88c13a9e36a1116ee48",
+    "tasks/validation_V25_control/export/embeddings.npy": "083696a01ac2c02eb8e8e0ba9bb6cfbdb28b2bd0c2a120b228b107fe206159d2"
+  }
+}

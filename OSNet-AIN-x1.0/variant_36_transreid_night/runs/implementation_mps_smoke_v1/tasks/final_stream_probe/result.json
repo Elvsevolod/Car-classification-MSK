@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "trial_id": "stock_jpm",
+  "step": 0,
+  "max_vector_error": 2.9802322387695312e-08,
+  "batch_sizes": [
+    1,
+    8,
+    16,
+    32
+  ],
+  "exact_raw_graph_top10": true,
+  "permutation_and_removal": true,
+  "model_state_unchanged": true
+}

@@ -1,0 +1,9 @@
+{
+  "experiment": "v33_nive_low_aux_primary_v1",
+  "aux_weight": 0.025,
+  "previous_run": "OSNet-AIN-x1.0/variant_32_nive_mixed/runs/pilot_v1",
+  "previous_manifest_sha256": "ccd37cc18780c09c3d243ef16d424a0070a08d8327a036266c22b4188b3cf9a1",
+  "previous_results_sha256": "a30aeeb35c3459e76f2f4d6bbfee8c0ee288a58e63be4c1e364a72288254e37b",
+  "hypothesis": "Reducing auxiliary loss tenfold in both matched arms may prevent source gradients dominating organizer gradients.",
+  "corrections_remaining_after_this_run": 0
+}

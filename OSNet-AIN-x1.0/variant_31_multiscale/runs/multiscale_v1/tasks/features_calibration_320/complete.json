@@ -1,0 +1,27 @@
+{
+  "signature": "1f57ad99cfeccfaf0971541cb0ccd097c987879edc6b23846a550334656e1f26",
+  "artifacts": {
+    "tasks/features_calibration_320/block_00000.npy": "6103f0b44d77a94674831434255963b7c99d476cb0cd801ae608a09182ce49f5",
+    "tasks/features_calibration_320/result.json": "da34d6120c105303b9482f8e26f5d23cf6175c3deadb0a5f298a63fae41c8b80",
+    "tasks/features_calibration_320/block_00000.json": "c1b97c19da662357f0c88f3cbc0b473aa6bfa24e1b136bf7830d2911506bd9a4",
+    "tasks/features_calibration_320/block_00128.json": "b6bad2298874d64460550604f098cb3ba53d99ad008cfd3e714716d6cfecc6e8",
+    "tasks/features_calibration_320/block_01152.json": "20b07224d6be3d033f59a680c908e542818741f9edfc3fb84e454e1b00adb4ed",
+    "tasks/features_calibration_320/block_00256.json": "3c8e8453d7f53dc852680cf6b28fa593b0de358b492b01bf6c4a390ac405722f",
+    "tasks/features_calibration_320/block_00128.npy": "4aac42602e63c6e7523568d08bf349267ba577392046da025b75179d59117733",
+    "tasks/features_calibration_320/block_00896.npy": "e38bb70263fc17be7aef69776d04666e04b58d9ff431eb9b83564756b5d90919",
+    "tasks/features_calibration_320/block_00640.json": "663c3b90ecbb49dd28c740f2e2911d78dbe82cf62b7858036e7cd25b02036bc2",
+    "tasks/features_calibration_320/block_00512.npy": "3cfdee76593c4d300c2e6d1c4491c3878eb75fa01e1894325cf9a1628947c620",
+    "tasks/features_calibration_320/block_00512.json": "2bca1f83af7963ae0af50986f88a65880274ebae4e2fb51101c553d91125e31b",
+    "tasks/features_calibration_320/block_00768.json": "a7dd43b4aea0792c9c96ded111aa1f5caa446d328d7342946f1721a995f9a066",
+    "tasks/features_calibration_320/block_01152.npy": "ea6d26987cc373639045280f1129a72858c957d8d4d0f2306e3e1fa0781b6329",
+    "tasks/features_calibration_320/block_01024.npy": "bf463a7a3974e74f33fd20bcdd77474eb43ca04e0635c8e9c451f62f00dc45ab",
+    "tasks/features_calibration_320/block_01024.json": "c8d09f2259a77dec49a22ebac8f3d1c9f732b2d1436f321018846d39c58d3d5e",
+    "tasks/features_calibration_320/block_00256.npy": "0ed71ad1bee2ee2c60ea8c6aca78358321a2a45b6d62117e96793b31d18e52bb",
+    "tasks/features_calibration_320/features.npy": "d702eca1d1a641221085a12db8d4d9b33a68081d0c8fb071f9f03c1532fa5f42",
+    "tasks/features_calibration_320/block_00896.json": "ba19f413fd5227fbceb3dbe4bc4acdf6c12f7e07ee960ef134df4a827fdebc73",
+    "tasks/features_calibration_320/block_00640.npy": "29f5d57346f1d710a582aad18e7c88be8624dfeb5177ba6f01ba76a2e63fa64c",
+    "tasks/features_calibration_320/block_00384.json": "3e4f8a9524c6f821f8655d9ce0ea642c92ee62b788f73f01dc8fc7dfc0d52ac3",
+    "tasks/features_calibration_320/block_00384.npy": "e1fae813230b22b919c7da6879a43b5c48537590ca0f491d90a7e4d5ec99d98f",
+    "tasks/features_calibration_320/block_00768.npy": "e77a02b7e59052775c575a9bcbb8b7c5518c3abf2c35fd82ec7d46df53ce6773"
+  }
+}

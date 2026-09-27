@@ -353,3 +353,43 @@ def test_nive_notebook_is_valid_and_compiles_with_source_guard():
     for cell in notebook.cells:
         if cell.cell_type == "code":
             compile(cell.source, "NiVe notebook", "exec")
+
+
+def test_confirmation_notebook_uses_completed_pilot_settings(tmp_path):
+    notebook = nbformat.read(n.VARIANT / "confirm_nive_transfer.ipynb", as_version=4)
+    nbformat.validate(notebook)
+    for cell in notebook.cells:
+        if cell.cell_type == "code":
+            compile(cell.source, "NiVe confirmation notebook", "exec")
+    code = next(c.source for c in notebook.cells if c.id == "frozen-settings")
+    namespace = {"VARIANT": tmp_path, "REPO": tmp_path, "load_json": n.suite.load_json,
+                 "digest": n.digest, "Budget": n.suite.Budget, "pd": __import__("pandas"),
+                 "display": lambda value: None}
+    with pytest.raises(RuntimeError, match="Сначала заверши pilot"):
+        exec(code, namespace)
+    run = tmp_path / "runs/nive_pilot_v1"
+    run.mkdir(parents=True)
+    manifest = {"runtime": {"device": "cpu"}, "seeds": [11, 12, 13],
+                "pretrain_budget": {"max_steps": 2, "evaluation_interval": 1, "warmup_steps": 1},
+                "target_budget": {"max_steps": 4, "evaluation_interval": 1, "warmup_steps": 1},
+                "nive": {"source": {"local_copy_source_confirmed_by_user": True, "url": n.SOURCE_URL}}}
+    pilot = {"pilot_complete": True, "signature": n.digest(manifest), "primary": []}
+    n.write_json(run / "manifest.json", manifest)
+    n.write_json(run / "pilot_summary.json", pilot)
+    exec(code, namespace)
+    assert namespace["PHASE"] == "confirm" and namespace["RUN_NAME"] == "nive_pilot_v1"
+    assert namespace["DEVICE"] == "cpu" and namespace["SEEDS"] == (11, 12, 13)
+    assert namespace["PRETRAIN_BUDGET"].max_steps == 2
+    assert namespace["TARGET_BUDGET"].max_steps == 4 and namespace["SOURCE_CONFIRMED"] is True
+    training = next(c.source for c in notebook.cells if c.id == "training")
+    with pytest.raises(RuntimeError, match="NiVe confirmation отложен"):
+        exec(training, {"RUN_CONFIRMATION": False})
+    for change in ({"pilot_complete": False}, {"signature": "changed"}):
+        n.write_json(run / "pilot_summary.json", {**pilot, **change})
+        with pytest.raises(RuntimeError, match="Пилот не завершён или его manifest изменился"):
+            exec(code, namespace)
+    manifest["nive"]["source"]["local_copy_source_confirmed_by_user"] = False
+    n.write_json(run / "manifest.json", manifest)
+    n.write_json(run / "pilot_summary.json", {**pilot, "signature": n.digest(manifest)})
+    with pytest.raises(RuntimeError, match="нет подтверждения источника NiVe"):
+        exec(code, namespace)

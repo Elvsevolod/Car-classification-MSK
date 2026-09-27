@@ -1,0 +1,67 @@
+{
+  "experiment": "v36_transreid_night_v1",
+  "source_run": "OSNet-AIN-x1.0/variant_34_nive_system/runs/system_v1",
+  "source_manifest_sha256": "d080fafd9695ab0a6a239770a8748aa4f13d48ea7d342411024f198d53348f45",
+  "source_results_sha256": "75c1b3484d8f841b2555688e9ebab6bd5811f328a0aaa3ba01ef3292b4812ae6",
+  "reference_features_sha256": "52f7895edd053903da608f2051e8244aed4a0df13967671eb884d6348c174649",
+  "reference_order_sha256": "ac7b1e83e83f7ee084fa508adb76ad5a687c7191cd37a6e4f4a664bff74ef981",
+  "reference_metrics_sha256": "fc8216f06b9f4b88269d41e91c4eec3ac3645e00063e736c997379fbaae4521d",
+  "grid": {
+    "architectures": [
+      "global",
+      "jpm"
+    ],
+    "encoder_lr": [
+      0.00001,
+      0.00003,
+      0.0001
+    ],
+    "weight_decay": [
+      0.0001,
+      0.01
+    ],
+    "metric_loss": [
+      "soft_triplet",
+      "supcon"
+    ]
+  },
+  "seed": 20260915,
+  "screen_steps": 400,
+  "final_steps": 1800,
+  "finalists_per_architecture": 2,
+  "checkpoints": [
+    400,
+    800,
+    1200,
+    1800
+  ],
+  "save_interval": 50,
+  "log_interval": 25,
+  "warmup_steps": 100,
+  "min_lr_ratio": 0.02,
+  "head_lr_multiplier": 10,
+  "identities_per_batch": 8,
+  "images_per_identity": 2,
+  "metric_weight": 1,
+  "label_smoothing": 0.1,
+  "supcon_temperature": 0.1,
+  "gradient_clip": 5,
+  "drop_path": 0.1,
+  "image_size": 256,
+  "eval_batch_size": 16,
+  "new_encoder_weight": 0.1,
+  "graph": {
+    "k1": 20,
+    "k2": 3,
+    "lambda": 0.75
+  },
+  "selection": "per architecture: best single, best fixed mixture, then next mixture if duplicate; ties trial order",
+  "SIE_CAMERA": false,
+  "SIE_VIEW": false,
+  "external_train": false,
+  "threshold_fit": false,
+  "original_outer_evaluation": false,
+  "promoted": false,
+  "wall_time_limit": null,
+  "estimated_run_disk_gib": 13
+}

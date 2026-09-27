@@ -1,0 +1,14 @@
+{
+  "identity": {
+    "signature": "cc96f08ea8750bd088305bd47b322574a54e04f032ee72dee9bd24b3c911847a",
+    "checkpoint": {
+      "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_32_nive_mixed/runs/pilot_v1/training/N1_nive_mixed/step_01200.pt",
+      "sha256": "7b6a8f1a9d54842d6b2928f5becfb463620ca1251e6fdbd8e2ee9c2ad6f31ed7"
+    }
+  },
+  "files": {
+    "features.npy": "f1f044ae60c6696b6b6e0414cbfade969b027d84b03135cac471d75ba4a91bb9",
+    "metrics.json": "c5fa0bc029f06c05ab73f78ddddd9a37a88ee71fab966c0fa39292172ff4916d",
+    "order.json": "ac7b1e83e83f7ee084fa508adb76ad5a687c7191cd37a6e4f4a664bff74ef981"
+  }
+}

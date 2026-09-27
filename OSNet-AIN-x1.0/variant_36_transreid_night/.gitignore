@@ -1,0 +1,6 @@
+weights/
+runs/**/resume_*.pt
+runs/**/step_*.pt
+runs/**/features.npy
+runs/**/block_*.npy
+smoke/

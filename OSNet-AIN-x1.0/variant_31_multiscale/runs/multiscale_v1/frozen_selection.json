@@ -1,0 +1,17 @@
+{
+  "signature": "1f57ad99cfeccfaf0971541cb0ccd097c987879edc6b23846a550334656e1f26",
+  "selection_split": "calibration",
+  "selected": {
+    "name": "V25_control",
+    "size": 256,
+    "high_weight": 0.0
+  },
+  "evaluations": [
+    {
+      "name": "V25_control",
+      "size": 256,
+      "high_weight": 0.0
+    }
+  ],
+  "promoted": false
+}

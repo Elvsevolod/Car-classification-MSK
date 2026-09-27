@@ -1,0 +1,2 @@
+# Frozen manifests refer to exact bytes; never rewrite LF/CRLF on add/checkout.
+* -text

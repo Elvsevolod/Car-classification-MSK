@@ -1,0 +1,35 @@
+{
+  "signature": "467976b0985cbace3d9915df2b578c755e1abd48bc9cf19815e84e9987813a35",
+  "events": [
+    {
+      "task": "calibration_V25_control",
+      "status": "complete",
+      "seconds": 0.29775074997451156
+    },
+    {
+      "task": "calibration_raw_pool10",
+      "status": "complete",
+      "seconds": 0.31388204090762883
+    },
+    {
+      "task": "calibration_raw_pool20",
+      "status": "complete",
+      "seconds": 0.31189462495967746
+    },
+    {
+      "task": "calibration_raw_pool50",
+      "status": "complete",
+      "seconds": 0.3128656670451164
+    },
+    {
+      "task": "validation_V25_control",
+      "status": "complete",
+      "seconds": 0.9637447079876438
+    },
+    {
+      "task": "validation_raw_pool50",
+      "status": "complete",
+      "seconds": 1.0438572920393199
+    }
+  ]
+}

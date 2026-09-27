@@ -1,0 +1,27 @@
+{
+  "signature": "1f57ad99cfeccfaf0971541cb0ccd097c987879edc6b23846a550334656e1f26",
+  "artifacts": {
+    "tasks/features_calibration_384/block_00000.npy": "ec0ff57bef996f30a2919de42ac70c9e935e3d17827e29a74f117f4c052bd857",
+    "tasks/features_calibration_384/result.json": "1cea54461a1743ed69b0f16c04c996127fb05c75b151c080c27a87c8f12b289f",
+    "tasks/features_calibration_384/block_00000.json": "daac452c9d72ca34a3ec6053cc237912bf3787ce48aa53a295819da080347e81",
+    "tasks/features_calibration_384/block_00128.json": "82481a033425603979cea3991da1d849a0ac74e0c70730f2ca0110e015630070",
+    "tasks/features_calibration_384/block_01152.json": "2c243a92f04a3bac08da7b6bd50454acb5df270d49929af042c129733d44bda8",
+    "tasks/features_calibration_384/block_00256.json": "c6f3e9028e235996a07158e066eb8fd3e5c9b153de25a78ae4c99dc066f8a210",
+    "tasks/features_calibration_384/block_00128.npy": "7ccf54c19a1f313714fafa5c54937f40457fa3a140806b5720e9aa6d4522c9de",
+    "tasks/features_calibration_384/block_00896.npy": "2122d83daa8f5d955d8a86ab15e99f390d9ba0076f0a750eb0d439e943f80317",
+    "tasks/features_calibration_384/block_00640.json": "35dd6fcb2a98cb195c90588695310089611f67e80b06608db366589ef49bad5a",
+    "tasks/features_calibration_384/block_00512.npy": "5c6257b74e6c8bbb2f8e25063c282d4cf513faa41a96c6b70add704bddb6ae94",
+    "tasks/features_calibration_384/block_00512.json": "a572b4fd513ef9bad21d54edead30e2349c89cda2aca235fb48dc8755413e6ad",
+    "tasks/features_calibration_384/block_00768.json": "fb5295f2f6edab9f8d0ce4411a3689d723103d38e184e4f72bf2862708f0bcdf",
+    "tasks/features_calibration_384/block_01152.npy": "6f42bfff8cb4a163ba524802aa278caa4f7c700b9ca17e4c71962a81d857f0a8",
+    "tasks/features_calibration_384/block_01024.npy": "3eb6a552dd817bd498b5928bcef31c66a21445d00d6846885b92c077f839b5ee",
+    "tasks/features_calibration_384/block_01024.json": "f52c3e270fa7eb46c794bf3588b50077e20ae8e876d3fcdc12a770482d13ff94",
+    "tasks/features_calibration_384/block_00256.npy": "575b73d8d0deed1e641df4fe079b632b4ce05410f9dd931a61f41f8575aa5dcc",
+    "tasks/features_calibration_384/features.npy": "36e97a52e0838e9b4903955cb1362250126677c207e208cabb99cfd8e99404fd",
+    "tasks/features_calibration_384/block_00896.json": "713ca1a86dd9d0404252a95bb77452bc5e929864ebc47cdc6947ebdce0752ca0",
+    "tasks/features_calibration_384/block_00640.npy": "dcf4572413506f56bc22703dcdcdc1b9347cba02849f4f32ddd33847b027d9d0",
+    "tasks/features_calibration_384/block_00384.json": "5e6209abfe18059bd001bb0b7b59a1bd24b7343ede0e6fdd190915544fdd2d40",
+    "tasks/features_calibration_384/block_00384.npy": "d6d728cca680cfb909823ecbbd7ee8bf28ce24364b734d0f27ea50deb4087b46",
+    "tasks/features_calibration_384/block_00768.npy": "28a85de35468558d524cc3c086c5c0317e842b774a3af2ff6e00e8c2a201c724"
+  }
+}

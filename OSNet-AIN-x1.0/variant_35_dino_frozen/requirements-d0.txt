@@ -1,0 +1,6 @@
+# Isolated add-on packages only; do not replace the project's torch/numpy/torchvision.
+transformers==4.57.3
+huggingface_hub==0.36.0
+tokenizers==0.22.1
+safetensors==0.6.2
+regex==2025.9.18

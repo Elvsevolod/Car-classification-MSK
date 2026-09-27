@@ -1,0 +1,69 @@
+{
+  "source": {
+    "parent": {
+      "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_33_nive_low_aux/runs/low_aux_v1/training/N1_nive_mixed/step_00000.pt",
+      "sha256": "53f870ea3240c091f9087c5c8db38d83831198a63ff50be2d8741d4e8ac5abd2",
+      "arm": "N1_nive_mixed",
+      "step": 0
+    },
+    "N0": {
+      "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_33_nive_low_aux/runs/low_aux_v1/training/N0_target_extra/step_01600.pt",
+      "sha256": "2f834e1f4216677148ebc12a3a8cbd4ee7196bbeea800b19549f952cdd94316e",
+      "arm": "N0_target_extra",
+      "step": 1600
+    },
+    "N1": {
+      "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_33_nive_low_aux/runs/low_aux_v1/training/N1_nive_mixed/step_01800.pt",
+      "sha256": "42bce9b71e1fdcac8981a013670ed5cd3e60210799a818fe5a1ae70f12693a1b",
+      "arm": "N1_nive_mixed",
+      "step": 1800
+    }
+  },
+  "systems": {
+    "V25_control": {
+      "member": null,
+      "graph": "legacy",
+      "weights": [
+        0.5,
+        0.5
+      ]
+    },
+    "R1_N0_pair": {
+      "member": "N0",
+      "graph": "less_graph",
+      "weights": [
+        0.5,
+        0.5
+      ]
+    },
+    "R1_N1_pair": {
+      "member": "N1",
+      "graph": "less_graph",
+      "weights": [
+        0.5,
+        0.5
+      ]
+    },
+    "MVP_R1_N0": {
+      "member": "N0",
+      "graph": "legacy",
+      "weights": [
+        0.5,
+        0.25,
+        0.25
+      ]
+    },
+    "MVP_R1_N1": {
+      "member": "N1",
+      "graph": "legacy",
+      "weights": [
+        0.5,
+        0.25,
+        0.25
+      ]
+    }
+  },
+  "threshold": 0.534365177154541,
+  "promoted": false,
+  "source_was_post_hoc_inner": true
+}

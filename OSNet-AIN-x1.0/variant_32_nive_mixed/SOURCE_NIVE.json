@@ -1,0 +1,20 @@
+{
+  "name": "NiVe1303",
+  "version": 1,
+  "author": "Ruozheng LI",
+  "url": "https://data.mendeley.com/datasets/42wv2svztx/1",
+  "doi": "10.17632/42wv2svztx.1",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "verified_date": "2026-09-27",
+  "evidence": "Official Mendeley Data search-indexed page lists NiVe1303, Version 1, Ruozheng LI and Licence CC BY 4.0; direct page rendering may return only its shell.",
+  "short_license_excerpt": "Licence CC BY 4.0",
+  "source_confirmation": "Existing nive_pilot_v1 manifest records user-confirmed source; every image hash must match that manifest.",
+  "used_split": "train only",
+  "expected_train_images": 17070,
+  "expected_train_identities": 703,
+  "test_in_loss": false,
+  "masks_in_loss": false,
+  "sampling_group": "EN/ES/N/S prefix is only a view proxy, not verified physical camera",
+  "redistribution": "No dataset upload or push; retain attribution when distributing derived materials. This metadata is not the full license text."
+}

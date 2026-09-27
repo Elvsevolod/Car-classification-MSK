@@ -1,0 +1,22 @@
+{
+  "source_run": "OSNet-AIN-x1.0/variant_33_nive_low_aux/runs/low_aux_v1",
+  "source_manifest_sha256": "39c15d3dc547dd32c540300a078d11d19bd6c17aa30c7fa9c6995938adc107f5",
+  "source_results_sha256": "5474f7080284380a88400b5af052f971b7e1b5c4d1e3dd8a30c04723829e1697",
+  "models": {
+    "parent": {"arm": "N1_nive_mixed", "step": 0, "sha256": "53f870ea3240c091f9087c5c8db38d83831198a63ff50be2d8741d4e8ac5abd2"},
+    "N0": {"arm": "N0_target_extra", "step": 1600, "sha256": "2f834e1f4216677148ebc12a3a8cbd4ee7196bbeea800b19549f952cdd94316e"},
+    "N1": {"arm": "N1_nive_mixed", "step": 1800, "sha256": "42bce9b71e1fdcac8981a013670ed5cd3e60210799a818fe5a1ae70f12693a1b"}
+  },
+  "v25_run": "OSNet-AIN-x1.0/variant_25_map_search/runs/map_search_v1",
+  "v24_run": "OSNet-AIN-x1.0/variant_24_dual_role/runs/dual_role_v1",
+  "inner_expected_map": {"N0": 0.8462263070894022, "N1": 0.8481063716778001},
+  "batch_size": 16,
+  "chunk_size": 128,
+  "provider": "CPUExecutionProvider",
+  "vector_atol": 0.00002,
+  "optimizer_updates": 0,
+  "bn_updates": 0,
+  "threshold_fit": false,
+  "promoted": false,
+  "wall_time_limit": null
+}

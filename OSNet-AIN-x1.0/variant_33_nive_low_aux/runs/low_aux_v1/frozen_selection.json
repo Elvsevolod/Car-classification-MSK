@@ -1,0 +1,8 @@
+{
+  "signature": "77582e1b6f82b0e316cb41a36b60fb4e682fa78fbdd466e6f09be0c292883f40",
+  "steps": {
+    "N0_target_extra": "0",
+    "N1_nive_mixed": "0"
+  },
+  "criterion": "mean fixed graph mAP on three primary draws; ties prefer fewer updates"
+}

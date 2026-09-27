@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "images": 8,
+  "max_errors": {
+    "v25_cache": 0.0,
+    "v25_batch": 1.7881393432617188e-07,
+    "parent": 1.6391277313232422e-07,
+    "N0": 1.4156103134155273e-07,
+    "N1": 1.4901161193847656e-07
+  },
+  "scope": "fresh CPU feature/cache probe; not a full device benchmark"
+}

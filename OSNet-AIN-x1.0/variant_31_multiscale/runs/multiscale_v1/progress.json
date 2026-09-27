@@ -1,0 +1,45 @@
+{
+  "signature": "1f57ad99cfeccfaf0971541cb0ccd097c987879edc6b23846a550334656e1f26",
+  "events": [
+    {
+      "task": "calibration_V25_control",
+      "status": "complete",
+      "seconds": 0.292792540974915
+    },
+    {
+      "task": "features_calibration_320",
+      "status": "complete",
+      "seconds": 147.20488854206633
+    },
+    {
+      "task": "calibration_r1_s320_w25",
+      "status": "complete",
+      "seconds": 0.31498745805583894
+    },
+    {
+      "task": "calibration_r1_s320_w50",
+      "status": "complete",
+      "seconds": 0.3141299579292536
+    },
+    {
+      "task": "features_calibration_384",
+      "status": "complete",
+      "seconds": 201.53427270893008
+    },
+    {
+      "task": "calibration_r1_s384_w25",
+      "status": "complete",
+      "seconds": 0.3112400829559192
+    },
+    {
+      "task": "calibration_r1_s384_w50",
+      "status": "complete",
+      "seconds": 0.3088202918879688
+    },
+    {
+      "task": "validation_V25_control",
+      "status": "complete",
+      "seconds": 1.0139233749359846
+    }
+  ]
+}

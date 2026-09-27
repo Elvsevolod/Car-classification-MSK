@@ -48,3 +48,22 @@ OSNet-AIN-x1.0/variant_08_masked_hpo/weights/**/*.onnx
 OSNet-AIN-x1.0/variant_08_masked_hpo/results/cache/
 OSNet-AIN-x1.0/variant_08_masked_hpo/results/**/*.sqlite3*
 OSNet-AIN-x1.0/variant_08_masked_hpo/results/**/*.tmp
+
+# New experimental weights/caches stay local; release ONNX assets live in main.
+.env
+.env.*
+!.env.example
+.agents/
+skills-lock.json
+**/.lock
+**/.run.lock
+*.tmp
+*.pending.npy
+OSNet-AIN-x1.0/**/*.pt
+OSNet-AIN-x1.0/**/*.pth
+OSNet-AIN-x1.0/**/*.onnx
+OSNet-AIN-x1.0/**/*.npy
+OSNet-AIN-x1.0/**/*.npz
+OSNet-AIN-x1.0/**/*.sqlite3*
+# The running night queue is not a finished, reproducible result snapshot yet.
+OSNet-AIN-x1.0/variant_36_transreid_night/runs/night_v1/

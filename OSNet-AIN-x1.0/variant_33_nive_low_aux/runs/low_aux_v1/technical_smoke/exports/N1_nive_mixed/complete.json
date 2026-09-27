@@ -1,0 +1,22 @@
+{
+  "identity": {
+    "signature": "d346c222a971de8178373605f1a1654a2de4c5508f4b94098cc84ed403cc6100",
+    "checkpoint": {
+      "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_33_nive_low_aux/runs/low_aux_v1/technical_smoke/training/N1_nive_mixed/step_00003.pt",
+      "sha256": "69ccc4de05652e7699da7152e1eb0e0cf117142a5b24e99154247090d773bf30"
+    }
+  },
+  "dimension": 512,
+  "input_size": 256,
+  "heads_exported": false,
+  "preprocessing": "same organizer bbox, RGB, bilinear256, ImageNet normalization, L2",
+  "max_onnx_error": 6.407499313354492e-07,
+  "max_batch_error": 1.564621925354004e-07,
+  "threshold": null,
+  "promoted": false,
+  "GPU_verified": false,
+  "files": {
+    "encoder.pt": "fa189aca3dd17339ed847e23fb091fda1856ef42e15e18df85154b4fdc5d1c61",
+    "encoder.onnx": "dc8fc594cf85218987ce659b8350613b50b58f7dfee7783609d3cf24998b1523"
+  }
+}

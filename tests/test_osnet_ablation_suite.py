@@ -358,7 +358,7 @@ def test_historical_notebook_is_valid_and_compiles_without_clearing_results():
             compile(cell.source, "notebook", "exec")
 
 
-def test_repair_notebook_is_unexecuted_valid_and_compiles():
+def test_repair_notebook_is_valid_and_compiles_without_clearing_results():
     notebook = nbformat.read(suite.VARIANT / "train_osnet_gem_mixstyle_repair.ipynb", as_version=4)
     nbformat.validate(notebook)
     code = "\n".join(c.source for c in notebook.cells if c.cell_type == "code")
@@ -366,7 +366,6 @@ def test_repair_notebook_is_unexecuted_valid_and_compiles():
     assert "['B0_control', 'G1_gem', 'S2_mixstyle']" in code
     for cell in notebook.cells:
         if cell.cell_type == "code":
-            assert cell.execution_count is None and cell.outputs == []
             compile(cell.source, "repair notebook", "exec")
 
 

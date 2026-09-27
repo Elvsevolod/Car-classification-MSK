@@ -1,0 +1,137 @@
+{
+  "schema": "nive-system-v34",
+  "encoders": {
+    "parent": {
+      "path": "encoders/parent/exports/N1_nive_mixed/encoder.onnx",
+      "sha256": "2f23faae23b4e86d9be1361cdbb4724c92f4e0599c5e749484e8155610f1be74",
+      "source": {
+        "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_33_nive_low_aux/runs/low_aux_v1/training/N1_nive_mixed/step_00000.pt",
+        "sha256": "53f870ea3240c091f9087c5c8db38d83831198a63ff50be2d8741d4e8ac5abd2",
+        "arm": "N1_nive_mixed",
+        "step": 0
+      },
+      "parity": {
+        "max_onnx_error": 6.407499313354492e-07,
+        "max_batch_error": 1.341104507446289e-07
+      }
+    },
+    "N0": {
+      "path": "encoders/N0/exports/N0_target_extra/encoder.onnx",
+      "sha256": "34208f25036ab311f6772c282a927534dfaff8de3e9806b5066a793d2bc75962",
+      "source": {
+        "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_33_nive_low_aux/runs/low_aux_v1/training/N0_target_extra/step_01600.pt",
+        "sha256": "2f834e1f4216677148ebc12a3a8cbd4ee7196bbeea800b19549f952cdd94316e",
+        "arm": "N0_target_extra",
+        "step": 1600
+      },
+      "parity": {
+        "max_onnx_error": 6.817281246185303e-07,
+        "max_batch_error": 2.4959444999694824e-07
+      }
+    },
+    "N1": {
+      "path": "encoders/N1/exports/N1_nive_mixed/encoder.onnx",
+      "sha256": "75ad351d9ff41f909bd789762d3b1788f7df0a166e5987c8adb4d29f731a957b",
+      "source": {
+        "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_33_nive_low_aux/runs/low_aux_v1/training/N1_nive_mixed/step_01800.pt",
+        "sha256": "42bce9b71e1fdcac8981a013670ed5cd3e60210799a818fe5a1ae70f12693a1b",
+        "arm": "N1_nive_mixed",
+        "step": 1800
+      },
+      "parity": {
+        "max_onnx_error": 7.469207048416138e-07,
+        "max_batch_error": 1.7881393432617188e-07
+      }
+    }
+  },
+  "systems": {
+    "V25_control": {
+      "member": null,
+      "graph": "legacy",
+      "weights": [
+        0.5,
+        0.5
+      ]
+    },
+    "R1_N0_pair": {
+      "member": "N0",
+      "graph": "less_graph",
+      "weights": [
+        0.5,
+        0.5
+      ]
+    },
+    "R1_N1_pair": {
+      "member": "N1",
+      "graph": "less_graph",
+      "weights": [
+        0.5,
+        0.5
+      ]
+    },
+    "MVP_R1_N0": {
+      "member": "N0",
+      "graph": "legacy",
+      "weights": [
+        0.5,
+        0.25,
+        0.25
+      ]
+    },
+    "MVP_R1_N1": {
+      "member": "N1",
+      "graph": "legacy",
+      "weights": [
+        0.5,
+        0.25,
+        0.25
+      ]
+    }
+  },
+  "layout": {
+    "v25_mvp": [
+      0,
+      512
+    ],
+    "v25_candidates": [
+      512,
+      2048
+    ],
+    "parent": [
+      2048,
+      2560
+    ],
+    "member": [
+      2560,
+      3072
+    ],
+    "normalization": "unit blocks; real feature bank, not a single ranking cosine"
+  },
+  "preprocessing": {
+    "image_size": 256,
+    "resize_mode": "square",
+    "interpolation": "bilinear",
+    "decode": "EXIF-oriented RGB",
+    "crop": "organizer xywh before resize",
+    "mean": [
+      0.48500001430511475,
+      0.4560000002384186,
+      0.4059999883174896
+    ],
+    "std": [
+      0.2290000021457672,
+      0.2240000069141388,
+      0.22499999403953552
+    ],
+    "scale": 255,
+    "layout": "NCHW",
+    "l2_normalized": true,
+    "flip_tta": false
+  },
+  "v25_profile": {
+    "path": "../../../variant_24_dual_role/runs/dual_role_v1/dual_role_profile.json",
+    "sha256": "7b9c701fc3a8d3ae14262ef1cc24e0926d136ea146a54e810831d570981867a9"
+  },
+  "threshold": 0.534365177154541,
+  "promoted": false
+}

@@ -1,0 +1,4971 @@
+{
+  "system": "MVP_R1_N0",
+  "split": "calibration",
+  "threshold": 0.534365177154541,
+  "ranking": {
+    "n_scored": 246,
+    "n_openset_excluded": 61,
+    "mAP@10": 0.8104381824997388,
+    "Rank-1": 0.8292682926829268,
+    "Rank-5": 0.8943089430894309
+  },
+  "candidates": {
+    "TP": 181,
+    "FP": 39,
+    "FN": 44,
+    "TN": 43,
+    "n_openset_queries": 61,
+    "Precision": 0.8227272727272728,
+    "Recall": 0.8044444444444444,
+    "F1": 0.8134831460674156,
+    "TNR": 0.7049180327868853,
+    "PR-AUC": 0.9190438844563414,
+    "C": 0.7809136120832565,
+    "open_set_FP": 18
+  },
+  "per_query": {
+    "b71ed5cf13ec4377b4d29c2e8436eb24": {
+      "vehicle_id": 888,
+      "known": false,
+      "confidence": 0.5271669030189514,
+      "raw": {
+        "top1": "5df3d4a7246a482d8f06d055be673867",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "5df3d4a7246a482d8f06d055be673867",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "831fe0568c854a8eacfdfef22f965b11": {
+      "vehicle_id": 706,
+      "known": false,
+      "confidence": 0.3951007127761841,
+      "raw": {
+        "top1": "bdef5e989b8d4b868ce06b51ce8ac81b",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "bdef5e989b8d4b868ce06b51ce8ac81b",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "9146e641dfd147788ad5120854287b66": {
+      "vehicle_id": 245,
+      "known": false,
+      "confidence": 0.7535490989685059,
+      "raw": {
+        "top1": "59af67f063764c159d86f3464d5767b1",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "59af67f063764c159d86f3464d5767b1",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "81a3f6e40f7c45c8b6937f4ccc5c4b73": {
+      "vehicle_id": 1137,
+      "known": false,
+      "confidence": 0.4138660430908203,
+      "raw": {
+        "top1": "e9d64e9e9b19498c93aaf7ca5146eeb8",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "e9d64e9e9b19498c93aaf7ca5146eeb8",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "dbdce53e3585409bbb0115362d235add": {
+      "vehicle_id": 929,
+      "known": false,
+      "confidence": 0.46834295988082886,
+      "raw": {
+        "top1": "615676b020a64fd0bf8ed64fcc79c6c4",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "bd8d1edfd6c04f84831180e657980156",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "9a1e0afd4b314f339210629babd2ef3a": {
+      "vehicle_id": 684,
+      "known": false,
+      "confidence": 0.3750748336315155,
+      "raw": {
+        "top1": "0f2ae5db4ee6476fbb0e1a8a9b90caef",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "0f2ae5db4ee6476fbb0e1a8a9b90caef",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "b7c6cb79bf6048ae8e25ab4c3e8cdb3a": {
+      "vehicle_id": 1126,
+      "known": false,
+      "confidence": 0.5125110745429993,
+      "raw": {
+        "top1": "52a9f3a17dca4d5a897410224c777892",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "52a9f3a17dca4d5a897410224c777892",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "78bea851fbce4dd3953341f1ffd9eb9e": {
+      "vehicle_id": 1506,
+      "known": false,
+      "confidence": 0.48532670736312866,
+      "raw": {
+        "top1": "595c70af27fc432ba1fdedb81adc5c3a",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "595c70af27fc432ba1fdedb81adc5c3a",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "041100eb8d584ec19caad0decd6e9a16": {
+      "vehicle_id": 641,
+      "known": false,
+      "confidence": 0.4686170816421509,
+      "raw": {
+        "top1": "99c4b99e6e704e63aca525cf56328480",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "220b410d8f4b4cf18e0d2d791f988c3f",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "6d0e23b271a9450ba7de768c6ac7fcfe": {
+      "vehicle_id": 944,
+      "known": false,
+      "confidence": 0.6041277050971985,
+      "raw": {
+        "top1": "3010b10322014c1ba826b2197cc316a1",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "3010b10322014c1ba826b2197cc316a1",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "404dfd7a69164636823ba07fe10cad43": {
+      "vehicle_id": 1160,
+      "known": false,
+      "confidence": 0.3714428246021271,
+      "raw": {
+        "top1": "833fd05701f74898afef1c31c2bae668",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "833fd05701f74898afef1c31c2bae668",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "54ad976b0d6c4cacb8206bc64f3647d6": {
+      "vehicle_id": 617,
+      "known": false,
+      "confidence": 0.6377961039543152,
+      "raw": {
+        "top1": "932f170e51c740a5a5d37bc9c255ba9c",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "932f170e51c740a5a5d37bc9c255ba9c",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "6c30bfc2917742918b35c7b62465bdbc": {
+      "vehicle_id": 440,
+      "known": false,
+      "confidence": 0.5343095064163208,
+      "raw": {
+        "top1": "410056de626e42b884a63b3779cc8b32",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "8d8621dcd43740ff8eafec9b7e4e3a90",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "0ee751f5106747009c997a46919f2367": {
+      "vehicle_id": 991,
+      "known": false,
+      "confidence": 0.5761951208114624,
+      "raw": {
+        "top1": "a2f9cdee3f7640f29cef4defc6814dfb",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "ba328a988df1403794cb7e8063233a08",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "8c6f3984b50b449e949a7e5eef16ba67": {
+      "vehicle_id": 1166,
+      "known": false,
+      "confidence": 0.5403184294700623,
+      "raw": {
+        "top1": "7952fdfd854a438fba2a0ab8fd1f6138",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "ed3e2a1728564602bed75eb828f42984",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "507843ed09754f6da00da29e990b24d7": {
+      "vehicle_id": 957,
+      "known": false,
+      "confidence": 0.364797443151474,
+      "raw": {
+        "top1": "798395e7db2d4eecaef4610acf8c3a62",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "7c0137938d5a4d51b35713fd16c5cf18",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "e1215c71fda140c1a98023528cc96870": {
+      "vehicle_id": 1109,
+      "known": false,
+      "confidence": 0.44299113750457764,
+      "raw": {
+        "top1": "c49df913cb1c4b24b6a7c3d90ebfd915",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "379936672c0d4a0393be6bf0cebbfae6",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "4ef2848605e8460fac202a3ff3a7eac0": {
+      "vehicle_id": 1420,
+      "known": false,
+      "confidence": 0.4552854001522064,
+      "raw": {
+        "top1": "b4275445a0654734a0f49074e9c02cd8",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "b4275445a0654734a0f49074e9c02cd8",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "15c23300bb7b49d1b3e444e67f239721": {
+      "vehicle_id": 198,
+      "known": false,
+      "confidence": 0.47124335169792175,
+      "raw": {
+        "top1": "0319a833ee26436a8ab428497abaac60",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "0319a833ee26436a8ab428497abaac60",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "d356962e487547a193f2939fb910b202": {
+      "vehicle_id": 1249,
+      "known": false,
+      "confidence": 0.32071033120155334,
+      "raw": {
+        "top1": "03a5c3e214b844eea8c2549f7a58f6bc",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "c917db5fe3464803aa84f92c8a75c19b",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "a6298c823fdd4a9cbcfb5338d7c971b3": {
+      "vehicle_id": 473,
+      "known": false,
+      "confidence": 0.7403191924095154,
+      "raw": {
+        "top1": "14acb3e28cdc4388a1a26121588ed27c",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "14acb3e28cdc4388a1a26121588ed27c",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "ce279fa7df4c470eba776f47847bc2e4": {
+      "vehicle_id": 973,
+      "known": false,
+      "confidence": 0.6508412957191467,
+      "raw": {
+        "top1": "961c5f38ca9b4de88a8f9629c5df27ee",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "da9dd373193944148bd440d5014b9552",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "6aef8655a75144bc90b08a107e4fe6a6": {
+      "vehicle_id": 306,
+      "known": false,
+      "confidence": 0.646199107170105,
+      "raw": {
+        "top1": "b0d43e2fd63148929cf050bde5db6470",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "bdef5e989b8d4b868ce06b51ce8ac81b",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "4dd03d16715a49d98fce909b629115fe": {
+      "vehicle_id": 73,
+      "known": false,
+      "confidence": 0.4838853180408478,
+      "raw": {
+        "top1": "1b1469d98377499fbdb5fe34709da9ca",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "1b1469d98377499fbdb5fe34709da9ca",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "3cdf56affc0a492b9f891bec52525ccd": {
+      "vehicle_id": 559,
+      "known": false,
+      "confidence": 0.604185938835144,
+      "raw": {
+        "top1": "58a8bdeb687a470fb02413e864c83de4",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "58a8bdeb687a470fb02413e864c83de4",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "9aed07ab8e1d4d8394f656466f85386a": {
+      "vehicle_id": 783,
+      "known": false,
+      "confidence": 0.7290881276130676,
+      "raw": {
+        "top1": "35180a4e2d8f4e38b4da76e4f3bdfd3f",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "35180a4e2d8f4e38b4da76e4f3bdfd3f",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "c98afaf8b06e437fb127f5743845e5e5": {
+      "vehicle_id": 680,
+      "known": false,
+      "confidence": 0.30547434091567993,
+      "raw": {
+        "top1": "58081382ae754a62b8315e602ed14779",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "58081382ae754a62b8315e602ed14779",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "57745068fda341bbb6cc8bd21bcf26c6": {
+      "vehicle_id": 1046,
+      "known": false,
+      "confidence": 0.3491991460323334,
+      "raw": {
+        "top1": "4d9832d64c20483a9b34f85add0bb031",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "4d9832d64c20483a9b34f85add0bb031",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "856a3fa4b1de48aca952bf70db8b03fb": {
+      "vehicle_id": 1338,
+      "known": false,
+      "confidence": 0.400694876909256,
+      "raw": {
+        "top1": "796f2c4a8e8f404991bbedcba3b90a35",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "796f2c4a8e8f404991bbedcba3b90a35",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "34c2df1001964bb8b48fe6442d67e300": {
+      "vehicle_id": 355,
+      "known": false,
+      "confidence": 0.41974419355392456,
+      "raw": {
+        "top1": "519a8b6ee8aa4ef2b70a190e516258b6",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "519a8b6ee8aa4ef2b70a190e516258b6",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "76c40e4ef37144b08d10d12fd96bcfd2": {
+      "vehicle_id": 427,
+      "known": false,
+      "confidence": 0.5908150672912598,
+      "raw": {
+        "top1": "6ac6b312bba6439b8d169fa0a5f147e4",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "6ac6b312bba6439b8d169fa0a5f147e4",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "5835acc3505745ef9d594ea72fe7da1f": {
+      "vehicle_id": 1091,
+      "known": false,
+      "confidence": 0.42005065083503723,
+      "raw": {
+        "top1": "ce21f3627bf34462a9734cc8ddd64935",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "0319a833ee26436a8ab428497abaac60",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "c791a4b1054f44ca9243dd66c9eabc5f": {
+      "vehicle_id": 995,
+      "known": false,
+      "confidence": 0.6892666220664978,
+      "raw": {
+        "top1": "d28dcdb66adc48f196b827406776aebd",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "d28dcdb66adc48f196b827406776aebd",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "186405d817e44d62a3ccdddd0cea3f56": {
+      "vehicle_id": 398,
+      "known": false,
+      "confidence": 0.5031359791755676,
+      "raw": {
+        "top1": "d5959c842705431f9d2c631348fd6f0c",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "d5959c842705431f9d2c631348fd6f0c",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "a62d99d7ae51444b87eb078ac3b1b298": {
+      "vehicle_id": 922,
+      "known": false,
+      "confidence": 0.49000227451324463,
+      "raw": {
+        "top1": "88b9875d15dd4152a2531e18b507ffd7",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "debbb8329fea47fc838c9858a3ab1b7a",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "8de5377423e8416092c5c02f5bc5fe27": {
+      "vehicle_id": 1054,
+      "known": false,
+      "confidence": 0.3982742726802826,
+      "raw": {
+        "top1": "25d77b9ca16c4a238667fb20b92ab427",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "25d77b9ca16c4a238667fb20b92ab427",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "98a5070b9e5545eba630dd16f25c365d": {
+      "vehicle_id": 1300,
+      "known": false,
+      "confidence": 0.4362981915473938,
+      "raw": {
+        "top1": "88318ab2d0884b409faef7fc18934355",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "ac136177d5824e2380721c4ceafd8a2a",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "eda6b6d3f66a48789866ef2757c500da": {
+      "vehicle_id": 1250,
+      "known": false,
+      "confidence": 0.46036767959594727,
+      "raw": {
+        "top1": "6cfeffba5a3e482da716d4ecba1f5c56",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "6cfeffba5a3e482da716d4ecba1f5c56",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "5cd207433c594270a775359c342cfe6d": {
+      "vehicle_id": 7,
+      "known": false,
+      "confidence": 0.40319108963012695,
+      "raw": {
+        "top1": "a6daf81e034241f480b229768a3c8a5c",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "a0f1fdefb6e24b81a79a365d8214b711",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "784b85da77984d3288f33380462144c6": {
+      "vehicle_id": 1251,
+      "known": false,
+      "confidence": 0.41234761476516724,
+      "raw": {
+        "top1": "c36b27be24774d46b2b5e9fd39ed19f2",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "16f8a03513bf4494949341a3904866e0",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "0d1dd7abe90c4bd79a98713cc7b15350": {
+      "vehicle_id": 541,
+      "known": false,
+      "confidence": 0.3172699511051178,
+      "raw": {
+        "top1": "93cafa7a655748d9af153f04f3660a98",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "93cafa7a655748d9af153f04f3660a98",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "4512f4c9b4fe404db8a932efb6195c12": {
+      "vehicle_id": 1460,
+      "known": false,
+      "confidence": 0.3156086206436157,
+      "raw": {
+        "top1": "d28dcdb66adc48f196b827406776aebd",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "1194e05ccd15414bae793d4e88bc95bd",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "331a99f0323d484bb4a7e5d74cfd4774": {
+      "vehicle_id": 772,
+      "known": false,
+      "confidence": 0.6730706691741943,
+      "raw": {
+        "top1": "c841c802c04d41d49b16d775806adb29",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "c841c802c04d41d49b16d775806adb29",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "8a7f112bd19c4b42bf192907bd69a553": {
+      "vehicle_id": 1019,
+      "known": false,
+      "confidence": 0.5283359885215759,
+      "raw": {
+        "top1": "d48c3e5a9fa84229ae50ac91920596b9",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "d48c3e5a9fa84229ae50ac91920596b9",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "c1df5dce1fa946b68188af887a2244e0": {
+      "vehicle_id": 1020,
+      "known": false,
+      "confidence": 0.5115212798118591,
+      "raw": {
+        "top1": "ba328a988df1403794cb7e8063233a08",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "ba328a988df1403794cb7e8063233a08",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "5f0ad3cb7c2d49f082bdd4d9678e84de": {
+      "vehicle_id": 50,
+      "known": false,
+      "confidence": 0.40453824400901794,
+      "raw": {
+        "top1": "16f8a03513bf4494949341a3904866e0",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "16f8a03513bf4494949341a3904866e0",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "5ef9741867d6437bad5d525ba3105e89": {
+      "vehicle_id": 1520,
+      "known": false,
+      "confidence": 0.6536774635314941,
+      "raw": {
+        "top1": "b1063a3ba698493ebabf38471ccb741f",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "f49a5e3d176a41dcaec3ca6c16fb2aaa",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "c0a35bfb48c544bbac3d0adaf8e43264": {
+      "vehicle_id": 94,
+      "known": false,
+      "confidence": 0.655602216720581,
+      "raw": {
+        "top1": "598f359622514e5f8b69f29a05d36737",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "598f359622514e5f8b69f29a05d36737",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "b1624a6e9dca47c5b1cf52678271be32": {
+      "vehicle_id": 602,
+      "known": false,
+      "confidence": 0.337873637676239,
+      "raw": {
+        "top1": "c841c802c04d41d49b16d775806adb29",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "b611c87cf9ac4c2cb10f66bf3d317ba3",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "dfc3d826306b465a881de834908b167d": {
+      "vehicle_id": 518,
+      "known": false,
+      "confidence": 0.6995906829833984,
+      "raw": {
+        "top1": "58a8bdeb687a470fb02413e864c83de4",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "58a8bdeb687a470fb02413e864c83de4",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "59520dce675a46ffa8e6269448a1b77e": {
+      "vehicle_id": 1006,
+      "known": false,
+      "confidence": 0.37843212485313416,
+      "raw": {
+        "top1": "a83ec961846941be88351f9a27b95a01",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "10af960714cf40a08bd1727807d15ffe",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "6d0ab45526ae46ee96bf7c844df6de71": {
+      "vehicle_id": 388,
+      "known": false,
+      "confidence": 0.4783969521522522,
+      "raw": {
+        "top1": "c62011c694af4d06851a74e4210ecf52",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "08aebb98964a453293af497e8f77e898",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "45b0cefc0e3c4b10b441e7204b0fa00d": {
+      "vehicle_id": 1391,
+      "known": false,
+      "confidence": 0.6367859244346619,
+      "raw": {
+        "top1": "a9d4cf41d0d04118b29824cd994c710a",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "a9d4cf41d0d04118b29824cd994c710a",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "001b9e0a069f4d99997864a9b4d54c21": {
+      "vehicle_id": 1393,
+      "known": false,
+      "confidence": 0.41844552755355835,
+      "raw": {
+        "top1": "9385ede3c22144edbdf01c676d553ad9",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "ad626768b96f4593899a6617466d5ff7",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "7d120d655d3146c2859cbceaa99ccc40": {
+      "vehicle_id": 623,
+      "known": false,
+      "confidence": 0.5002692341804504,
+      "raw": {
+        "top1": "2192a9b28b83477e899428a6d23c3e0d",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "2192a9b28b83477e899428a6d23c3e0d",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "ed140f9599f74ecbb0478fa168d227cf": {
+      "vehicle_id": 371,
+      "known": false,
+      "confidence": 0.7004704475402832,
+      "raw": {
+        "top1": "cc7d64f9b2e04c669dd1fc259a8f929d",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "cc7d64f9b2e04c669dd1fc259a8f929d",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "ed916d6bf0584b4f9d6520e149fdbb5a": {
+      "vehicle_id": 774,
+      "known": false,
+      "confidence": 0.4314742088317871,
+      "raw": {
+        "top1": "c4555074dbeb45d899fc59f0137194f9",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "c4555074dbeb45d899fc59f0137194f9",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "5c03ef49e55c439abe1bc09cc5fa2493": {
+      "vehicle_id": 189,
+      "known": false,
+      "confidence": 0.4057239890098572,
+      "raw": {
+        "top1": "6ac6b312bba6439b8d169fa0a5f147e4",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "2977c87360b24866b60d4ea57cec7fc6",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "3d37812f45754ac8ba8bd0683fb87f91": {
+      "vehicle_id": 1527,
+      "known": false,
+      "confidence": 0.4089207053184509,
+      "raw": {
+        "top1": "c0bc2ed435a042cea7b6ffb238b55bda",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "88a38730b10b4cce867a4500e6284160",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "00dd09939f9d44de901760c49e0b5094": {
+      "vehicle_id": 956,
+      "known": false,
+      "confidence": 0.4999844431877136,
+      "raw": {
+        "top1": "355f48fac959433bbdafb603f460efb7",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "a13a9a740fe24d8fbc43dccbcc9aa6fd",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "4878b8b7acb44524955f91c1dbd11639": {
+      "vehicle_id": 639,
+      "known": false,
+      "confidence": 0.38098058104515076,
+      "raw": {
+        "top1": "9b81ed3fa8d7439489fc52dd46beee74",
+        "correct": false,
+        "ap": null
+      },
+      "ranking": {
+        "top1": "615676b020a64fd0bf8ed64fcc79c6c4",
+        "correct": false,
+        "ap": null
+      },
+      "confidence_group": "unknown"
+    },
+    "0bcaf16f8da94abc873cf16e3d904a2b": {
+      "vehicle_id": 900,
+      "known": true,
+      "confidence": 0.6866366267204285,
+      "raw": {
+        "top1": "395c22db326348d591aa1eadc960a91c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "395c22db326348d591aa1eadc960a91c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "89dd6a52ebe34d2f83dffec9740acd83": {
+      "vehicle_id": 1218,
+      "known": true,
+      "confidence": 0.6029418706893921,
+      "raw": {
+        "top1": "806f482c346c449cab5ab4e8cb68514b",
+        "correct": false,
+        "ap": 0.4777777777777777
+      },
+      "ranking": {
+        "top1": "806f482c346c449cab5ab4e8cb68514b",
+        "correct": false,
+        "ap": 0.3833333333333333
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "908831cb83d443359fc90b2a5ef72450": {
+      "vehicle_id": 88,
+      "known": true,
+      "confidence": 0.6767463088035583,
+      "raw": {
+        "top1": "08b8ddc46d234318907c0b62545efa4e",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "a1f6f6456f45452dbeed62bcc46e2cc3",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "e0045857cfd64795bea014e575aa15b6": {
+      "vehicle_id": 791,
+      "known": true,
+      "confidence": 0.7751274704933167,
+      "raw": {
+        "top1": "0b741dcbeb564891a80ce18d0144a3e4",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "0b741dcbeb564891a80ce18d0144a3e4",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "c5e251f7ea2c410891e47b4fdffa44bd": {
+      "vehicle_id": 305,
+      "known": true,
+      "confidence": 0.39521124958992004,
+      "raw": {
+        "top1": "4b762d66cba2402e8d0d6a4450399e26",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "de0ae8ae65314226a8f71153b2c5bfd4",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "7a472479fb2d44149518c47494068441": {
+      "vehicle_id": 424,
+      "known": true,
+      "confidence": 0.6188861131668091,
+      "raw": {
+        "top1": "e0b8227c5a6e447583af27b8e16e5285",
+        "correct": true,
+        "ap": 0.6088888888888888
+      },
+      "ranking": {
+        "top1": "e0b8227c5a6e447583af27b8e16e5285",
+        "correct": true,
+        "ap": 0.6
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "9566fa2e6c2b404e8a4301424d8e333e": {
+      "vehicle_id": 485,
+      "known": true,
+      "confidence": 0.6874679327011108,
+      "raw": {
+        "top1": "da9dd373193944148bd440d5014b9552",
+        "correct": false,
+        "ap": 0.5333333333333333
+      },
+      "ranking": {
+        "top1": "da9dd373193944148bd440d5014b9552",
+        "correct": false,
+        "ap": 0.3206349206349206
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "b6701fb8fc684c099c6a8c8a00c6257d": {
+      "vehicle_id": 1072,
+      "known": true,
+      "confidence": 0.7841996550559998,
+      "raw": {
+        "top1": "b4275445a0654734a0f49074e9c02cd8",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "b4275445a0654734a0f49074e9c02cd8",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "48ee0f4e4aa04ee8b1d3b9b9ce1bb1a1": {
+      "vehicle_id": 653,
+      "known": true,
+      "confidence": 0.6309009194374084,
+      "raw": {
+        "top1": "c872abb4f8784dd49c59eb52dc838415",
+        "correct": true,
+        "ap": 0.7
+      },
+      "ranking": {
+        "top1": "c872abb4f8784dd49c59eb52dc838415",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "fb00f38eb97347ea8806cbb189c41f2b": {
+      "vehicle_id": 1502,
+      "known": true,
+      "confidence": 0.7113514542579651,
+      "raw": {
+        "top1": "93ac53b4b1d44c11ba7a3d5195d23cda",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "5dacf6a02e674434bc8014c466b8601d",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "8e0ac84867c1483991df4a9989a7d7f6": {
+      "vehicle_id": 89,
+      "known": true,
+      "confidence": 0.848443865776062,
+      "raw": {
+        "top1": "96b88d47262a4c3f9974e4c2df012c06",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "96b88d47262a4c3f9974e4c2df012c06",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "b739d87f09a94745a8cbfe9e1bc9b5bb": {
+      "vehicle_id": 586,
+      "known": true,
+      "confidence": 0.6287731528282166,
+      "raw": {
+        "top1": "4e9127cb6e074d4ea6ec86bea316515e",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "4e9127cb6e074d4ea6ec86bea316515e",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "df96c52af8ad4698bd245a617492444b": {
+      "vehicle_id": 940,
+      "known": true,
+      "confidence": 0.878449022769928,
+      "raw": {
+        "top1": "556b0cf62f26426fb3ac97366071dee6",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "556b0cf62f26426fb3ac97366071dee6",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "620f0d06a77645a9bd3fa2a702ce8311": {
+      "vehicle_id": 481,
+      "known": true,
+      "confidence": 0.45148560404777527,
+      "raw": {
+        "top1": "efefc02efc8b42a389781b22b17e2bf0",
+        "correct": false,
+        "ap": 0.0
+      },
+      "ranking": {
+        "top1": "fab03518a94c4d3a86e5130f2757051d",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "476f60f067e9441aba12c5abb7d3ce7a": {
+      "vehicle_id": 710,
+      "known": true,
+      "confidence": 0.527496874332428,
+      "raw": {
+        "top1": "5687f98fb85d48499e16db784fb3ec60",
+        "correct": true,
+        "ap": 0.7037037037037037
+      },
+      "ranking": {
+        "top1": "5687f98fb85d48499e16db784fb3ec60",
+        "correct": true,
+        "ap": 0.9761904761904763
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "69fa39f52c894a15b3b29567ad41e35b": {
+      "vehicle_id": 453,
+      "known": true,
+      "confidence": 0.48359817266464233,
+      "raw": {
+        "top1": "1b1469d98377499fbdb5fe34709da9ca",
+        "correct": false,
+        "ap": 0.047619047619047616
+      },
+      "ranking": {
+        "top1": "fb13feb0cc1d4bb7b851618fa251e5dc",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "66a3713872ce419badf41c1c3129da77": {
+      "vehicle_id": 377,
+      "known": true,
+      "confidence": 0.6828134655952454,
+      "raw": {
+        "top1": "ab0c8da3b9e74bd29db82eb8d9c34913",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "ab0c8da3b9e74bd29db82eb8d9c34913",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "7d1d88b9a1634586aa323be47d410722": {
+      "vehicle_id": 274,
+      "known": true,
+      "confidence": 0.5217525362968445,
+      "raw": {
+        "top1": "c7858141bb5c488bb255612e4871de5e",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "c7858141bb5c488bb255612e4871de5e",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "b8a30a520bed491bb3147208519ae8f6": {
+      "vehicle_id": 928,
+      "known": true,
+      "confidence": 0.6804121136665344,
+      "raw": {
+        "top1": "4234d7c91f814372a8da8633f9ed7ba7",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "4234d7c91f814372a8da8633f9ed7ba7",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "f863e3ff648b40a9a93703fdd05f1a12": {
+      "vehicle_id": 1226,
+      "known": true,
+      "confidence": 0.5177991390228271,
+      "raw": {
+        "top1": "3f53002b52634d3084744b833ddaa2d5",
+        "correct": true,
+        "ap": 0.7916666666666666
+      },
+      "ranking": {
+        "top1": "3f53002b52634d3084744b833ddaa2d5",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "776100bf31f14b55a13c918b391407e6": {
+      "vehicle_id": 1348,
+      "known": true,
+      "confidence": 0.6217162609100342,
+      "raw": {
+        "top1": "0a41603e707f40eca4c97f63b590cf44",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "0a41603e707f40eca4c97f63b590cf44",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "849d281dc9aa4143a6d33f7153ada812": {
+      "vehicle_id": 823,
+      "known": true,
+      "confidence": 0.4219418168067932,
+      "raw": {
+        "top1": "7dd00ab2aba942c0b100cf4f81f32408",
+        "correct": true,
+        "ap": 0.2
+      },
+      "ranking": {
+        "top1": "7dd00ab2aba942c0b100cf4f81f32408",
+        "correct": true,
+        "ap": 0.2
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "4b4c7196cb834f84bc5eef0e5a05dbbc": {
+      "vehicle_id": 937,
+      "known": true,
+      "confidence": 0.8312356472015381,
+      "raw": {
+        "top1": "44cdc5d829ad4d9c963cb3dfd6d462e9",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "44cdc5d829ad4d9c963cb3dfd6d462e9",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "59af1fc20f7647ad98eee4319ae04751": {
+      "vehicle_id": 837,
+      "known": true,
+      "confidence": 0.7872546315193176,
+      "raw": {
+        "top1": "f9424cc6abb64aca910cd8476b13fc2f",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "f9424cc6abb64aca910cd8476b13fc2f",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "41a228efcd27438584b746515520bf9f": {
+      "vehicle_id": 112,
+      "known": true,
+      "confidence": 0.5630704164505005,
+      "raw": {
+        "top1": "99ca18be71514f2f8c8f61cefb31acd2",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "99ca18be71514f2f8c8f61cefb31acd2",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "f4f91d202dfe4b5f91ee0a5f926381dd": {
+      "vehicle_id": 1432,
+      "known": true,
+      "confidence": 0.5817886590957642,
+      "raw": {
+        "top1": "952f4c3c091e4e08bbc484b1de88a8a6",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "a678110966a6439388a2af4b1a05a0a3",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "c091a9ae9838436f9607d46e0c5d6749": {
+      "vehicle_id": 509,
+      "known": true,
+      "confidence": 0.39129939675331116,
+      "raw": {
+        "top1": "db0befeb3dcc42b7b1d5088c060a3118",
+        "correct": true,
+        "ap": 0.6666666666666666
+      },
+      "ranking": {
+        "top1": "c6973c93517b4e75b251c50319dcf284",
+        "correct": false,
+        "ap": 0.03333333333333333
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "09f6e043bdad41de8b79a4208571409a": {
+      "vehicle_id": 864,
+      "known": true,
+      "confidence": 0.6483639478683472,
+      "raw": {
+        "top1": "ca092d1c53684cf496addaff9d781e07",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "64f7aee2fc3e49f5a1259847e2379a36",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "85a89d63081346c9a838dda6b3c98cfd": {
+      "vehicle_id": 122,
+      "known": true,
+      "confidence": 0.6368956565856934,
+      "raw": {
+        "top1": "61056aba884a4530b074d39d46b46dec",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "d5110abe882f4001a5c092f614b19e33",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "210551ab3d604fd6a1c0f9cf2aaf49df": {
+      "vehicle_id": 1499,
+      "known": true,
+      "confidence": 0.6692224740982056,
+      "raw": {
+        "top1": "5186173b48364d628c2cd650e2b34ea8",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "5186173b48364d628c2cd650e2b34ea8",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "bd4fb09df0b74560a1ed8ca5b1890b35": {
+      "vehicle_id": 737,
+      "known": true,
+      "confidence": 0.6246157288551331,
+      "raw": {
+        "top1": "f4d283460bd8449f857c0a87fef6387a",
+        "correct": true,
+        "ap": 0.9666666666666666
+      },
+      "ranking": {
+        "top1": "f4d283460bd8449f857c0a87fef6387a",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "f4b92c65377746aebc3e39a9d22ff9c8": {
+      "vehicle_id": 801,
+      "known": true,
+      "confidence": 0.6098711490631104,
+      "raw": {
+        "top1": "23d871d6e63f48bc995893a9be40360b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "23d871d6e63f48bc995893a9be40360b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "c132480a2dab4f28a93d1f49c0c61435": {
+      "vehicle_id": 832,
+      "known": true,
+      "confidence": 0.7770863175392151,
+      "raw": {
+        "top1": "3010b10322014c1ba826b2197cc316a1",
+        "correct": true,
+        "ap": 0.8095238095238094
+      },
+      "ranking": {
+        "top1": "3010b10322014c1ba826b2197cc316a1",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "a45d13d980c342a8b5207bd39908f11d": {
+      "vehicle_id": 194,
+      "known": true,
+      "confidence": 0.5429660677909851,
+      "raw": {
+        "top1": "25d77b9ca16c4a238667fb20b92ab427",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "25d77b9ca16c4a238667fb20b92ab427",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "2e2b73cd5755446e8a8b4680f45c7f0b": {
+      "vehicle_id": 134,
+      "known": true,
+      "confidence": 0.5569754838943481,
+      "raw": {
+        "top1": "a9b0b74d31d04816bba318cffca1c5f5",
+        "correct": true,
+        "ap": 0.6333333333333333
+      },
+      "ranking": {
+        "top1": "a9b0b74d31d04816bba318cffca1c5f5",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "95ed22127a2b4bcdbf9f449c2d50dc5e": {
+      "vehicle_id": 1099,
+      "known": true,
+      "confidence": 0.756061315536499,
+      "raw": {
+        "top1": "91be73936cda428bb42423f4860d42cb",
+        "correct": true,
+        "ap": 0.6
+      },
+      "ranking": {
+        "top1": "91be73936cda428bb42423f4860d42cb",
+        "correct": true,
+        "ap": 0.6
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "50ed8acf5d2149d082f5a4106f4edb69": {
+      "vehicle_id": 476,
+      "known": true,
+      "confidence": 0.7512528896331787,
+      "raw": {
+        "top1": "e7b43fb77ad2422e84575091fe4fa03a",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "e7b43fb77ad2422e84575091fe4fa03a",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "f618b6cd963849fda05d1d493e61a734": {
+      "vehicle_id": 120,
+      "known": true,
+      "confidence": 0.8192964196205139,
+      "raw": {
+        "top1": "6cfeffba5a3e482da716d4ecba1f5c56",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "74054301dc504723ae9bdc68a83793de",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "e8681757c72f45db8518bd5bea53453b": {
+      "vehicle_id": 913,
+      "known": true,
+      "confidence": 0.6293286681175232,
+      "raw": {
+        "top1": "50a9e3ea1cdf440297563ae695074b89",
+        "correct": false,
+        "ap": 0.2888888888888889
+      },
+      "ranking": {
+        "top1": "50a9e3ea1cdf440297563ae695074b89",
+        "correct": false,
+        "ap": 0.3833333333333333
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "bcbb90ab1c6c4a23966d94c6818bb744": {
+      "vehicle_id": 458,
+      "known": true,
+      "confidence": 0.628656268119812,
+      "raw": {
+        "top1": "dc841e175ba4409cb997f00c9c6a428d",
+        "correct": true,
+        "ap": 0.6759259259259259
+      },
+      "ranking": {
+        "top1": "03117b0fe6814821b2ada2cf8dcf3751",
+        "correct": true,
+        "ap": 0.5666666666666667
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "99c027f683da4975a1e09e4cdc93b5ff": {
+      "vehicle_id": 193,
+      "known": true,
+      "confidence": 0.7962313890457153,
+      "raw": {
+        "top1": "6b9b6ca6105342699ef0c88d3817bb99",
+        "correct": false,
+        "ap": 0.125
+      },
+      "ranking": {
+        "top1": "7efdf9796395421299f1797215bc71af",
+        "correct": false,
+        "ap": 0.125
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "80933352e3464347bd52add8dffa1334": {
+      "vehicle_id": 1313,
+      "known": true,
+      "confidence": 0.7247484922409058,
+      "raw": {
+        "top1": "2d6f0957136948f2be711e399cba9c37",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "e9d64e9e9b19498c93aaf7ca5146eeb8",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "79c228888f1f49c5b2b39fc9a9ba9d98": {
+      "vehicle_id": 1017,
+      "known": true,
+      "confidence": 0.7023353576660156,
+      "raw": {
+        "top1": "6856092d227941509e7d83fc3b17b2db",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "6856092d227941509e7d83fc3b17b2db",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "721ec3c795ed4a01b153789021cc2e0d": {
+      "vehicle_id": 63,
+      "known": true,
+      "confidence": 0.6616300940513611,
+      "raw": {
+        "top1": "52a9f3a17dca4d5a897410224c777892",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "a7f6fba4e34942969085f4662c5e2ef0",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "b2b5fc12ec564c5eab1392405f55144f": {
+      "vehicle_id": 1201,
+      "known": true,
+      "confidence": 0.7237770557403564,
+      "raw": {
+        "top1": "2192a9b28b83477e899428a6d23c3e0d",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "2192a9b28b83477e899428a6d23c3e0d",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "175cc41b4a1c406fa02e345f8d4e0b9d": {
+      "vehicle_id": 3,
+      "known": true,
+      "confidence": 0.7701213955879211,
+      "raw": {
+        "top1": "ebcd53d3c608468c959e96c1f00bf697",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "ebcd53d3c608468c959e96c1f00bf697",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "617d468e9b854d6085ca6c2e3522c2f3": {
+      "vehicle_id": 1321,
+      "known": true,
+      "confidence": 0.5981318950653076,
+      "raw": {
+        "top1": "6dbd44fffa0c406ab4bf27126f457516",
+        "correct": false,
+        "ap": 0.6388888888888888
+      },
+      "ranking": {
+        "top1": "6dbd44fffa0c406ab4bf27126f457516",
+        "correct": false,
+        "ap": 0.6388888888888888
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "fe61b108b5d64fccb5905c0f48387975": {
+      "vehicle_id": 1056,
+      "known": true,
+      "confidence": 0.534365177154541,
+      "raw": {
+        "top1": "bce1558d0f224222a1c3d750217a7ed5",
+        "correct": true,
+        "ap": 0.9166666666666666
+      },
+      "ranking": {
+        "top1": "52096473cbdc48d08a98f6e7d4cd75bc",
+        "correct": false,
+        "ap": 0.4777777777777777
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "e4166069ddc74d09b790d5dce3122a0c": {
+      "vehicle_id": 256,
+      "known": true,
+      "confidence": 0.4335785210132599,
+      "raw": {
+        "top1": "48d649080c4641c49118ac97fdfa6b41",
+        "correct": true,
+        "ap": 0.9666666666666666
+      },
+      "ranking": {
+        "top1": "48d649080c4641c49118ac97fdfa6b41",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "4614780623b14dc5ae947b2c225d8219": {
+      "vehicle_id": 1299,
+      "known": true,
+      "confidence": 0.6370185613632202,
+      "raw": {
+        "top1": "473a187ff44443f8a3492c3f36601959",
+        "correct": true,
+        "ap": 0.8055555555555555
+      },
+      "ranking": {
+        "top1": "6245132e13a34a1791c3815b7776e0cf",
+        "correct": false,
+        "ap": 0.4444444444444444
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "c7a91c77607c499d8870f6fd569dbd82": {
+      "vehicle_id": 734,
+      "known": true,
+      "confidence": 0.6693673729896545,
+      "raw": {
+        "top1": "482f0965b7b64cbd930bb9cc1f1401b8",
+        "correct": true,
+        "ap": 0.55
+      },
+      "ranking": {
+        "top1": "482f0965b7b64cbd930bb9cc1f1401b8",
+        "correct": true,
+        "ap": 0.8761904761904763
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "4bc627a9f7f04cfb8d0f0617bf0f7c75": {
+      "vehicle_id": 1418,
+      "known": true,
+      "confidence": 0.7925499677658081,
+      "raw": {
+        "top1": "36d3f69585524658ae4761b7c924780e",
+        "correct": true,
+        "ap": 0.7142857142857143
+      },
+      "ranking": {
+        "top1": "e9993ad45a9549ab9124fba29f12f122",
+        "correct": true,
+        "ap": 0.9617346938775511
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "82f94048bfb24012a16d1d88c1de755f": {
+      "vehicle_id": 516,
+      "known": true,
+      "confidence": 0.8283485174179077,
+      "raw": {
+        "top1": "59ee5e451406490ab0f1c63d44ae6c0c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "59ee5e451406490ab0f1c63d44ae6c0c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "cbc764fbb520426c9088b500289063b3": {
+      "vehicle_id": 663,
+      "known": true,
+      "confidence": 0.45002156496047974,
+      "raw": {
+        "top1": "78685a7e9f6f4751afea18bf65812d2c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "6ae675e25e06437092a316d78eb12f63",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "1647268ac21b4639aac45c419acb7591": {
+      "vehicle_id": 1500,
+      "known": true,
+      "confidence": 0.7839879989624023,
+      "raw": {
+        "top1": "0b36ae97505f48979ab345e8c96185f5",
+        "correct": true,
+        "ap": 0.8303571428571428
+      },
+      "ranking": {
+        "top1": "0b36ae97505f48979ab345e8c96185f5",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "475da5fddf774e69883e872eaf674f32": {
+      "vehicle_id": 1221,
+      "known": true,
+      "confidence": 0.6114588975906372,
+      "raw": {
+        "top1": "41b1122ac725411f94ec7b150bd59f1b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "41b1122ac725411f94ec7b150bd59f1b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "61a0747aab2c48efbda90478357edde7": {
+      "vehicle_id": 1222,
+      "known": true,
+      "confidence": 0.5650483965873718,
+      "raw": {
+        "top1": "be639f64ae5140abbb2eff44be6b6651",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "be639f64ae5140abbb2eff44be6b6651",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "0eb755d8c3f249c79ef2f865b7ee8d62": {
+      "vehicle_id": 1262,
+      "known": true,
+      "confidence": 0.5354205369949341,
+      "raw": {
+        "top1": "9c30b4787cdb4f448937e694efecb2e6",
+        "correct": true,
+        "ap": 0.6666666666666666
+      },
+      "ranking": {
+        "top1": "9c30b4787cdb4f448937e694efecb2e6",
+        "correct": true,
+        "ap": 0.6666666666666666
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "e9ef6ad169cd4cda9163bce72cfcba50": {
+      "vehicle_id": 1445,
+      "known": true,
+      "confidence": 0.5558513402938843,
+      "raw": {
+        "top1": "06f871bdfcde4da8854825aea2fa6f2b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "d444c62a8cb947809882954cb5088e25",
+        "correct": false,
+        "ap": 0.3833333333333333
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "2a9e00c44e3d463991cde177ffd083a5": {
+      "vehicle_id": 692,
+      "known": true,
+      "confidence": 0.6790583729743958,
+      "raw": {
+        "top1": "eeaaa5ac03324f7d833862f90da0b908",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "56dfc41ba1204b8480deac5d9963b578",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "7f3f20d43b2e436f91465650f6466a7d": {
+      "vehicle_id": 537,
+      "known": true,
+      "confidence": 0.5064563155174255,
+      "raw": {
+        "top1": "51a1dd02453a41b2b71e1be57628b913",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "5c3e398e1af24a8a8e1a495dec3ce97f",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "4c08377d8c98426791c7b3bbebe7b3ad": {
+      "vehicle_id": 290,
+      "known": true,
+      "confidence": 0.6424897909164429,
+      "raw": {
+        "top1": "c004dae2c35d4cc8bb12749c86f337bf",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "8cff10547bcd4b6f98f5aeda2816481c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "f7e1008b1d2a4802ae0170ab262b8c78": {
+      "vehicle_id": 1529,
+      "known": true,
+      "confidence": 0.8293526768684387,
+      "raw": {
+        "top1": "158c3d788a2246ca841009eac61689cb",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "158c3d788a2246ca841009eac61689cb",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "30573eedee014057b7fc486d638fe0ed": {
+      "vehicle_id": 1367,
+      "known": true,
+      "confidence": 0.701050877571106,
+      "raw": {
+        "top1": "836385fee78d40faba293ff1b1b6481a",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "836385fee78d40faba293ff1b1b6481a",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "ee49b098485744f8a7000e0d7552b270": {
+      "vehicle_id": 98,
+      "known": true,
+      "confidence": 0.7908036708831787,
+      "raw": {
+        "top1": "33f8939d09984bd2a82e0884ef035f3c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "33f8939d09984bd2a82e0884ef035f3c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "4ae4b55d2e244458838c2a94240d9694": {
+      "vehicle_id": 296,
+      "known": true,
+      "confidence": 0.7016893029212952,
+      "raw": {
+        "top1": "0589866cfed34253bf96304c28faa0cf",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "0589866cfed34253bf96304c28faa0cf",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "35e563b5f4bf45a4884c8ab25e986c17": {
+      "vehicle_id": 1282,
+      "known": true,
+      "confidence": 0.6877025365829468,
+      "raw": {
+        "top1": "72f6b6a60ecb4455bb2a1e6d1afb33c3",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "72f6b6a60ecb4455bb2a1e6d1afb33c3",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "385140e7679d427293393f7639a01826": {
+      "vehicle_id": 707,
+      "known": true,
+      "confidence": 0.571090042591095,
+      "raw": {
+        "top1": "1aaa9ef342274bb7aaf54dcf652dae0c",
+        "correct": false,
+        "ap": 0.0
+      },
+      "ranking": {
+        "top1": "1aaa9ef342274bb7aaf54dcf652dae0c",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "59a81948fba94544a26d2ca5a0867c3e": {
+      "vehicle_id": 229,
+      "known": true,
+      "confidence": 0.7089382410049438,
+      "raw": {
+        "top1": "36b67422580648f79aedab84459318ad",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "36b67422580648f79aedab84459318ad",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "1d83e65f848149ffbf2596536bd041dd": {
+      "vehicle_id": 1101,
+      "known": true,
+      "confidence": 0.8844476342201233,
+      "raw": {
+        "top1": "525f99f36a414fd1af5c3209577c8aea",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "9b81ed3fa8d7439489fc52dd46beee74",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "a5835da84637463d9ec66b3d97bb8f2b": {
+      "vehicle_id": 735,
+      "known": true,
+      "confidence": 0.5769332647323608,
+      "raw": {
+        "top1": "798395e7db2d4eecaef4610acf8c3a62",
+        "correct": false,
+        "ap": 0.16666666666666666
+      },
+      "ranking": {
+        "top1": "798395e7db2d4eecaef4610acf8c3a62",
+        "correct": false,
+        "ap": 0.06666666666666667
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "5ae3cfd286554ccd8e6a132dc7f6fb2c": {
+      "vehicle_id": 1152,
+      "known": true,
+      "confidence": 0.8165127635002136,
+      "raw": {
+        "top1": "6ba2d42243034469a9e4d703130dd861",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "6ba2d42243034469a9e4d703130dd861",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "c7a550eca4494c4593a590aee2c365ed": {
+      "vehicle_id": 1293,
+      "known": true,
+      "confidence": 0.69862961769104,
+      "raw": {
+        "top1": "75436fed238e4a06aa6d74732132bf8b",
+        "correct": true,
+        "ap": 0.8055555555555555
+      },
+      "ranking": {
+        "top1": "75436fed238e4a06aa6d74732132bf8b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "665d6ff8183c406d850d690dbcdbac20": {
+      "vehicle_id": 171,
+      "known": true,
+      "confidence": 0.6320340633392334,
+      "raw": {
+        "top1": "667d2ed2c26c47efab4a627de90969d5",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "667d2ed2c26c47efab4a627de90969d5",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "9a24fd234a1e426a8279e46af9b3a099": {
+      "vehicle_id": 101,
+      "known": true,
+      "confidence": 0.6488193869590759,
+      "raw": {
+        "top1": "ffa4b07ecb444d6c84de24e73b6be211",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "e2f2d3d0380741bba24bc1d4c69a9f3c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "1625537d0f724d098a454a582cf49a7d": {
+      "vehicle_id": 319,
+      "known": true,
+      "confidence": 0.6640785932540894,
+      "raw": {
+        "top1": "f7fcdc06cbe24d47bb50bff48c9f9c82",
+        "correct": true,
+        "ap": 0.4666666666666666
+      },
+      "ranking": {
+        "top1": "f7fcdc06cbe24d47bb50bff48c9f9c82",
+        "correct": true,
+        "ap": 0.3333333333333333
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "e0fc0cd40cfa4b4496eb8ec24f275019": {
+      "vehicle_id": 275,
+      "known": true,
+      "confidence": 0.6492870450019836,
+      "raw": {
+        "top1": "82dc961a122a4dc5a97ac32021157b71",
+        "correct": true,
+        "ap": 0.6666666666666666
+      },
+      "ranking": {
+        "top1": "82dc961a122a4dc5a97ac32021157b71",
+        "correct": true,
+        "ap": 0.5555555555555555
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "684ac61449314f84b3e9ccf147f6b1bc": {
+      "vehicle_id": 879,
+      "known": true,
+      "confidence": 0.5794351696968079,
+      "raw": {
+        "top1": "57234dbd0e5d42c7a18fc68e851e18dc",
+        "correct": true,
+        "ap": 0.4833333333333333
+      },
+      "ranking": {
+        "top1": "57234dbd0e5d42c7a18fc68e851e18dc",
+        "correct": true,
+        "ap": 0.8
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "605118d5e3784b8c965abd8060a2c191": {
+      "vehicle_id": 640,
+      "known": true,
+      "confidence": 0.5809751749038696,
+      "raw": {
+        "top1": "b00b56487e734826a7952e13816dfa68",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "b00b56487e734826a7952e13816dfa68",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "163b2f69d37245eab032365a1594f2e8": {
+      "vehicle_id": 1127,
+      "known": true,
+      "confidence": 0.6432110667228699,
+      "raw": {
+        "top1": "e8fd1cb14597408891dd692284385c34",
+        "correct": false,
+        "ap": 0.037037037037037035
+      },
+      "ranking": {
+        "top1": "e8fd1cb14597408891dd692284385c34",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "646d6fa87b7b4069b4407fbbd322301e": {
+      "vehicle_id": 911,
+      "known": true,
+      "confidence": 0.7259445786476135,
+      "raw": {
+        "top1": "124938b60cdf4f61aca1e369d1ff0737",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "124938b60cdf4f61aca1e369d1ff0737",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "f368431f36ab443ebe920d0059219abb": {
+      "vehicle_id": 208,
+      "known": true,
+      "confidence": 0.4477950632572174,
+      "raw": {
+        "top1": "f1374db1a28549b7acf80b3c567c0113",
+        "correct": false,
+        "ap": 0.0
+      },
+      "ranking": {
+        "top1": "f1374db1a28549b7acf80b3c567c0113",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "a1d81a64d7f0418b88bdeb0760daae0c": {
+      "vehicle_id": 1122,
+      "known": true,
+      "confidence": 0.7117518782615662,
+      "raw": {
+        "top1": "89dfb17d7aeb4b549835a75fa7ad0747",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "89dfb17d7aeb4b549835a75fa7ad0747",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "f157256a59b2441dbdd511b00a5b4c15": {
+      "vehicle_id": 701,
+      "known": true,
+      "confidence": 0.7520976066589355,
+      "raw": {
+        "top1": "b0288859dbf646ba8093b9d62d60322c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "7e5cb0a6f94f4833afdf53642d43bc88",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "350a42319ad444ceb791657dbc8b6320": {
+      "vehicle_id": 1406,
+      "known": true,
+      "confidence": 0.800938069820404,
+      "raw": {
+        "top1": "cd34175243834104bde29e20f6b24a0b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "cd34175243834104bde29e20f6b24a0b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "a38a5f2625b84ad5ad6aa26ade14bcdf": {
+      "vehicle_id": 400,
+      "known": true,
+      "confidence": 0.5810208320617676,
+      "raw": {
+        "top1": "f9ead7da5c44400183662d8283928c7c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "8444abe111414ca79823a1f2e1f67a73",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "68df0cdb42c44386927d1ab20f02d81b": {
+      "vehicle_id": 232,
+      "known": true,
+      "confidence": 0.5941599607467651,
+      "raw": {
+        "top1": "db2940d153664264b342b6427b8a80fd",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "fc70f2fbfadc4062b97d7d07e30cb0b0",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "9dbbb8c8cc6742d9ad17a7edb766af15": {
+      "vehicle_id": 15,
+      "known": true,
+      "confidence": 0.8718926906585693,
+      "raw": {
+        "top1": "3e09196b092d449c95ec9a74859d81e6",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "3e09196b092d449c95ec9a74859d81e6",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "36b71f11f7a145e984a92d025a957619": {
+      "vehicle_id": 1373,
+      "known": true,
+      "confidence": 0.7590125799179077,
+      "raw": {
+        "top1": "50a9e3ea1cdf440297563ae695074b89",
+        "correct": true,
+        "ap": 0.9484126984126985
+      },
+      "ranking": {
+        "top1": "50a9e3ea1cdf440297563ae695074b89",
+        "correct": true,
+        "ap": 0.6878306878306878
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "38ca86b373064f6f8ea7658b49bbe330": {
+      "vehicle_id": 729,
+      "known": true,
+      "confidence": 0.6639127731323242,
+      "raw": {
+        "top1": "2f4df3c984a84504966a79a2f9da78cd",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "2f4df3c984a84504966a79a2f9da78cd",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "a0c5985c23e544ddb4c97414342f5703": {
+      "vehicle_id": 1080,
+      "known": true,
+      "confidence": 0.5363226532936096,
+      "raw": {
+        "top1": "4909862ce4e747389e0411f6b142f560",
+        "correct": true,
+        "ap": 0.95
+      },
+      "ranking": {
+        "top1": "4909862ce4e747389e0411f6b142f560",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "aa01eb9ae20e4887a620ad80ed7b2407": {
+      "vehicle_id": 1013,
+      "known": true,
+      "confidence": 0.6264438033103943,
+      "raw": {
+        "top1": "3ddf286cacab4c3b9424bf865e90051d",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "3ddf286cacab4c3b9424bf865e90051d",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "ece2d254519845bb963fe3b9b3a0482a": {
+      "vehicle_id": 842,
+      "known": true,
+      "confidence": 0.7397545576095581,
+      "raw": {
+        "top1": "833fd05701f74898afef1c31c2bae668",
+        "correct": false,
+        "ap": 0.5449999999999999
+      },
+      "ranking": {
+        "top1": "f981883fbcce46d2b441ec2890599eee",
+        "correct": false,
+        "ap": 0.525952380952381
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "b628dccfec6246179425bcdb04af6e48": {
+      "vehicle_id": 169,
+      "known": true,
+      "confidence": 0.6943599581718445,
+      "raw": {
+        "top1": "82becd6a94574a1ca8c2427820fbc11b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "82becd6a94574a1ca8c2427820fbc11b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "a745e242c9e84bdd99229ad48ce5da08": {
+      "vehicle_id": 628,
+      "known": true,
+      "confidence": 0.6501315832138062,
+      "raw": {
+        "top1": "906132c62fcd4fb1bd79cf483284f563",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "906132c62fcd4fb1bd79cf483284f563",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "0dcd471374f943e78006098d06d7111c": {
+      "vehicle_id": 724,
+      "known": true,
+      "confidence": 0.732648491859436,
+      "raw": {
+        "top1": "1e7bb7d6d45e413086d3ccd95544f109",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "1e7bb7d6d45e413086d3ccd95544f109",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "1b1e04c9bf8541dcb05143651303e702": {
+      "vehicle_id": 1182,
+      "known": true,
+      "confidence": 0.4998359680175781,
+      "raw": {
+        "top1": "e8fd1cb14597408891dd692284385c34",
+        "correct": false,
+        "ap": 0.06666666666666667
+      },
+      "ranking": {
+        "top1": "e8fd1cb14597408891dd692284385c34",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "98f45790d86f4cda85b23febbc415c4b": {
+      "vehicle_id": 137,
+      "known": true,
+      "confidence": 0.5785645842552185,
+      "raw": {
+        "top1": "91065f8631904b0c9f2cbe52552b4899",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "35cedfd6b4c641209a42fe5698aadfb0",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "a25570d747bf4511bd3c48fd67664764": {
+      "vehicle_id": 1227,
+      "known": true,
+      "confidence": 0.8783146739006042,
+      "raw": {
+        "top1": "b50184f7929a4f67bae3793de6ff432b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "b50184f7929a4f67bae3793de6ff432b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "3d1e305250c24c8589f509170de2c96e": {
+      "vehicle_id": 982,
+      "known": true,
+      "confidence": 0.450043261051178,
+      "raw": {
+        "top1": "ff21d7892fe54b71a9dbd2b2fb5c6366",
+        "correct": false,
+        "ap": 0.0
+      },
+      "ranking": {
+        "top1": "99c4b99e6e704e63aca525cf56328480",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "1d6a8651e3cf40079ba71203011d995c": {
+      "vehicle_id": 960,
+      "known": true,
+      "confidence": 0.6978914737701416,
+      "raw": {
+        "top1": "708eaff36c8b4f17b9b53a4cb0eeafe6",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "708eaff36c8b4f17b9b53a4cb0eeafe6",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "ed9efad4fa0e4c4bbf066c3c31394191": {
+      "vehicle_id": 1353,
+      "known": true,
+      "confidence": 0.6644889116287231,
+      "raw": {
+        "top1": "7f4fe0f72c6b405d8aa268a3d212128c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "7f4fe0f72c6b405d8aa268a3d212128c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "c0740acb6cef4c5083b3c6e8a98e18ba": {
+      "vehicle_id": 665,
+      "known": true,
+      "confidence": 0.620607316493988,
+      "raw": {
+        "top1": "1d8217a3d3384258ae8c8fcbae64bd05",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "1d8217a3d3384258ae8c8fcbae64bd05",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "bd0d9c44133240bc8552dc86c02da6b2": {
+      "vehicle_id": 393,
+      "known": true,
+      "confidence": 0.6849247217178345,
+      "raw": {
+        "top1": "867f6e2dd68c43cc843adc243ade5195",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "867f6e2dd68c43cc843adc243ade5195",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "ab6744d2922a4d36aeb3b7c9fd66fcba": {
+      "vehicle_id": 872,
+      "known": true,
+      "confidence": 0.8020820021629333,
+      "raw": {
+        "top1": "bd8d1edfd6c04f84831180e657980156",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "bd8d1edfd6c04f84831180e657980156",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "323f71b2b7c848e699b422d81295613b": {
+      "vehicle_id": 1066,
+      "known": true,
+      "confidence": 0.4411357641220093,
+      "raw": {
+        "top1": "1e7bb7d6d45e413086d3ccd95544f109",
+        "correct": false,
+        "ap": 0.6388888888888888
+      },
+      "ranking": {
+        "top1": "395412373f9d49be9d9f655e81c28568",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "51f40bdf9e3c4e228300068ce6a65838": {
+      "vehicle_id": 827,
+      "known": true,
+      "confidence": 0.8362802267074585,
+      "raw": {
+        "top1": "d881a4cbe7a04cfd9ab0b8c027f63a52",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "d881a4cbe7a04cfd9ab0b8c027f63a52",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "c6380fc6897e4ddc8b8a31a143e072e1": {
+      "vehicle_id": 501,
+      "known": true,
+      "confidence": 0.7293746471405029,
+      "raw": {
+        "top1": "c32ef47204274b5c95199d4c27196415",
+        "correct": true,
+        "ap": 0.9166666666666666
+      },
+      "ranking": {
+        "top1": "c32ef47204274b5c95199d4c27196415",
+        "correct": true,
+        "ap": 0.6333333333333333
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "0df22d63a5fa4086a47db6b393f45b11": {
+      "vehicle_id": 1531,
+      "known": true,
+      "confidence": 0.7570310831069946,
+      "raw": {
+        "top1": "1a0365d2cebf435b89f0da47e1a249fb",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "1a0365d2cebf435b89f0da47e1a249fb",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "7e8b4af9bfc241ca8cd7f5c57c657d32": {
+      "vehicle_id": 1253,
+      "known": true,
+      "confidence": 0.40626755356788635,
+      "raw": {
+        "top1": "1f7d3b81956543e68118c3343f6dc379",
+        "correct": false,
+        "ap": 0.45
+      },
+      "ranking": {
+        "top1": "ad626768b96f4593899a6617466d5ff7",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "6f78768d44df4346adda3bfc4ab6e846": {
+      "vehicle_id": 600,
+      "known": true,
+      "confidence": 0.7186980247497559,
+      "raw": {
+        "top1": "5f0b28f932b4492c91ed6e540f7776bd",
+        "correct": true,
+        "ap": 0.6666666666666666
+      },
+      "ranking": {
+        "top1": "5f0b28f932b4492c91ed6e540f7776bd",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "b3fb1f6ac90b473fb83765b131d5630a": {
+      "vehicle_id": 981,
+      "known": true,
+      "confidence": 0.7211520671844482,
+      "raw": {
+        "top1": "a50e825871ac4c7f9114b48c83ab4633",
+        "correct": true,
+        "ap": 0.8333333333333334
+      },
+      "ranking": {
+        "top1": "e4d5292f66414aba8544a8e6dc076404",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "0b646741f08544b09a20c2d563436751": {
+      "vehicle_id": 845,
+      "known": true,
+      "confidence": 0.8071631193161011,
+      "raw": {
+        "top1": "c200047a656641bebb5c44022759137b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "c200047a656641bebb5c44022759137b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "af282ecbbbd54aa3a4fa3391de07daa8": {
+      "vehicle_id": 114,
+      "known": true,
+      "confidence": 0.6387132406234741,
+      "raw": {
+        "top1": "e37b414ad9b244b79b2c7cbb2898329f",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "e37b414ad9b244b79b2c7cbb2898329f",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "29591c652f5d4a4fb5b371d3155f7ea3": {
+      "vehicle_id": 270,
+      "known": true,
+      "confidence": 0.6783504486083984,
+      "raw": {
+        "top1": "100b0002537e40e7a4d9fcb5f82ddf33",
+        "correct": true,
+        "ap": 0.5
+      },
+      "ranking": {
+        "top1": "100b0002537e40e7a4d9fcb5f82ddf33",
+        "correct": true,
+        "ap": 0.5911111111111111
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "563a4f2d7f86455db1554d7d12ef4438": {
+      "vehicle_id": 1075,
+      "known": true,
+      "confidence": 0.6695250868797302,
+      "raw": {
+        "top1": "0ee6d6922aa64ed882742ed09c385fed",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "0ee6d6922aa64ed882742ed09c385fed",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "2820d376a61b466ab6ae90ee80021459": {
+      "vehicle_id": 9,
+      "known": true,
+      "confidence": 0.7151618599891663,
+      "raw": {
+        "top1": "392c0474fd5d42e8b84f810f35ad6d57",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "392c0474fd5d42e8b84f810f35ad6d57",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "18c956e7cf474417bb0b1fb2be076bc9": {
+      "vehicle_id": 360,
+      "known": true,
+      "confidence": 0.5187111496925354,
+      "raw": {
+        "top1": "5f9e6738afc84b8496d5afef2a1986cc",
+        "correct": false,
+        "ap": 0.21666666666666667
+      },
+      "ranking": {
+        "top1": "b70f0a39763749a199c22c426ff10328",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "3cc3916862294af091a252c7ca31d8e8": {
+      "vehicle_id": 839,
+      "known": true,
+      "confidence": 0.803589403629303,
+      "raw": {
+        "top1": "475371f56fef495ca7f1a6207dd3296c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "475371f56fef495ca7f1a6207dd3296c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "a4f040e7b3444df8b5fc6bacee52103b": {
+      "vehicle_id": 961,
+      "known": true,
+      "confidence": 0.6356208920478821,
+      "raw": {
+        "top1": "2bfa3c99576d40f3867bd2e1888a46ca",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "0020d9ccf91f4944afe069070529bd34",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "7ca3e5521ccf48dc94533089665e75e8": {
+      "vehicle_id": 1400,
+      "known": true,
+      "confidence": 0.6242676973342896,
+      "raw": {
+        "top1": "804db47b5e7f42669ad2710142a8e234",
+        "correct": false,
+        "ap": 0.037037037037037035
+      },
+      "ranking": {
+        "top1": "efa7fd05ae0f44c9aca2ecc5f86cbdfa",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "b168c1a5973b423898b8c8b3dc7df945": {
+      "vehicle_id": 43,
+      "known": true,
+      "confidence": 0.7706978917121887,
+      "raw": {
+        "top1": "992ea4fcead7459890a9fd2f829c7a67",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "75193a6c65954cd480c8d2aa742dcb27",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "17154984a5c24a23a0f570a8a452624c": {
+      "vehicle_id": 1426,
+      "known": true,
+      "confidence": 0.5993885397911072,
+      "raw": {
+        "top1": "61d260752f724f50b8ac73645d821c3a",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "31bc8ee6b49646fe8533ac1628887e94",
+        "correct": false,
+        "ap": 0.6388888888888888
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "b4fdd08103ce4a4194130a5d39a23e17": {
+      "vehicle_id": 761,
+      "known": true,
+      "confidence": 0.30055150389671326,
+      "raw": {
+        "top1": "7a82a9b9e31b4643939d9456eabe22f6",
+        "correct": false,
+        "ap": 0.0
+      },
+      "ranking": {
+        "top1": "903fcf7ef760419a87688bc525f5b171",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "07190cc823e54284abc6b63db547c47c": {
+      "vehicle_id": 157,
+      "known": true,
+      "confidence": 0.702436625957489,
+      "raw": {
+        "top1": "804db47b5e7f42669ad2710142a8e234",
+        "correct": true,
+        "ap": 0.5
+      },
+      "ranking": {
+        "top1": "c61e1e592570487088074cef60fbc753",
+        "correct": false,
+        "ap": 0.05555555555555555
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "008594dbabb74c5dad71d0bf918aa61c": {
+      "vehicle_id": 2,
+      "known": true,
+      "confidence": 0.5391896367073059,
+      "raw": {
+        "top1": "39925d0366ad4279b6d347802317e09a",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "39925d0366ad4279b6d347802317e09a",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "fb486d3a516d4b8d8dacae22fc0c81d2": {
+      "vehicle_id": 1246,
+      "known": true,
+      "confidence": 0.654924213886261,
+      "raw": {
+        "top1": "6a36c789588c4690a1eea83d49bb2e5e",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "6a36c789588c4690a1eea83d49bb2e5e",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "810436b02aaa470b84adb815009dbb04": {
+      "vehicle_id": 181,
+      "known": true,
+      "confidence": 0.6889852285385132,
+      "raw": {
+        "top1": "0c85b5e5712442b6b3f2b929bc13525b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "c06b9f5d7fe841f692e37104463a2eb0",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "de70781c5d244e7783bc042f1e42655b": {
+      "vehicle_id": 1051,
+      "known": true,
+      "confidence": 0.5974464416503906,
+      "raw": {
+        "top1": "e3d588fd2da14c47897adbdcc5e6c307",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "e3d588fd2da14c47897adbdcc5e6c307",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "839121f7fd1648f6b171f6f2142279dd": {
+      "vehicle_id": 694,
+      "known": true,
+      "confidence": 0.6326412558555603,
+      "raw": {
+        "top1": "31eec009c0b1463ba66a1c22f1b52c8d",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "31eec009c0b1463ba66a1c22f1b52c8d",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "8cee4362f39748cab4b7317e027eb446": {
+      "vehicle_id": 760,
+      "known": true,
+      "confidence": 0.8370916247367859,
+      "raw": {
+        "top1": "da91a375efe54c30a00cb0dbe477b4c8",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "da91a375efe54c30a00cb0dbe477b4c8",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "2850d4d419954cb5a851ad5e7ef9ced0": {
+      "vehicle_id": 1311,
+      "known": true,
+      "confidence": 0.551850438117981,
+      "raw": {
+        "top1": "80b2eaf9ab584abaaba98e8bc7263dcd",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "80b2eaf9ab584abaaba98e8bc7263dcd",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "7cd6cc3770df4edc827457f29b9072f5": {
+      "vehicle_id": 1356,
+      "known": true,
+      "confidence": 0.6587451100349426,
+      "raw": {
+        "top1": "d057f0bda4a347a199c24138ff80b54c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "88b9875d15dd4152a2531e18b507ffd7",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "e0cb3184b91845e7b64d275b03590b7e": {
+      "vehicle_id": 880,
+      "known": true,
+      "confidence": 0.7635241150856018,
+      "raw": {
+        "top1": "150f21a0b262479e921af566e5c99d2f",
+        "correct": true,
+        "ap": 0.9761904761904763
+      },
+      "ranking": {
+        "top1": "150f21a0b262479e921af566e5c99d2f",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "4fa85c39e7f84d029e20d62e20c06f52": {
+      "vehicle_id": 601,
+      "known": true,
+      "confidence": 0.6378675103187561,
+      "raw": {
+        "top1": "99ebc8079e91493daaa7a3541b2a63d9",
+        "correct": true,
+        "ap": 0.8571428571428571
+      },
+      "ranking": {
+        "top1": "410056de626e42b884a63b3779cc8b32",
+        "correct": true,
+        "ap": 0.8571428571428571
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "617b66c3624e49f58fe07187d4cfe601": {
+      "vehicle_id": 1041,
+      "known": true,
+      "confidence": 0.799511194229126,
+      "raw": {
+        "top1": "e8ebcef8c96441cb806edf714f270219",
+        "correct": true,
+        "ap": 0.7271825396825397
+      },
+      "ranking": {
+        "top1": "e8ebcef8c96441cb806edf714f270219",
+        "correct": true,
+        "ap": 0.7271825396825397
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "48aba143886d42deb85f9c7e9f49d0bc": {
+      "vehicle_id": 1124,
+      "known": true,
+      "confidence": 0.661628007888794,
+      "raw": {
+        "top1": "98ee0e0fe5b64960bedca79bfa3feeaa",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "e47d1cd5cf8c4c4795488c6dc415940e",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "3dd45aab82494a7c9a01bcf34d25fc66": {
+      "vehicle_id": 1064,
+      "known": true,
+      "confidence": 0.5581280589103699,
+      "raw": {
+        "top1": "ec274c19a67543e98be5ee5fcd1c3ce6",
+        "correct": true,
+        "ap": 0.6666666666666666
+      },
+      "ranking": {
+        "top1": "ec274c19a67543e98be5ee5fcd1c3ce6",
+        "correct": true,
+        "ap": 0.6666666666666666
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "6b271afbd06b4d2c899815c862b552ff": {
+      "vehicle_id": 1192,
+      "known": true,
+      "confidence": 0.6795927286148071,
+      "raw": {
+        "top1": "1ec7d41333b74047a44662380268a0b7",
+        "correct": true,
+        "ap": 0.6666666666666666
+      },
+      "ranking": {
+        "top1": "1ec7d41333b74047a44662380268a0b7",
+        "correct": true,
+        "ap": 0.6666666666666666
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "78efb7a78ad74411bc3aaba5c02ccae4": {
+      "vehicle_id": 178,
+      "known": true,
+      "confidence": 0.4820483922958374,
+      "raw": {
+        "top1": "16050b1ecb8a4bc58599967f47d852a5",
+        "correct": false,
+        "ap": 0.0
+      },
+      "ranking": {
+        "top1": "e0b8227c5a6e447583af27b8e16e5285",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "a4a677a287e9458aa665bfe81c6b983a": {
+      "vehicle_id": 858,
+      "known": true,
+      "confidence": 0.43760451674461365,
+      "raw": {
+        "top1": "608cb59380114f819e6df30404ed50f1",
+        "correct": false,
+        "ap": 0.6388888888888888
+      },
+      "ranking": {
+        "top1": "0319a833ee26436a8ab428497abaac60",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "94adaa692a6140c792b31bd64fea2249": {
+      "vehicle_id": 1087,
+      "known": true,
+      "confidence": 0.6963527798652649,
+      "raw": {
+        "top1": "d50c62f7ed674353970d4b329d4df0a7",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "d50c62f7ed674353970d4b329d4df0a7",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "54986e13e7b541d88db53d84c6cc9199": {
+      "vehicle_id": 250,
+      "known": true,
+      "confidence": 0.682301938533783,
+      "raw": {
+        "top1": "598f359622514e5f8b69f29a05d36737",
+        "correct": true,
+        "ap": 0.8666666666666667
+      },
+      "ranking": {
+        "top1": "598f359622514e5f8b69f29a05d36737",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "d9ff3feb61234776a592799857390a2b": {
+      "vehicle_id": 1410,
+      "known": true,
+      "confidence": 0.5881685018539429,
+      "raw": {
+        "top1": "e747777f832d4de0b9e33c87652222ac",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "e747777f832d4de0b9e33c87652222ac",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "f674e767e56f4a53bf7326cbd5807e46": {
+      "vehicle_id": 1489,
+      "known": true,
+      "confidence": 0.4824780225753784,
+      "raw": {
+        "top1": "b3b7bfdb4aef48f08ed1f20b9daf2de3",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "c7b9ce9cf0604943b6f8cfe134f6c83d",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "b4857013dd664a31b904cbaa9568e7e9": {
+      "vehicle_id": 1309,
+      "known": true,
+      "confidence": 0.5558277368545532,
+      "raw": {
+        "top1": "0eb09f752a3b4f6cb883849eeb2cef78",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "0eb09f752a3b4f6cb883849eeb2cef78",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "a80ab773e1274f7ebf0d5fe4778f60d9": {
+      "vehicle_id": 736,
+      "known": true,
+      "confidence": 0.5841383337974548,
+      "raw": {
+        "top1": "a7773e2468284e18b22f69f97f882e9e",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "a7773e2468284e18b22f69f97f882e9e",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "80145085568d4f51b9fb4f209ba596a9": {
+      "vehicle_id": 1358,
+      "known": true,
+      "confidence": 0.6445890069007874,
+      "raw": {
+        "top1": "f1376f6a18f34042a4fee498e75ff5cf",
+        "correct": true,
+        "ap": 0.5746031746031746
+      },
+      "ranking": {
+        "top1": "7f652bf7924c4d268c01a90369a3f491",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "21f6d8074a3041078bcbedc281a7ea2c": {
+      "vehicle_id": 1456,
+      "known": true,
+      "confidence": 0.6411668062210083,
+      "raw": {
+        "top1": "ffde07b2c54949a6b6b35d59d5b1fa01",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "ffde07b2c54949a6b6b35d59d5b1fa01",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "7e5822cd81e546bda1754bc8648f69dc": {
+      "vehicle_id": 420,
+      "known": true,
+      "confidence": 0.4718259572982788,
+      "raw": {
+        "top1": "e514d8e936e9408baeccad4ab3b391e8",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "e514d8e936e9408baeccad4ab3b391e8",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "074060ff9ac84801a97d3272c4b2f7dc": {
+      "vehicle_id": 200,
+      "known": true,
+      "confidence": 0.7831423282623291,
+      "raw": {
+        "top1": "539c4e2bbed84df2a88066bbf9cd1ed2",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "787c523bba224b2bb8dc4c5ac07ef274",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "1dab977e8d1442eeba3ce47e6d1d1552": {
+      "vehicle_id": 1388,
+      "known": true,
+      "confidence": 0.6290369629859924,
+      "raw": {
+        "top1": "da9dd373193944148bd440d5014b9552",
+        "correct": true,
+        "ap": 0.7333333333333333
+      },
+      "ranking": {
+        "top1": "da9dd373193944148bd440d5014b9552",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "64814e639164477383ef8305dd42bdfc": {
+      "vehicle_id": 1314,
+      "known": true,
+      "confidence": 0.5744869709014893,
+      "raw": {
+        "top1": "2e7d03b601984ed89a3775edcd4cc947",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "b3df316cbdc240e5bf6d7f6b260ea7ad",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "2e4b2428e081495993927b6dd3486de2": {
+      "vehicle_id": 1239,
+      "known": true,
+      "confidence": 0.7202541828155518,
+      "raw": {
+        "top1": "7f4fe0f72c6b405d8aa268a3d212128c",
+        "correct": false,
+        "ap": 0.3595238095238095
+      },
+      "ranking": {
+        "top1": "7c5250ba520945a2ae4c97550418aa6d",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "e6f3b617533849ae98a91a7fcab9fa8b": {
+      "vehicle_id": 666,
+      "known": true,
+      "confidence": 0.6777365803718567,
+      "raw": {
+        "top1": "cfcddff5376443d5b0c607c285b266c5",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "cfcddff5376443d5b0c607c285b266c5",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "8d7bc91ac9384b8aa9c0b068c03bcfd2": {
+      "vehicle_id": 614,
+      "known": true,
+      "confidence": 0.7064766883850098,
+      "raw": {
+        "top1": "88ea3acc2ee440e1ae64d1e887bc3040",
+        "correct": true,
+        "ap": 0.663888888888889
+      },
+      "ranking": {
+        "top1": "0294485c05b2461ca7bd2d59ca32f912",
+        "correct": true,
+        "ap": 0.4
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "21239b26ae70494f91b052bc149ddb78": {
+      "vehicle_id": 868,
+      "known": true,
+      "confidence": 0.6771809458732605,
+      "raw": {
+        "top1": "07286f8cf4544940ac304dac49a336a6",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "07286f8cf4544940ac304dac49a336a6",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "1f769a90be3a45b79bd5184ef61b2cb8": {
+      "vehicle_id": 738,
+      "known": true,
+      "confidence": 0.536304771900177,
+      "raw": {
+        "top1": "539c4e2bbed84df2a88066bbf9cd1ed2",
+        "correct": false,
+        "ap": 0.0
+      },
+      "ranking": {
+        "top1": "608cb59380114f819e6df30404ed50f1",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "4dbd33a5712a4a1ebb73d1913a6fb789": {
+      "vehicle_id": 1412,
+      "known": true,
+      "confidence": 0.5892168283462524,
+      "raw": {
+        "top1": "3ed96a77d81745f8aacad0a51389d4b0",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "3ed96a77d81745f8aacad0a51389d4b0",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "804fe0590cc34e68a0ea44f33c1f976e": {
+      "vehicle_id": 773,
+      "known": true,
+      "confidence": 0.6081319451332092,
+      "raw": {
+        "top1": "bdef5e989b8d4b868ce06b51ce8ac81b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "bdef5e989b8d4b868ce06b51ce8ac81b",
+        "correct": true,
+        "ap": 0.8571428571428571
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "9d8bf02fe40a45ff8e3fba1a05207808": {
+      "vehicle_id": 1106,
+      "known": true,
+      "confidence": 0.5199227929115295,
+      "raw": {
+        "top1": "e069b2c13bef4010803240f63f330142",
+        "correct": false,
+        "ap": 0.21805555555555556
+      },
+      "ranking": {
+        "top1": "e069b2c13bef4010803240f63f330142",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "0b68e072890f494091415951c2cdbb69": {
+      "vehicle_id": 1002,
+      "known": true,
+      "confidence": 0.57010817527771,
+      "raw": {
+        "top1": "02adf925e49745fc8e8427b71ae6a615",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "02adf925e49745fc8e8427b71ae6a615",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "78a628d099b8413eb30babae542a6bbe": {
+      "vehicle_id": 1371,
+      "known": true,
+      "confidence": 0.7532967925071716,
+      "raw": {
+        "top1": "21b0c81a7beb48d8b0c22f3f01aa67a8",
+        "correct": false,
+        "ap": 0.27777777777777773
+      },
+      "ranking": {
+        "top1": "21b0c81a7beb48d8b0c22f3f01aa67a8",
+        "correct": false,
+        "ap": 0.3206349206349206
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "6045603bcbcc4f77a7fd280b5756754e": {
+      "vehicle_id": 1328,
+      "known": true,
+      "confidence": 0.7635456919670105,
+      "raw": {
+        "top1": "4439cc7f44e641918d2a304cc9c4a626",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "2c4082f83b5a4517b1601eee725866d4",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "c2ead492232042a2a5c361b9f25954fb": {
+      "vehicle_id": 1451,
+      "known": true,
+      "confidence": 0.5718955397605896,
+      "raw": {
+        "top1": "1aaa9ef342274bb7aaf54dcf652dae0c",
+        "correct": false,
+        "ap": 0.5977777777777777
+      },
+      "ranking": {
+        "top1": "ebd7c0f75263448d851d1c24c90359ac",
+        "correct": true,
+        "ap": 0.638888888888889
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "b7ca66ecb7be4395a08f2de7c068cf05": {
+      "vehicle_id": 798,
+      "known": true,
+      "confidence": 0.8972593545913696,
+      "raw": {
+        "top1": "476dfc304ba14ea9ad2b5461bdd19649",
+        "correct": true,
+        "ap": 0.5
+      },
+      "ranking": {
+        "top1": "16845fe660f44e8aaaeb293305a88a82",
+        "correct": true,
+        "ap": 0.5
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "77391c97700a4cf2b7d38b5269d22c23": {
+      "vehicle_id": 635,
+      "known": true,
+      "confidence": 0.7700405120849609,
+      "raw": {
+        "top1": "46ac50caa5d641df854e1a40202109ee",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "46ac50caa5d641df854e1a40202109ee",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "96b5a4304bed420899520998d66828df": {
+      "vehicle_id": 246,
+      "known": true,
+      "confidence": 0.8062840700149536,
+      "raw": {
+        "top1": "1049d1e88d314176899ef00be12f6e62",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "1049d1e88d314176899ef00be12f6e62",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "9a8d4e6a88194fef80a8d89b1beff475": {
+      "vehicle_id": 77,
+      "known": true,
+      "confidence": 0.774497389793396,
+      "raw": {
+        "top1": "99be3522f5274a128a1a0363271a3299",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "ab4eaa532c734e92bfad68e39c28496c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "45045370af73405dbeabd5b55f70be65": {
+      "vehicle_id": 488,
+      "known": true,
+      "confidence": 0.7084698677062988,
+      "raw": {
+        "top1": "65610b9ce7524f44b28f3205e73e6fc5",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "65610b9ce7524f44b28f3205e73e6fc5",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "f67cd2a4e2d44b6696ac9791329ebd51": {
+      "vehicle_id": 997,
+      "known": true,
+      "confidence": 0.7029429078102112,
+      "raw": {
+        "top1": "6c56ac4e773e4ca5a3f0c79eaebf9a01",
+        "correct": true,
+        "ap": 0.8968253968253969
+      },
+      "ranking": {
+        "top1": "6c56ac4e773e4ca5a3f0c79eaebf9a01",
+        "correct": true,
+        "ap": 0.6160714285714285
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "184a8ef48b2745c4b36b4f7860da9edb": {
+      "vehicle_id": 1125,
+      "known": true,
+      "confidence": 0.5623730421066284,
+      "raw": {
+        "top1": "023599520d7b4d02a2b11ad3cbc135de",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "dbf8f8be344b4fe3b13ea09320b8e580",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "d5268595eac9476abfc4515b37da422c": {
+      "vehicle_id": 1042,
+      "known": true,
+      "confidence": 0.7123095393180847,
+      "raw": {
+        "top1": "1aaa9ef342274bb7aaf54dcf652dae0c",
+        "correct": false,
+        "ap": 0.5
+      },
+      "ranking": {
+        "top1": "80d81f8c1b2149809251e3995b51d8bb",
+        "correct": true,
+        "ap": 0.7555555555555555
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "b7c5d7f02658408bb5037adac49d0580": {
+      "vehicle_id": 896,
+      "known": true,
+      "confidence": 0.6044851541519165,
+      "raw": {
+        "top1": "355f48fac959433bbdafb603f460efb7",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "355f48fac959433bbdafb603f460efb7",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "d925c8c0681141ad9552cee5dbba67ce": {
+      "vehicle_id": 276,
+      "known": true,
+      "confidence": 0.5181617140769958,
+      "raw": {
+        "top1": "1c19439bfc5d408bb47abb32d2234ce6",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "1c19439bfc5d408bb47abb32d2234ce6",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "6ad2ca15cd104910b3d4f087c0ef4c0f": {
+      "vehicle_id": 131,
+      "known": true,
+      "confidence": 0.6776760220527649,
+      "raw": {
+        "top1": "caf9c73677b64065bceb57851aa89092",
+        "correct": true,
+        "ap": 0.7555555555555555
+      },
+      "ranking": {
+        "top1": "caf9c73677b64065bceb57851aa89092",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "201325d4164040b19ae6f7052a0c9595": {
+      "vehicle_id": 287,
+      "known": true,
+      "confidence": 0.4752067029476166,
+      "raw": {
+        "top1": "ec2df94fa51f4751a9e3742609af1414",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "a1d22da89d4a4489bd0b1f65e4d3795d",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "160b7643c49b40d78fd3ee5ae8cc3acc": {
+      "vehicle_id": 1016,
+      "known": true,
+      "confidence": 0.6041966080665588,
+      "raw": {
+        "top1": "fa85750c2b0c43e895659ff48f18efb0",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "fa85750c2b0c43e895659ff48f18efb0",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "111d91f1d8e94baa839bd97d3d436a09": {
+      "vehicle_id": 1431,
+      "known": true,
+      "confidence": 0.46072471141815186,
+      "raw": {
+        "top1": "14acb3e28cdc4388a1a26121588ed27c",
+        "correct": false,
+        "ap": 0.4866666666666667
+      },
+      "ranking": {
+        "top1": "f069642026204b229a15709e45cbd4f5",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "0aaeec6f79854ae9a5c0b93dbb6c6adc": {
+      "vehicle_id": 746,
+      "known": true,
+      "confidence": 0.715399444103241,
+      "raw": {
+        "top1": "453b094831ab4f47b24fa1a248376527",
+        "correct": true,
+        "ap": 0.6666666666666666
+      },
+      "ranking": {
+        "top1": "453b094831ab4f47b24fa1a248376527",
+        "correct": true,
+        "ap": 0.6666666666666666
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "7b891b71c5f1466e8b67eccd9b9c8d61": {
+      "vehicle_id": 168,
+      "known": true,
+      "confidence": 0.6773543953895569,
+      "raw": {
+        "top1": "6bfb7e76101949b5aec0357d4d915589",
+        "correct": true,
+        "ap": 0.8
+      },
+      "ranking": {
+        "top1": "6bfb7e76101949b5aec0357d4d915589",
+        "correct": true,
+        "ap": 0.8
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "5eb7218010154fd09a218a13e9cccfa1": {
+      "vehicle_id": 87,
+      "known": true,
+      "confidence": 0.47490984201431274,
+      "raw": {
+        "top1": "7c2a00f1bfa7496380c75b6bdac5770c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "7c2a00f1bfa7496380c75b6bdac5770c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "52ad4d8f9f9e4d05a33dfc42be9b59c9": {
+      "vehicle_id": 873,
+      "known": true,
+      "confidence": 0.6443681716918945,
+      "raw": {
+        "top1": "dba00a30fc3a4143bca9e3c4f3189785",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "dba00a30fc3a4143bca9e3c4f3189785",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "1398a279681647ec902e3e9616b7ff1f": {
+      "vehicle_id": 540,
+      "known": true,
+      "confidence": 0.7310739159584045,
+      "raw": {
+        "top1": "7b57671cddf444e5b8c48414a6f38309",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "0d3b96b3dbfc4139b23b74f435f81735",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "721367067d9843f28ede7152d74ea899": {
+      "vehicle_id": 416,
+      "known": true,
+      "confidence": 0.815242350101471,
+      "raw": {
+        "top1": "2a49b89dfde442f5a932c5480fdaa6e2",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "2a49b89dfde442f5a932c5480fdaa6e2",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "bcab19f21ce74d7a8cf838fa72ce2caf": {
+      "vehicle_id": 996,
+      "known": true,
+      "confidence": 0.524161696434021,
+      "raw": {
+        "top1": "94e0921840aa405689a8ee205ddde1b5",
+        "correct": false,
+        "ap": 0.5
+      },
+      "ranking": {
+        "top1": "6bb796a0361f4949bf9fee8fb646fb8c",
+        "correct": false,
+        "ap": 0.27579365079365076
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "862831ee43a34dad9f7967d2bd73cd74": {
+      "vehicle_id": 1494,
+      "known": true,
+      "confidence": 0.6960588097572327,
+      "raw": {
+        "top1": "fe31af8bdb7c4777bd90f84b6bdf06da",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "6ac6b312bba6439b8d169fa0a5f147e4",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "a20a711ed40248f896bf57180dd9ab46": {
+      "vehicle_id": 963,
+      "known": true,
+      "confidence": 0.4904029965400696,
+      "raw": {
+        "top1": "e2ea631f345e4c21928da5569db690ad",
+        "correct": true,
+        "ap": 0.7000000000000001
+      },
+      "ranking": {
+        "top1": "e2ea631f345e4c21928da5569db690ad",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "65b3a9c5242644b991c400a6ed258b42": {
+      "vehicle_id": 30,
+      "known": true,
+      "confidence": 0.5606926679611206,
+      "raw": {
+        "top1": "30b1987a8a284f72874cec009a742f83",
+        "correct": true,
+        "ap": 0.6261904761904761
+      },
+      "ranking": {
+        "top1": "30b1987a8a284f72874cec009a742f83",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "0a7f35ded3fb4b27b2934a072caacd13": {
+      "vehicle_id": 1095,
+      "known": true,
+      "confidence": 0.6758105754852295,
+      "raw": {
+        "top1": "1194e05ccd15414bae793d4e88bc95bd",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "1194e05ccd15414bae793d4e88bc95bd",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "05809398918346eb894af9947442bc96": {
+      "vehicle_id": 386,
+      "known": true,
+      "confidence": 0.596427321434021,
+      "raw": {
+        "top1": "d55d3dcd951c440d8395fac18663056b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "d55d3dcd951c440d8395fac18663056b",
+        "correct": true,
+        "ap": 0.9761904761904763
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "506693f0873a47239500b9a1fc0224b1": {
+      "vehicle_id": 1401,
+      "known": true,
+      "confidence": 0.694786548614502,
+      "raw": {
+        "top1": "bdb2c91add594cfe9ba838254d7bd418",
+        "correct": true,
+        "ap": 0.8392857142857142
+      },
+      "ranking": {
+        "top1": "1878b774e33140b49cc521336eb70eeb",
+        "correct": true,
+        "ap": 0.7892857142857143
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "8f28abd7a6104e9d84068eb01ea04363": {
+      "vehicle_id": 967,
+      "known": true,
+      "confidence": 0.3496628999710083,
+      "raw": {
+        "top1": "0a07e9dbb2544f50a35f97d55835e1b0",
+        "correct": false,
+        "ap": 0.0
+      },
+      "ranking": {
+        "top1": "0a07e9dbb2544f50a35f97d55835e1b0",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "436e1613137945b4bc3b94083b7592ea": {
+      "vehicle_id": 489,
+      "known": true,
+      "confidence": 0.5250664949417114,
+      "raw": {
+        "top1": "948e670a173e4428ac2abf92ebed643f",
+        "correct": true,
+        "ap": 0.9166666666666666
+      },
+      "ranking": {
+        "top1": "948e670a173e4428ac2abf92ebed643f",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "971d6752521d48149a6e7020100ead4f": {
+      "vehicle_id": 1272,
+      "known": true,
+      "confidence": 0.3070460557937622,
+      "raw": {
+        "top1": "d55d3dcd951c440d8395fac18663056b",
+        "correct": false,
+        "ap": 0.0
+      },
+      "ranking": {
+        "top1": "d55d3dcd951c440d8395fac18663056b",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "c659bb51d42449e387aeef6bd0cd641d": {
+      "vehicle_id": 1402,
+      "known": true,
+      "confidence": 0.4484950304031372,
+      "raw": {
+        "top1": "e3505af9b4cd432e82e19b1720d1337e",
+        "correct": false,
+        "ap": 0.4777777777777777
+      },
+      "ranking": {
+        "top1": "e3505af9b4cd432e82e19b1720d1337e",
+        "correct": false,
+        "ap": 0.03333333333333333
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "651d2bc1cdfd40de80966295ff90ad4a": {
+      "vehicle_id": 1434,
+      "known": true,
+      "confidence": 0.7344399690628052,
+      "raw": {
+        "top1": "75800c15a29a4964a7ec2cbce20135eb",
+        "correct": false,
+        "ap": 0.05555555555555555
+      },
+      "ranking": {
+        "top1": "75800c15a29a4964a7ec2cbce20135eb",
+        "correct": false,
+        "ap": 0.0
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "7dec0d8ab54145149650dc93fe035512": {
+      "vehicle_id": 1331,
+      "known": true,
+      "confidence": 0.8873770236968994,
+      "raw": {
+        "top1": "107f27bf1e1945169726afab00212aec",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "107f27bf1e1945169726afab00212aec",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "db0c88244516406ab2d963e8e991b492": {
+      "vehicle_id": 437,
+      "known": true,
+      "confidence": 0.6300172209739685,
+      "raw": {
+        "top1": "f9f4c5056d834e049b3cebbc8f9686ff",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "1a8890ed47724179b60b4e01d724e9ad",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "12600dde111c4f8488dff25ffbca1b63": {
+      "vehicle_id": 670,
+      "known": true,
+      "confidence": 0.45315825939178467,
+      "raw": {
+        "top1": "51f6fdc27aee4f31a7217bc6a54ae455",
+        "correct": false,
+        "ap": 0.3333333333333333
+      },
+      "ranking": {
+        "top1": "41e367de6ea14be7a4fab9c430c418a0",
+        "correct": false,
+        "ap": 0.2
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "5faef711a85244aca731a0071f300fa0": {
+      "vehicle_id": 177,
+      "known": true,
+      "confidence": 0.515406608581543,
+      "raw": {
+        "top1": "383897e56b23423dbec8a61dfa9f789b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "383897e56b23423dbec8a61dfa9f789b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "9e2cf1c6d98049968417c950745862cd": {
+      "vehicle_id": 599,
+      "known": true,
+      "confidence": 0.5155569911003113,
+      "raw": {
+        "top1": "4f38e347a81a49e9aec89ccbd9ddaae2",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "4f38e347a81a49e9aec89ccbd9ddaae2",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "1074504e236949668d371bdb76cf73f1": {
+      "vehicle_id": 1343,
+      "known": true,
+      "confidence": 0.6575658917427063,
+      "raw": {
+        "top1": "135ed5e19d8642f1abbc1da832f930d8",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "16c96c8da0ea4e8e84cd8c1cd98898f2",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "951ed6910dbc4e53ba29bad366a9f67d": {
+      "vehicle_id": 1365,
+      "known": true,
+      "confidence": 0.7622153759002686,
+      "raw": {
+        "top1": "82dc961a122a4dc5a97ac32021157b71",
+        "correct": false,
+        "ap": 0.4777777777777777
+      },
+      "ranking": {
+        "top1": "82dc961a122a4dc5a97ac32021157b71",
+        "correct": false,
+        "ap": 0.12222222222222223
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "81759ecbedcc481c8379a29c74031195": {
+      "vehicle_id": 345,
+      "known": true,
+      "confidence": 0.4034133851528168,
+      "raw": {
+        "top1": "d37b6f95ee0748c5baf881b888668921",
+        "correct": false,
+        "ap": 0.38888888888888884
+      },
+      "ranking": {
+        "top1": "d37b6f95ee0748c5baf881b888668921",
+        "correct": false,
+        "ap": 0.03333333333333333
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "6b2635b5a54e48cca21469824af78237": {
+      "vehicle_id": 1517,
+      "known": true,
+      "confidence": 0.6612087488174438,
+      "raw": {
+        "top1": "a383addd222c495aab1ef354dfa8040f",
+        "correct": true,
+        "ap": 0.5873015873015873
+      },
+      "ranking": {
+        "top1": "a383addd222c495aab1ef354dfa8040f",
+        "correct": true,
+        "ap": 0.5873015873015873
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "8494745f57bb445a9790e2d2abd5e71b": {
+      "vehicle_id": 23,
+      "known": true,
+      "confidence": 0.661598801612854,
+      "raw": {
+        "top1": "833fd05701f74898afef1c31c2bae668",
+        "correct": true,
+        "ap": 0.8666666666666667
+      },
+      "ranking": {
+        "top1": "f981883fbcce46d2b441ec2890599eee",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "17711da466664a808372408fbbe9fbb6": {
+      "vehicle_id": 426,
+      "known": true,
+      "confidence": 0.7149857878684998,
+      "raw": {
+        "top1": "f7a4cedbf2f44fb8b383c6912e7bb805",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "f7a4cedbf2f44fb8b383c6912e7bb805",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "292bf84b9f984114a8ac1e3f5d2d154d": {
+      "vehicle_id": 395,
+      "known": true,
+      "confidence": 0.5111120939254761,
+      "raw": {
+        "top1": "681cb37301da4297a09a96b466a33430",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "544b3f3385d54b519dbb21d3eed83bd7",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "741cef9f2a9b49f686a6581832de15d3": {
+      "vehicle_id": 803,
+      "known": true,
+      "confidence": 0.5794965028762817,
+      "raw": {
+        "top1": "2c7464e5fddf47cca4b20168b84c0573",
+        "correct": true,
+        "ap": 0.9583333333333334
+      },
+      "ranking": {
+        "top1": "a361f4cf65f34d49aaeed4fe1259c6da",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "b5adc03a32a64586aa1721d3eacaa4cf": {
+      "vehicle_id": 408,
+      "known": true,
+      "confidence": 0.47233378887176514,
+      "raw": {
+        "top1": "9385ede3c22144edbdf01c676d553ad9",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "77bf99479a2d4578af8eef9882e90676",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "a5c156e835944f8aa3ec98c2c2fba089": {
+      "vehicle_id": 1214,
+      "known": true,
+      "confidence": 0.464370995759964,
+      "raw": {
+        "top1": "d9e5789c468c4ef3a082615ae8bfd98e",
+        "correct": true,
+        "ap": 0.9166666666666666
+      },
+      "ranking": {
+        "top1": "d9e5789c468c4ef3a082615ae8bfd98e",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "2d807a07106d4da8a7748653d8c03eeb": {
+      "vehicle_id": 828,
+      "known": true,
+      "confidence": 0.6557328104972839,
+      "raw": {
+        "top1": "888a0f4d19ae43c280df3f34ffae91ff",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "888a0f4d19ae43c280df3f34ffae91ff",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "958f72c61a5a449c90107e9cf643d67d": {
+      "vehicle_id": 294,
+      "known": true,
+      "confidence": 0.7264938950538635,
+      "raw": {
+        "top1": "0e865cc057074d14b13a92416727e020",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "0e865cc057074d14b13a92416727e020",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "5f6646924692441f89e4ffbf6b313311": {
+      "vehicle_id": 800,
+      "known": true,
+      "confidence": 0.5683709383010864,
+      "raw": {
+        "top1": "a9d4cf41d0d04118b29824cd994c710a",
+        "correct": true,
+        "ap": 0.8333333333333334
+      },
+      "ranking": {
+        "top1": "7335d65dd777433485187f345ff05c3f",
+        "correct": true,
+        "ap": 0.8333333333333334
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "6d2d76b1d0ff4d1d8b41296902940ed6": {
+      "vehicle_id": 373,
+      "known": true,
+      "confidence": 0.6515424251556396,
+      "raw": {
+        "top1": "84834495d7474dd69e588c43bd7c2045",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "48dbb5a7d0a14551a1d053aec5b2a3e4",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "9a40c285023f48d29b90890fdbee55c0": {
+      "vehicle_id": 696,
+      "known": true,
+      "confidence": 0.6535391211509705,
+      "raw": {
+        "top1": "2977c87360b24866b60d4ea57cec7fc6",
+        "correct": true,
+        "ap": 0.40740740740740744
+      },
+      "ranking": {
+        "top1": "2977c87360b24866b60d4ea57cec7fc6",
+        "correct": true,
+        "ap": 0.3333333333333333
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "0d5c656fca064cb3904b7416bb3aab29": {
+      "vehicle_id": 834,
+      "known": true,
+      "confidence": 0.646542489528656,
+      "raw": {
+        "top1": "f8a552a02b2b467bbff1bd8fef453ded",
+        "correct": false,
+        "ap": 0.32999999999999996
+      },
+      "ranking": {
+        "top1": "ac136177d5824e2380721c4ceafd8a2a",
+        "correct": false,
+        "ap": 0.2621428571428571
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "b6f50b269fdc4f7ab9bd86cef0f5afc9": {
+      "vehicle_id": 571,
+      "known": true,
+      "confidence": 0.7360841035842896,
+      "raw": {
+        "top1": "176d2d12c3714dbeaa869f403c3f8ec7",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "176d2d12c3714dbeaa869f403c3f8ec7",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "4af2e951c1f84cdcaa4168011cfd1bee": {
+      "vehicle_id": 809,
+      "known": true,
+      "confidence": 0.5545254349708557,
+      "raw": {
+        "top1": "16050b1ecb8a4bc58599967f47d852a5",
+        "correct": true,
+        "ap": 0.9166666666666666
+      },
+      "ranking": {
+        "top1": "16050b1ecb8a4bc58599967f47d852a5",
+        "correct": true,
+        "ap": 0.9166666666666666
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "38d082d9d7d1467c8c65b66e5af571d0": {
+      "vehicle_id": 1090,
+      "known": true,
+      "confidence": 0.6165710091590881,
+      "raw": {
+        "top1": "2fd88ce571b141d3bd17d81011227266",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "c917db5fe3464803aa84f92c8a75c19b",
+        "correct": false,
+        "ap": 0.1037037037037037
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "e57c69c5947649c08712e8f7b5c2736d": {
+      "vehicle_id": 318,
+      "known": true,
+      "confidence": 0.8383957147598267,
+      "raw": {
+        "top1": "36e5e9de99f64ee6b295d0970cc701ed",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "36e5e9de99f64ee6b295d0970cc701ed",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "1276afacfe2e44f0a511fe5e824ee43b": {
+      "vehicle_id": 1267,
+      "known": true,
+      "confidence": 0.6315125226974487,
+      "raw": {
+        "top1": "699e13d9a3f84d34a09edb302a900a37",
+        "correct": false,
+        "ap": 0.3333333333333333
+      },
+      "ranking": {
+        "top1": "efa7fd05ae0f44c9aca2ecc5f86cbdfa",
+        "correct": true,
+        "ap": 0.6984126984126983
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "90661f059276455283c7a8c0902d3733": {
+      "vehicle_id": 435,
+      "known": true,
+      "confidence": 0.6823355555534363,
+      "raw": {
+        "top1": "b6277349c90540d2acd5cbe337d330c5",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "f98ce828274941e3be51c8467ecae943",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "d3fb5901eae14837ad0677b30da62dec": {
+      "vehicle_id": 1161,
+      "known": true,
+      "confidence": 0.7098492980003357,
+      "raw": {
+        "top1": "7006411be2444d4ba109a39cf4e72bca",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "7006411be2444d4ba109a39cf4e72bca",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "ae323732a2ec457d82c66a2be0fd04f4": {
+      "vehicle_id": 1281,
+      "known": true,
+      "confidence": 0.5521940588951111,
+      "raw": {
+        "top1": "dfef730d7e704c20a7991ac62ada4e44",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "dfef730d7e704c20a7991ac62ada4e44",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "c6351eb537fd4ac7b29125c0de308c26": {
+      "vehicle_id": 751,
+      "known": true,
+      "confidence": 0.75124192237854,
+      "raw": {
+        "top1": "9b51879f67304ad180f0ce385fa8cbcf",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "ac136177d5824e2380721c4ceafd8a2a",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "07418c8839044b12a5210a58260eddf8": {
+      "vehicle_id": 28,
+      "known": true,
+      "confidence": 0.690669596195221,
+      "raw": {
+        "top1": "38601e71e958457bb1594eb46e82514a",
+        "correct": true,
+        "ap": 0.3333333333333333
+      },
+      "ranking": {
+        "top1": "38601e71e958457bb1594eb46e82514a",
+        "correct": true,
+        "ap": 0.3333333333333333
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "2082ba5cfcee4b5293d53d11dd940219": {
+      "vehicle_id": 695,
+      "known": true,
+      "confidence": 0.7617828845977783,
+      "raw": {
+        "top1": "cb05cb6476f745508fa414d46e0d62e1",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "102587885b394ff1b73d9af9a6d9254d",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "bfd4e5134c3140d0a4075c9fe7a1d909": {
+      "vehicle_id": 521,
+      "known": true,
+      "confidence": 0.533599853515625,
+      "raw": {
+        "top1": "5eb9cce498104e90890e62561d300e91",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "0b741dcbeb564891a80ce18d0144a3e4",
+        "correct": false,
+        "ap": 0.4666666666666666
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "2548709da3124ff3b8bd929ca9b3529f": {
+      "vehicle_id": 419,
+      "known": true,
+      "confidence": 0.631854772567749,
+      "raw": {
+        "top1": "21a7f4b6e4354de6bb0f105d5d596128",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "21a7f4b6e4354de6bb0f105d5d596128",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "a36f03c650d74f54878be23be409afbc": {
+      "vehicle_id": 299,
+      "known": true,
+      "confidence": 0.7069602012634277,
+      "raw": {
+        "top1": "932f170e51c740a5a5d37bc9c255ba9c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "932f170e51c740a5a5d37bc9c255ba9c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "93fd5f78614a47c89cffcb8f556be87b": {
+      "vehicle_id": 170,
+      "known": true,
+      "confidence": 0.6082143783569336,
+      "raw": {
+        "top1": "1f4e759d3fa94fa1b0541b146a40e1d9",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "b805494f5464419a919efe1ff113cdc0",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "3992c31354bc4fb3beb28dc425afa650": {
+      "vehicle_id": 102,
+      "known": true,
+      "confidence": 0.8034820556640625,
+      "raw": {
+        "top1": "ca6374c8598046dbb2b50a08b573f76a",
+        "correct": false,
+        "ap": 0.24206349206349206
+      },
+      "ranking": {
+        "top1": "ca6374c8598046dbb2b50a08b573f76a",
+        "correct": false,
+        "ap": 0.24206349206349206
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "773b4c5fde76459fb8942eaa440c22ba": {
+      "vehicle_id": 425,
+      "known": true,
+      "confidence": 0.7240741848945618,
+      "raw": {
+        "top1": "c1d0922ac9e34ae9af99477060b9335b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "c1d0922ac9e34ae9af99477060b9335b",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "8431b110a82f420d89fb3bffafadf74f": {
+      "vehicle_id": 1133,
+      "known": true,
+      "confidence": 0.5780413150787354,
+      "raw": {
+        "top1": "b772c296c8d442e1bb364bd0b979ba2c",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "9bb391cc299f46dda9707c10594c7aa9",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "41eaba4999d34e4f82936440ce29c1e3": {
+      "vehicle_id": 1422,
+      "known": true,
+      "confidence": 0.4617237150669098,
+      "raw": {
+        "top1": "fa7ab7f62ca84dd38d417ba413a175fc",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "fa1e68a72abf44849cd9ec5327888853",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "ab34af2488ac4b7a9ff6e04196bc5478": {
+      "vehicle_id": 364,
+      "known": true,
+      "confidence": 0.5848078727722168,
+      "raw": {
+        "top1": "0bf91dc1a7cd4cd88488209466b6b915",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "0bf91dc1a7cd4cd88488209466b6b915",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "4964513c6c5946858e2c844b5b4a9c8b": {
+      "vehicle_id": 792,
+      "known": true,
+      "confidence": 0.623367428779602,
+      "raw": {
+        "top1": "00dc933848c24d9f83daf1659bd42ede",
+        "correct": true,
+        "ap": 0.8
+      },
+      "ranking": {
+        "top1": "e26dc343130e4e7a8b87a3aee549e0d7",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "905a2521dd53412588b3cea25ffa7a9a": {
+      "vehicle_id": 1044,
+      "known": true,
+      "confidence": 0.8028204441070557,
+      "raw": {
+        "top1": "c49df913cb1c4b24b6a7c3d90ebfd915",
+        "correct": true,
+        "ap": 0.755952380952381
+      },
+      "ranking": {
+        "top1": "c49df913cb1c4b24b6a7c3d90ebfd915",
+        "correct": true,
+        "ap": 0.8095238095238095
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "b1f45fe268584c4ea1bd858f985db985": {
+      "vehicle_id": 41,
+      "known": true,
+      "confidence": 0.5662075281143188,
+      "raw": {
+        "top1": "483ad021c5b34e81b40f8233e6860397",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "483ad021c5b34e81b40f8233e6860397",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "d7e0b81431b84c758eca199359a7531f": {
+      "vehicle_id": 875,
+      "known": true,
+      "confidence": 0.5976639986038208,
+      "raw": {
+        "top1": "cd976cb253c34b29ac8c78bfe134102a",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "cd976cb253c34b29ac8c78bfe134102a",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "649f6c21909f41e8afde06370e46701e": {
+      "vehicle_id": 284,
+      "known": true,
+      "confidence": 0.4699172377586365,
+      "raw": {
+        "top1": "61e63ea5622b49168a66267abbd94511",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "ea2d8549270b4fea924db157e9b365e4",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "9822c7481f8c424fb6dc8b22d19c8645": {
+      "vehicle_id": 581,
+      "known": true,
+      "confidence": 0.7056388854980469,
+      "raw": {
+        "top1": "50a9e3ea1cdf440297563ae695074b89",
+        "correct": false,
+        "ap": 0.03333333333333333
+      },
+      "ranking": {
+        "top1": "50a9e3ea1cdf440297563ae695074b89",
+        "correct": false,
+        "ap": 0.03333333333333333
+      },
+      "confidence_group": "known_wrong_raw"
+    },
+    "e4536f4645ce4f0ead7143d505079799": {
+      "vehicle_id": 285,
+      "known": true,
+      "confidence": 0.6579442024230957,
+      "raw": {
+        "top1": "86f18847a55549bc9cdc60eccf251e6a",
+        "correct": true,
+        "ap": 1.0
+      },
+      "ranking": {
+        "top1": "86f18847a55549bc9cdc60eccf251e6a",
+        "correct": true,
+        "ap": 1.0
+      },
+      "confidence_group": "known_correct_raw"
+    },
+    "ea2b0f0f25ea4ba8bcab8642ec35db31": {
+      "vehicle_id": 1467,
+      "known": true,
+      "confidence": 0.4699546992778778,
+      "raw": {
+        "top1": "9a0c6386081842e4959025ce7c45016c",
+        "correct": false,
+        "ap": 0.33730158730158727
+      },
+      "ranking": {
+        "top1": "9a0c6386081842e4959025ce7c45016c",
+        "correct": false,
+        "ap": 0.3194444444444444
+      },
+      "confidence_group": "known_wrong_raw"
+    }
+  },
+  "top1_transitions": {
+    "correct_to_wrong": 8,
+    "wrong_to_correct": 7
+  },
+  "confidence_before_threshold": {
+    "unknown": {
+      "count": 61,
+      "quantiles_10_50_90": [
+        0.364797443151474,
+        0.47124335169792175,
+        0.6730706691741943
+      ]
+    },
+    "known_correct_raw": {
+      "count": 205,
+      "quantiles_10_50_90": [
+        0.5230781197547912,
+        0.661598801612854,
+        0.8016244292259216
+      ]
+    },
+    "known_wrong_raw": {
+      "count": 41,
+      "quantiles_10_50_90": [
+        0.40626755356788635,
+        0.536304771900177,
+        0.7397545576095581
+      ]
+    }
+  },
+  "all_query_PR_AUC_before_threshold": 0.9353574974068712
+}

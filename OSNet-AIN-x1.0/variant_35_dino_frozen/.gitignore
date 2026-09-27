@@ -1,0 +1,5 @@
+.deps/
+weights/
+cache/
+runs/**/features*.npy
+runs/**/block_*.npy
