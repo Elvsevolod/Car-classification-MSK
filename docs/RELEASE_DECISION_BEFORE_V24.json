@@ -1,0 +1,20 @@
+{
+  "active_profile": "MVP_legacy",
+  "candidate_profile": "RC_R1_equal3_v18",
+  "reserve_profile": "RC_R1_single_v18",
+  "promoted": false,
+  "official_submission_ready": false,
+  "local_acceptance_passed": true,
+  "verification_scope": "full supplied dataset: 1110 queries, 750 gallery images; CPU macOS arm64 and offline Linux arm64 container",
+  "verification_run": "artifacts/release_verification/full_20260926",
+  "verification_evidence": "docs/RELEASE_VERIFICATION_EVIDENCE.json",
+  "verification_evidence_sha256": "5a1713e0a583467b2292f5eb5a2eaf220d5370c9a8c639296d712414ac0dd55f",
+  "verification_runtime_unchanged": true,
+  "open_checks": [
+    "GPU CUDA and native Linux amd64 acceptance",
+    "Residual license-plate signal is not proven absent",
+    "Official extractor.py interface has not been supplied",
+    "Junk/top-10 truncation ambiguity requires organizer clarification",
+    "Presentation and submission links are a separate checklist"
+  ]
+}

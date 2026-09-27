@@ -1,3 +1,4 @@
+// Legacy fallback: production Docker serves React from frontend/dist. Kept for source-level FastAPI tests.
 const $ = id => document.getElementById(id);
 const canvas = $('canvas');
 const context = canvas.getContext('2d');

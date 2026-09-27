@@ -1,0 +1,23 @@
+services:
+  postgres-test:
+    image: pgvector/pgvector:0.8.6-pg16-bookworm
+    environment:
+      POSTGRES_DB: vehicle_reid_test
+      POSTGRES_USER: vehicle_reid_test
+      POSTGRES_PASSWORD: vehicle-reid-test
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test
+    environment:
+      DATABASE_URL: postgresql://vehicle_reid_test:vehicle-reid-test@postgres-test:5432/vehicle_reid_test
+    depends_on:
+      postgres-test:
+        condition: service_healthy

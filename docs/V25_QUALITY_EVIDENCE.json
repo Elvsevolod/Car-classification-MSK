@@ -1,0 +1,106 @@
+{
+  "source_signature": "0d72bee94427ed4f3ad2cd718bd693d24123a048b94ac7075d029038c8733c71",
+  "source_results_sha256": "922dce2f169062ae2ce05c783c34db1728bf707664cdb39085e9001605dce223",
+  "selection": {
+    "signature": "0d72bee94427ed4f3ad2cd718bd693d24123a048b94ac7075d029038c8733c71",
+    "selection_split": "calibration",
+    "selected": {
+      "name": "r1w50_k20_q3_l50",
+      "k1": 20,
+      "k2": 3,
+      "lambda": 0.5,
+      "r1_weight": 0.5
+    },
+    "evaluations": [
+      {
+        "name": "r1w00_k20_q3_l50",
+        "k1": 20,
+        "k2": 3,
+        "lambda": 0.5,
+        "r1_weight": 0.0
+      },
+      {
+        "name": "r1w50_k20_q3_l50",
+        "k1": 20,
+        "k2": 3,
+        "lambda": 0.5,
+        "r1_weight": 0.5
+      }
+    ],
+    "promoted": false
+  },
+  "baseline": {
+    "system": {
+      "name": "r1w00_k20_q3_l50",
+      "k1": 20,
+      "k2": 3,
+      "lambda": 0.5,
+      "r1_weight": 0.0
+    },
+    "threshold": 0.534365177154541,
+    "ranking": {
+      "n_scored": 247,
+      "n_openset_excluded": 62,
+      "mAP@10": 0.8146886982413298,
+      "Rank-1": 0.8016194331983806,
+      "Rank-5": 0.8825910931174089
+    },
+    "candidates": {
+      "TP": 175,
+      "FP": 43,
+      "FN": 47,
+      "TN": 44,
+      "n_openset_queries": 62,
+      "Precision": 0.8027522935779816,
+      "Recall": 0.7882882882882883,
+      "F1": 0.7954545454545456,
+      "TNR": 0.7096774193548387,
+      "PR-AUC": 0.924077581204396,
+      "C": 0.7697214076246335,
+      "open_set_FP": 18
+    },
+    "protocol_sha256": "6deb6d91e6daab52a2bb69c3ea9d9e6e25f05081a2270bc51626cbf9ef2bf020"
+  },
+  "winner": {
+    "system": {
+      "name": "r1w50_k20_q3_l50",
+      "k1": 20,
+      "k2": 3,
+      "lambda": 0.5,
+      "r1_weight": 0.5
+    },
+    "threshold": 0.534365177154541,
+    "ranking": {
+      "n_scored": 247,
+      "n_openset_excluded": 62,
+      "mAP@10": 0.8289573904235558,
+      "Rank-1": 0.8299595141700404,
+      "Rank-5": 0.8785425101214575
+    },
+    "candidates": {
+      "TP": 175,
+      "FP": 43,
+      "FN": 47,
+      "TN": 44,
+      "n_openset_queries": 62,
+      "Precision": 0.8027522935779816,
+      "Recall": 0.7882882882882883,
+      "F1": 0.7954545454545456,
+      "TNR": 0.7096774193548387,
+      "PR-AUC": 0.924077581204396,
+      "C": 0.7697214076246335,
+      "open_set_FP": 18
+    },
+    "protocol_sha256": "6deb6d91e6daab52a2bb69c3ea9d9e6e25f05081a2270bc51626cbf9ef2bf020"
+  },
+  "delta": {
+    "mAP_delta": 0.014268692182225928,
+    "C_delta": 0.0,
+    "improved": 34,
+    "worsened": 21,
+    "unchanged": 192
+  },
+  "protected_files_verified": 2226,
+  "task_receipts_verified": 86,
+  "scope": "observed development validation, not hidden test"
+}

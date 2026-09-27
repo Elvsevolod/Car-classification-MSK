@@ -1,0 +1,7 @@
+# Add after the existing review-fixes Compose files; keep their ports, DB and volumes.
+services:
+  vehicle-reid:
+    image: vehicle-reid:dual-role-v24
+    environment:
+      REID_PROFILE: ${REID_PROFILE:-MVP_dual_role_v24}
+      REID_PROVIDER: CPUExecutionProvider

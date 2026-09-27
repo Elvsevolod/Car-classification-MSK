@@ -1,0 +1,27 @@
+{
+  "active_profile": "MVP_fusion_v25",
+  "rollback_profile": "MVP_dual_role_v24",
+  "legacy_profile": "MVP_legacy",
+  "promoted": true,
+  "authority": "explicit user approval after v25 review",
+  "quality_evidence": "docs/V25_QUALITY_EVIDENCE.json",
+  "quality_evidence_sha256": "a5a5fcd65bf28d5984399236a84b21cda41e231bf0d52a856cb82046e13a7eca",
+  "official_submission_ready": false,
+  "local_acceptance_passed": true,
+  "verification_scope": "v25 promotion: full original validation CPU macOS decision parity, independent fresh research CLI parity, 91 application tests including disposable PostgreSQL and rollback, live Docker/PostgreSQL browser smoke; not full GPU/Linux acceptance",
+  "verification_evidence": "docs/V25_APPLICATION_EVIDENCE.json",
+  "verification_evidence_sha256": "4bd368913689bbc9694a84dfe20a1f6803175430593a0db04ae9269631038e99",
+  "live_demo": "http://127.0.0.1:8000",
+  "live_image": "vehicle-reid:fusion-v25",
+  "live_image_sha256": "8dd6cc07abfe80c5b503a5f3e174d43aa5dea66ffc3f62511788942d730e238e",
+  "application_tests_passed": 91,
+  "research_tests_passed": 134,
+  "previous_release_decision": "docs/RELEASE_DECISION_BEFORE_V25.json",
+  "open_checks": [
+    "GPU CUDA and native Linux amd64 acceptance",
+    "Residual license-plate signal is not proven absent",
+    "Official extractor.py interface has not been supplied",
+    "Junk/top-10 truncation ambiguity requires organizer clarification",
+    "Presentation and submission links are a separate checklist"
+  ]
+}

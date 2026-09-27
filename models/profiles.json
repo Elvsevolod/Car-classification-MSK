@@ -1,0 +1,67 @@
+{
+  "MVP_legacy": {
+    "kind": "legacy",
+    "size": 208,
+    "dimension": 512,
+    "calibration": "models/calibration.json",
+    "calibration_sha256": "1022a9a830cc3d2bfec5a569469476d8516338ddad91558d2420e435d96942b5",
+    "ranking": "legacy",
+    "candidate_policy": "ranking_top1",
+    "lambda": 0.5
+  },
+  "RC_R1_equal3_v18": {
+    "kind": "policy",
+    "size": 256,
+    "dimension": 1536,
+    "bundle": "models/frozen/OSNet-AIN-x1.0/variant_18_retrieval_policy/runs/policy_v1/final/R1_equal3/less_graph/raw_top1/bundle.json",
+    "bundle_sha256": "f911643a916f4287b0d78941cc1c35db228bef1153a195beb9e9789f580c5fcc",
+    "ranking": "less_graph",
+    "candidate_policy": "raw_top1",
+    "lambda": 0.75,
+    "metrics": "models/RC_R1_equal3_v18.metrics.json",
+    "metrics_sha256": "5923de58ed682be7f842fe2a3e7dadccccfe9490983eb5b1bbcf2d40db441dc0"
+  },
+  "RC_R1_single_v18": {
+    "kind": "policy",
+    "size": 256,
+    "dimension": 512,
+    "bundle": "models/frozen/OSNet-AIN-x1.0/variant_18_retrieval_policy/runs/policy_v1/final/R1_resolution256_20260915/less_graph/raw_top1/bundle.json",
+    "bundle_sha256": "89127d7d1b115634dc907c9c9dc64861ae366a2d99889ed10738a831eeb39628",
+    "ranking": "less_graph",
+    "candidate_policy": "raw_top1",
+    "lambda": 0.75,
+    "metrics": "models/RC_R1_single_v18.metrics.json",
+    "metrics_sha256": "22bdb91d9025e08c802b7648c398f6943caa32afe470b7364eefa28ab0736d40"
+  },
+  "MVP_dual_role_v24": {
+    "kind": "dual_role",
+    "size": [
+      208,
+      256
+    ],
+    "dimension": 2048,
+    "bundle": "models/frozen/OSNet-AIN-x1.0/variant_18_retrieval_policy/runs/policy_v1/final/R1_equal3/less_graph/raw_top1/bundle.json",
+    "bundle_sha256": "f911643a916f4287b0d78941cc1c35db228bef1153a195beb9e9789f580c5fcc",
+    "ranking": "legacy",
+    "candidate_policy": "raw_top1",
+    "lambda": 0.5,
+    "metrics": "models/MVP_dual_role_v24.metrics.json",
+    "metrics_sha256": "2dcf98ce59b7c1bdb3e86156d2af88e91ded95ff1d9c9da10c8298d18096c31a"
+  },
+  "MVP_fusion_v25": {
+    "kind": "dual_role",
+    "size": [
+      208,
+      256
+    ],
+    "dimension": 2048,
+    "bundle": "models/frozen/OSNet-AIN-x1.0/variant_18_retrieval_policy/runs/policy_v1/final/R1_equal3/less_graph/raw_top1/bundle.json",
+    "bundle_sha256": "f911643a916f4287b0d78941cc1c35db228bef1153a195beb9e9789f580c5fcc",
+    "ranking": "legacy",
+    "candidate_policy": "raw_top1",
+    "lambda": 0.5,
+    "metrics": "models/MVP_fusion_v25.metrics.json",
+    "metrics_sha256": "630612e80f07cc233fb7e07bbe1c6fcbe3c13f494d974edf4c3f5af5890499ff",
+    "r1_weight": 0.5
+  }
+}

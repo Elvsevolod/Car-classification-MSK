@@ -1,4 +1,5 @@
 import csv
+import io
 import numpy as np
 import pytest
 from fastapi.testclient import TestClient
@@ -6,6 +7,7 @@ from PIL import Image
 
 from backend.app import create_app
 from backend.core import Encoder, Gallery, normalize, preprocess, rank, read_rows
+from backend.gallery_repository import SQLiteGalleryRepository
 from backend.evaluate import (CANDIDATES_HEADER, calibrate,
                               make_protocol, make_splits, metrics, ranked_queries,
                               threshold_curve, validate_artifacts)
@@ -196,9 +198,17 @@ def tiny_dataset(tmp_path_factory):
 
 @pytest.fixture(scope="module")
 def client(tiny_dataset, tmp_path_factory):
-    app = create_app(tiny_dataset, tmp_path_factory.mktemp("artifacts"))
+    artifacts = tmp_path_factory.mktemp("artifacts")
+    app = create_app(tiny_dataset, artifacts, SQLiteGalleryRepository(artifacts / "gallery.db"), profile="MVP_legacy")
     with TestClient(app) as client:
         yield client
+
+
+def test_mutable_artifacts_cannot_override_bundled_calibration(tiny_dataset, tmp_path):
+    (tmp_path / "baseline_metrics.json").write_text('{"threshold": -1}')
+    app = create_app(tiny_dataset, tmp_path, SQLiteGalleryRepository(tmp_path / "gallery.db"), profile="MVP_legacy")
+    with TestClient(app) as isolated:
+        assert isolated.get("/api/health").json()["default_threshold"] == 0.5948754549026489
 
 
 def test_api_actual_osnet_matches_upload_and_query(client, tiny_dataset):
@@ -209,6 +219,8 @@ def test_api_actual_osnet_matches_upload_and_query(client, tiny_dataset):
     by_id = client.post("/api/search/query", json={"query_id": row["image_id"]})
     assert uploaded.status_code == by_id.status_code == 200
     assert uploaded.json()["results"] == by_id.json()["results"]
+    assert uploaded.json()["confidence"] == pytest.approx(by_id.json()["confidence"])
+    assert -1 <= uploaded.json()["confidence"] <= 1
     assert "rerank_score" in uploaded.json()["results"][0]
     embedded = client.post("/api/embedding", data=data, files={"image": ("q.jpg", content)})
     assert embedded.status_code == 200
@@ -233,18 +245,45 @@ def test_api_bbox_bounds_and_file_type(client, tiny_dataset):
     assert client.post("/api/search", data={"x": 0, "y": 0, "w": -1, "h": 10}, files={"image": ("q.jpg", content)}).status_code == 422
 
 
-def test_api_refusal_and_no_fabricated_threshold(client):
+def test_api_rejects_unsupported_and_oversized_uploads(client):
+    gif = io.BytesIO()
+    Image.new("RGB", (10, 10), "red").save(gif, format="GIF")
+    data = {"x": 0, "y": 0, "w": 1, "h": 1}
+    unsupported = client.post("/api/search", data=data,
+                              files={"image": ("car.gif", gif.getvalue(), "image/gif")})
+    assert unsupported.status_code == 415
+
+    oversized = client.post("/api/search", data=data,
+                            files={"image": ("car.jpg", b"x" * (15 * 1024 * 1024 + 1), "image/jpeg")})
+    assert oversized.status_code == 413
+
+
+def test_api_refusal_and_bundled_threshold_on_fresh_artifacts(client):
     payload = {"query_id": "0" * 31 + "2", "mode": "candidates"}
-    assert client.post("/api/search/query", json=payload).status_code == 409
+    default = client.post("/api/search/query", json=payload)
+    assert default.status_code == 200
+    assert default.json()["threshold"] == 0.5948754549026489
+    assert default.json()["threshold_source"] == "calibration"
+    assert client.get("/api/health").json()["default_threshold"] == default.json()["threshold"]
+    assert client.get("/api/metrics").json()["threshold"] == default.json()["threshold"]
     response = client.post("/api/search/query", json={**payload, "threshold": 1})
     assert response.status_code == 200
     assert response.json()["refused"] is True
-    assert response.json()["results"] == []
+    assert len(response.json()["results"]) == 2  # ranking is retained independently of refusal
+    assert response.json()["accepted_candidate"] is None
+    assert response.json()["demo_threshold_override"] is True
+    assert response.json()["threshold_source"] == "manual"
+    assert -1 <= response.json()["confidence"] <= 1
 
 
 def test_frontend_and_openapi(client):
-    assert client.get("/").status_code == 200
-    assert client.get("/static/app.js").status_code == 200
+    index = client.get("/")
+    assert index.status_code == 200
+    # Docker tests serve the React production bundle; source-only pytest keeps the documented legacy fallback.
+    if "/static/assets/" in index.text:
+        assert "/static/assets/" in index.text
+    else:
+        assert client.get("/static/app.js").status_code == 200
     health = client.get("/api/health").json()
     assert health["fine_tuned"] is True
     assert "epoch 5" in health["model"]
@@ -252,12 +291,17 @@ def test_frontend_and_openapi(client):
                                    "k2": 3, "lambda": .5, "refusal_score": "maximum raw cosine"}
     schema = client.get("/openapi.json").json()
     assert "SearchResponse" in schema["components"]["schemas"]
+    docs = client.get("/docs").text
+    assert "/static/vendor/swagger-ui/swagger-ui-bundle.js" in docs
+    assert "/static/vendor/swagger-ui/swagger-ui.css" in docs
+    assert "https://" not in docs
 
 
 def test_gallery_cache_and_batch_parity(tiny_dataset, tmp_path):
     encoder = Encoder()
-    gallery = Gallery(encoder, tiny_dataset, tmp_path / "gallery.db")
-    reloaded = Gallery(encoder, tiny_dataset, tmp_path / "gallery.db")
+    repository = SQLiteGalleryRepository(tmp_path / "gallery.db")
+    gallery = Gallery(encoder, tiny_dataset, repository=repository)
+    reloaded = Gallery(encoder, tiny_dataset, repository=repository)
     np.testing.assert_array_equal(gallery.vectors, reloaded.vectors)
     row = gallery.rows[0]
     with Image.open(tiny_dataset / "images" / f"{row['image_id']}.jpg") as image:
@@ -272,7 +316,7 @@ def test_gallery_cache_and_batch_parity(tiny_dataset, tmp_path):
     original = path.read_bytes()
     try:
         Image.new("RGB", (100, 80), "red").save(path)
-        changed = Gallery(encoder, tiny_dataset, tmp_path / "gallery.db")
+        changed = Gallery(encoder, tiny_dataset, repository=repository)
         assert changed.fingerprint != gallery.fingerprint
     finally:
         path.write_bytes(original)
@@ -280,7 +324,9 @@ def test_gallery_cache_and_batch_parity(tiny_dataset, tmp_path):
 
 def test_actual_export_has_no_submission_header(tiny_dataset, tmp_path):
     from backend.evaluate import export
-    result = export(Encoder(), {"threshold": 1.0}, tiny_dataset, tmp_path)
+    result = export(
+        Encoder(), {"threshold": 1.0}, tiny_dataset, tmp_path, SQLiteGalleryRepository(tmp_path / "gallery.db")
+    )
     assert result["submission_rows"] == 1
     assert result["embedding_shape"] == [3, 512]
     with (tmp_path / "submission.csv").open(newline="") as stream:
