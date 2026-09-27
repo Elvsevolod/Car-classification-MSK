@@ -1,0 +1,6 @@
+services:
+  vehicle-reid:
+    image: vehicle-reid:fusion-v25
+    environment:
+      REID_PROFILE: ${REID_PROFILE:-MVP_fusion_v25}
+      REID_PROVIDER: CPUExecutionProvider

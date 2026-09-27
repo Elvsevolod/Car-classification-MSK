@@ -90,7 +90,7 @@ def rank(scores, top_k):
 
 class Encoder:
     """Проверяет bundled ONNX-модель и преобразует crop автомобиля в L2-нормированный 512-D embedding."""
-    def __init__(self, model_path=MODEL):
+    def __init__(self, model_path=MODEL, provider="CPUExecutionProvider"):
         model_path = Path(model_path)
         expected_checksum = {
             MODEL.resolve(): MODEL_SHA384,
@@ -104,12 +104,13 @@ class Encoder:
             raise ValueError("OSNet checksum mismatch for bundled checkpoint")
         self.model_sha256 = sha256(model_path)
         self.fingerprint = hashlib.sha256((self.model_sha256 + PREPROCESS).encode()).hexdigest()
-        options = ort.SessionOptions()
-        options.intra_op_num_threads = 2
-        options.inter_op_num_threads = 1
-        options.log_severity_level = 3
-        self.session = ort.InferenceSession(str(model_path), sess_options=options, providers=["CPUExecutionProvider"])
+        from .frozen_encoder import _session
+        self.session = _session(model_path, provider)
+        self.provider = provider
+        self.dimension, self.size = 512, 208
         self.input_name = self.session.get_inputs()[0].name
+
+    preprocess = staticmethod(preprocess)
 
     def encode_batch(self, batch, flip_tta=False):
         inputs = np.stack(batch)

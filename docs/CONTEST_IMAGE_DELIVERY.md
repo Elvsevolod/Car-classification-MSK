@@ -2,7 +2,7 @@
 
 ## Цель
 
-Передать жюри воспроизводимые Linux-образы приложения и PostgreSQL + pgvector. Обязательный запуск формирует `submission.csv`, `embeddings.npy` и `candidates.csv` из смонтированных `images/` и CSV без доступа в интернет.
+Передать жюри воспроизводимый Linux-образ приложения. Обязательный автономный запуск формирует `submission.csv`, `embeddings.npy` и `candidates.csv` из смонтированных `images/`, `test_query.csv` и `test_gallery.csv` без доступа в интернет, PostgreSQL или `train.csv`. Образ PostgreSQL + pgvector дополнительно нужен для необязательного web-демо.
 
 Исходный код, Dockerfile, docker-compose.yml, README и файл зависимостей остаются обязательной частью репозитория. Docker-архив — дополнительный способ исключить скачивание образов и Python-пакетов на закрытом стенде.
 
@@ -36,10 +36,10 @@ docker image inspect pgvector/pgvector:0.8.6-pg16-bookworm \
 
 ```bash
 docker tag vehicle-reid:contest-amd64 vehicle-reid:local
-docker compose --profile inference run --rm --pull never inference
+docker compose --profile inference run --rm --no-deps --pull never inference
 ```
 
-Перед export Compose автоматически выполнит `dataset-init`: сервис копирует внешний датасет во внутренний Docker volume, поэтому права исходной папки на Linux не влияют на non-root runtime. На первом запуске требуется дополнительное место, примерно равное размеру датасета.
+Batch запускает `python -m backend.infer --dataset /data --output /out`, читает исходный датасет read-only и пишет напрямую в `./artifacts`. Он не запускает `dataset-init`, миграции или БД и не требует дополнительной копии датасета. Порог и отчёт калибровки входят в образ (`models/calibration.json`); пересчёта порога на тестовых данных нет.
 
 Убедиться, что в `./artifacts/` появились:
 
@@ -50,11 +50,12 @@ docker compose --profile inference run --rm --pull never inference
 Проверить форматы после экспорта:
 
 ```bash
-docker compose --profile inference run --rm --pull never \
-  --entrypoint python inference -m backend.evaluate --validate-only
+docker compose --profile inference run --rm --no-deps --pull never \
+  -e DATASET_DIR=/data --entrypoint python inference \
+  -m backend.evaluate --validate-only --output /out
 ```
 
-Контейнеры общаются только по внутренней Docker-сети; внешние загрузки при runtime не требуются. Поэтому перед передачей оба образа должны быть уже загружены локально.
+Внешние загрузки при runtime не требуются. Для batch достаточно заранее загруженного образа приложения; для web-демо дополнительно нужен образ PostgreSQL. Проверка `--pull never` исключает pull, но полную автономность нужно отдельно подтвердить запуском без доступа в сеть на целевом стенде.
 
 ## Упаковка и передача
 
@@ -72,16 +73,16 @@ shasum -a 256 vehicle-reid-contest-amd64.tar > vehicle-reid-contest-amd64.tar.sh
 ```bash
 docker load --input vehicle-reid-contest-amd64.tar
 docker tag vehicle-reid:contest-amd64 vehicle-reid:local
-docker compose --profile inference run --rm --pull never inference
+docker compose --profile inference run --rm --no-deps --pull never inference
 ```
 
-Для inference и полного demo-сервиса требуется также локально доступный образ `pgvector/pgvector:0.8.6-pg16-bookworm`; он является частью поставки PostgreSQL-only.
+Для полного demo-сервиса дополнительно нужен локально доступный образ `pgvector/pgvector:0.8.6-pg16-bookworm`; обязательный inference от него не зависит. Архив выше включает оба образа для удобства запуска обоих сценариев.
 
 ## Финальный чек-лист
 
 - [ ] Git-репозиторий содержит исходный код, Dockerfile, docker-compose.yml, README и документацию.
 - [ ] `vehicle-reid:contest-amd64` имеет архитектуру `linux/amd64`.
 - [ ] Проверен one-command inference в `./artifacts/`.
-- [ ] Валидатор проходит через Compose после PostgreSQL-backed inference без внешних загрузок.
+- [ ] Валидатор проходит через Compose после автономного inference без `train.csv`, БД и внешних загрузок.
 - [ ] Архив образа и SHA-256 переданы отдельно от Git.
 - [ ] В README указаны внешние модели, библиотеки и версии.

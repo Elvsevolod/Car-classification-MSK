@@ -1,0 +1,103 @@
+{
+  "profile": "MVP_fusion_v25",
+  "counts": {
+    "queries": 309,
+    "gallery": 896,
+    "embedding_shape": [
+      1205,
+      2048
+    ],
+    "embedding_dtype": "float32",
+    "submission_rows": 309,
+    "candidate_rows": 218,
+    "accepted_queries": 218,
+    "refused_queries": 91
+  },
+  "parity": {
+    "passed": true,
+    "max_abs_embedding_error": 0.0,
+    "max_abs_confidence_error": 1.2516975402832031e-06,
+    "atol": 2e-05,
+    "changed_top10": [],
+    "changed_candidate_or_refusal": [],
+    "queries": 309
+  },
+  "runtime": {
+    "profile": "MVP_fusion_v25",
+    "model": "MVP_fusion_v25",
+    "provider": "CPUExecutionProvider",
+    "dimension": 2048,
+    "image_size": [
+      208,
+      256
+    ],
+    "profile_fingerprint": "bc58613e39c634d9820b25dd0f670a039526fbda82a2873bb21c499b4cdde778",
+    "encoder_fingerprint": "3a576f41744f2fceb40b042e5e9f500f75b9194c0f5c52dd142d26002d6bc717",
+    "implementation_sha256": {
+      "core.py": "bcbc75fffa88b86894fd80d7048f6fb9ee566149ce874ebbf687ffebb0713cf8",
+      "frozen_encoder.py": "8cd1cafb3e045e56849fb781a88806fc72aff155301d39ea83e9fee082d463b5",
+      "runtime.py": "3c8d5dca17329ecf56fe20692dde58f9bd21a3e67338046191473b1bd0276954",
+      "rerank.py": "7490f288e42a8d42540604e2ad165f40805100f0a1ce42967e13e17af09adc7f",
+      "images.py": "6ae43611a3addd8a53d85c242280d00ac5bb8f4158b04106da1861dcdf68f360",
+      "dual_role.py": "d37e58e34c763048bb529736f24b58dbffbb19282439099293ab9fbfabce6b65"
+    },
+    "ranking_policy": "legacy",
+    "candidate_policy": "raw_top1",
+    "frozen_threshold": 0.534365177154541,
+    "preprocessing": {
+      "ranking": "exif-rgb-bbox-bilinear208-imagenet-l2-v1",
+      "candidate": {
+        "image_size": 256,
+        "resize_mode": "square",
+        "interpolation": "bilinear",
+        "decode": "EXIF-oriented RGB",
+        "crop": "organizer xywh before resize",
+        "mean": [
+          0.48500001430511475,
+          0.4560000002384186,
+          0.4059999883174896
+        ],
+        "std": [
+          0.2290000021457672,
+          0.2240000069141388,
+          0.22499999403953552
+        ],
+        "scale": 255,
+        "layout": "NCHW",
+        "l2_normalized": true,
+        "flip_tta": false
+      },
+      "layout": {
+        "ranking": [
+          0,
+          512
+        ],
+        "candidate": [
+          512,
+          2048
+        ],
+        "normalization": "unit blocks, no global renormalization"
+      }
+    },
+    "l2_normalized": false,
+    "embedding_layout": {
+      "ranking": [
+        0,
+        512
+      ],
+      "candidate": [
+        512,
+        2048
+      ],
+      "normalization": "unit blocks, no global renormalization"
+    },
+    "ranking_model": "MVP_legacy + R1_equal3 (50/50)",
+    "ranking_r1_weight": 0.5,
+    "candidate_model": "RC_R1_equal3_v18"
+  },
+  "source_results_sha256": "922dce2f169062ae2ce05c783c34db1728bf707664cdb39085e9001605dce223",
+  "fresh_images": true,
+  "training": false,
+  "threshold_fit": false,
+  "scope": "full original validation CPU macOS; not GPU/Linux acceptance"
+}

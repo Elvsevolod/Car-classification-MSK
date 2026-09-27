@@ -7,4 +7,5 @@ numpy>=2.2,<3
 pandas>=2.2,<4
 Pillow>=11.3,<13
 onnxruntime>=1.22,<2
+onnx==1.22.0
 psycopg[binary]>=3.3,<3.4

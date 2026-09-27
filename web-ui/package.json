@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/license-notices.mjs",
     "lint": "oxlint",
     "preview": "vite preview",
     "test:e2e": "playwright test"

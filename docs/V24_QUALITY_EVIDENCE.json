@@ -1,0 +1,189 @@
+{
+  "source_results_sha256": "a4df5e0e4ac011cedfdfb6dd0e4c8d23641b4d013f8b55ee5e90a04cace2084b",
+  "results": {
+    "status": "complete",
+    "signature": "0723affdca3877377ab6d134a7c6e8e665181173bc9bddce8f2ff4d6a5d0da5f",
+    "evaluations": {
+      "cached_calibration": {
+        "split": "calibration",
+        "threshold": 0.534365177154541,
+        "ranking": {
+          "n_scored": 246,
+          "n_openset_excluded": 61,
+          "mAP@10": 0.7871847058606641,
+          "Rank-1": 0.7926829268292683,
+          "Rank-5": 0.8780487804878049
+        },
+        "candidates": {
+          "TP": 181,
+          "FP": 39,
+          "FN": 44,
+          "TN": 43,
+          "n_openset_queries": 61,
+          "Precision": 0.8227272727272728,
+          "Recall": 0.8044444444444444,
+          "F1": 0.8134831460674156,
+          "TNR": 0.7049180327868853,
+          "PR-AUC": 0.9190438844563414,
+          "C": 0.7809136120832565,
+          "open_set_FP": 18
+        },
+        "parity": {
+          "MVP_top10_exact": true,
+          "R1_candidate_confidence_refusal_exact": true,
+          "v22_csv_byte_parity": false
+        },
+        "export": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_24_dual_role/runs/dual_role_v1/tasks/cached_calibration/export",
+        "accepted": 220,
+        "refused": 87,
+        "fresh_image_inference": false,
+        "candidate_differs_from_top1": 82,
+        "candidate_outside_top10": 4,
+        "quality_points_out_of_55": 43.23244788456245
+      },
+      "cached_validation": {
+        "split": "validation",
+        "threshold": 0.534365177154541,
+        "ranking": {
+          "n_scored": 247,
+          "n_openset_excluded": 62,
+          "mAP@10": 0.8146886982413298,
+          "Rank-1": 0.8016194331983806,
+          "Rank-5": 0.8825910931174089
+        },
+        "candidates": {
+          "TP": 175,
+          "FP": 43,
+          "FN": 47,
+          "TN": 44,
+          "n_openset_queries": 62,
+          "Precision": 0.8027522935779816,
+          "Recall": 0.7882882882882883,
+          "F1": 0.7954545454545456,
+          "TNR": 0.7096774193548387,
+          "PR-AUC": 0.924077581204396,
+          "C": 0.7697214076246335,
+          "open_set_FP": 18
+        },
+        "parity": {
+          "MVP_top10_exact": true,
+          "R1_candidate_confidence_refusal_exact": true,
+          "v22_csv_byte_parity": true
+        },
+        "export": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_24_dual_role/runs/dual_role_v1/tasks/cached_validation/export",
+        "accepted": 218,
+        "refused": 91,
+        "fresh_image_inference": false,
+        "candidate_differs_from_top1": 94,
+        "candidate_outside_top10": 5,
+        "quality_points_out_of_55": 44.35820549710618
+      },
+      "fresh_validation": {
+        "split": "validation",
+        "threshold": 0.534365177154541,
+        "ranking": {
+          "n_scored": 247,
+          "n_openset_excluded": 62,
+          "mAP@10": 0.8146886982413298,
+          "Rank-1": 0.8016194331983806,
+          "Rank-5": 0.8825910931174089
+        },
+        "candidates": {
+          "TP": 175,
+          "FP": 43,
+          "FN": 47,
+          "TN": 44,
+          "n_openset_queries": 62,
+          "Precision": 0.8027522935779816,
+          "Recall": 0.7882882882882883,
+          "F1": 0.7954545454545456,
+          "TNR": 0.7096774193548387,
+          "PR-AUC": 0.924077581204396,
+          "C": 0.7697214076246335,
+          "open_set_FP": 18
+        },
+        "parity": {
+          "MVP_top10_exact": true,
+          "R1_candidate_confidence_refusal_exact": true,
+          "v22_csv_byte_parity": true,
+          "vector_atol": 2e-05,
+          "max_abs_error": 0.0,
+          "bit_exact_vectors": true
+        },
+        "export": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_24_dual_role/runs/dual_role_v1/tasks/fresh_validation/export",
+        "accepted": 218,
+        "refused": 91,
+        "fresh_image_inference": true,
+        "candidate_differs_from_top1": 94,
+        "candidate_outside_top10": 5,
+        "quality_points_out_of_55": 44.35820549710618
+      }
+    },
+    "optimizer_updates": 0,
+    "bn_updates": 0,
+    "threshold_fit": false,
+    "promoted": false,
+    "comparison": {
+      "mAP_delta": 0.0,
+      "C_delta": 0.022600183553334485,
+      "quality_points_delta": 0.22600183553334574
+    },
+    "events": [
+      {
+        "task": "cached_calibration",
+        "status": "complete",
+        "seconds": 1.201794125023298
+      },
+      {
+        "task": "cached_validation",
+        "status": "complete",
+        "seconds": 1.2228330420330167
+      },
+      {
+        "task": "fresh_validation",
+        "status": "complete",
+        "seconds": 121.6554712500656
+      }
+    ],
+    "elapsed_seconds": 134.25189958396368,
+    "protected_unchanged": true
+  },
+  "source_signature": "0723affdca3877377ab6d134a7c6e8e665181173bc9bddce8f2ff4d6a5d0da5f",
+  "profile": {
+    "schema": "dual-role-v1",
+    "layout": {
+      "dimension": 2048,
+      "ranking_slice": [
+        0,
+        512
+      ],
+      "candidate_slice": [
+        512,
+        2048
+      ],
+      "normalization": "unit blocks, no global renormalization"
+    },
+    "roles": {
+      "ranking": "MVP legacy k20/k3/lambda0.50",
+      "candidate": "R1 equal3 raw_top1",
+      "confidence": "maximum raw cosine of R1 block only"
+    },
+    "mvp_preprocessing": "exif-rgb-bbox-bilinear208-imagenet-l2-v1",
+    "mvp": {
+      "path": "../../../../models/osnet_ain_x1_0_vehicle_reid_hpo_best_map.onnx",
+      "sha256": "01466f503232467224774b6e3bafe6c4393b1de30b47b1bd714908a62f2006a2"
+    },
+    "r1_bundle": {
+      "path": "../../../variant_18_retrieval_policy/runs/policy_v1/final/R1_equal3/less_graph/raw_top1/bundle.json",
+      "sha256": "f911643a916f4287b0d78941cc1c35db228bef1153a195beb9e9789f580c5fcc"
+    },
+    "threshold": 0.534365177154541,
+    "calibration": {
+      "split": "calibration",
+      "candidate_policy": "raw_top1",
+      "method": "maximize C=0.7F1+0.3TNR; ties F1 then higher threshold",
+      "protocol_sha256": "7084dc8a0b795ddf1d569b81adc1d76a0918dddd52a52a50d5fb50595fdd8ce9"
+    },
+    "promoted": false
+  }
+}

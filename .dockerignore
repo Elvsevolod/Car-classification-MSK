@@ -17,3 +17,7 @@ journal_devops
 
 web-ui/node_modules/
 web-ui/dist/
+reproduction
+notebooks
+tools
+.agents

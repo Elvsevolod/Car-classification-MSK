@@ -1,0 +1,18 @@
+{
+  "model": "RC_R1_equal3_v18",
+  "threshold": 0.534365177154541,
+  "validation": {
+    "mAP_at_10": 0.8051694942484416,
+    "candidate_F1": 0.7954545454545456,
+    "TNR": 0.7096774193548387,
+    "known_queries": 247,
+    "unknown_queries": 62
+  },
+  "provenance": {
+    "source": "OSNet-AIN-x1.0/variant_18_retrieval_policy/runs/policy_v1/final.json",
+    "source_sha256": "c4359d45457f037832e0e5f3ea85534912ad8ff690edb532914f2e1b85e9abaa",
+    "case": "R1_equal3/less_graph/raw_top1",
+    "bundle_sha256": "f911643a916f4287b0d78941cc1c35db228bef1153a195beb9e9789f580c5fcc",
+    "kind": "historical local validation, not hidden test"
+  }
+}

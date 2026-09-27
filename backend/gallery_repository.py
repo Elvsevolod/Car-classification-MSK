@@ -1,4 +1,4 @@
-"""Gallery storage interfaces and the SQLite reference implementation."""
+"""Gallery storage interfaces, transient batch storage, and the SQLite reference."""
 from __future__ import annotations
 
 import json
@@ -32,6 +32,33 @@ class GalleryRepository(Protocol):
         self, fingerprint: str, rows: list[dict], vectors: np.ndarray, state: GalleryBuildState
     ) -> None:
         """Atomically replace the persisted gallery with vectors in CSV order."""
+
+
+class InMemoryGalleryRepository:
+    """Process-local storage for batch inference, without a database or disk cache."""
+
+    def __init__(self):
+        self.fingerprint = None
+        self.image_ids = []
+        self.vectors = None
+
+    def load(
+        self, fingerprint: str, image_ids: list[str], dimension: int, state: GalleryBuildState
+    ) -> np.ndarray | None:
+        del state
+        if self.fingerprint != fingerprint or self.image_ids != image_ids:
+            return None
+        if self.vectors is None or self.vectors.shape != (len(image_ids), dimension):
+            return None
+        return self.vectors.copy()
+
+    def replace(
+        self, fingerprint: str, rows: list[dict], vectors: np.ndarray, state: GalleryBuildState
+    ) -> None:
+        del state
+        self.fingerprint = fingerprint
+        self.image_ids = [row["image_id"] for row in rows]
+        self.vectors = np.asarray(vectors, dtype=np.float32).copy()
 
 
 class SQLiteGalleryRepository:

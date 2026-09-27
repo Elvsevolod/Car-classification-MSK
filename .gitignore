@@ -4,7 +4,7 @@
 .uv-cache/
 __pycache__/
 .pytest_cache/
-dataset/
+/dataset
 artifacts/
 output/
 .playwright-cli/

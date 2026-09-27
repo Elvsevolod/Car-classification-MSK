@@ -4,7 +4,7 @@ import os
 
 from .database import DatabaseSettings
 from .gallery_repository import GalleryRepository
-from .postgres_gallery_repository import PostgresGalleryRepository
+from .cache_spaces import PostgresGallerySpaces
 
 
 def gallery_repository_from_environment() -> GalleryRepository:
@@ -12,4 +12,4 @@ def gallery_repository_from_environment() -> GalleryRepository:
     storage = os.environ.get("GALLERY_STORAGE", "postgres").strip().lower()
     if storage != "postgres":
         raise ValueError("GALLERY_STORAGE must be postgres")
-    return PostgresGalleryRepository(DatabaseSettings.from_environment())
+    return PostgresGallerySpaces(DatabaseSettings.from_environment())

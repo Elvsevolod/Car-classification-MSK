@@ -1,7 +1,7 @@
 """FastAPI-слой: валидирует изображение/BBox и возвращает поиск или отказ."""
 
 import io
-import json
+import os
 import time
 import warnings
 from contextlib import asynccontextmanager
@@ -15,17 +15,21 @@ from PIL import Image, UnidentifiedImageError
 from pydantic import BaseModel, Field
 
 from .bootstrap import gallery_repository_from_environment
+from .calibration import DEFAULT_CALIBRATION
 from .core import (ARTIFACTS, DATASET, MODEL_FINE_TUNED, MODEL_NAME, ROOT,
-                   Encoder, Gallery, bbox, crop_image, read_rows)
+                   bbox, crop_image, read_rows)
+from .images import ImageIndex
+from .runtime import DEFAULT_PROFILE, Runtime, RuntimeGallery
 
 MAX_UPLOAD_BYTES = 15 * 1024 * 1024
 MAX_PIXELS = 25_000_000
 FRONTEND = ROOT / "frontend"
 FRONTEND_DIST = FRONTEND / "dist"
+LOCAL_FRONTEND_DIST = ROOT / "web-ui/dist"
 
 
 class QuerySearch(BaseModel):
-    query_id: str = Field(pattern=r"^[0-9a-f]{32}$")
+    query_id: str = Field(pattern=r"^[A-Za-z0-9_-]+$")
     top_k: int = Field(default=10, ge=1, le=100)
     mode: Literal["ranking", "candidates"] = "ranking"
     threshold: float | None = Field(default=None, ge=-1, le=1, allow_inf_nan=False)
@@ -52,34 +56,41 @@ class SearchResponse(BaseModel):
     confidence: float
     refused: bool
     results: list[Candidate]
+    accepted_candidate: Candidate | None
     elapsed_ms: float
     encoder_fingerprint: str
+    profile: str
+    profile_fingerprint: str
+    gallery_fingerprint: str
+    ranking_policy: str
+    candidate_policy: str
+    demo_threshold_override: bool
 
 
-def load_metrics(encoder, artifacts):
-    path = artifacts / "baseline_metrics.json"
-    if not path.exists():
-        return None
-    report = json.loads(path.read_text())
-    if report.get("encoder_fingerprint") != encoder.fingerprint:
-        return None
-    return report
-
-
-def create_app(dataset=DATASET, artifacts=ARTIFACTS, gallery_repository=None):
+def create_app(dataset=DATASET, artifacts=ARTIFACTS, gallery_repository=None,
+               calibration_path=DEFAULT_CALIBRATION, profile=None, provider=None):
     """Собирает API и позволяет тестам подменять датасет, артефакты и gallery-репозиторий."""
+    # Keep the positional API for existing callers; mutable artifacts no longer set calibration.
+    del artifacts
     @asynccontextmanager
     async def lifespan(app):
-        app.state.encoder = Encoder()
+        app.state.runtime = Runtime(profile or os.getenv("REID_PROFILE", DEFAULT_PROFILE),
+                                    provider or os.getenv("REID_PROVIDER", "CPUExecutionProvider"),
+                                    calibration_path)
+        app.state.encoder = app.state.runtime.encoder
+        app.state.calibration = {**app.state.runtime.report, **app.state.runtime.metadata()}
         repository = gallery_repository or gallery_repository_from_environment()
-        app.state.gallery = Gallery(app.state.encoder, dataset, repository=repository)
+        app.state.gallery = RuntimeGallery(app.state.runtime, dataset, repository=repository)
+        app.state.images = ImageIndex(dataset / "images")
         app.state.queries = {r["image_id"]: r for r in read_rows(dataset / "test_query.csv")}
         yield
 
     app = FastAPI(title="Vehicle ReID · fine-tuned OSNet", version="0.2.0", lifespan=lifespan,
                   docs_url=None, redoc_url=None)
-    # Production всегда отдаёт Vite dist; исходный HTML/JS остаётся только fallback для локальных Python-тестов.
-    static_dir = FRONTEND_DIST if FRONTEND_DIST.exists() else FRONTEND
+    # Docker and a local `npm run build` both serve the current React UI.
+    # The legacy source fallback remains only for source-only Python tests.
+    static_dir = next((path for path in (FRONTEND_DIST, LOCAL_FRONTEND_DIST)
+                       if (path / "index.html").is_file()), FRONTEND)
     # Swagger assets stay outside the Vite build and remain available offline.
     app.mount("/static/vendor", StaticFiles(directory=FRONTEND / "vendor"), name="static-vendor")
     app.mount("/static", StaticFiles(directory=static_dir), name="static")
@@ -101,23 +112,22 @@ def create_app(dataset=DATASET, artifacts=ARTIFACTS, gallery_repository=None):
 
     @app.get("/api/health")
     def health():
-        from .rerank import ACTIVE_K1, ACTIVE_K2, ACTIVE_LAMBDA
-        report = load_metrics(app.state.encoder, artifacts)
-        return {"status": "ready", "model": MODEL_NAME, "fine_tuned": MODEL_FINE_TUNED,
-                "embedding_dim": 512, "device": "CPU", "gallery_size": len(app.state.gallery.rows),
+        from .frozen_encoder import POLICIES
+        report = app.state.calibration
+        runtime = app.state.runtime
+        return {**runtime.metadata(), "status": "ready", "fine_tuned": MODEL_FINE_TUNED,
+                "embedding_dim": runtime.dimension, "device": runtime.provider.removesuffix("ExecutionProvider"),
+                "gallery_size": len(app.state.gallery.rows),
                 "gallery_storage": type(app.state.gallery.repository).__name__,
+                "gallery_fingerprint": app.state.gallery.fingerprint,
                 "encoder_fingerprint": app.state.encoder.fingerprint,
-                "default_threshold": report["threshold"] if report else None,
-                "reranking": {"method": "streaming k-reciprocal", "k1": ACTIVE_K1,
-                              "k2": ACTIVE_K2, "lambda": ACTIVE_LAMBDA,
+                "default_threshold": report["threshold"],
+                "reranking": {"method": "streaming k-reciprocal", **POLICIES[runtime.spec["ranking"]],
                               "refusal_score": "maximum raw cosine"}}
 
     @app.get("/api/metrics")
     def model_metrics():
-        report = load_metrics(app.state.encoder, artifacts)
-        if report is None:
-            raise HTTPException(404, "Run python -m backend.evaluate to measure the active model")
-        return report
+        return app.state.calibration
 
     @app.get("/api/queries")
     def queries(offset: int = Query(0, ge=0), limit: int = Query(50, ge=1, le=1110)):
@@ -130,9 +140,9 @@ def create_app(dataset=DATASET, artifacts=ARTIFACTS, gallery_repository=None):
         row = records.get(image_id)
         if row is None:
             raise HTTPException(404, "Unknown image_id")
-        path = dataset / "images" / f"{image_id}.jpg"
+        path = app.state.images.resolve(image_id)
         if not crop:
-            return FileResponse(path, media_type="image/jpeg")
+            return FileResponse(path, media_type="image/png" if path.suffix.lower() == ".png" else "image/jpeg")
         with Image.open(path) as full_image:
             output = io.BytesIO()
             crop_image(full_image, bbox(row)).save(output, format="JPEG", quality=90)
@@ -144,17 +154,21 @@ def create_app(dataset=DATASET, artifacts=ARTIFACTS, gallery_repository=None):
         if mode == "candidates":
             source = "manual" if threshold is not None else "calibration"
             if threshold is None:
-                report = load_metrics(app.state.encoder, artifacts)
-                if report is None:
-                    raise HTTPException(409, "No calibrated threshold: run python -m backend.evaluate or supply threshold")
-                threshold = report["threshold"]
+                threshold = app.state.calibration["threshold"]
         else:
             threshold = None
-        results, confidence = app.state.gallery.search_with_confidence(vector, top_k, threshold)
+        decision = app.state.gallery.decide(vector, top_k, threshold)
+        runtime = app.state.runtime
         return {"mode": mode, "query_id": query_id, "gallery_size": len(app.state.gallery.rows),
-                "threshold": threshold, "threshold_source": source, "confidence": confidence,
-                "refused": mode == "candidates" and not results,
-                "results": results, "elapsed_ms": round((time.perf_counter() - started) * 1000, 3),
+                "threshold": threshold, "threshold_source": source, "confidence": decision["confidence"],
+                "refused": mode == "candidates" and decision["refused"],
+                "results": decision["results"],
+                "accepted_candidate": decision["accepted_candidate"] if mode == "candidates" else None,
+                "profile": runtime.profile, "profile_fingerprint": runtime.fingerprint,
+                "gallery_fingerprint": app.state.gallery.fingerprint,
+                "ranking_policy": runtime.spec["ranking"], "candidate_policy": runtime.spec["candidate_policy"],
+                "demo_threshold_override": source == "manual",
+                "elapsed_ms": round((time.perf_counter() - started) * 1000, 3),
                 "encoder_fingerprint": app.state.encoder.fingerprint}
 
     def uploaded_embedding(upload, box):
@@ -192,7 +206,9 @@ def create_app(dataset=DATASET, artifacts=ARTIFACTS, gallery_repository=None):
     def embedding(image: Annotated[UploadFile, File()], x: Annotated[int, Form(ge=0)],
                   y: Annotated[int, Form(ge=0)], w: Annotated[int, Form(gt=0)], h: Annotated[int, Form(gt=0)]):
         vector = uploaded_embedding(image, (x, y, w, h))
-        return {"embedding": vector.tolist(), "dimension": 512, "dtype": "float32", "l2_normalized": True,
+        return {"embedding": vector.tolist(), "dimension": app.state.runtime.dimension, "dtype": "float32",
+                "l2_normalized": app.state.runtime.metadata()["l2_normalized"],
+                "embedding_layout": app.state.runtime.metadata()["embedding_layout"],
                 "encoder_fingerprint": app.state.encoder.fingerprint}
 
     @app.post("/api/search/query", response_model=SearchResponse)
@@ -201,7 +217,7 @@ def create_app(dataset=DATASET, artifacts=ARTIFACTS, gallery_repository=None):
         row = app.state.queries.get(request.query_id)
         if row is None:
             raise HTTPException(404, "Unknown query_id")
-        with Image.open(dataset / "images" / f"{row['image_id']}.jpg") as image:
+        with Image.open(app.state.images.resolve(row["image_id"])) as image:
             vector = app.state.encoder.encode(image, bbox(row))
         return search(vector, request.top_k, request.mode, request.threshold, started, request.query_id)
 

@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "model": {
+    "path": "encoder.onnx",
+    "sha256": "6c1f87bdfbd5dbf48012bb2491b660310d76b1800e0a889617a8333230fd6ff4",
+    "input": "input",
+    "output": "output",
+    "dimension": 512
+  },
+  "preprocessing": {
+    "image_size": 256,
+    "resize_mode": "square",
+    "interpolation": "bilinear",
+    "decode": "EXIF-oriented RGB",
+    "crop": "organizer xywh before resize",
+    "mean": [
+      0.48500001430511475,
+      0.4560000002384186,
+      0.4059999883174896
+    ],
+    "std": [
+      0.2290000021457672,
+      0.2240000069141388,
+      0.22499999403953552
+    ],
+    "scale": 255,
+    "layout": "NCHW",
+    "l2_normalized": true,
+    "flip_tta": false
+  },
+  "threshold": 0.552223265171051,
+  "confidence": "maximum raw gallery cosine; not a probability",
+  "reranking": {
+    "method": "streaming k-reciprocal",
+    "k1": 20,
+    "k2": 3,
+    "lambda": 0.5
+  },
+  "calibration": {
+    "split": "calibration",
+    "protocol_sha256": "7084dc8a0b795ddf1d569b81adc1d76a0918dddd52a52a50d5fb50595fdd8ce9",
+    "method": "frozen maximum raw cosine; select 0.7F1+0.3TNR on original calibration"
+  }
+}

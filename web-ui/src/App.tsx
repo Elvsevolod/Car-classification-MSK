@@ -1,127 +1,212 @@
-// Демо-клиент использует только существующий /api: здесь нет ML-логики и прямого доступа к PostgreSQL.
-import { useEffect, useMemo, useRef, useState, type FormEvent, type PointerEvent } from 'react'
-import { SquareDashedMousePointer } from 'lucide-react'
-
+// The UI uses only /api; model inference and gallery access stay on the server.
+import { useEffect, useRef, useState, type FormEvent, type PointerEvent } from 'react'
+import { CarFront, ExternalLink, ImagePlus, RotateCcw } from 'lucide-react'
 import { SearchForm } from '@/components/search-form'
 import { SearchResults } from '@/components/search-results'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { boxKeys, type Box, type Health, type Query, type SearchResult } from '@/types'
+import { ComparisonDialog } from '@/components/comparison-dialog'
+import { QueryCrop } from '@/components/query-crop'
+import { ModelMetrics } from '@/components/model-metrics'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
+import { Spinner } from '@/components/ui/spinner'
+import { cn } from '@/lib/utils'
+import { isValidBox } from '@/lib/image-crop'
+import { boxKeys, type Box, type Health, type ModelMetrics as ModelMetricsData, type Query, type SearchMode, type SearchResult } from '@/types'
 
 const initialBox: Box = { x: 0, y: 0, w: 0, h: 0 }
 
 function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const imageRef = useRef<HTMLImageElement | null>(null)
+  const objectUrl = useRef<string | null>(null)
+  const sourceVersion = useRef(0)
+  const searchVersion = useRef(0)
+  const imageRequest = useRef<AbortController | null>(null)
+  const searchRequest = useRef<AbortController | null>(null)
   const dragStart = useRef<[number, number] | null>(null)
+  const resultsRef = useRef<HTMLElement>(null)
+  const returnFocus = useRef<HTMLElement | null>(null)
+  const [comparisonIndex, setComparisonIndex] = useState<number | null>(null)
+  const [sourceImage, setSourceImage] = useState<HTMLImageElement | null>(null)
   const [box, setBox] = useState<Box>(initialBox)
   const [blob, setBlob] = useState<Blob | null>(null)
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+  const [sourceName, setSourceName] = useState('')
+  const [imageSize, setImageSize] = useState({ width: 0, height: 0 })
+  const [boxInvalid, setBoxInvalid] = useState(false)
   const [health, setHealth] = useState<Health | null>(null)
+  const [serviceError, setServiceError] = useState<string | null>(null)
+  const [serviceRetry, setServiceRetry] = useState(0)
   const [queries, setQueries] = useState<Query[]>([])
-  const [metrics, setMetrics] = useState<object | null>(null)
-  const [queryFilter, setQueryFilter] = useState('')
+  const [metrics, setMetrics] = useState<ModelMetricsData | null>(null)
   const [selectedQuery, setSelectedQuery] = useState('')
-  const [status, setStatus] = useState('Загрузите изображение или выберите query из списка.')
   const [result, setResult] = useState<SearchResult | null>(null)
-  const [mode, setMode] = useState<'ranking' | 'candidates'>('ranking')
+  const [error, setError] = useState<string | null>(null)
+  const [sourceError, setSourceError] = useState<string | null>(null)
+  const [mode, setMode] = useState<SearchMode>('candidates')
   const [topK, setTopK] = useState(10)
   const [threshold, setThreshold] = useState('')
-  const [busy, setBusy] = useState(false)
+  const [searching, setSearching] = useState(false)
+  const [loadingImage, setLoadingImage] = useState(false)
 
-  const visibleQueries = useMemo(() => {
-    const normalized = queryFilter.trim().toLowerCase()
-    const matching = normalized
-      ? queries.filter((query) => query.image_id.toLowerCase().includes(normalized))
-      : queries
-    return matching.slice(0, 8)
-  }, [queries, queryFilter])
-
-  const draw = (nextBox: Box) => {
-    const canvas = canvasRef.current
-    const image = imageRef.current
-    if (!canvas || !image) return
-    const context = canvas.getContext('2d')
-    if (!context) return
-
-    context.clearRect(0, 0, canvas.width, canvas.height)
-    context.drawImage(image, 0, 0)
-    if (nextBox.w && nextBox.h) {
-      context.strokeStyle = '#ffffff'
-      context.lineWidth = Math.max(2, canvas.width / 400)
-      context.strokeRect(nextBox.x, nextBox.y, nextBox.w, nextBox.h)
-    }
-  }
-
-  useEffect(() => { draw(box) }, [box])
-
-  // Загружаем неизменяемые для сессии данные один раз, чтобы UI сразу показывал состояние сервиса и query.
   useEffect(() => {
-    void Promise.all([fetch('/api/health'), fetch('/api/queries?limit=1110'), fetch('/api/metrics')])
-      .then(async ([healthResponse, queryResponse, metricsResponse]) => {
-        if (!healthResponse.ok || !queryResponse.ok) throw new Error('Сервис недоступен')
-        setHealth(await healthResponse.json() as Health)
-        setQueries((await queryResponse.json() as { items: Query[] }).items)
-        if (metricsResponse.ok) setMetrics(await metricsResponse.json() as object)
+    const controller = new AbortController()
+    const options = { signal: controller.signal }
+    void Promise.all([fetch('/api/health', options), fetch('/api/queries?limit=1110', options)])
+      .then(async ([healthResponse, queryResponse]) => {
+        if (!healthResponse.ok || !queryResponse.ok) throw new Error('Сервис недоступен. Проверьте, что backend запущен.')
+        const nextHealth = await healthResponse.json() as Health
+        const nextQueries = await queryResponse.json() as { items: Query[] }
+        if (controller.signal.aborted) return
+        setHealth(nextHealth)
+        setQueries(nextQueries.items)
+        setServiceError(null)
       })
-      .catch((error: Error) => setStatus(error.message))
+      .catch((reason: unknown) => {
+        if (!controller.signal.aborted) setServiceError(reason instanceof Error ? reason.message : 'Сервис недоступен.')
+      })
+    void fetch('/api/metrics', options).then(async (response) => {
+      if (!response.ok) return
+      const payload = await response.json() as ModelMetricsData
+      if (!controller.signal.aborted) setMetrics(payload)
+    }).catch(() => { /* Search remains available if the optional metrics request fails. */ })
+    return () => controller.abort()
+  }, [serviceRetry])
+
+  useEffect(() => {
+    if (!result || !window.matchMedia('(max-width: 1023px)').matches) return
+    resultsRef.current?.focus({ preventScroll: true })
+    resultsRef.current?.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
+  }, [result])
+
+  useEffect(() => () => {
+    sourceVersion.current += 1
+    searchVersion.current += 1
+    imageRequest.current?.abort()
+    searchRequest.current?.abort()
+    if (objectUrl.current) URL.revokeObjectURL(objectUrl.current)
   }, [])
 
-  const loadBlob = async (nextBlob: Blob, nextBox: Box = initialBox) => {
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const image = imageRef.current
+    if (!canvas || !image || !blob) return
+    canvas.width = image.naturalWidth
+    canvas.height = image.naturalHeight
+    const context = canvas.getContext('2d')
+    if (!context) return
+    context.drawImage(image, 0, 0)
+    if (box.w > 0 && box.h > 0) {
+      const lineWidth = Math.max(2, canvas.width / 350)
+      context.lineWidth = lineWidth * 2
+      context.strokeStyle = '#171717'
+      context.strokeRect(box.x, box.y, box.w, box.h)
+      context.lineWidth = lineWidth
+      context.strokeStyle = '#ffffff'
+      context.strokeRect(box.x, box.y, box.w, box.h)
+    }
+  }, [blob, box])
+
+  const invalidateSearch = () => {
+    searchVersion.current += 1
+    searchRequest.current?.abort()
+    setSearching(false)
+    setResult(null)
+    setComparisonIndex(null)
+    setError(null)
+    setSourceError(null)
+  }
+
+  const changeBox = (nextBox: Box) => {
+    invalidateSearch()
+    setBoxInvalid(false)
+    setBox(nextBox)
+  }
+
+  const clearSource = () => {
+    sourceVersion.current += 1
+    imageRequest.current?.abort()
+    invalidateSearch()
+    imageRef.current = null
+    setSourceImage(null)
+    dragStart.current = null
+    if (objectUrl.current) URL.revokeObjectURL(objectUrl.current)
+    objectUrl.current = null
+    setPreviewUrl(null)
+    setBlob(null)
+    setBox(initialBox)
+    setSourceName('')
+    setImageSize({ width: 0, height: 0 })
+    setBoxInvalid(false)
+    setLoadingImage(false)
+    return sourceVersion.current
+  }
+
+  const loadBlob = async (nextBlob: Blob, version: number, name: string, nextBox: Box = initialBox) => {
     const url = URL.createObjectURL(nextBlob)
     try {
       const image = new Image()
       image.src = url
       await image.decode()
-      if (image.naturalWidth * image.naturalHeight > 25_000_000) {
-        throw new Error('Изображение превышает 25 мегапикселей')
-      }
+      if (sourceVersion.current !== version) return
+      if (image.naturalWidth * image.naturalHeight > 25_000_000) throw new Error('Изображение превышает 25 мегапикселей.')
       imageRef.current = image
-      if (canvasRef.current) {
-        canvasRef.current.width = image.naturalWidth
-        canvasRef.current.height = image.naturalHeight
-      }
+      setSourceImage(image)
+      objectUrl.current = url
+      setPreviewUrl(url)
       setBlob(nextBlob)
       setBox(nextBox)
-      setResult(null)
-      setStatus(`Исходный размер: ${image.naturalWidth}×${image.naturalHeight}. Выделите автомобиль.`)
-      requestAnimationFrame(() => draw(nextBox))
-    } catch (error) {
-      setBlob(null)
-      setStatus(error instanceof Error ? error.message : 'Не удалось загрузить изображение')
+      setSourceName(name)
+      setImageSize({ width: image.naturalWidth, height: image.naturalHeight })
+    } catch (reason) {
+      if (sourceVersion.current === version) setSourceError(reason instanceof Error ? reason.message : 'Не удалось прочитать изображение.')
     } finally {
-      URL.revokeObjectURL(url)
+      if (objectUrl.current !== url) URL.revokeObjectURL(url)
+      if (sourceVersion.current === version) setLoadingImage(false)
     }
   }
 
   const selectFile = async (file?: File) => {
     if (!file) return
-    if (file.size > 15 * 1024 * 1024) {
-      setStatus('Максимальный размер файла — 15 МиБ')
+    const version = clearSource()
+    setSelectedQuery('')
+    if (!['image/jpeg', 'image/png'].includes(file.type)) {
+      setSourceError('Выберите изображение JPEG или PNG.')
       return
     }
-    setSelectedQuery('')
-    setQueryFilter('')
-    await loadBlob(file)
+    if (file.size > 15 * 1024 * 1024) {
+      setSourceError('Максимальный размер файла — 15 МиБ.')
+      return
+    }
+    setLoadingImage(true)
+    await loadBlob(file, version, file.name)
   }
 
   const selectQuery = async (queryId: string) => {
-    setSelectedQuery(queryId)
-    setQueryFilter(queryId)
     const query = queries.find((item) => item.image_id === queryId)
     if (!query) return
-
-    setBusy(true)
+    const version = clearSource()
+    const controller = new AbortController()
+    imageRequest.current = controller
+    setSelectedQuery(queryId)
+    setLoadingImage(true)
     try {
-      const response = await fetch(`/api/images/query/${query.image_id}`)
-      if (!response.ok) throw new Error('Не удалось загрузить пример')
-      await loadBlob(await response.blob(), query)
-    } catch (error) {
-      setStatus(error instanceof Error ? error.message : 'Не удалось загрузить пример')
-    } finally {
-      setBusy(false)
+      const response = await fetch(`/api/images/query/${queryId}`, { signal: controller.signal })
+      if (!response.ok) throw new Error('Не удалось загрузить пример. Попробуйте выбрать его ещё раз.')
+      const nextBlob = await response.blob()
+      if (sourceVersion.current !== version) return
+      await loadBlob(nextBlob, version, queryId, query)
+    } catch (reason) {
+      if (sourceVersion.current === version && !controller.signal.aborted) {
+        setSourceError(reason instanceof Error ? reason.message : 'Не удалось загрузить пример.')
+        setLoadingImage(false)
+      }
     }
   }
 
-  // Canvas может быть уменьшен CSS; переводим координаты указателя обратно в пиксели исходного изображения.
+  // CSS scales the canvas; pointer coordinates must use source-image pixels.
   const getPoint = (event: PointerEvent<HTMLCanvasElement>): [number, number] | null => {
     const canvas = canvasRef.current
     if (!canvas || !imageRef.current) return null
@@ -134,38 +219,44 @@ function App() {
 
   const submit = async (event: FormEvent) => {
     event.preventDefault()
+    invalidateSearch()
     const image = imageRef.current
-    if (!blob || !image) return
-    if (box.w <= 0 || box.h <= 0 || box.x + box.w > image.naturalWidth || box.y + box.h > image.naturalHeight) {
-      setStatus('BBox должен находиться внутри исходного изображения.')
+    if (!blob || !image || loadingImage) return
+    if (!isValidBox(box, image)) {
+      setBoxInvalid(true)
+      setSourceError('Выделите автомобиль. BBox должен иметь положительный размер и находиться внутри кадра.')
       return
     }
-
-    setBusy(true)
-    setResult(null)
-    setStatus('Поиск по gallery…')
+    if (!Number.isInteger(topK) || topK < 1 || topK > 100) {
+      setSourceError('Количество результатов должно быть целым числом от 1 до 100.')
+      return
+    }
+    const version = searchVersion.current
+    const controller = new AbortController()
+    searchRequest.current = controller
+    setSearching(true)
     try {
       const form = new FormData()
-      form.append('image', blob, 'query.jpg')
+      form.append('image', blob, blob.type === 'image/png' ? 'query.png' : 'query.jpg')
       boxKeys.forEach((key) => form.append(key, String(box[key])))
       form.append('top_k', String(topK))
       form.append('mode', mode)
-      if (threshold) form.append('threshold', threshold)
-
-      const response = await fetch('/api/search', { method: 'POST', body: form })
-      const payload = await response.json() as SearchResult & { detail?: string }
-      if (!response.ok) throw new Error(payload.detail ?? 'Ошибка поиска')
-
-      setResult(payload)
-      setStatus(
-        payload.refused
-          ? `Отказ: нет кандидатов выше порога ${payload.threshold?.toFixed(4) ?? ''}.`
-          : `Найдено ${payload.results.length} результатов за ${payload.elapsed_ms} мс.`,
-      )
-    } catch (error) {
-      setStatus(error instanceof Error ? error.message : 'Ошибка поиска')
+      if (mode === 'candidates' && threshold.trim()) form.append('threshold', threshold)
+      const response = await fetch('/api/search', { method: 'POST', body: form, signal: controller.signal })
+      if (!response.ok) {
+        const payload = await response.json().catch(() => null) as { detail?: unknown } | null
+        if ([413, 415, 422].includes(response.status)) {
+          if (searchVersion.current === version) setSourceError(typeof payload?.detail === 'string' ? payload.detail : 'Проверьте изображение, BBox и параметры поиска.')
+          return
+        }
+        throw new Error(typeof payload?.detail === 'string' ? payload.detail : `Ошибка поиска (${response.status}). Проверьте параметры и повторите запрос.`)
+      }
+      const payload = await response.json() as SearchResult
+      if (searchVersion.current === version) setResult(payload)
+    } catch (reason) {
+      if (searchVersion.current === version && !controller.signal.aborted) setError(reason instanceof Error ? reason.message : 'Ошибка поиска.')
     } finally {
-      setBusy(false)
+      if (searchVersion.current === version) setSearching(false)
     }
   }
 
@@ -176,65 +267,86 @@ function App() {
     link.href = url
     link.download = 'search-result.json'
     link.click()
-    URL.revokeObjectURL(url)
+    setTimeout(() => URL.revokeObjectURL(url), 0)
   }
 
+  const comparisonCandidates = result ? [...result.results] : []
+  const accepted = result?.accepted_candidate
+  if (accepted && !comparisonCandidates.some((item) => item.image_id === accepted.image_id)) comparisonCandidates.push(accepted)
+
   return (
-    <main className="dark min-h-screen bg-[#080808] px-4 py-5 text-white sm:px-8">
-      <div className="mx-auto max-w-7xl">
-        <header className="flex items-center justify-between border-b border-white/20 pb-4 text-[11px] font-semibold tracking-[.14em] uppercase">
-          <span className="flex items-center gap-3">
-            <span className="grid size-6 place-items-center bg-white text-black">V</span>
-            Кейс от ASU_TEAM
-          </span>
-          <span className={health ? 'hidden text-white/60 sm:block' : 'hidden text-amber-200 sm:block'}>
-            {health ? '● Система поиска готова' : '○ Проверяем сервис'}
-          </span>
+    <main className="min-h-screen bg-background px-4 pb-8 text-foreground sm:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-7">
+        <header className="flex flex-wrap items-center justify-between gap-3 border-b py-5">
+          <div className="flex items-center gap-3"><CarFront className="size-6" /><span className="text-sm font-semibold tracking-tight">ASU Team <span className="font-normal text-muted-foreground">/ Vehicle Re-ID</span></span></div>
         </header>
 
-        <section className="grid gap-8 border-b border-white/20 py-10 lg:grid-cols-[1.4fr_.6fr]">
-          <div>
-            <p className="mb-3 text-[10px] tracking-[.16em] text-white/55 uppercase">Computer vision · re-identification</p>
-            <h1 className="text-5xl leading-[.86] font-semibold tracking-[-.08em] uppercase sm:text-7xl">Поиск<br />автомобиля</h1>
-            <p className="mt-6 border-t border-white/20 pt-4 text-xs text-white/80">
-              {health ? `${health.model} · ${health.device} · gallery: ${health.gallery_size}` : 'Проверка сервиса…'}
-            </p>
+        <section className="flex flex-wrap items-end justify-between gap-4">
+          <div className="flex flex-col gap-2"><h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Поиск автомобиля</h1><p className="max-w-xl text-sm leading-6 text-muted-foreground">Один кадр. Область автомобиля. Похожие изображения из галереи.</p></div>
+          {health && <p className="text-xs text-muted-foreground">{health.gallery_size} кадров в галерее · {health.device}</p>}
+        </section>
+        {health?.profile && <details className="text-xs text-muted-foreground" data-testid="active-profile">
+          <summary>Профиль: {health.profile} · {health.embedding_dim}D · {health.ranking_policy} / {health.candidate_policy}</summary>
+          <p className="mt-2 break-all">Fingerprint: {health.profile_fingerprint}. Профиль выбирается при запуске сервиса.</p>
+        </details>}
+
+        {serviceError && <Alert variant="destructive"><AlertTitle>Нет связи с сервисом</AlertTitle><AlertDescription>{serviceError}</AlertDescription><Button type="button" variant="outline" className="mt-2 w-fit" onClick={() => setServiceRetry((value) => value + 1)}>Повторить подключение</Button></Alert>}
+
+        <section className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+          <div id="source-workspace" tabIndex={-1} className="flex min-w-0 flex-col gap-5 self-stretch scroll-mt-4 outline-none">
+          <SearchForm box={box} boxInvalid={boxInvalid} sourceError={sourceError} hasImage={!!blob} canSearch={!!blob && health?.status === 'ready'} searching={searching} loadingImage={loadingImage} mode={mode} queries={queries} selectedQuery={selectedQuery} threshold={threshold} defaultThreshold={health?.default_threshold ?? null} topK={topK} onBoxChange={(key, value) => changeBox({ ...box, [key]: Number(value) })} onModeChange={(value) => { invalidateSearch(); setMode(value) }} onSelectFile={selectFile} onSelectQuery={selectQuery} onSubmit={submit} onThresholdChange={(value) => { invalidateSearch(); setThreshold(value) }} onTopKChange={(value) => { invalidateSearch(); setTopK(value) }}>
+            <div className="flex flex-col gap-3">
+              <div className="overflow-hidden rounded-lg border bg-muted/40">
+                <canvas ref={canvasRef} data-testid="source-canvas" aria-label="Кадр запроса. Выделите автомобиль указателем или задайте координаты в дополнительных настройках." className={cn('block h-auto w-full touch-none', !blob && 'hidden')}
+                  onPointerDown={(event) => {
+                    const point = getPoint(event)
+                    if (!point) return
+                    dragStart.current = point
+                    event.currentTarget.setPointerCapture(event.pointerId)
+                    changeBox({ x: point[0], y: point[1], w: 0, h: 0 })
+                  }}
+                  onPointerMove={(event) => {
+                    const start = dragStart.current
+                    const end = getPoint(event)
+                    if (start && end) changeBox({ x: Math.min(start[0], end[0]), y: Math.min(start[1], end[1]), w: Math.abs(end[0] - start[0]), h: Math.abs(end[1] - start[1]) })
+                  }}
+                  onPointerUp={() => { dragStart.current = null }} onPointerCancel={() => { dragStart.current = null }}
+                />
+                {!blob && <Empty className="min-h-64"><EmptyHeader><EmptyMedia variant="icon">{loadingImage ? <Spinner aria-label="Загрузка изображения" /> : <ImagePlus />}</EmptyMedia><EmptyTitle>{loadingImage ? 'Загружаем кадр…' : 'Добавьте исходный кадр'}</EmptyTitle><EmptyDescription>Выберите файл или готовый пример выше.</EmptyDescription></EmptyHeader></Empty>}
+              </div>
+              {blob && <>
+                <p className="truncate text-xs text-muted-foreground" title={sourceName}>{sourceName}</p>
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="text-xs text-muted-foreground" role="status">{imageSize.width} × {imageSize.height} px · BBox {box.w} × {box.h}</p>
+                  <Button type="button" variant="ghost" size="sm" onClick={() => changeBox(initialBox)}><RotateCcw data-icon="inline-start" />Сбросить BBox</Button>
+                </div>
+                <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                  <span className="text-muted-foreground">Обведите автомобиль на кадре.</span>
+                  {previewUrl && <a href={previewUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 underline underline-offset-4">Исходный кадр<ExternalLink className="size-3" /></a>}
+                </div>
+              </>}
+            </div>
+          </SearchForm>
+          {result && sourceImage && isValidBox(box, sourceImage) && <div className="sticky top-4 hidden lg:block">
+            <Card size="sm"><CardHeader><CardTitle>Исходный автомобиль</CardTitle></CardHeader><CardContent><QueryCrop image={sourceImage} box={box} testId="sticky-query-crop" className="h-40 w-full object-contain" /></CardContent></Card>
+          </div>}
           </div>
-          <p className="self-end text-sm leading-6 text-white/55">Загрузите кадр, выделите автомобиль и получите ранжированный Top‑10 либо обоснованный отказ.</p>
+          <section ref={resultsRef} tabIndex={-1} aria-label="Результаты поиска" className="min-w-0 scroll-mt-4 outline-none">
+            <SearchResults result={result} searching={searching} error={error} onDownload={download} onCompare={(index, trigger) => { returnFocus.current = trigger; setComparisonIndex(index) }} onCompareAccepted={(trigger) => { returnFocus.current = trigger; setComparisonIndex(comparisonCandidates.findIndex((item) => item.image_id === accepted?.image_id)) }} />
+            {result && <Button variant="outline" className="mt-4 w-full lg:hidden" onClick={() => {
+              const source = document.getElementById('source-workspace')
+              source?.focus({ preventScroll: true })
+              source?.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
+            }}>К исходному кадру</Button>}
+          </section>
         </section>
 
-        <section className="grid gap-5 py-5 lg:grid-cols-[360px_minmax(0,1fr)]">
-          <SearchForm box={box} blob={blob} busy={busy} hasResult={result !== null} mode={mode} queryFilter={queryFilter} selectedQuery={selectedQuery} threshold={threshold} topK={topK} visibleQueries={visibleQueries} onBoxChange={(key, value) => { setBox({ ...box, [key]: Math.max(0, Number(value) || 0) }); setResult(null) }} onDownload={download} onModeChange={setMode} onQueryFilterChange={setQueryFilter} onSelectFile={selectFile} onSelectQuery={selectQuery} onSubmit={submit} onThresholdChange={setThreshold} onTopKChange={setTopK} />
+        <ComparisonDialog image={sourceImage} box={box} sourceUrl={previewUrl} candidates={comparisonCandidates} selectedIndex={comparisonIndex} onSelect={setComparisonIndex} onClose={() => setComparisonIndex(null)} returnFocus={returnFocus} />
 
-          <Card className="min-w-0 bg-white/[.04] text-white ring-white/15">
-            <CardHeader className="border-b border-white/15">
-              <CardTitle className="flex items-center gap-2 text-xs tracking-[.12em] uppercase"><SquareDashedMousePointer />Кадр запроса</CardTitle>
-              <CardDescription>Выделите автомобиль указателем или введите BBox.</CardDescription>
-            </CardHeader>
-            <CardContent className="p-0">
-              <canvas
-                ref={canvasRef}
-                className="block min-h-80 w-full bg-black touch-none"
-                onPointerDown={(event) => { dragStart.current = getPoint(event); event.currentTarget.setPointerCapture(event.pointerId) }}
-                onPointerMove={(event) => { const start = dragStart.current; const end = getPoint(event); if (!start || !end) return; setBox({ x: Math.min(start[0], end[0]), y: Math.min(start[1], end[1]), w: Math.abs(end[0] - start[0]), h: Math.abs(end[1] - start[1]) }) }}
-                onPointerUp={() => { dragStart.current = null }}
-                onPointerCancel={() => { dragStart.current = null }}
-              />
-            </CardContent>
-          </Card>
-        </section>
-
-        <p className="bg-white px-4 py-3 text-xs text-black">{status}</p>
-
-        <SearchResults result={result} />
-
-        <section className="mt-5 grid gap-4 border-t border-white/20 pt-5 lg:grid-cols-[1fr_auto]">
-          <details className="bg-white/[.04] p-4 text-xs">
-            <summary className="cursor-pointer tracking-[.1em] uppercase">Метрики модели на локальной validation</summary>
-            <pre className="mt-4 max-h-72 overflow-auto whitespace-pre-wrap text-white/55">{metrics ? JSON.stringify(metrics, null, 2) : 'Метрики пока не рассчитаны.'}</pre>
-          </details>
-          <nav className="flex items-start gap-5 pt-3 text-xs tracking-[.1em] uppercase"><a href="/docs">Swagger API</a><a href="/openapi.json">OpenAPI JSON</a></nav>
-        </section>
+        <footer className="flex min-w-0 flex-col gap-4 border-t pt-4">
+          <ModelMetrics metrics={metrics} />
+          <nav className="flex gap-5 text-xs text-muted-foreground" aria-label="Документация API"><a href="/docs" className="underline underline-offset-4">Swagger API</a><a href="/openapi.json" className="underline underline-offset-4">OpenAPI JSON</a></nav>
+        </footer>
       </div>
     </main>
   )

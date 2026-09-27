@@ -1,0 +1,25 @@
+{
+  "active_profile": "MVP_dual_role_v24",
+  "rollback_profile": "MVP_legacy",
+  "candidate_profile": "RC_R1_equal3_v18",
+  "reserve_profile": "RC_R1_single_v18",
+  "promoted": true,
+  "authority": "explicit user approval after completed v24",
+  "quality_evidence": "docs/V24_QUALITY_EVIDENCE.json",
+  "quality_evidence_sha256": "eee67915a40672e12f6606b9d43250ddba7a1a0a541a9a2d8b4d8f8d109f1c86",
+  "official_submission_ready": false,
+  "local_acceptance_passed": true,
+  "verification_scope": "v24 promotion: full original validation CPU macOS decision parity; 89 application tests including disposable PostgreSQL; live Docker/PostgreSQL browser smoke, not full GPU/Linux acceptance",
+  "verification_evidence": "docs/V24_APPLICATION_EVIDENCE.json",
+  "verification_evidence_sha256": "6999a2a4959a5a9de29acedd288ec3150484e6303a9d24e4f90f21293c6b073d",
+  "live_demo": "http://127.0.0.1:8000",
+  "live_image": "vehicle-reid:dual-role-v24",
+  "previous_release_decision": "docs/RELEASE_DECISION_BEFORE_V24.json",
+  "open_checks": [
+    "GPU CUDA and native Linux amd64 acceptance",
+    "Residual license-plate signal is not proven absent",
+    "Official extractor.py interface has not been supplied",
+    "Junk/top-10 truncation ambiguity requires organizer clarification",
+    "Presentation and submission links are a separate checklist"
+  ]
+}

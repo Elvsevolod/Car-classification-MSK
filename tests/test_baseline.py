@@ -199,9 +199,16 @@ def tiny_dataset(tmp_path_factory):
 @pytest.fixture(scope="module")
 def client(tiny_dataset, tmp_path_factory):
     artifacts = tmp_path_factory.mktemp("artifacts")
-    app = create_app(tiny_dataset, artifacts, SQLiteGalleryRepository(artifacts / "gallery.db"))
+    app = create_app(tiny_dataset, artifacts, SQLiteGalleryRepository(artifacts / "gallery.db"), profile="MVP_legacy")
     with TestClient(app) as client:
         yield client
+
+
+def test_mutable_artifacts_cannot_override_bundled_calibration(tiny_dataset, tmp_path):
+    (tmp_path / "baseline_metrics.json").write_text('{"threshold": -1}')
+    app = create_app(tiny_dataset, tmp_path, SQLiteGalleryRepository(tmp_path / "gallery.db"), profile="MVP_legacy")
+    with TestClient(app) as isolated:
+        assert isolated.get("/api/health").json()["default_threshold"] == 0.5948754549026489
 
 
 def test_api_actual_osnet_matches_upload_and_query(client, tiny_dataset):
@@ -251,13 +258,21 @@ def test_api_rejects_unsupported_and_oversized_uploads(client):
     assert oversized.status_code == 413
 
 
-def test_api_refusal_and_no_fabricated_threshold(client):
+def test_api_refusal_and_bundled_threshold_on_fresh_artifacts(client):
     payload = {"query_id": "0" * 31 + "2", "mode": "candidates"}
-    assert client.post("/api/search/query", json=payload).status_code == 409
+    default = client.post("/api/search/query", json=payload)
+    assert default.status_code == 200
+    assert default.json()["threshold"] == 0.5948754549026489
+    assert default.json()["threshold_source"] == "calibration"
+    assert client.get("/api/health").json()["default_threshold"] == default.json()["threshold"]
+    assert client.get("/api/metrics").json()["threshold"] == default.json()["threshold"]
     response = client.post("/api/search/query", json={**payload, "threshold": 1})
     assert response.status_code == 200
     assert response.json()["refused"] is True
-    assert response.json()["results"] == []
+    assert len(response.json()["results"]) == 2  # ranking is retained independently of refusal
+    assert response.json()["accepted_candidate"] is None
+    assert response.json()["demo_threshold_override"] is True
+    assert response.json()["threshold_source"] == "manual"
     assert -1 <= response.json()["confidence"] <= 1
 
 
