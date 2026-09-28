@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "system": "V25_control",
+  "split": "calibration",
+  "candidate_bytes_unchanged": true,
+  "npy_replay": "exact decisions",
+  "dimension": 2048
+}

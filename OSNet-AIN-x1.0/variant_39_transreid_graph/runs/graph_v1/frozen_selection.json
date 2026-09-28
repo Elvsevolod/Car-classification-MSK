@@ -1,0 +1,40 @@
+{
+  "signature": "b77923ecbd74869e682ec01bd6a1fd6aee4b13c1f38a010e37a4adaafc76ece2",
+  "split": "calibration",
+  "metric": "mAP@10",
+  "selected": "Full_T12_l50",
+  "spec": {
+    "source": "Full_T12_w10",
+    "mixture": "T12_w10",
+    "policy": "legacy",
+    "weight": 0.1
+  },
+  "tie_order": [
+    "V25_control",
+    "Full_T12_l50",
+    "Full_T12_l75",
+    "Full_T12_raw"
+  ],
+  "threshold": 0.534365177154541,
+  "checkpoint": {
+    "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_38_transreid_full_train/runs/refit_v1/training/T12_global_supcon/step_01800.pt",
+    "sha256": "beefa79b18c18981ce39ba7f76e11cb7e664cd2a4ffc50bd62c2070fd44c40e3"
+  },
+  "calibration_sha256": {
+    "V25_control": "6eda501dcd8ab1b3fa480e8c3c57799ec31b6e01e2ae93aac73495f528410f06",
+    "Full_T12_l50": "950dd20181d67f8cb0171f3573821b19b9111b09b9317e01d707a5af82ccf74e",
+    "Full_T12_l75": "0f78edfe370fdbb9b3098de8555be5ca541bb02c54892f32fa098367254c37e0",
+    "Full_T12_raw": "936d3e81e6f302e7ec8b0978ea846bc9a9e1ff1c256ade0c33c308cd8f55d6c2"
+  },
+  "scores": {
+    "V25_control": 0.826409928470033,
+    "Full_T12_l50": 0.8298791779584462,
+    "Full_T12_l75": 0.8283731310952566,
+    "Full_T12_raw": 0.8075730739450251
+  },
+  "evaluations": [
+    "V25_control",
+    "Full_T12_l50"
+  ],
+  "promoted": false
+}

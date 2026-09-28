@@ -1,0 +1,111 @@
+# v41 — Windows, RTX 4060 8 GB, независимые очереди
+
+Это исследование качества. Не меняет main/MVP_fusion_v25 и не выполняет финальный refit.
+Один **Run All** запускает три очереди, чередуя первые опыты и затем продолжая лучшие.
+На одной GPU одновременно считается один trial. Простой CPU fallback запрещён.
+
+## Перенести на второй компьютер
+
+1. Получить ветку `fine-tuning` репозитория `Elvsevolod/Car-classification-MSK`.
+2. Отдельно перенести **v41_inputs.zip**, 3 870 018 042 байта (~3.60 GiB).
+   Архив находится на исходном Mac в `research_transfer/`; его **нет и не будет в Git**.
+   SHA256 и состав зафиксированы в `INPUT_PACKAGE.json`.
+3. Нужны Windows x64, Python 3.11 x64, драйвер NVIDIA, интернет для установки и первых
+   загрузок внешних моделей. Рекомендуется не менее 50 GB свободного диска и 16 GB RAM.
+   Модели/история могут занимать десятки GB; не удалять checkpoint ради освобождения места.
+
+В PowerShell, из корня клона:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\OSNet-AIN-x1.0\variant_41_windows_queues\setup_windows.ps1
+.\.venv-rtx4060\Scripts\python.exe -m training.research_inputs --unpack C:\путь\v41_inputs.zip
+.\.venv-rtx4060\Scripts\python.exe -m jupyterlab
+```
+
+Выбрать `train_windows_queues.ipynb`, kernel **Car ReID RTX 4060**, нажать Run All.
+Путь к архиву заменить своим; старые абсолютные Mac-пути никуда подставлять не нужно.
+Установка использует отдельную `.venv-rtx4060`, PyTorch 2.6.0 + torchvision 0.21.0 / CUDA12.4,
+остальные версии закреплены в `requirements-windows.txt`. CUDA Toolkit отдельно не нужен,
+но драйвер должен поддерживать этот runtime. На Mac тесты выполнены в другом окружении;
+native Windows/CUDA-приёмку выполняет preflight на целевой машине.
+
+Без Jupyter можно запустить тот же runner:
+
+```powershell
+.\.venv-rtx4060\Scripts\python.exe -m training.research_gpu --inputs research_transfer/v41_inputs --run-name rtx4060_v1
+```
+
+## Второй датасет: NiVe1303
+
+**Официальное скачивание NiVe1303 v1:** https://data.mendeley.com/datasets/42wv2svztx/1
+
+- Автор: Ruozheng LI; DOI: `10.17632/42wv2svztx.1`; лицензия: CC BY 4.0.
+- В подготовленном входном ZIP уже есть проверенные **17 070 train-фотографий / 703 ID**.
+  Если используешь ZIP, отдельно скачивать NiVe не требуется.
+- При ручном восстановлении взять оригинальный `train/<ID>/*.jpg` и разместить как
+  `research_transfer/v41_inputs/nive/train/<ID>/*.jpg`. Не включать `test`, masks,
+  `*_MK_PURE`, не переименовывать изображения и не менять их байты.
+- Для полного запуска всё равно нужны organizer train-изображения и наши контрольные
+  checkpoints из входного пакета: одно скачивание NiVe их не заменяет.
+- Источник ранее подтверждён владельцем данных. Проверяются SHA256 всех входных файлов.
+  Несовпадение — повод восстановить исходные файлы, не отключать защиту.
+
+## Очереди и бюджет
+
+| Очередь | Фиксированная первая программа |
+|---|---|
+| TransReID global DeiT-Small | 12: LR 3e-5/1e-4/3e-4 × P8K2/P16K4 × SupCon/soft triplet; все до 10 и 30 условных проходов, лучшие 4 до 90 |
+| NiVe | 9: shared/target-only updates/domain-specific BN × alpha .005/.025/.1; ещё 9 соответствующих target-extra контролей и один target-only контроль |
+| Новые представления | 6 frozen DINOv2 S14/B14 × CLS/patch mean/concat + 4 frozen R50-IBN (ImageNet, VeRi, VehicleID, VERI-Wild) |
+| Адаптация представлений | Лучший pooling каждого DINO: head-only + last4 при 3 LR. Лучшие 2 автомобильных R50: last-stage при 3 LR. До 14 условий по 10 проходов; лучшие 2 каждого семейства до 30 |
+
+Итого до **55 различных конфигураций**, плюс продолжения и контрольные измерения.
+NiVe: 1600 joint + 600 target-only шагов, LR horizon 2200 одинаков для сравнений.
+Эти 600 шагов и новый sampler — новый matched-эксперимент, не точный replay v33.
+Main PK одинаков между NiVe-условиями; auxiliary PK использует только свой домен,
+target-extra исключает текущие main-изображения. Полное покрытие всех NiVe-фото за
+1600 шагов не гарантируется; архив содержит весь train, но sampler вероятностный.
+
+Основной критерий отбора — **G2 expert10 к C_primary**, средний официальный mAP@10
+по трём прежним primary draws. Standalone raw/graph и pre-graph/G1 — диагностика,
+не дополнительные скрытые правила выбора. Выборы pooling/finalists сохраняются и
+не переигрываются на resume. Calibration/validation/test организаторов в этих очередях
+не открываются. Новые независимые fold/seed и refit — следующий этап после анализа.
+
+C_primary = B0_208 seed20260915 step800 + R1 equal3 step800, cosine50/50.
+Это fold-matched аналог состава v25, а не точная копия его исторического обучения.
+Все компоненты обучались на 740 primary train-ID; 185 holdout-ID не участвовали.
+На Windows контроль извлекается заново, сравнение идёт в одном runtime.
+
+Используется float32, TF32/AMP выключены. TransReID и DINO last4 используют activation
+checkpointing для экономии 8 GB. P×K — настоящий batch, не gradient accumulation.
+Если конфигурация не помещается, она фиксируется как failed/OOM; batch/loss не меняются.
+Остальные очереди продолжают работу. Для внешнего источника без доступных весов
+фиксируется ошибка; случайные веса и сторонние зеркала не подставляются.
+
+**Не обещается завершение за одну ночь.** Ограничения времени нет. Вывод содержит trial,
+шаг, условные проходы, loss, accuracy, время; сохраняются нормы/направления градиентов
+NiVe, настоящий runtime и allocator peak CUDA (не полный пик VRAM платы).
+
+## Остановка и продолжение
+
+Остановить выполнение штатным Interrupt, дождаться освобождения kernel/процесса.
+Повторить Run All с тем же RUN_NAME и теми же исходниками/окружением. Сохраняется
+модель и optimizer каждые 100 шагов в двух атомарных slots. Неполный блок пересчитывается
+с теми же per-step seed. Не запускать два kernel для одного каталога.
+Изменение кода, параметров, данных или runtime требует нового RUN_NAME; старый не стирать.
+
+## Что передать обратно
+
+После завершения в каталоге этого варианта появятся:
+
+- `rtx4060_v1_analysis.zip`: отчёт, метрики, ошибки, per-query top10/AP, manifests и логи.
+- `rtx4060_v1_full_results.zip`: то же + реальные features и выбранные по этапам checkpoints.
+- SHA256 JSON рядом с каждым ZIP.
+
+Передать **оба ZIP**. Полный архив нужен для последующей сборки модели, а не только
+обсуждения таблицы. Не удалять runs и исходные weights на Windows до проверки переноса.
+Resume slots не входят в возвратный архив; он для анализа/моделей, не для продолжения
+optimizer-run на другом runtime. Эксперимент не оценивает новую candidate-policy/F1/TNR.
+
+Исходники/лицензии: `SOURCES.md`. Готовый промпт для нейронки: **AI_LAUNCH_PROMPT_RU.md**.

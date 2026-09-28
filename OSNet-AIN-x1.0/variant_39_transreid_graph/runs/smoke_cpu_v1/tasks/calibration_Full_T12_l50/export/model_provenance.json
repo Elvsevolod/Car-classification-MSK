@@ -1,0 +1,18 @@
+{
+  "signature": "b77923ecbd74869e682ec01bd6a1fd6aee4b13c1f38a010e37a4adaafc76ece2",
+  "system": "Full_T12_l50",
+  "spec": {
+    "source": "Full_T12_w10",
+    "mixture": "T12_w10",
+    "policy": "legacy",
+    "weight": 0.1
+  },
+  "source_signature": "344249c0d98dff205e3ead3b3ade09bbfc75960a331adc77f0f4bb3a579efc49",
+  "checkpoint": {
+    "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_38_transreid_full_train/runs/refit_v1/training/T12_global_supcon/step_01800.pt",
+    "sha256": "beefa79b18c18981ce39ba7f76e11cb7e664cd2a4ffc50bd62c2070fd44c40e3"
+  },
+  "v25_profile": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_24_dual_role/runs/dual_role_v1/dual_role_profile.json",
+  "encoder_forwards": 0,
+  "promoted": false
+}

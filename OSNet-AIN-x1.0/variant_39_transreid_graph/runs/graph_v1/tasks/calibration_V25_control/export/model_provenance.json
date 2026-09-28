@@ -1,0 +1,15 @@
+{
+  "signature": "b77923ecbd74869e682ec01bd6a1fd6aee4b13c1f38a010e37a4adaafc76ece2",
+  "system": "V25_control",
+  "spec": {
+    "source": "V25_control",
+    "mixture": "V25_control",
+    "policy": "legacy",
+    "weight": 0.0
+  },
+  "source_signature": "344249c0d98dff205e3ead3b3ade09bbfc75960a331adc77f0f4bb3a579efc49",
+  "checkpoint": null,
+  "v25_profile": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_24_dual_role/runs/dual_role_v1/dual_role_profile.json",
+  "encoder_forwards": 0,
+  "promoted": false
+}

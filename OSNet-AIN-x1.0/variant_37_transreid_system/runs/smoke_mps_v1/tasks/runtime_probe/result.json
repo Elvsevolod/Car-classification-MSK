@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "max_errors": {
+    "v25_cache": 0.0,
+    "T12": {
+      "1": 0.0,
+      "8": 0.0,
+      "16": 0.0,
+      "32": 0.0
+    },
+    "T22": {
+      "1": 2.9802322387695312e-08,
+      "8": 0.0,
+      "16": 0.0,
+      "32": 0.0
+    }
+  },
+  "bn_updates": 0,
+  "scope": "fresh feature/batch probe, not a latency or GPU benchmark"
+}

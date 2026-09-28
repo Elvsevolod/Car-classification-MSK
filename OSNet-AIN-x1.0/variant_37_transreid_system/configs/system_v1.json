@@ -1,0 +1,21 @@
+{
+  "source_run": "OSNet-AIN-x1.0/variant_36_transreid_night/runs/night_v1",
+  "source_manifest_sha256": "943e9025ae2bfa940a824145b96629341e93a5dd9e53f93a69bcf093d3c567b1",
+  "source_results_sha256": "4fa23e20716d9ef8165903ae2c0fca3764ba9efa0b9be9f7da697ca50ab6b62e",
+  "source_complete_sha256": "1dffea6b45d06237f1ab89749b8e08040a030d8d1769935fb42511fb688c2e15",
+  "models": {
+    "T12": {"trial_id": "T12_global_supcon", "architecture": "global", "step": 1800, "sha256": "b192a0620b139efd56296b33234413daf165641345d1b1c5e905584b97a0e869"},
+    "T22": {"trial_id": "T22_jpm_supcon", "architecture": "jpm", "step": 1800, "sha256": "8e64e98db1329223a2fb40474509f5d9974d8d415da4798df1e58e2cb5d43d0d"}
+  },
+  "v25_run": "OSNet-AIN-x1.0/variant_25_map_search/runs/map_search_v1",
+  "v24_run": "OSNet-AIN-x1.0/variant_24_dual_role/runs/dual_role_v1",
+  "batch_size": 16,
+  "vector_atol": 0.00002,
+  "selection_split": "calibration",
+  "validation": "control and one frozen calibration winner only",
+  "optimizer_updates": 0,
+  "bn_updates": 0,
+  "threshold_fit": false,
+  "promoted": false,
+  "wall_time_limit": null
+}

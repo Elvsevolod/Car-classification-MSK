@@ -1,0 +1,19 @@
+{
+  "source_run": "OSNet-AIN-x1.0/variant_38_transreid_full_train/runs/refit_v1",
+  "source_signature": "344249c0d98dff205e3ead3b3ade09bbfc75960a331adc77f0f4bb3a579efc49",
+  "source_manifest_sha256": "f99df3477f9e2514545f9e910453ba8fc44e113c064e14aa892e4872f51e6502",
+  "source_results_sha256": "918b5dbdb182e69be7076b35836423fb233f7f06d88fe73136e4eba38089ecda",
+  "source_complete_sha256": "ebdd65602fae360c5411157338472a2ab8076176c46d25c78b0f477841699700",
+  "source_frozen_candidate_sha256": "19a67ae57b911d1ab9f5c137d3d0abb528c7b359f2fdf66a796277552793d29f",
+  "checkpoint_sha256": "beefa79b18c18981ce39ba7f76e11cb7e664cd2a4ffc50bd62c2070fd44c40e3",
+  "new_encoder_weight": 0.1,
+  "policies": ["legacy", "less_graph", "raw"],
+  "selection_split": "calibration",
+  "selection_metric": "mAP@10",
+  "validation": "V25_control and one frozen calibration winner only",
+  "optimizer_updates": 0,
+  "encoder_forwards": 0,
+  "threshold_fit": false,
+  "promoted": false,
+  "wall_time_limit": null
+}

@@ -1,0 +1,30 @@
+{
+  "signature": "344249c0d98dff205e3ead3b3ade09bbfc75960a331adc77f0f4bb3a579efc49",
+  "checkpoint": {
+    "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_38_transreid_full_train/runs/refit_v1/training/T12_global_supcon/step_01800.pt",
+    "sha256": "beefa79b18c18981ce39ba7f76e11cb7e664cd2a4ffc50bd62c2070fd44c40e3"
+  },
+  "step": 1800,
+  "trial": {
+    "id": "T12_global_supcon",
+    "architecture": "global",
+    "encoder_lr": 0.0001,
+    "weight_decay": 0.01,
+    "metric_loss": "supcon"
+  },
+  "train_ids_sha256": "3de2292f54fbc3e1d832bff7463e37508ec9d0ecf9b6673b70649b5a299912a2",
+  "systems": {
+    "V25_control": "V25_control",
+    "Full_T12_w10": "T12_w10"
+  },
+  "graph": {
+    "k1": 20,
+    "k2": 3,
+    "lambda": 0.5
+  },
+  "new_encoder_weight": 0.1,
+  "threshold": 0.534365177154541,
+  "selection_split": null,
+  "selection": "fixed before training, no quality-based selection",
+  "promoted": false
+}

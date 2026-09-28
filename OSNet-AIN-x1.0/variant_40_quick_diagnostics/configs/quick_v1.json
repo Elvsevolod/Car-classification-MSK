@@ -1,0 +1,45 @@
+{
+  "experiment": "v40_quick_v1",
+  "train_csv_sha256": "bd1df45b052ae9aabb7fd356898e244875f8cad2f111a3f76977c1b90bce9268",
+  "threshold": 0.534365177154541,
+  "cache_sources": {
+    "calibration": {
+      "N1": {
+        "features": "OSNet-AIN-x1.0/variant_34_nive_system/runs/system_v1/tasks/calibration_MVP_R1_N1/export/embeddings.npy",
+        "order": "OSNet-AIN-x1.0/variant_34_nive_system/runs/system_v1/tasks/calibration_MVP_R1_N1/export/embedding_order.json",
+        "files": {
+          "OSNet-AIN-x1.0/variant_34_nive_system/runs/system_v1/tasks/calibration_MVP_R1_N1/export/embeddings.npy": "23ad4bf2b3c0435778f88b3c862e9ff969c3be5cc472a336d8eb7dd49462668c",
+          "OSNet-AIN-x1.0/variant_34_nive_system/runs/system_v1/tasks/calibration_MVP_R1_N1/export/embedding_order.json": "d1e28b76dcf49177e0df7dfee74cb19c8961213db982dc0ff0948fddb8df6974"
+        }
+      },
+      "T12": {
+        "features": "OSNet-AIN-x1.0/variant_38_transreid_full_train/runs/refit_v1/tasks/calibration_Full_T12_w10/export/embeddings.npy",
+        "order": "OSNet-AIN-x1.0/variant_38_transreid_full_train/runs/refit_v1/tasks/calibration_Full_T12_w10/export/embedding_order.json",
+        "files": {
+          "OSNet-AIN-x1.0/variant_38_transreid_full_train/runs/refit_v1/tasks/calibration_Full_T12_w10/export/embeddings.npy": "cb4e0882526c5828d709bfb448e29266011051c1465865dd5c2158625ebb64d1",
+          "OSNet-AIN-x1.0/variant_38_transreid_full_train/runs/refit_v1/tasks/calibration_Full_T12_w10/export/embedding_order.json": "63d31c5de6f75c91a77671e79e70317cd496da4025d0bb1e71b53abd1bd3f79e"
+        }
+      }
+    },
+    "validation": {
+      "N1": {
+        "features": "OSNet-AIN-x1.0/variant_34_nive_system/runs/system_v1/tasks/validation_MVP_R1_N1/export/embeddings.npy",
+        "order": "OSNet-AIN-x1.0/variant_34_nive_system/runs/system_v1/tasks/validation_MVP_R1_N1/export/embedding_order.json",
+        "files": {
+          "OSNet-AIN-x1.0/variant_34_nive_system/runs/system_v1/tasks/validation_MVP_R1_N1/export/embeddings.npy": "9be292f9bdf2016f4757986e8bdd1c6e3576e286c459c64605a9cb27eedd8c36",
+          "OSNet-AIN-x1.0/variant_34_nive_system/runs/system_v1/tasks/validation_MVP_R1_N1/export/embedding_order.json": "851310d1012ca5b3c6a5da20f165c342345072ea20369dc74ebd2344d818e01e"
+        }
+      },
+      "T12": {
+        "features": "OSNet-AIN-x1.0/variant_38_transreid_full_train/runs/refit_v1/tasks/validation_Full_T12_w10/export/embeddings.npy",
+        "order": "OSNet-AIN-x1.0/variant_38_transreid_full_train/runs/refit_v1/tasks/validation_Full_T12_w10/export/embedding_order.json",
+        "files": {
+          "OSNet-AIN-x1.0/variant_38_transreid_full_train/runs/refit_v1/tasks/validation_Full_T12_w10/export/embeddings.npy": "fa3ff4b8efe02a7c7c2a06c90e9c9a383fbf52dba34404e1dacc5c577136fe13",
+          "OSNet-AIN-x1.0/variant_38_transreid_full_train/runs/refit_v1/tasks/validation_Full_T12_w10/export/embedding_order.json": "04937e41216a6f84e8399c4e5de87eda952c6de7431c90ad5fd46b0290cef89c"
+        }
+      }
+    }
+  },
+  "optimizer_updates": 0,
+  "promoted": false
+}

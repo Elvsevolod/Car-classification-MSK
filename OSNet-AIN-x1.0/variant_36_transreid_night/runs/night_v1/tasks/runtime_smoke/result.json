@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "device": "mps",
+  "updates": [
+    {
+      "architecture": "global",
+      "metric": "soft_triplet",
+      "loss": 8.323974609375,
+      "seconds": 0.6743313330225646
+    },
+    {
+      "architecture": "global",
+      "metric": "supcon",
+      "loss": 8.417159080505371,
+      "seconds": 0.2755939579801634
+    },
+    {
+      "architecture": "jpm",
+      "metric": "soft_triplet",
+      "loss": 8.762605667114258,
+      "seconds": 0.38537904201075435
+    },
+    {
+      "architecture": "jpm",
+      "metric": "supcon",
+      "loss": 8.342232704162598,
+      "seconds": 0.30084649997297674
+    }
+  ],
+  "discarded_smoke_models": true,
+  "timing_is_not_a_benchmark_or_eta": true
+}

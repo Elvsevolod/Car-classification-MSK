@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "device": "mps",
+  "updates": [
+    {
+      "architecture": "global",
+      "metric": "supcon",
+      "loss": 9.315601348876953,
+      "seconds": 0.997299209004268
+    }
+  ],
+  "discarded_smoke_models": true,
+  "timing_is_not_a_benchmark_or_eta": true
+}

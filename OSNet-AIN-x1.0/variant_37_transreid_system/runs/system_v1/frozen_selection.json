@@ -1,0 +1,68 @@
+{
+  "signature": "90c0f606afca5857fc8f37cbd9b1fefeb5613237ddaa8e88f23ed0050369ee76",
+  "selection_split": "calibration",
+  "selected": "T12_w10",
+  "spec": {
+    "member": "T12",
+    "weight": 0.1
+  },
+  "graph": {
+    "k1": 20,
+    "k2": 3,
+    "lambda": 0.5
+  },
+  "threshold": 0.534365177154541,
+  "calibration": {
+    "V25_control": 0.826409928470033,
+    "T12_w05": 0.8322669591775282,
+    "T22_w05": 0.8297744870305845,
+    "T12_w10": 0.8340484256033035,
+    "T22_w10": 0.8324881167462469,
+    "T12_w15": 0.8271631285757303,
+    "T22_w15": 0.830275089258829,
+    "T12_w20": 0.8225946358669936,
+    "T22_w20": 0.8240916032176195
+  },
+  "calibration_files": {
+    "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_37_transreid_system/runs/system_v1/tasks/calibration_V25_control/result.json": "fb5a8c5c122760fd1debdaf72d2940ef57e46b5d2b4d92907bd11918ec7b8801",
+    "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_37_transreid_system/runs/system_v1/tasks/calibration_T12_w05/result.json": "be6bc3512cef4e662dd1961fdb085839b4428234f3df619cb029267c6c9c186b",
+    "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_37_transreid_system/runs/system_v1/tasks/calibration_T22_w05/result.json": "057cd27ffd1b3fb805f0d6404d21c36b153b8a20a9a93b7e054ce4744103b47d",
+    "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_37_transreid_system/runs/system_v1/tasks/calibration_T12_w10/result.json": "532a1d909113859c03cfd1fdbe9f650631beae49d4098f76fe87f342a5469b16",
+    "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_37_transreid_system/runs/system_v1/tasks/calibration_T22_w10/result.json": "376d6f99ac6f3588c95f34cfe39f1b3122e417e7ffb05dbb175bf69bff996057",
+    "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_37_transreid_system/runs/system_v1/tasks/calibration_T12_w15/result.json": "9b720c5bcc042ae530992ba16efc531fd33458b1a7af4d836f55df7fcf3d6dd0",
+    "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_37_transreid_system/runs/system_v1/tasks/calibration_T22_w15/result.json": "92e0860f013798ac942cdb9206c52958b936d9d155219bf24f828b9d2afad231",
+    "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_37_transreid_system/runs/system_v1/tasks/calibration_T12_w20/result.json": "750c9889167cf8745e51536d6863b0912527793fd27eca10f5434ef2aca142d1",
+    "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_37_transreid_system/runs/system_v1/tasks/calibration_T22_w20/result.json": "f48c1667b257a0646d377f2f34af3e9ed5721a818dc9d6ac7e26ff3b387e62b7"
+  },
+  "models": {
+    "T12": {
+      "trial_id": "T12_global_supcon",
+      "architecture": "global",
+      "step": 1800,
+      "sha256": "b192a0620b139efd56296b33234413daf165641345d1b1c5e905584b97a0e869",
+      "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_36_transreid_night/runs/night_v1/training/T12_global_supcon/step_01800.pt",
+      "trial": {
+        "id": "T12_global_supcon",
+        "architecture": "global",
+        "encoder_lr": 0.0001,
+        "weight_decay": 0.01,
+        "metric_loss": "supcon"
+      }
+    },
+    "T22": {
+      "trial_id": "T22_jpm_supcon",
+      "architecture": "jpm",
+      "step": 1800,
+      "sha256": "8e64e98db1329223a2fb40474509f5d9974d8d415da4798df1e58e2cb5d43d0d",
+      "path": "/Users/elvsevolod/Desktop/учеба/Учёба 4 курс/Хакатон мск сентябрь/Car-classification-MSK/OSNet-AIN-x1.0/variant_36_transreid_night/runs/night_v1/training/T22_jpm_supcon/step_01800.pt",
+      "trial": {
+        "id": "T22_jpm_supcon",
+        "architecture": "jpm",
+        "encoder_lr": 0.0001,
+        "weight_decay": 0.0001,
+        "metric_loss": "supcon"
+      }
+    }
+  },
+  "promoted": false
+}

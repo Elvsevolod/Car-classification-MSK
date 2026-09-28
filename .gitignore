@@ -1,6 +1,7 @@
 .DS_Store
 .idea/
 .venv/
+.venv-rtx4060/
 .uv-cache/
 __pycache__/
 .pytest_cache/
@@ -65,5 +66,11 @@ OSNet-AIN-x1.0/**/*.onnx
 OSNet-AIN-x1.0/**/*.npy
 OSNet-AIN-x1.0/**/*.npz
 OSNet-AIN-x1.0/**/*.sqlite3*
-# The running night queue is not a finished, reproducible result snapshot yet.
-OSNet-AIN-x1.0/variant_36_transreid_night/runs/night_v1/
+# Completed night_v1 text reports are versioned; binary weights/caches remain local.
+# Portable data/weights are copied locally, never published to Git.
+research_transfer/
+OSNet-AIN-x1.0/variant_40_quick_diagnostics/runs/
+OSNet-AIN-x1.0/variant_41_windows_queues/runs/
+OSNet-AIN-x1.0/variant_41_windows_queues/weights/
+OSNet-AIN-x1.0/variant_4[01]_*/*.zip
+OSNet-AIN-x1.0/variant_4[01]_*/*.sha256.json

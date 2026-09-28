@@ -1,0 +1,12 @@
+numpy==2.2.6
+pandas==2.2.3
+pillow==11.1.0
+onnx==1.17.0
+onnxruntime==1.21.0
+optuna==4.2.1
+scipy==1.15.2
+tqdm==4.67.1
+pytest==8.3.5
+ipykernel==6.29.5
+jupyterlab==4.3.6
+nbclient==0.10.2

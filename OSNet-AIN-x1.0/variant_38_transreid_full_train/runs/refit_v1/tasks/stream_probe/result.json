@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "max_vector_error": 0.0,
+  "v25_cache_error": 0.0,
+  "batch_sizes": [
+    1,
+    8,
+    16,
+    32
+  ],
+  "permutation_and_removal": true,
+  "exact_top10_candidates_refusals": true,
+  "inference_bn_updates": 0,
+  "scope": "fresh correctness probe, not a speed benchmark"
+}

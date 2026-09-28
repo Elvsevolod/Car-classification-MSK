@@ -1,0 +1,8 @@
+{
+  "name": "v41_inputs.zip",
+  "sha256": "8efbc42e7d5351e2e26784ae0f735a9643348c7fea665ccfcc9c104aff6b4ab6",
+  "bytes": 3870018042,
+  "files": 22802,
+  "inputs_manifest_sha256": "2fdd729fdb981923f4a86d0b71301899a05fe06a7aa6d6543dd1c9d1305f1c51",
+  "distribution": "Local transfer between the user's computers only. Never push datasets to Git."
+}

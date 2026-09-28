@@ -1,0 +1,9 @@
+{
+  "signature": "ea28ccf603a9a31876be8a2173058b21bc5653f8c6ef32bce574ae6e5edb8988",
+  "selected": [
+    "T09_global_soft_triplet",
+    "T12_global_supcon",
+    "T23_jpm_soft_triplet",
+    "T22_jpm_supcon"
+  ]
+}

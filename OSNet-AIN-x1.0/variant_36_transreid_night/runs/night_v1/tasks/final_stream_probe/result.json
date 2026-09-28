@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "trial_id": "T12_global_supcon",
+  "step": 1800,
+  "max_vector_error": 0.0,
+  "batch_sizes": [
+    1,
+    8,
+    16,
+    32
+  ],
+  "exact_raw_graph_top10": true,
+  "permutation_and_removal": true,
+  "model_state_unchanged": true
+}
