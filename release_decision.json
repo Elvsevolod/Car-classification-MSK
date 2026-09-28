@@ -20,8 +20,8 @@
   "open_checks": [
     "GPU CUDA and native Linux amd64 acceptance",
     "Residual license-plate signal is not proven absent",
-    "Official extractor.py interface has not been supplied",
     "Junk/top-10 truncation ambiguity requires organizer clarification",
     "Presentation and submission links are a separate checklist"
-  ]
+  ],
+  "organizer_clarifications": "docs/ORGANIZER_CLARIFICATIONS_2026-09-28.md"
 }
