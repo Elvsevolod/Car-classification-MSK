@@ -2,7 +2,7 @@ services:
   postgres-test:
     image: pgvector/pgvector:0.8.6-pg16-bookworm
     environment:
-      POSTGRES_DB: vehicle_reid_test
+      POSTGRES_DB: reid_integration_test
       POSTGRES_USER: vehicle_reid_test
       POSTGRES_PASSWORD: vehicle-reid-test
     healthcheck:
@@ -17,7 +17,8 @@ services:
       dockerfile: Dockerfile
       target: test
     environment:
-      DATABASE_URL: postgresql://vehicle_reid_test:vehicle-reid-test@postgres-test:5432/vehicle_reid_test
+      DATABASE_URL: postgresql://vehicle_reid_test:vehicle-reid-test@postgres-test:5432/reid_integration_test
+      REID_TEST_DATABASE_URL: postgresql://vehicle_reid_test:vehicle-reid-test@postgres-test:5432/reid_integration_test
     depends_on:
       postgres-test:
         condition: service_healthy

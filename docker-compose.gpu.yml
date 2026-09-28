@@ -1,0 +1,39 @@
+# Use together with docker-compose.yml. CPU remains the default without this file.
+x-gpu-image: &gpu-image
+  image: vehicle-reid:cuda12.2
+  platform: linux/amd64
+  build:
+    context: .
+    dockerfile: Dockerfile
+    args:
+      RUNTIME_REQUIREMENTS: requirements-gpu.txt
+
+x-gpu-device: &gpu-device
+  resources:
+    reservations:
+      devices:
+        - driver: nvidia
+          count: 1
+          capabilities: [gpu]
+
+services:
+  dataset-init:
+    <<: *gpu-image
+
+  inference:
+    <<: *gpu-image
+    environment:
+      REID_PROVIDER: CUDAExecutionProvider
+      REID_PROFILE: ${REID_PROFILE:-MVP_fusion_v25}
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+    command: ["--dataset", "/data", "--output", "/out", "--profile", "${REID_PROFILE:-MVP_fusion_v25}", "--provider", "CUDAExecutionProvider"]
+    deploy: *gpu-device
+
+  vehicle-reid:
+    <<: *gpu-image
+    environment:
+      REID_PROVIDER: CUDAExecutionProvider
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+    deploy: *gpu-device

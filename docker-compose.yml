@@ -11,7 +11,7 @@ services:
       SOURCE_DATASET_DIR: /source
       TARGET_DATASET_DIR: /dataset-cache/dataset
     volumes:
-      - ./dataset:/source:ro
+      - ${HOST_DATASET_DIR:-./dataset}:/source:ro
       - dataset_cache:/dataset-cache
     restart: "no"
 
@@ -47,9 +47,9 @@ services:
     command: ["--dataset", "/data", "--output", "/out", "--profile", "${REID_PROFILE:-MVP_fusion_v25}", "--provider", "${REID_PROVIDER:-CPUExecutionProvider}"]
     network_mode: none
     volumes:
-      - ./dataset:/data:ro
+      - ${HOST_DATASET_DIR:-./dataset}:/data:ro
       # Submission artifacts are written directly to the ignored host directory.
-      - ./artifacts:/out
+      - ${OUTPUT_DIR:-./artifacts}:/out
 
   # Демонстрационный HTTP-сервис: FastAPI, React и локальный Swagger UI.
   vehicle-reid:

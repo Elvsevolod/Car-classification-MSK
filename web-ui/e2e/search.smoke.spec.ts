@@ -21,6 +21,7 @@ async function search(page: Page) {
 }
 
 test('real API: calibrated default, result photos, JSON and metrics', async ({ page }) => {
+  const health = await (await page.request.get('/api/health')).json()
   await selectOfficialQuery(page)
   await expect(page).toHaveTitle('Поиск автомобиля · ASU Team')
   await expect(page.locator('header')).toHaveText('ASU Team / Vehicle Re-ID')
@@ -28,7 +29,10 @@ test('real API: calibrated default, result photos, JSON and metrics', async ({ p
   await expect(page.getByLabel('Порог cosine')).not.toBeVisible()
   const payload = await search(page)
   expect(payload.mode).toBe('candidates')
-  expect(payload.threshold).toBeCloseTo(0.5948754549026489)
+  expect(health.profile).toBe('MVP_fusion_v25')
+  expect(health.embedding_dim).toBe(2048)
+  expect(health.default_threshold).toBeCloseTo(0.534365177154541)
+  expect(payload.threshold).toBe(health.default_threshold)
   expect(payload.threshold_source).not.toBe('manual')
   const decision = page.getByTestId('search-decision')
   await expect(decision).toContainText(payload.refused ? 'Отказ: порог не пройден' : 'Порог пройден · проверьте кандидатов')

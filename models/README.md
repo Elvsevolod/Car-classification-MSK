@@ -1,6 +1,16 @@
 # Vehicle OSNet weights
 
-## Active MVP checkpoint
+## Active ensemble: MVP_fusion_v25
+
+The default profile combines this legacy MVP encoder with three frozen R1
+encoders in `models/frozen/`: 2048-D output, 50/50 MVP/R1 ranking fusion,
+separate R1 raw-top1 candidate and threshold `0.534365177154541`.
+All four ONNX files are committed as ordinary Git blobs. Profile definitions,
+member paths and checksums are in `profiles.json` and the referenced bundles.
+See [MODEL_REPORT.md](../docs/MODEL_REPORT.md) and the [current run guide](../README.md).
+The sections below document the legacy member and public initialization.
+
+## Legacy MVP member checkpoint
 
 File: `osnet_ain_x1_0_vehicle_reid_hpo_best_map.onnx`.
 
@@ -45,7 +55,7 @@ resize 208×208 → float32 / 255 → ImageNet mean `(0.485,0.456,0.406)` and
 std `(0.229,0.224,0.225)` → NCHW. This is the original ONNX, not the
 OpenVINO-converted BGR model. Output is L2-normalized in Python.
 
-No OCR, plate features, detector, or additional embedding model is used.
+No OCR, explicit plate features or detector is used by the deployed ensemble.
 The stock checkpoint remains frozen and is used only to initialize new training runs.
 Changing the active checkpoint requires updating its metadata, recalculating gallery
 embeddings, and calibrating the refusal threshold.

@@ -14,6 +14,7 @@ from PIL import Image
 from .core import ROOT, bbox, read_rows, sha256
 from .frozen_encoder import PROVIDERS
 from .images import ImageIndex
+from .gpu import CudaSynchronizer, gpu_inventory
 from .runtime import DEFAULT_PROFILE, PROFILE_NAMES, Runtime, encode_rows, write_json
 
 
@@ -98,8 +99,9 @@ def benchmark(profile, dataset, provider=PROVIDERS[0], warmup=50, samples=300,
         runtime = Runtime(profile, provider)
         model_load_seconds = time.perf_counter() - started
         sessions = [e.session for e in getattr(runtime.encoder, "members", [runtime.encoder])]
-        if any(s.get_providers() != [provider] for s in sessions):
+        if any(s.get_providers()[0] != provider for s in sessions):
             raise RuntimeError("Provider fallback forbidden")
+        sync = CudaSynchronizer() if provider == "CUDAExecutionProvider" else lambda: None
 
         def extract(rows):
             batch = []
@@ -114,8 +116,10 @@ def benchmark(profile, dataset, provider=PROVIDERS[0], warmup=50, samples=300,
 
         latency = []
         for i in range(warmup + samples):
+            sync()
             started = time.perf_counter()
             extract([queries[i % len(queries)]])
+            sync()
             elapsed = time.perf_counter() - started
             if i >= warmup:
                 latency.append(elapsed * 1000)
@@ -125,24 +129,32 @@ def benchmark(profile, dataset, provider=PROVIDERS[0], warmup=50, samples=300,
         for count in (1, 8, 16, 32):
             rows = [queries[i % len(queries)] for i in range(count)]
             extract(rows)
+            sync()
             started, processed, iterations = time.perf_counter(), 0, 0
             while time.perf_counter() - started < throughput_seconds:
                 extract(rows)
+                sync()
                 processed += count
                 iterations += 1
             seconds = time.perf_counter() - started
             throughput[str(count)] = {"images_per_second": processed / seconds, "seconds": seconds,
                                       "iterations": iterations, "images": processed}
             progress(f"{profile}: throughput batch={count}, {processed / seconds:.2f} images/s")
+        sync()
         started = time.perf_counter()
         full_vectors = encode_rows(runtime, queries + gallery, dataset, 16,
                                    lambda n, total: progress(f"{profile}: full extract {n}/{total}"))
+        sync()
         full_extract_seconds = time.perf_counter() - started
     return {**runtime.metadata(), "reused_measurement": False, "official_gpu_verified": False,
             "official_score": None, "interpretation": "Own-machine estimate only; organizers assign official scores",
             "platform": platform.platform(), "machine": platform.machine(), "python": platform.python_version(),
             "cpu": platform.processor(), "logical_cpus": os.cpu_count(), "ram_total_bytes": psutil.virtual_memory().total,
             "onnxruntime": ort.__version__, "actual_providers": [s.get_providers() for s in sessions],
+            "gpu": gpu_inventory() if provider == "CUDAExecutionProvider" else None,
+            "cuda_synchronization": "cudaDeviceSynchronize before/after timing" if provider == "CUDAExecutionProvider" else None,
+            "cuda_placement": [getattr(s, "reid_cuda_placement", None) for s in sessions],
+            "weights": weight_inventory(ROOT / "models"),
             "warmup": warmup, "samples": samples, "batch1_latency_ms": latency,
             "median_ms": float(np.median(latency)), "p95_ms": float(np.percentile(latency, 95)),
             "throughput": throughput, "model_load_seconds": model_load_seconds,

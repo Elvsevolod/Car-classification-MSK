@@ -1,238 +1,196 @@
-# Кейс от ASU_TEAM — Vehicle ReID
+# ASU_TEAM — Vehicle ReID
 
-Сервис ищет похожие автомобили: получает изображение и ограничивающую рамку автомобиля (BBox), строит embedding, ищет кандидатов в статичной gallery и возвращает Top-N либо отказ.
-В поставку входят FastAPI API, React-интерфейс, PostgreSQL 16 + pgvector, офлайн Swagger UI и конкурсный batch-экспорт.
+Поиск одного автомобиля на снимках с разных камер по изображению и предоставленному BBox. В `main` находятся актуальный React-интерфейс и последняя утверждённая модель **MVP_fusion_v25**: четыре ONNX-энкодера, зафиксированный preprocessing, ranking и порог отказа. Все веса входят в Git обычными файлами; Git LFS и скачивание моделей при запуске не нужны.
 
-Два независимых пути запуска: **автономный batch-export без БД и `train.csv`** и демонстрационное web-приложение с PostgreSQL. Активная модель и порог фиксированы; протокол, локальные метрики и ограничения — в [отчёте о модели](docs/MODEL_REPORT.md).
+**Основной конкурсный путь:** каталог изображений + два CSV → одна команда offline inference → `submission.csv`, `embeddings.npy`, `candidates.csv`. Web/API с PostgreSQL — отдельное демонстрационное приложение. Для inference не нужны `train.csv`, исследовательская ветка или обучение.
 
-Ветка **main** содержит готовое приложение с **MVP_fusion_v25** и всеми необходимыми
-ONNX-весами. Обучение, notebooks экспериментов и исследовательские отчёты находятся
-в [fine-tuning](https://github.com/Elvsevolod/Car-classification-MSK/tree/fine-tuning).
-Правила разделения и происхождение модели — [BRANCH_LAYOUT.md](docs/BRANCH_LAYOUT.md).
+Текущий статус проверки и незакрытые условия: [GPU_READINESS.md](docs/GPU_READINESS.md). RTX 4060 позволяет проверить CUDA и получить замеры на своём компьютере. Эти цифры нельзя выдавать за результат на конкурсной RTX A5000 24 ГБ.
 
-## Что нужно заранее
+## 1. Подготовка Windows + RTX 4060
 
-- Docker Desktop (macOS/Windows) или Docker Engine + Docker Compose plugin (Linux);
-- датасет организаторов в папке `dataset/` рядом с `docker-compose.yml`;
-- для web-демо — свободное место Docker под внутреннюю копию датасета (около 7 ГБ для текущего набора); автономный batch читает исходный каталог напрямую.
+1. Установите актуальный Windows-драйвер NVIDIA с поддержкой WSL2 и Docker Desktop. В PowerShell выполните `wsl --update`; если WSL ещё не установлен — сначала `wsl --install`, затем завершите настройку Ubuntu и перезагрузку, если она запрошена.
+2. В Docker Desktop включите **Use the WSL 2 based engine**, Linux containers и **Resources → WSL Integration → Ubuntu**. GPU поддерживается именно через WSL2: [инструкция Docker](https://docs.docker.com/desktop/features/gpu/).
+3. Все последующие команды выполняйте в **терминале Ubuntu/WSL (Bash)**. Не устанавливайте Linux-драйвер NVIDIA внутрь WSL. Отдельные Python, CUDA Toolkit и Node.js на хосте для запуска проекта не нужны.
+4. Держите проект и dataset в файловой системе WSL (`~/...`), а не в `/mnt/c/...`: чтение и декодирование изображений входят в замер скорости.
 
-Локальные Python, `venv`, Node.js и npm для обычного запуска **не нужны**.
+```bash
+nvidia-smi
+docker version
+docker compose version
+git clone --branch main https://github.com/Elvsevolod/Car-classification-MSK.git
+cd Car-classification-MSK
+git rev-parse HEAD
+```
 
-## Структура датасета
+Если репозиторий уже клонирован, используйте чистую копию `main` и `git pull --ff-only`. Незакоммиченные исследования сохраняйте отдельно. На Linux x86_64 требуется NVIDIA driver и настроенный [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
 
-Папка `dataset/` не хранится в Git. Перед запуском она должна содержать:
+Папка `dataset/` рядом с Compose-файлами должна содержать:
 
 ```text
 dataset/
-├── images/
-├── test_gallery.csv
-└── test_query.csv
+├── images/             # JPG/JPEG/PNG, имя файла = image_id
+├── test_query.csv      # image_id,x,y,w,h
+└── test_gallery.csv    # image_id,x,y,w,h
 ```
 
-`train.csv` нужен только для отдельной локальной оценки/калибровки разработчиком. Для web-демо и batch-export он не требуется.
-
-Автономный конкурсный inference требует минимум 10 объектов gallery, чтобы каждый query получил полный Top-10.
-
-Проверка структуры:
+Дополнительные колонки метаданных не подаются модели. ID уникальны, query/gallery не пересекаются. Для конкурсного Top-10 нужны минимум 10 объектов gallery. Пропавшее/повреждённое изображение или неверный BBox завершают запуск ошибкой, а не пропускаются.
 
 ```bash
-ls dataset/images dataset/test_gallery.csv dataset/test_query.csv
+ls dataset/images dataset/test_query.csv dataset/test_gallery.csv
 ```
 
-## Запуск демо одной командой
+Датасет не публикуется в Git. Другой каталог можно задать через `HOST_DATASET_DIR` в `.env`; каталог результатов — через `OUTPUT_DIR`. Без этих настроек используются `./dataset` и `./artifacts`.
 
-Из корня репозитория:
+## 2. Сборка и проверка CUDA
+
+Определите сокращение в текущем терминале Bash; в новом терминале выполните его снова:
 
 ```bash
-docker compose up --build
+dcgpu() { docker compose -f docker-compose.yml -f docker-compose.gpu.yml "$@"; }
+dcgpu build inference
 ```
 
-После строки `Application startup complete` откройте:
+Сборка требует сети. Она создаёт `vehicle-reid:cuda12.2` для **linux/amd64**, включает UI, все веса и точные версии зависимостей из [requirements-gpu.txt](requirements-gpu.txt). ONNX Runtime GPU 1.20.2 использует CUDA 12.2/cuDNN 9.1. Он выбран с учётом заявленного организаторами драйвера CUDA 12.2; нельзя без повторной проверки заменять его последним GPU-пакетом. В одном окружении не устанавливаются одновременно CPU и GPU пакеты ONNX Runtime. Матрица совместимости: [ONNX Runtime](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements).
 
-- приложение: http://127.0.0.1:8000;
-- Swagger API: http://127.0.0.1:8000/docs;
-- healthcheck: http://127.0.0.1:8000/api/health.
-
-При первом запуске сервис `dataset-init` автоматически копирует dataset во внутренний Docker volume. Поэтому права доступа исходной папки, включая `700` на Linux, не мешают основному контейнеру. Затем запускаются PostgreSQL, миграции и заполнение gallery (750 объектов в текущем наборе). Кэш датасета проверяется по содержимому CSV и изображений, а не только размерам файлов; галерея дополнительно проверяет модель и preprocessing. Замена изображения тем же числом байт также обновляет кэш.
-
-Порог и локальный отчёт входят в образ как `models/calibration.json`: предварительный export и заполненный artifacts-volume не нужны. При несовместимом manifest запуск завершается явной ошибкой; порог не выдумывается и не перекалибровывается на тестовых данных.
-
-Запуск в фоне:
+Проверьте доступ к GPU и запуск всех четырёх моделей без сети:
 
 ```bash
-docker compose up -d --build
-docker compose ps
+dcgpu --profile inference run --rm --no-deps --pull never --entrypoint nvidia-smi inference
+dcgpu --profile inference run --rm --no-deps --pull never --entrypoint python inference \
+  -m backend.gpu --output /out/rtx4060/preflight.json
 ```
 
-Остановка контейнеров без удаления данных:
+Ожидается `preflight_passed: true`, профиль `MVP_fusion_v25`, размерность `2048`, `CUDAExecutionProvider` первым в каждой из четырёх сессий и `cpu_compute_fallback: false`. Проверяется фактическое распределение операторов, а не только наличие CUDA в списке провайдеров. ONNX Runtime может выполнять служебный `Shape` на CPU; свёртки и остальные вычисления сети на CPU запрещены. Отсутствие драйвера/библиотеки или GPU приводит к ошибке. Используется float32 без TF32; веса и порог не меняются.
+
+## 3. Конкурсный offline inference одной командой
+
+После сборки и подготовки dataset:
 
 ```bash
-docker compose stop
+dcgpu --profile inference run --rm --no-deps --pull never inference \
+  --dataset /data --output /out/rtx4060/run1
 ```
 
-Полный сброс локальных данных (удаляет PostgreSQL, внутреннюю копию dataset и runtime-artifacts):
+Это самостоятельный batch-процесс с `network_mode: none`, read-only dataset, без web, PostgreSQL, миграций и калибровки. Все query обрабатываются независимо относительно статичной gallery. По умолчанию batch size — 16; уменьшить его при нехватке памяти можно через `--batch-size 8` или `1`, записав выбранное значение в отчёт.
+
+В `artifacts/rtx4060/run1/` появятся:
+
+| Файл | Контракт |
+|---|---|
+| `submission.csv` | Без заголовка; query ID и ровно 10 разных gallery ID. Все query, включая отказы, в исходном порядке CSV. |
+| `embeddings.npy` | `float32`, `(N_query + N_gallery, 2048)`: сначала query, затем gallery, строго в порядке CSV. Для выданного набора — `(1860, 2048)`. |
+| `candidates.csv` | Заголовок `query_id,gallery_id,confidence`. Один принятый R1 raw-top1 кандидат с raw cosine; при отказе строка отсутствует. |
+| `export_manifest.json` | Профиль, провайдер, хэши входов/кода, порядок ID и результаты автоматической проверки форматов. |
+| `runtime_timing.json` | Время загрузки и полного экспорта; это не latency extractor. |
+
+Сдаются первые три файла. Остальные сохраняются для проверки воспроизводимости. Выходной каталог должен быть новым или пустым: программа **не перезаписывает** прежние результаты. Для повторного теста выбирайте новое имя, например `rtx4060-test2/run1`.
+
+Вектор содержит два нормированных блока MVP512 + R1_1536, общая норма `sqrt(2)`. Общая L2-нормализация необязательна по Q&A №8; размерность фиксирована для всех объектов. Raw cosine в `candidates.csv` не является вероятностью и не преобразуется в `(cosine+1)/2` для v25.
+
+## 4. Повторяемость и benchmark на RTX 4060
+
+Выполните второй независимый offline запуск и сравнение:
 
 ```bash
-docker compose down -v
+dcgpu --profile inference run --rm --no-deps --pull never inference \
+  --dataset /data --output /out/rtx4060/run2
+dcgpu --profile inference run --rm --no-deps --pull never --entrypoint python inference \
+  -m backend.compare_exports --dataset /data \
+  --first /out/rtx4060/run1 --second /out/rtx4060/run2 \
+  --output /out/rtx4060/repeatability.json
 ```
 
-## Как пользоваться интерфейсом
+По умолчанию требуется точное совпадение embeddings, confidence, Top-10 и кандидата/отказа. Несовпадение — ошибка проверки, не успешный результат. Между разными GPU/CPU побитовая идентичность заранее не обещается.
 
-Интерфейс — белое минималистичное рабочее место на shadcn/ui: изображение и BBox слева, результаты справа; на узком экране блоки идут последовательно. Числовые координаты, Top-N и ручной порог находятся в дополнительных настройках.
-
-1. Выберите официальный query или загрузите JPEG/PNG.
-2. Для официального query BBox подставляется из CSV. Для своего изображения нарисуйте рамку на canvas или заполните `x`, `y`, `w`, `h` вручную.
-3. Нажмите «Найти автомобиль».
-4. В режиме «Ранжирование» отображается Top-N похожих объектов gallery.
-5. В режиме «С порогом» по умолчанию используется сохранённый порог `0.5948754549026489`. При необходимости его можно переопределить вручную: если максимум cosine ниже порога, API вернёт отказ и пустой список кандидатов.
-6. При необходимости скачайте JSON ответа.
-
-`confidence` — максимальный raw cosine similarity, а не вероятность. Reranking влияет на порядок кандидатов, но не на решение об отказе. Режим «Ранжирование» не подтверждает совпадение: он возвращает Top-N без проверки порога. Даже принятые кандидаты требуют визуальной проверки.
-
-## API
-
-Swagger находится по адресу `/docs`, OpenAPI JSON — `/openapi.json`.
-
-| Метод | Адрес | Назначение |
-|---|---|---|
-| `GET` | `/api/health` | Готовность сервиса, модель, порог, размер gallery |
-| `GET` | `/api/queries` | Официальные query и их BBox |
-| `POST` | `/api/search` | Загруженное изображение + BBox → поиск |
-| `POST` | `/api/search/query` | Поиск по `query_id` из `test_query.csv` |
-| `POST` | `/api/embedding` | Получить 512-D L2-нормированный embedding |
-| `GET` | `/api/images/...` | Исходный кадр или crop query/gallery |
-| `GET` | `/api/metrics` | Зафиксированные локальные метрики модели |
-
-Пример проверки API:
+Перед benchmark закройте игры и другие GPU-задачи; web-приложение запускайте после замеров. Если оно уже запущено через `dcgpu`, остановите его: `dcgpu stop vehicle-reid`.
 
 ```bash
-curl http://127.0.0.1:8000/api/health
-curl 'http://127.0.0.1:8000/api/queries?limit=1'
+dcgpu --profile inference run --rm --no-deps --pull never --entrypoint python inference \
+  -m backend.benchmark --dataset /data --profile MVP_fusion_v25 \
+  --provider CUDAExecutionProvider --output /out/rtx4060/benchmark.json
 ```
 
-`POST /api/search` принимает `multipart/form-data` с полями `image`, `x`, `y`, `w`, `h`, а также необязательными `top_k`, `mode` (`ranking`/`candidates`) и `threshold`. Изображения ограничены JPEG/PNG, 15 МиБ и 25 мегапикселями. Некорректный BBox не исправляется молча — API возвращает ошибку 4xx.
+Методика Q&A №38: 50 прогревов, 300 измерений batch=1 с `cudaDeviceSynchronize` до/после; median и p95; batches 1/8/16/32 не менее 10 секунд каждый. Таймер включает чтение, декодирование, EXIF, BBox, preprocessing, передачу данных, все четыре forward и нормализацию. Поиск/gallery reranking в extractor timing не входят. Отчёт содержит GPU/драйвер, версии, размер весов, память и отдельное время полного извлечения признаков.
 
-## Экспорт файлов сдачи
+RAM/VRAM снимаются периодически: это наблюдавшийся максимум, не гарантированный точный пик. В WSL2 NVML может не показывать память отдельного процесса; тогда VRAM остаётся `null` с предупреждением и требуется дополнительный замер на Linux/NVIDIA. Ошибка/OOM на batch=32 не должна скрываться уменьшением списка батчей или выдачей частичного замера за полный.
 
-Сначала соберите образ (нужна сеть для отсутствующих образов/зависимостей):
+Для сравнения с CPU-сборкой создайте отдельный эталон; это может занять заметно больше времени:
 
 ```bash
 docker compose build inference
+docker compose --profile inference run --rm --no-deps --pull never inference \
+  --dataset /data --output /out/rtx4060/cpu-reference --provider CPUExecutionProvider
+dcgpu --profile inference run --rm --no-deps --pull never --entrypoint python inference \
+  -m backend.compare_exports --dataset /data \
+  --first /out/rtx4060/cpu-reference --second /out/rtx4060/run1 \
+  --atol 0.0002 --output /out/rtx4060/cpu-cuda-parity.json
 ```
 
-Затем создайте обязательные файлы одной командой. Web, PostgreSQL, миграции, `dataset-init` и `train.csv` не нужны:
+Численный допуск `2e-4` применяется к vectors/confidence; **Top-10, ID кандидата и отказ должны совпасть точно**. Даже небольшое численное отличие, изменившее решение, требует разбора. Эта проверка одновременно сравнивает CPU ORT 1.30.0 с GPU ORT 1.20.2. Сохраните весь каталог `artifacts/rtx4060/` и SHA коммита из шага 1.
+
+## 5. Новый web-интерфейс на GPU
 
 ```bash
-docker compose --profile inference run --rm --no-deps --pull never inference
+dcgpu up -d --build
+dcgpu ps
+curl http://127.0.0.1:8017/api/health
 ```
 
-Сервис запускает `python -m backend.infer --dataset /data --output /out`, читает `./dataset` через read-only mount и пишет в `./artifacts`. Gallery хранится в памяти процесса; encoder, ranking, отказ и экспортный формат общие с основным приложением. Порог берётся из bundled manifest, калибровка не запускается.
+- Интерфейс: <http://127.0.0.1:8017>.
+- Swagger: <http://127.0.0.1:8017/docs> — assets включены в образ, CDN не нужен.
+- Health: <http://127.0.0.1:8017/api/health> — `status=ready`, `profile=MVP_fusion_v25`, `provider=CUDAExecutionProvider`, `embedding_dim=2048`, gallery соответствует CSV.
 
-В папке `artifacts/` появятся:
+Порт по умолчанию **8017**, другой задаётся `PORT` в `.env`. При первом запуске `dataset-init` копирует dataset во внутренний volume (понадобится дополнительное место примерно размером dataset), затем выполняются миграции и индексирование gallery. Дождитесь healthy; первое индексирование может занять несколько минут. Кэш учитывает байты изображений, BBox, модель и provider; смена CPU/GPU создаёт совместимое пространство заново.
 
-```text
-artifacts/
-├── submission.csv
-├── embeddings.npy
-├── candidates.csv
-└── export_manifest.json
-```
+В UI выберите query либо загрузите JPEG/PNG, задайте BBox и выполните поиск. Ranking — смесь MVP/R1 50/50 и streaming k-reciprocal (20/3/0.50). Решение «совпадение/отказ» принимает отдельная ветвь R1 с порогом **0.534365177154541**. Принятый кандидат может отличаться от первого в ranking и показывается отдельно. При отказе `accepted_candidate=null`; ranking остаётся доступным для просмотра. Ручной threshold в UI — только демо и не меняет конкурсный профиль.
 
-Три конкурсных файла автоматически проверяются после экспорта. `export_manifest.json` — дополнительный служебный отчёт с порядком ID, хэшами и настройками. Повторный запуск заменяет файлы в выходной папке; важные исторические результаты следует хранить отдельно.
+Основные API: `GET /api/health`, `/api/queries`, `/api/metrics`; `POST /api/search`, `/api/search/query`, `/api/embedding`; `GET /api/images/...`. Embedding API возвращает 2048D для v25. `POST /api/search` принимает image + x/y/w/h, опционально top_k/mode/threshold. JPEG/PNG ограничены 15 МиБ и 25 мегапикселями. Можно сравнивать кандидатов и скачать JSON ответа.
 
-Проверка их структуры без повторного вычисления embeddings:
+Остановка без удаления данных: `dcgpu stop`. Команда `dcgpu down -v` удаляет БД, кэш датасета и внутренние runtime-artifacts; она не нужна для обычного перезапуска или отката модели. Сохранённые bind-mount результаты в `./artifacts` остаются на хосте.
+
+## 6. CPU-запуск и автономная поставка
+
+На macOS или компьютере без NVIDIA используйте основной Compose без GPU overlay:
 
 ```bash
-docker compose --profile inference run --rm --no-deps --pull never \
-  -e DATASET_DIR=/data --entrypoint python inference \
-  -m backend.evaluate --validate-only --output /out
+docker compose up -d --build
+# Или только конкурсный экспорт, без web/БД:
+docker compose build inference
+docker compose --profile inference run --rm --no-deps --pull never inference \
+  --dataset /data --output /out/cpu-run1
 ```
 
-Ожидаемые размеры для текущего датасета: 1110 query, 750 gallery и `embeddings.npy` формы `(1860, 512)` типа `float32`: сначала query, затем gallery в порядке CSV. `submission.csv` не имеет заголовка и содержит query ID плюс 10 gallery ID. Отказ отражается отсутствием строк соответствующего query в `candidates.csv`; принятый query содержит одного верхнего reranked-кандидата с `confidence=(max_raw_cosine+1)/2`, не вероятностью. Файл Top-10 при отказе не сокращается.
+Для стенда без сети заранее соберите и перенесите Linux amd64 GPU-образ через `docker save`/`docker load`. На стенде используйте `--pull never` и `--no-build` для web. Точная процедура и контрольная сумма архива — [CONTEST_IMAGE_DELIVERY.md](docs/CONTEST_IMAGE_DELIVERY.md). Сеть разрешена при сборке; конкурсный inference выполняется с полностью отключённой сетью. Web использует локальную сеть Compose для PostgreSQL.
 
-При установленных Python-зависимостях тот же путь доступен без Docker:
+## 7. Модель, качество и источники
 
-```bash
-python -m backend.infer --dataset ./dataset --output ./artifacts
-```
+Архитектура: вход/BBox → проверка и crop → OSNet-AIN x1.0 (одна MVP и три R1) → фиксированные признаки → статичная gallery → независимые ranking и отказ → UI/API/конкурсные файлы. Web хранит gallery в PostgreSQL 16 + pgvector; batch — в памяти процесса. Нет OCR, детектора, трекинга, query expansion или использования других query. Камера, время и география не поступают модели.
 
-`python -m backend.evaluate` остаётся инструментом разработки для локального размеченного `train.csv`, а не обязательным шагом перед экспортом. Подробности воспроизведения — в [MODEL_REPORT.md](docs/MODEL_REPORT.md).
+Наблюдавшаяся development-validation на 309 query / 896 gallery: **mAP@10 82.90%, Rank-1 83.00%, Rank-5 87.85%, F1 79.55%, TNR 70.97%**. Это сохранённые результаты выбора модели, не новый независимый тест и не оценка организаторов. Порог выбран на calibration по максимуму `0.7×F1 + 0.3×TNR`, при равенстве — F1 и затем больший порог. Закрытый тест не используется для настройки. Методика, ограничения и исходные отчёты: [MODEL_REPORT.md](docs/MODEL_REPORT.md), [V25_PROMOTION.md](docs/V25_PROMOTION.md), [profiles.json](models/profiles.json).
 
-## Офлайн запуск на стенде
+Источники и фиксированные версии:
 
-Во время работы сервис не скачивает модели или Python-пакеты. Однако `docker compose up --build` может скачивать базовые образы и зависимости при **сборке**. Для стенда без сети нужно заранее собрать Linux `amd64` образы, сохранить их через `docker save`, доставить вместе с исходниками и выполнить `docker load`.
+- Backbone OSNet-AIN x1.0, публичная инициализация OpenVINO Open Model Zoo **vehicle-reid-0001, 2022.1**, авторы исходного vehicle-ReID порта: [sovrasov/deep-person-reid](https://github.com/sovrasov/deep-person-reid/tree/vehicle_reid). MIT, локально [LICENSE.osnet](models/LICENSE.osnet). URL весов, SHA-256/SHA-384 и preprocessing: [models/README.md](models/README.md). Четыре дообученных ONNX имеют проверяемые checksum в frozen bundles; [ASSET_PROVENANCE.json](docs/ASSET_PROVENANCE.json) хранит их происхождение.
+- Дообучение активных весов: выданный организаторами dataset. Внешние экспериментальные NiVe/TransReID не входят в активный v25. Данные организаторов получают отдельно; пути прошлой разработки в provenance не нужны для запуска.
+- Полный обучающий код и воспроизведение модели: [зафиксированный исследовательский коммит 8fc310c](https://github.com/Elvsevolod/Car-classification-MSK/tree/8fc310ca6ac1d8467ef8bfdc5ce4c1d1afa4498b), папка `reproduction/source/`. При сдаче приложите этот код/архив вместе с main, а не только контейнер inference. [Разделение веток](docs/BRANCH_LAYOUT.md).
+- Полный список Python-библиотек с точными версиями: [CPU requirements.txt](requirements.txt), [GPU requirements-gpu.txt](requirements-gpu.txt). Ключевые: Python 3.11, FastAPI 0.141.1, NumPy 2.4.6, Pillow 12.3.0, ONNX 1.22.0; версии ORT и CUDA описаны выше. Node 24.15.0 нужен только при сборке UI. Полный список frontend-зависимостей и версий: [package-lock.json](web-ui/package-lock.json); `npm ci` использует lock. Версии и digest контейнеров зафиксированы в Dockerfile/Compose.
 
-После загрузки образов запуск выглядит так:
+## 8. Проверки и границы готовности
 
-```bash
-docker compose --profile inference run --rm --no-deps --pull never inference
-# Необязательное web-демо, дополнительно требует образ PostgreSQL:
-docker compose up -d --no-build --pull never
-```
-
-Полная пошаговая процедура, контрольные SHA-256 и перечень образов — в [docs/CONTEST_IMAGE_DELIVERY.md](docs/CONTEST_IMAGE_DELIVERY.md). Перед передачей жюри этот путь нужно обязательно прогнать на чистом Linux `amd64` стенде.
-
-## Тесты: оставлять ли их в проекте?
-
-**Да, тесты нужно оставить в репозитории.** Они не являются частью долгоживущего production-контейнера и не запускаются при `docker compose up`. Отдельный target Dockerfile создаёт временную БД и проверяет BBox, API, PostgreSQL + pgvector, экспортные форматы и отказ. Это доказательство воспроизводимости для команды и жюри.
-
-Полный прогон:
+Изолированные тесты с временной PostgreSQL (не затрагивают БД демо):
 
 ```bash
 docker compose -p vehicle-reid-tests -f docker-compose.test.yml up --build --abort-on-container-exit --exit-code-from tests
 docker compose -p vehicle-reid-tests -f docker-compose.test.yml down -v
 ```
 
-Вторая команда удаляет только временные ресурсы с префиксом `vehicle-reid-tests`.
-
-Browser smoke-тесты React-интерфейса запускаются только для разработки и требуют Node.js:
+Browser-тесты требуют Node.js на машине разработчика и работающий UI:
 
 ```bash
 cd web-ui
 npm ci
-npm run test:e2e
+npx playwright install chromium
+E2E_BASE_URL=http://127.0.0.1:8017 npm run test:e2e
 ```
 
-Перед ними запустите приложение; адрес по умолчанию — `http://127.0.0.1:8000`, другой задаётся через `E2E_BASE_URL`. Для первого запуска тестов также нужен установленный Chromium Playwright (`npx playwright install chromium`).
-
-Browser-тесты проверяют интерфейс и его контракт с API. Это инженерные проверки; результаты качества модели приведены отдельно в [MODEL_REPORT.md](docs/MODEL_REPORT.md).
-
-## Архитектура
-
-```text
-Изображение + BBox
-  → FastAPI: проверка формата и границ
-  → OSNet: crop, preprocessing, 512-D L2 embedding
-  → статичная gallery: PostgreSQL + pgvector в web / память процесса в batch
-  → k-reciprocal reranking: порядок Top-N
-  → max raw cosine: confidence и решение об отказе
-  → React UI / JSON API / конкурсные CSV и NPY
-```
-
-- `backend/` — FastAPI, обработка изображений, поиск, экспорт и PostgreSQL-репозиторий;
-- `web-ui/` — белый минималистичный React/TypeScript/Tailwind интерфейс с shadcn/ui;
-- `frontend/vendor/swagger-ui/` — локальные Swagger assets без CDN;
-- `alembic/` — миграции PostgreSQL + pgvector;
-- `tests/` — unit, API и integration-тесты;
-- `docs/` — архитектура, runbook, тестовый отчёт и аудит требований.
-
-Подробнее: [архитектура](docs/ARCHITECTURE.md), [runbook](docs/RUNBOOK.md), [итоги тестирования](docs/TEST_SUMMARY.md), [аудит конкурса](docs/CONTEST_COMPLIANCE_AUDIT.md).
-
-## Статус и ограничения
-
-- Текущая поставка — **CPU-MVP**: FastAPI, React, PostgreSQL + pgvector для web, Docker Compose, офлайн Swagger и автономный batch-export. Наличие этих компонентов не означает завершённую приёмку на конкурсном стенде.
-- PostgreSQL — постоянное runtime-хранилище gallery для web; batch хранит её только в памяти процесса. `embeddings.npy` — сдаваемый артефакт.
-- Каждый query обрабатывается независимо; query expansion, OCR, номерные знаки и детектор не используются.
-- Активный MVP_fusion_v25: validation mAP@10 — 82,90%, candidate F1 — 79,55%, TNR — 70,97%. Это наблюдавшиеся development-данные, не независимый финальный тест и не результат организаторов. Протокол, фиксированный порог и ограничения — в [docs/MODEL_REPORT.md](docs/MODEL_REPORT.md).
-- CUDA/GPU profile и benchmark на RTX A5000, а также презентация, ещё не подготовлены.
-# Изолированная интеграция frozen R1
-
-После подтверждения v25 активен **MVP_fusion_v25**: ranking по смеси MVP/R1 50/50,
-кандидат/отказ full-train R1 неизменны. Откат — MVP_dual_role_v24; MVP_legacy также сохранён.
-Доказательство переноса и команды запуска: [V25_PROMOTION.md](docs/V25_PROMOTION.md).
-Переключённое демо на localhost:8000 и точные команды отката описаны в
-[docs/V24_PROMOTION.md](docs/V24_PROMOTION.md). Руководство по профилям, notebook Run All,
-offline-поставке и незакрытым проверкам: [docs/RELEASE_INTEGRATION.md](docs/RELEASE_INTEGRATION.md).
-Сервис этой копии по умолчанию использует порт 8017 и собственный Docker image.
-Ниже сохранена документация исходного приложения; при различиях runtime
-актуален контракт из RELEASE_INTEGRATION.md.
+Требования проверяются по [ORGANIZER_QA.md](ORGANIZER_QA.md) и исходному ТЗ. Полная готовность к сдаче требует фактического прогона на NVIDIA, повторяемости, замеров всех батчей, проверки на контрольном маскировании номеров, презентации и ссылок на поставку. Неоднозначность junk/Top-10 и точный внешний интерфейс `extractor.py` остаются в [release_decision.json](release_decision.json); официальный `evaluate.py` не изменён. Здесь предоставлен рабочий CLI batch и измерение extractor, но это не утверждение о согласованном с жюри Python API.

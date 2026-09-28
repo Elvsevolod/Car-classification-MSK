@@ -2,6 +2,7 @@
 import hashlib
 import json
 import re
+import tempfile
 from pathlib import Path
 
 import numpy as np
@@ -65,15 +66,36 @@ def _session(model_path, provider):
     options.intra_op_num_threads = 2
     options.inter_op_num_threads = 1
     options.log_severity_level = 3
-    if provider == "CUDAExecutionProvider":
-        options.add_session_config_entry("session.disable_cpu_ep_fallback", "1")
     model_bytes = Path(model_path).read_bytes()
     if _external_tensors(onnx.load_model_from_string(model_bytes)):
         raise ValueError("Frozen bundles require embedded ONNX weights, not external tensor files")
-    session = ort.InferenceSession(model_bytes, sess_options=options,
-                                   providers=[provider], enable_fallback=False)
+    # ORT places dynamic Shape metadata on CPU even for CUDA-supported graphs.
+    # Audit the actual kernels at startup instead of forbidding that metadata node.
+    cuda = provider == "CUDAExecutionProvider"
+    with tempfile.TemporaryDirectory(prefix="reid-ort-") as directory:
+        providers = [provider]
+        if cuda:
+            options.enable_profiling = True
+            options.profile_file_prefix = str(Path(directory) / "placement")
+            options.use_deterministic_compute = True
+            providers = [(provider, {"device_id": 0, "use_tf32": 0,
+                                     "cudnn_conv_algo_search": "DEFAULT",
+                                     "cudnn_conv_use_max_workspace": 0})]
+        session = ort.InferenceSession(model_bytes, sess_options=options,
+                                       providers=providers, enable_fallback=False)
+        session.disable_fallback()
+        if session.get_providers()[0] != provider:
+            raise RuntimeError(f"Requested provider failed to initialize: {session.get_providers()}")
+        if cuda:
+            from .gpu import validate_cuda_placement
+            source = session.get_inputs()[0]
+            for count in (1, 3):
+                probe = np.zeros((count, *source.shape[1:]), dtype=np.float32)
+                session.run(None, {source.name: probe})
+            events = json.loads(Path(session.end_profiling()).read_text())
+            session.reid_cuda_placement = validate_cuda_placement(events)
     session.disable_fallback()
-    if session.get_providers() != [provider]:
+    if not cuda and session.get_providers() != [provider]:
         raise RuntimeError(f"Provider fallback is forbidden: {session.get_providers()}")
     return session
 
