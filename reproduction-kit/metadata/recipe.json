@@ -1,0 +1,113 @@
+{
+  "profile": "MVP_fusion_v25",
+  "source_commit": "8fc310ca6ac1d8467ef8bfdc5ce4c1d1afa4498b",
+  "runtime_commit": "91d559c2e0024fd117f74943781b6b9ee84c997d",
+  "stock_sha256": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+  "legacy": {
+    "config": {
+      "epochs": 30,
+      "identities_per_batch": 16,
+      "images_per_identity": 2,
+      "encoder_lr": 0.00011940564013110387,
+      "head_lr_multiplier": 10.0,
+      "weight_decay": 6.069870050850335e-05,
+      "warmup_epochs": 2,
+      "min_lr_ratio": 0.02,
+      "metric_loss": "supcon",
+      "metric_weight": 1.4948762510958067,
+      "triplet_margin": 0.5,
+      "supcon_temperature": 0.1,
+      "consistency_weight": 0.22571745222502657,
+      "label_smoothing": 0.1,
+      "use_bnneck": true,
+      "prefer_cross_camera": true,
+      "num_workers": 0,
+      "seed": 20260915
+    },
+    "selected_epoch": 5,
+    "onnx_sha256": "01466f503232467224774b6e3bafe6c4393b1de30b47b1bd714908a62f2006a2",
+    "checkpoint_sha256": "58da0e506cb8d283485ca9bc739b98720ad5e8e1e3a5bf473ddb129f7b509ab5"
+  },
+  "r1": {
+    "variant": "R1_resolution256",
+    "seeds": [
+      20260915,
+      20260916,
+      20260917
+    ],
+    "selected_step": 800,
+    "lr_horizon": 1700,
+    "config_manifest": "source/OSNet-AIN-x1.0/variant_16_review_protocol/runs/review_v1/manifest.json"
+  },
+  "runtime_profile": {
+    "kind": "dual_role",
+    "size": [
+      208,
+      256
+    ],
+    "dimension": 2048,
+    "bundle": "models/frozen/OSNet-AIN-x1.0/variant_18_retrieval_policy/runs/policy_v1/final/R1_equal3/less_graph/raw_top1/bundle.json",
+    "bundle_sha256": "f911643a916f4287b0d78941cc1c35db228bef1153a195beb9e9789f580c5fcc",
+    "ranking": "legacy",
+    "candidate_policy": "raw_top1",
+    "lambda": 0.5,
+    "metrics": "models/MVP_fusion_v25.metrics.json",
+    "metrics_sha256": "630612e80f07cc233fb7e07bbe1c6fcbe3c13f494d974edf4c3f5af5890499ff",
+    "r1_weight": 0.5
+  },
+  "runtime_onnx_sha256": {
+    "models/osnet_ain_x1_0_vehicle_reid.onnx": "4aaad3e5db648618b0df3d2ff21c61323985ff9e50194c3d2edd4fb87c92d91f",
+    "models/osnet_ain_x1_0_vehicle_reid_hpo_best_map.onnx": "01466f503232467224774b6e3bafe6c4393b1de30b47b1bd714908a62f2006a2",
+    "models/frozen/OSNet-AIN-x1.0/variant_17_final_seed_confirmation/runs/final_seeds_v1/final/R1_resolution256/seed_20260916/encoder.onnx": "c4aaf2edbc291e976873e9c81a65ee5119d310c6077ff7a90d91b2223efc675d",
+    "models/frozen/OSNet-AIN-x1.0/variant_17_final_seed_confirmation/runs/final_seeds_v1/final/R1_resolution256/seed_20260917/encoder.onnx": "1b7f17e950efa7eb42a12f4eb10b92ccbe54a52d19a818aa3a5dfa5a09db8233",
+    "models/frozen/OSNet-AIN-x1.0/variant_16_review_protocol/runs/review_v1/final/R1_resolution256/seed_20260915/encoder.onnx": "6c1f87bdfbd5dbf48012bb2491b660310d76b1800e0a889617a8333230fd6ff4"
+  },
+  "metadata_origin": {
+    "splits.json": {
+      "research_path": "artifacts/splits.json",
+      "sha256": "f33aa044510baa1d30f9475fd76cecb7d5100e8f4b7f3c9829ca34389e62942b"
+    },
+    "legacy_summary.json": {
+      "research_path": "OSNet-AIN-x1.0/variant_02_hpo_bnneck_supcon/results/selected_run_02/summary.json",
+      "sha256": "2d07af245898b6cc414c3815cc8ec0eaaa682dec90306879dc1b239f4ab8c809"
+    },
+    "r1_20260915_summary.json": {
+      "research_path": "OSNet-AIN-x1.0/variant_16_review_protocol/runs/review_v1/final/R1_resolution256/seed_20260915/summary.json",
+      "sha256": "0f3b9719d9920c2a16c20058d5f2ca9b2cf16d3eb8970a9adf29de86f2255697"
+    },
+    "r1_20260915_export.json": {
+      "research_path": "OSNet-AIN-x1.0/variant_16_review_protocol/runs/review_v1/final/R1_resolution256/seed_20260915/export.json",
+      "sha256": "b8af2d8c5662abadb239ee3fd8fc77c861d9f98be13df565d3fb3b0859e76526"
+    },
+    "r1_20260915_bundle.json": {
+      "research_path": "OSNet-AIN-x1.0/variant_16_review_protocol/runs/review_v1/final/R1_resolution256/seed_20260915/bundle.json",
+      "sha256": "4bb0e340d90a5fab1928885e5fb456e4ab3cac6749238aefe09517a92ee99869"
+    },
+    "r1_20260916_summary.json": {
+      "research_path": "OSNet-AIN-x1.0/variant_17_final_seed_confirmation/runs/final_seeds_v1/final/R1_resolution256/seed_20260916/summary.json",
+      "sha256": "97edb59a5e59c636ca5ab668114b3cde3c7e3f3e5ac79533421c29be2518af4c"
+    },
+    "r1_20260916_export.json": {
+      "research_path": "OSNet-AIN-x1.0/variant_17_final_seed_confirmation/runs/final_seeds_v1/final/R1_resolution256/seed_20260916/export.json",
+      "sha256": "fd65143ec5f52dcf0cc29506f5afe40b36da70ad86a2e183412c32d810b002b8"
+    },
+    "r1_20260916_bundle.json": {
+      "research_path": "OSNet-AIN-x1.0/variant_17_final_seed_confirmation/runs/final_seeds_v1/final/R1_resolution256/seed_20260916/bundle.json",
+      "sha256": "8bb3a4c3a9f68ac23ffdbec3d9bb4327ea9684a2d93d9f11d0562c3cc1f312b6"
+    },
+    "r1_20260917_summary.json": {
+      "research_path": "OSNet-AIN-x1.0/variant_17_final_seed_confirmation/runs/final_seeds_v1/final/R1_resolution256/seed_20260917/summary.json",
+      "sha256": "8a543cfb47196ccc67b0ccaf2b500ec77f0587e44db31bb5b26d0e8293a1a8eb"
+    },
+    "r1_20260917_export.json": {
+      "research_path": "OSNet-AIN-x1.0/variant_17_final_seed_confirmation/runs/final_seeds_v1/final/R1_resolution256/seed_20260917/export.json",
+      "sha256": "2a46e2a016d56e466e91f3bbf467d5df6dfda8ea78232f8d258687a4c7e6c68d"
+    },
+    "r1_20260917_bundle.json": {
+      "research_path": "OSNet-AIN-x1.0/variant_17_final_seed_confirmation/runs/final_seeds_v1/final/R1_resolution256/seed_20260917/bundle.json",
+      "sha256": "91ef5d957a1a1d5b73b9444461adce9e7da220ba02c747573771f00469998d52"
+    }
+  },
+  "training_data": "Organizer train.csv and images only; no test training/pretraining, no external fine-tuning dataset",
+  "selection_scope": "Reproduce frozen recipes, not the full historical HPO/ablation search; no automatic promotion"
+}

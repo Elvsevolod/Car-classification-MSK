@@ -1,0 +1,16 @@
+{
+  "experiment": "v42_osnet_r1_continuation",
+  "input_sha256": "2fdd729fdb981923f4a86d0b71301899a05fe06a7aa6d6543dd1c9d1305f1c51",
+  "presentations": [6400, 12800, 25600, 51200],
+  "warmup_presentations": 3200,
+  "min_lr_ratio": 0.02,
+  "selection": "best concrete checkpoint on mean of 3 primary draws; control vs fixed G2 expert10 vs replace first R1",
+  "outer_evaluation": false,
+  "threshold_fit": false,
+  "automatic_promotion": false,
+  "external_training": false,
+  "wall_time_limit": null,
+  "precision": "float32",
+  "amp": false,
+  "num_workers": 0
+}

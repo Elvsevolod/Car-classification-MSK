@@ -1,0 +1,46 @@
+{
+  "date": "2026-09-28",
+  "dataset": {
+    "train_csv_rows": 9556,
+    "train_identities": 925,
+    "training_objects": 5717,
+    "calibration_identities": 307,
+    "validation_identities": 309,
+    "unique_frame_hashes": 9547,
+    "train_csv_sha256": "bd1df45b052ae9aabb7fd356898e244875f8cad2f111a3f76977c1b90bce9268",
+    "all_frame_hashes_checked": true,
+    "identity_and_exact_frame_disjoint": true,
+    "protocol_order_reconstructed": true,
+    "test_data_read_by_training": false
+  },
+  "unit_tests": {
+    "passed": 6,
+    "command": "python -m unittest discover -s tests -v"
+  },
+  "historical_sources": {
+    "files_checked": 83,
+    "unchanged": true,
+    "r1_training_time_source_hashes_match": true
+  },
+  "runtime_source_snapshot_matches_main": true,
+  "reference_onnx_files_unchanged": true,
+  "metadata_origin_hashes_match": true,
+  "python_sources_parse": true,
+  "notebook_outputs_cleared": true,
+  "archive_policy": {
+    "members": "KIT_SHA256.json plus the manifest itself",
+    "data_included": false,
+    "checkpoint_included": false,
+    "trained_onnx_included": false,
+    "stock_initialization_included": true,
+    "sha256_sidecar": true,
+    "integrity_checked_by": "pack.py validates checksums before writing and calls ZipFile.testzip afterwards"
+  },
+  "full_training_rerun": false,
+  "portable_extraction": {
+    "preflight_passed": true,
+    "unit_tests_passed": 6,
+    "data_checkpoint_and_cache_exclusions_checked": true,
+    "only_stock_onnx_in_archive": true
+  }
+}

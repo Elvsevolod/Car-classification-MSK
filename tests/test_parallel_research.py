@@ -131,17 +131,23 @@ class Tiny(nn.Module):
         return [self.head(f)],[f]
 
 
-def test_resume_replays_exact_training(tmp_path):
+@pytest.mark.parametrize("device",["cpu",pytest.param("mps",marks=pytest.mark.skipif(
+    os.environ.get("RUN_REID_MPS_SMOKE")!="1",reason="opt-in real MPS resume smoke"))])
+def test_resume_replays_exact_training(tmp_path,device):
+    if device=="mps": gpu.research_mac.preflight(io.ROOT)
     rows=tiny_rows(tmp_path)
-    c={"signature":"tiny","device":torch.device("cpu"),"inputs":tmp_path,"train":rows,"external":[],"manifest":{}}
+    c={"signature":"tiny","device":torch.device(device),"inputs":tmp_path,"train":rows,"external":[],"manifest":{}}
     spec={"id":"test","family":"transreid","seed":3,"lr":1e-4,"weight_decay":.01,"p":2,"k":2,
           "size":16,"loss":"supcon","clip":5.}
-    training.seed_all(4); full=Tiny(); interrupted=copy.deepcopy(full)
+    training.seed_all(4); full=Tiny().to(device); interrupted=copy.deepcopy(full)
     training.train(full,c,spec,4,4,tmp_path/"full")
     training.train(interrupted,c,spec,2,4,tmp_path/"resume")
-    resumed=Tiny(); training.train(resumed,c,spec,4,4,tmp_path/"resume")
+    resumed=Tiny().to(device); training.train(resumed,c,spec,4,4,tmp_path/"resume")
     for left,right in zip(full.parameters(),resumed.parameters()): torch.testing.assert_close(left,right,rtol=0,atol=0)
-    assert io.read(tmp_path/"full/history.json")==io.read(tmp_path/"resume/history.json")
+    # Allocator samples depend on live models, not training state; compare every scientific value exactly.
+    histories=[[{k:v for k,v in row.items() if k not in {"mps_allocated_bytes","mps_driver_bytes"}}
+                for row in io.read(tmp_path/name/"history.json")] for name in ("full","resume")]
+    assert histories[0]==histories[1]
 
 
 def test_archive_includes_reusable_weights_and_features(tmp_path):
@@ -162,8 +168,8 @@ def test_windows_import_tree_does_not_require_fcntl():
     subprocess.run([sys.executable,"-c",command],cwd=io.ROOT,check=True,timeout=60)
 
 
-def test_cuda_does_not_fallback():
-    with pytest.raises(ValueError,match="requires CUDA"): gpu.run("missing",device="cpu")
+def test_accelerator_does_not_fallback():
+    with pytest.raises(ValueError,match="requires MPS or CUDA"): gpu.run("missing",device="cpu")
 
 
 def test_failed_trial_does_not_stop_other_queue(tmp_path,monkeypatch):
@@ -186,7 +192,8 @@ def test_dino_pooling_excludes_registers():
 
 def test_notebooks_are_valid_and_compilable():
     import nbformat
-    for path in (quick.VARIANT/"quick_fusion_bn.ipynb",gpu.VARIANT/"train_windows_queues.ipynb"):
+    for path in (quick.VARIANT/"quick_fusion_bn.ipynb",gpu.VARIANT/"train_windows_queues.ipynb",
+                 gpu.VARIANT/"train_mac_m4_queues.ipynb"):
         notebook=nbformat.read(path,as_version=4)
         nbformat.validate(notebook)
         code="\n".join(c.source for c in notebook.cells if c.cell_type=="code")

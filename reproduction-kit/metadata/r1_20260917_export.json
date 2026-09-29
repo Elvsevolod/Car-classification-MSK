@@ -1,0 +1,10 @@
+{
+  "onnx_sha256": "1b7f17e950efa7eb42a12f4eb10b92ccbe54a52d19a818aa3a5dfa5a09db8233",
+  "cpu_parity": {
+    "1": 7.227063179016113e-07,
+    "3": 8.586794137954712e-07,
+    "8": 1.5944242477416992e-06
+  },
+  "gpu_parity": "not tested",
+  "promoted": false
+}

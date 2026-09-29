@@ -1,0 +1,78 @@
+{
+  "date": "2026-09-28",
+  "python": "3.11.9",
+  "platform": "macOS-15.7.3-arm64-arm-64bit",
+  "torch": "2.14.0",
+  "onnx": "1.22.0",
+  "onnxruntime": "1.30.0",
+  "exports": {
+    "legacy": {
+      "member": "legacy",
+      "checkpoint_sha256": "58da0e506cb8d283485ca9bc739b98720ad5e8e1e3a5bf473ddb129f7b509ab5",
+      "onnx_sha256": "d363ad5dee7b97fb0eae8c1e5bdc276e406b49ae2c87fb92fb8d943a9aa932f8",
+      "reference_onnx_sha256": "01466f503232467224774b6e3bafe6c4393b1de30b47b1bd714908a62f2006a2",
+      "byte_identical_to_reference": false,
+      "cpu_parity_max_abs": {
+        "1": 7.987022399902344e-06,
+        "3": 1.430511474609375e-05,
+        "8": 1.990795135498047e-05
+      },
+      "gpu_parity": "not tested",
+      "promoted": false
+    },
+    "r1_20260915": {
+      "member": "r1_20260915",
+      "checkpoint_sha256": "2b3619b54d3d35f6f1f22d1f81832f6a9da14f022d784e64f8f8e826699d1620",
+      "onnx_sha256": "6c1f87bdfbd5dbf48012bb2491b660310d76b1800e0a889617a8333230fd6ff4",
+      "reference_onnx_sha256": "6c1f87bdfbd5dbf48012bb2491b660310d76b1800e0a889617a8333230fd6ff4",
+      "byte_identical_to_reference": true,
+      "cpu_parity_max_abs": {
+        "1": 5.690380930900574e-07,
+        "3": 5.75091689825058e-07,
+        "8": 1.1529773473739624e-06
+      },
+      "gpu_parity": "not tested",
+      "promoted": false
+    },
+    "r1_20260916": {
+      "member": "r1_20260916",
+      "checkpoint_sha256": "06ee681023b86c4f27561b0b04886559448319b3ceca7a33c0e2658f4db38fb0",
+      "onnx_sha256": "c4aaf2edbc291e976873e9c81a65ee5119d310c6077ff7a90d91b2223efc675d",
+      "reference_onnx_sha256": "c4aaf2edbc291e976873e9c81a65ee5119d310c6077ff7a90d91b2223efc675d",
+      "byte_identical_to_reference": true,
+      "cpu_parity_max_abs": {
+        "1": 5.364418029785156e-07,
+        "3": 7.846392691135406e-07,
+        "8": 1.4640390872955322e-06
+      },
+      "gpu_parity": "not tested",
+      "promoted": false
+    },
+    "r1_20260917": {
+      "member": "r1_20260917",
+      "checkpoint_sha256": "cf6bbe08f72c77cd8d8082d87aea11ea728271b3c4ada9280d1c35a16955bb96",
+      "onnx_sha256": "1b7f17e950efa7eb42a12f4eb10b92ccbe54a52d19a818aa3a5dfa5a09db8233",
+      "reference_onnx_sha256": "1b7f17e950efa7eb42a12f4eb10b92ccbe54a52d19a818aa3a5dfa5a09db8233",
+      "byte_identical_to_reference": true,
+      "cpu_parity_max_abs": {
+        "1": 7.227063179016113e-07,
+        "3": 8.586794137954712e-07,
+        "8": 1.5944242477416992e-06
+      },
+      "gpu_parity": "not tested",
+      "promoted": false
+    }
+  },
+  "legacy_graph_comparison": {
+    "initializer_count": 265,
+    "all_initializers_identical": true,
+    "graph_identical_after_pool_scope_rename": true,
+    "reference_vs_export_max_abs": {
+      "1": 0.0,
+      "3": 0.0,
+      "8": 0.0
+    }
+  },
+  "full_training_rerun": false,
+  "gpu_tested": false
+}

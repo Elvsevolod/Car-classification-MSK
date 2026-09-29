@@ -1,0 +1,12 @@
+# Python 3.11.9. Direct dependencies for run_selected.py, frozen to the source environment.
+# Full historical notebook environment: source/requirements-train.txt (macOS snapshot).
+-c source/requirements-train.txt
+numpy==2.4.6
+pandas==3.0.5
+pillow==12.3.0
+torch==2.14.0
+torchvision==0.29.0
+onnx==1.22.0
+onnxruntime==1.30.0
+optuna==4.9.0
+tqdm==4.70.1

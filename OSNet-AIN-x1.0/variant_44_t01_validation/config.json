@@ -1,0 +1,44 @@
+{
+  "v25_run": "OSNet-AIN-x1.0/variant_25_map_search/runs/map_search_v1",
+  "v25_stage": "OSNet-AIN-x1.0/variant_25_map_search/runs/map_search_v1/tasks/validation_r1w50_k20_q3_l50",
+  "v24_profile": "OSNet-AIN-x1.0/variant_24_dual_role/runs/dual_role_v1/dual_role_profile.json",
+  "inputs": "research_transfer/v41_inputs",
+  "threshold": 0.534365177154541,
+  "vector_atol": 2e-05,
+  "schema": "v44-t01-v25-validation-v1",
+  "source_run": "mac_m4_v1",
+  "source_stage": "trials/T01_p8k2_supcon_lr3e-05/rung_10",
+  "batch_size": 8,
+  "checkpoint_sha256": "6f282d73bb2e9293e7cdde9b52ec066d784abd1eaa397bda2ac13f0593aa58be",
+  "policy": {
+    "control_weight": 0.9,
+    "expert_weight": 0.1,
+    "k1": 20,
+    "k2": 3,
+    "lambda": 0.5
+  },
+  "source_files": {
+    "manifest.json": "04cf1f1a2b424e5884cde154e724ce83c80e953fc7c29a5c1623678eef98ace4",
+    "trial_plan.json": "89b973ba9a5b8f8320371ca7fa2391ccc4129af115765f18904d45d0e462e87f",
+    "trials/T01_p8k2_supcon_lr3e-05/trial.json": "7320c4f4d09ef05a6c0f658bede1e6a094147204ac33092df2d248785c2a35c8",
+    "trials/T01_p8k2_supcon_lr3e-05/step_002883.pt": "6f282d73bb2e9293e7cdde9b52ec066d784abd1eaa397bda2ac13f0593aa58be",
+    "trials/T01_p8k2_supcon_lr3e-05/rung_10/complete.json": "d67b757bc36a6d20448d2ac36e933423abaf91af35849c0ec3ca467b80bfd22a",
+    "trials/T01_p8k2_supcon_lr3e-05/rung_10/features.npy": "440809fbca3ded0ca3ee663908fe7f85378e107f5d06f30451aeed17e46695dd",
+    "trials/T01_p8k2_supcon_lr3e-05/rung_10/order.json": "a00c559eaa4b1dc2b53b2d5a16f200a65a7ef3d81af1ed73855b2f9b38f22368",
+    "trials/T01_p8k2_supcon_lr3e-05/rung_10/result.json": "ebd74b4df8fa6844c7aa57aaa5e41a05a074286e835d05c7a44615086207cbdd"
+  },
+  "files": {
+    "OSNet-AIN-x1.0/variant_25_map_search/runs/map_search_v1/manifest.json": "78dfdea5c4cc7c44c2de29d209fa88fc824b4ab12ad61d0dae445b7ff5530d63",
+    "OSNet-AIN-x1.0/variant_25_map_search/runs/map_search_v1/frozen_selection.json": "37f4a6f935f5d5f295353b54b300197e144645b797fc1ba1f2f82079138fd4b8",
+    "OSNet-AIN-x1.0/variant_25_map_search/runs/map_search_v1/tasks/validation_r1w50_k20_q3_l50/complete.json": "e4e8af130e0e5d7b90de68b29a7af0151bc1bc9edb5ad8bb2c927489a2a34db9",
+    "OSNet-AIN-x1.0/variant_25_map_search/runs/map_search_v1/tasks/validation_r1w50_k20_q3_l50/result.json": "fb19be0602275d07532be7969d5308a41d9d13b64f69b4e3c4f3551ef0247728",
+    "OSNet-AIN-x1.0/variant_25_map_search/runs/map_search_v1/tasks/validation_r1w50_k20_q3_l50/export/embeddings.npy": "083696a01ac2c02eb8e8e0ba9bb6cfbdb28b2bd0c2a120b228b107fe206159d2",
+    "OSNet-AIN-x1.0/variant_25_map_search/runs/map_search_v1/tasks/validation_r1w50_k20_q3_l50/export/embedding_order.json": "667a2e829dfc6b52a3c9da1f633b7c39e9dd5caddbda9f095938515ef9fd28e3",
+    "OSNet-AIN-x1.0/variant_25_map_search/runs/map_search_v1/tasks/validation_r1w50_k20_q3_l50/export/submission.csv": "ca61b438c719ebd7de5e9e73a0264d3ab5ec1f74ba27ae0302b887c48250d14c",
+    "OSNet-AIN-x1.0/variant_25_map_search/runs/map_search_v1/tasks/validation_r1w50_k20_q3_l50/export/candidates.csv": "2e05c16033b96b527020adec5c66f9bb3825934ff36819d5be3b5cd6d368b990",
+    "research_transfer/v41_inputs/inputs.json": "2fdd729fdb981923f4a86d0b71301899a05fe06a7aa6d6543dd1c9d1305f1c51",
+    "dataset/train.csv": "bd1df45b052ae9aabb7fd356898e244875f8cad2f111a3f76977c1b90bce9268",
+    "artifacts/splits.json": "f33aa044510baa1d30f9475fd76cecb7d5100e8f4b7f3c9829ca34389e62942b",
+    "OSNet-AIN-x1.0/variant_24_dual_role/runs/dual_role_v1/dual_role_profile.json": "7b9c701fc3a8d3ae14262ef1cc24e0926d136ea146a54e810831d570981867a9"
+  }
+}

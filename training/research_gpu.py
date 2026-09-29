@@ -1,4 +1,6 @@
-"""v41: resumable Windows/CUDA queues; one real experiment at a time on 8 GB."""
+"""v41: resumable Apple Silicon/MPS or Windows/CUDA research queues."""
+from training import research_mac
+research_mac.configure_environment()  # Before torch, including the CLI entry point.
 import argparse
 from itertools import product, zip_longest
 import math
@@ -159,7 +161,7 @@ def summarize(c, interrupted=False):
         "leaderboard":[{"trial":r["spec"]["id"],"rung":r["rung"],"means":r["metrics"]["means"],
                         "delta":r["metrics"]["delta_system"],"training":r["training"]} for r in leaders]}
     io.write(c["output"] / "results.json",summary)
-    lines = ["# v41 Windows / RTX 4060 research", "", f"Status: {summary['status']}", "",
+    lines = [f"# v41 research / {c.get('device','unknown')}", "", f"Status: {summary['status']}", "",
              c["manifest"]["baseline"],"", "Primary development only. No outer evaluation, threshold fit or promotion.",
              "F1/TNR not optimized; final release requires a separately frozen full-system comparison.","",
              "| Trial | Rung | Single graph | System G2 | Delta |","|---|---:|---:|---:|---:|"]
@@ -170,15 +172,18 @@ def summarize(c, interrupted=False):
     return summary
 
 
-def run(inputs,run_name="rtx4060_v1",device="cuda"):
+def run(inputs,run_name=None,device="mps"):
+    if device not in {"mps","cuda"}: raise ValueError("v41 requires MPS or CUDA. No CPU fallback.")
+    run_name = run_name or ("mac_m4_v1" if device == "mps" else "rtx4060_v1")
     if not run_name.replace("_","").replace("-","").isalnum(): raise ValueError("Simple RUN_NAME required")
-    if device != "cuda": raise ValueError("v41 requires CUDA; use v40 for Mac. No CPU fallback.")
-    settings = io.read(VARIANT / "configs/rtx4060_v1.json")
+    settings = io.read(VARIANT / "configs" / ("mac_m4_v1.json" if device == "mps" else "rtx4060_v1.json"))
+    if device == "mps":
+        settings["hardware"] = research_mac.preflight(io.ROOT,settings["mps_memory_fraction"])
     output = VARIANT / "runs" / run_name
     with io.lock(output):
         c = runtime.prepare(inputs,output,device,settings)
         c["asset_cache"] = VARIANT / "weights"
-        c["control"] = runtime.baselines(c)  # Fresh control on THIS runtime, not copied Mac measurements.
+        c["control"] = runtime.baselines(c)  # Fresh control on THIS runtime, not copied device measurements.
         trans, nive, frozen = trans_grid(),nive_grid(c["manifest"]["config"]),frozen_grid()
         io.freeze(output / "trial_plan.json", {"transreid":trans,"nive":nive,"frozen":frozen,
                   "transreid_rungs":[10,30,90],"finalists":4,"adaptation":"best pool per DINO, best 2 vehicle IBN; LR grid"})
@@ -238,5 +243,6 @@ def run(inputs,run_name="rtx4060_v1",device="cuda"):
 
 if __name__ == "__main__":
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--inputs",type=Path,required=True); p.add_argument("--run-name",default="rtx4060_v1")
-    a=p.parse_args(); run(a.inputs,a.run_name)
+    p.add_argument("--inputs",type=Path,required=True); p.add_argument("--run-name")
+    p.add_argument("--device",choices=["mps","cuda"],default="mps")
+    a=p.parse_args(); run(a.inputs,a.run_name,a.device)

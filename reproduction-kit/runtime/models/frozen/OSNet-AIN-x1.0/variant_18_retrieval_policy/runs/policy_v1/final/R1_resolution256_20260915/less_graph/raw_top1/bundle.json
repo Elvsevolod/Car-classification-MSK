@@ -1,0 +1,25 @@
+{
+  "schema": 2,
+  "members": [
+    {
+      "path": "../../../../../../../variant_16_review_protocol/runs/review_v1/final/R1_resolution256/seed_20260915/bundle.json",
+      "sha256": "4bb0e340d90a5fab1928885e5fb456e4ab3cac6749238aefe09517a92ee99869"
+    }
+  ],
+  "ranking": "less_graph",
+  "ranking_parameters": {
+    "k1": 20,
+    "k2": 3,
+    "lambda": 0.75
+  },
+  "candidate_policy": "raw_top1",
+  "threshold": 0.5522230267524719,
+  "calibration": {
+    "split": "calibration",
+    "candidate_policy": "raw_top1",
+    "method": "maximize C=0.7F1+0.3TNR; ties F1 then higher threshold",
+    "protocol_sha256": "7084dc8a0b795ddf1d569b81adc1d76a0918dddd52a52a50d5fb50595fdd8ce9"
+  },
+  "fusion": "equal normalized concatenation",
+  "confidence": "maximum raw cosine of combined features"
+}

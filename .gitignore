@@ -2,6 +2,7 @@
 .idea/
 .venv/
 .venv-rtx4060/
+.venv-v41-m4/
 .uv-cache/
 __pycache__/
 .pytest_cache/

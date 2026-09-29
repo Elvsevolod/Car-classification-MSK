@@ -1,0 +1,33 @@
+{
+  "schema": 2,
+  "members": [
+    {
+      "path": "../../../../../../../variant_16_review_protocol/runs/review_v1/final/R1_resolution256/seed_20260915/bundle.json",
+      "sha256": "4bb0e340d90a5fab1928885e5fb456e4ab3cac6749238aefe09517a92ee99869"
+    },
+    {
+      "path": "../../../../../../../variant_17_final_seed_confirmation/runs/final_seeds_v1/final/R1_resolution256/seed_20260916/bundle.json",
+      "sha256": "8bb3a4c3a9f68ac23ffdbec3d9bb4327ea9684a2d93d9f11d0562c3cc1f312b6"
+    },
+    {
+      "path": "../../../../../../../variant_17_final_seed_confirmation/runs/final_seeds_v1/final/R1_resolution256/seed_20260917/bundle.json",
+      "sha256": "91ef5d957a1a1d5b73b9444461adce9e7da220ba02c747573771f00469998d52"
+    }
+  ],
+  "ranking": "less_graph",
+  "ranking_parameters": {
+    "k1": 20,
+    "k2": 3,
+    "lambda": 0.75
+  },
+  "candidate_policy": "raw_top1",
+  "threshold": 0.534365177154541,
+  "calibration": {
+    "split": "calibration",
+    "candidate_policy": "raw_top1",
+    "method": "maximize C=0.7F1+0.3TNR; ties F1 then higher threshold",
+    "protocol_sha256": "7084dc8a0b795ddf1d569b81adc1d76a0918dddd52a52a50d5fb50595fdd8ce9"
+  },
+  "fusion": "equal normalized concatenation",
+  "confidence": "maximum raw cosine of combined features"
+}

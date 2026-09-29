@@ -56,3 +56,56 @@ Native Windows PowerShell, CUDA 12.4/PyTorch 2.6, реальные 8 GB, дли�
 DINOv2-B full/partial run и окончательное качество всех 55 условий.
 OOM/ошибки источников должны оставаться явными failed trials, не скрытыми заменами.
 Полный Run All и финальный перенос архивов выполняет пользователь на целевых машинах.
+
+## Дополнение: перенос на Mac mini M4 / 16 ГБ
+
+Целевая машина изменена пользователем на Mac mini M4 с 16 ГБ unified memory.
+Добавлены `train_mac_m4_queues.ipynb`, `Start_v41_Mac.command`, `setup_mac.sh`,
+`requirements-mac.txt` и отдельный run `mac_m4_v1`. Историческое имя каталога
+`variant_41_windows_queues` сохранено; Windows-сценарий остаётся резервным.
+Рабочий MVP и выполненный пользователем v40 notebook не редактировались.
+
+Проверено после изменений:
+
+- Расширенная регрессия: **165 passed, 7 skipped** (25.46 s). Команда выше плюс
+  `tests/test_research_mac.py`. Семь пропусков — намеренно opt-in MPS smokes,
+  а не скрытые ошибки; обычный Run All не запускает дополнительное тестовое обучение.
+- `bash -n` для обоих Mac-скриптов, формат/синтаксис нового notebook и паритет
+  научной конфигурации с Windows. Новый notebook не содержит выполненных ячеек.
+- Явные отказы при Rosetta, недоступном MPS, CPU fallback, неограниченном allocator;
+  защита от использования перенесённого окружения и старых абсолютных путей.
+- Реальный MPS preflight: autograd + AdamW без CPU fallback.
+- **6 passed** в реальных MPS forward/backward: TransReID SupCon/soft-triplet,
+  NiVe shared/target-updates-only/domain-specific BN, DINOv2-S last4. Батч 4,
+  размеры 256 (DINO 280), конечные loss/градиенты/эмбеддинги после optimizer step.
+- **1 passed** в MPS resume smoke: четыре шага подряд против двух шагов,
+  сохранения, загрузки model/optimizer через CPU и ещё двух шагов. Параметры,
+  loss/LR и остальные научные значения history совпали **точно**, без допусков.
+  Только allocator samples исключены из сравнения history: число одновременно
+  живых тестовых моделей различается. CPU-тест по-прежнему проходит точно.
+- Разрешение закреплённых зависимостей через `pip --isolated install --dry-run
+  --only-binary=:all: -r .../requirements-mac.txt` завершилось успешно. Это не
+  установка с нуля: часть версий уже была в базовом Python. Новая `.venv-v41-m4`
+  здесь не создавалась; установка и запуск Jupyter проверяются на целевой машине.
+- `git diff --check` без ошибок. Исходные данные, веса и исторические runs не менялись.
+
+Для повторения семи коротких MPS проверок в окружении с входными данными и
+перенесённым кешем официального DINOv2-S (из корня проекта):
+
+```bash
+ORT_DISABLE_TELEMETRY=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=2 \
+PYTORCH_ENABLE_MPS_FALLBACK=0 PYTORCH_MPS_FAST_MATH=0 RUN_REID_MPS_SMOKE=1 \
+  .venv-v41-m4/bin/python -m pytest -q -s \
+  tests/test_parallel_research.py tests/test_research_mac.py \
+  -k 'real_mps or (resume and mps)'
+```
+
+**Граница подтверждения:** GPU проверки выполнены на доступном **Apple M4 Pro,
+24 ГБ, macOS 15.7.3**, Python 3.11 / torch 2.14.0 / torchvision 0.29.0, а не на
+целевом M4 с 16 ГБ. Это подтверждает работу MPS-пути, но не вместимость всех
+P16K4, DINOv2-B, полных NiVe-runs или новых автомобильных весов на 16 ГБ.
+Длительное обучение, полный AirDrop, запуск из Finder на другом Mac, установка
+чистого окружения и окончательное качество пока не проверены.
+MPS memory samples на концах шагов не объявляются точным пиком или полной RAM.
+При OOM параметры опыта не меняются автоматически. Ограничения времени нет,
+но завершение всех очередей за одну ночь не обещается.

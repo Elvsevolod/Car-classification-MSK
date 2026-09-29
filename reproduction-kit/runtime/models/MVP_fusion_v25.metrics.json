@@ -1,0 +1,26 @@
+{
+  "model": "MVP_fusion_v25",
+  "threshold": 0.534365177154541,
+  "validation": {
+    "mAP_at_10": 0.8289573904235558,
+    "candidate_F1": 0.7954545454545456,
+    "TNR": 0.7096774193548387,
+    "candidate_C": 0.7697214076246335,
+    "known_queries": 247,
+    "unknown_queries": 62
+  },
+  "provenance": {
+    "evidence": "docs/V25_QUALITY_EVIDENCE.json",
+    "evidence_sha256": "a5a5fcd65bf28d5984399236a84b21cda41e231bf0d52a856cb82046e13a7eca",
+    "ranking": {
+      "name": "r1w50_k20_q3_l50",
+      "k1": 20,
+      "k2": 3,
+      "lambda": 0.5,
+      "r1_weight": 0.5
+    },
+    "candidate": "RC_R1_equal3_v18",
+    "source_signature": "0d72bee94427ed4f3ad2cd718bd693d24123a048b94ac7075d029038c8733c71",
+    "kind": "observed development validation, not hidden test"
+  }
+}

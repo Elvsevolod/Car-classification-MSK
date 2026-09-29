@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.pytest_cache/
+/runs/
+/dist/
+# Already stored in the product repository; included in the standalone ZIP only.
+source/models/osnet_ain_x1_0_vehicle_reid.onnx

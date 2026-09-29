@@ -1,0 +1,21 @@
+{
+  "experiment": "v41_mac_m4_mps",
+  "input_sha256": "2fdd729fdb981923f4a86d0b71301899a05fe06a7aa6d6543dd1c9d1305f1c51",
+  "device": "mps",
+  "precision": "float32",
+  "mps_memory_fraction": 0.85,
+  "activation_checkpointing": true,
+  "transreid_rungs": [10,30,90],
+  "transreid_finalists": 4,
+  "nive_joint_steps": 1600,
+  "nive_tail_steps": 600,
+  "nive_modes": ["shared","target_updates_only","domain_specific"],
+  "nive_alpha": [0.005,0.025,0.1],
+  "selection": "G2 expert10 against frozen C_primary, mean 3 historical primary draws",
+  "external_frozen": 10,
+  "outer_evaluation": false,
+  "threshold_fit": false,
+  "automatic_promotion": false,
+  "wall_time_limit": null,
+  "num_workers": 0
+}

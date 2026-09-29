@@ -121,11 +121,13 @@ def train(model, c, spec, target_steps, horizon, directory):
     if pointer.exists():
         entry = io.read(pointer)
         io.verify(directory, {entry["path"]:entry["sha256"]})
-        saved = torch.load(io.child(directory, entry["path"]), map_location=c["device"], weights_only=True)
+        # Deserialize on CPU: avoid a second full GPU model/optimizer and keep Adam step scalars on CPU.
+        saved = torch.load(io.child(directory, entry["path"]), map_location="cpu", weights_only=True)
         if saved["signature"] != signature or saved["step"] > horizon:
             raise ValueError("Resume belongs to another trial/runtime")
         model.load_state_dict(saved["model"], strict=True); optimizer.load_state_dict(saved["optimizer"])
         start, history, elapsed = saved["step"], saved["history"], saved["elapsed"]
+        del saved
     if start > target_steps:
         raise ValueError("Cannot evaluate an earlier rung from a later resume; use its saved checkpoint")
     paired = spec["family"] == "nive"
@@ -171,6 +173,9 @@ def train(model, c, spec, target_steps, horizon, directory):
                         "main_presentations": (step+1)*spec["p"]*spec["k"],
                         "equivalent_passes": (step+1)*spec["p"]*spec["k"]/len(c["train"])})
         if (step+1) % 25 == 0 or step+1 == target_steps:
+            if c["device"].type == "mps":
+                from training.research_mac import memory_sample
+                history[-1].update(memory_sample())
             seconds = elapsed+time.perf_counter()-began
             print(f"{spec['id']} | step {step+1}/{target_steps} | passes {history[-1]['equivalent_passes']:.2f} | "
                   f"loss {history[-1]['loss']:.4f} | acc {history[-1]['accuracy']:.3f} | {seconds/60:.1f} min", flush=True)
@@ -186,4 +191,6 @@ def train(model, c, spec, target_steps, horizon, directory):
     return {"checkpoint":path.name, "sha256":io.sha(path), "step":target_steps,
             "elapsed_seconds":elapsed+time.perf_counter()-began,
             "peak_torch_cuda_allocated_bytes":torch.cuda.max_memory_allocated() if c["device"].type=="cuda" else None,
-            "memory_note":"PyTorch allocator peak, not total board VRAM"}
+            "max_observed_mps_driver_bytes":max((h.get("mps_driver_bytes",0) for h in history),default=0) or None,
+            "memory_note":("MPS samples at step ends every 25 steps; NOT a guaranteed peak or total system RAM"
+                           if c["device"].type=="mps" else "PyTorch allocator peak, not total board VRAM")}

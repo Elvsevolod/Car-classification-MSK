@@ -84,8 +84,20 @@ checkpoint, а не выдуманный полный hash на основани
 
 ## Окружение и границы исследования
 
+Актуальный сценарий после смены устройства — Mac mini M4 / 16 ГБ, **MPS**, отдельное
+окружение Python 3.11 arm64, `requirements-mac.txt`, `RUN_NAME=mac_m4_v1`.
+Torch 2.14.0 / torchvision 0.29.0 закреплены по проверенному исходному Mac-окружению.
+Новый `setup_mac.sh` не использует скопированную .venv: это соответствует
+[ограничениям переносимости Python venv](https://docs.python.org/3.11/library/venv.html#how-venvs-work).
+Apple GPU выбирается явно по [документации MPS](https://docs.pytorch.org/docs/2.14/notes/mps.html).
+Лимит памяти задаётся [set_per_process_memory_fraction](https://docs.pytorch.org/docs/2.14/generated/torch.mps.set_per_process_memory_fraction.html);
+он относится к рекомендованному Metal working set, не к полной RAM.
+[driver_allocated_memory](https://docs.pytorch.org/docs/2.14/generated/torch.mps.driver_allocated_memory.html)
+включает кэш/аллокации фреймворка; дискретные измерения в истории не являются точным пиком.
+Сетка/разбиения прежние, но MPS-run — отдельный runtime, контроль извлекается заново.
+
 [Официальные команды PyTorch 2.6.0 / CUDA 12.4](https://pytorch.org/get-started/previous-versions/#v260)
-использованы в setup_windows.ps1. Python 3.11, отдельное окружение и закреплённые
+использованы в резервном setup_windows.ps1. Python 3.11, отдельное окружение и закреплённые
 зависимости. Фактические версии/устройство сохраняются в manifest; результаты Mac
 не выдаются за Windows/CUDA-приёмку.
 

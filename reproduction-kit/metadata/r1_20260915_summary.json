@@ -1,0 +1,88 @@
+{
+  "signature": "f3a3b7cd814c79639ec31aba2a439d6019ffd0d2ffbdea320a1962a1edbebb82",
+  "context_signature": "2648555ff6bc6e62706e772358040b37fb1f726302a9b1e78e5c222a7252be70",
+  "variant": "R1_resolution256",
+  "seed": 20260915,
+  "fold": "final",
+  "stop_step": 800,
+  "lr_horizon": 1700,
+  "updates": 800,
+  "train_identities": 925,
+  "train_images": 5717,
+  "elapsed_seconds": 919.4178752909647,
+  "history": [
+    {
+      "step": 200,
+      "validation": null,
+      "train": {
+        "loss": 6.085570247173309,
+        "classification": 5.2347896289825435,
+        "metric": 0.5482936566695571,
+        "consistency": 0.13800200566649437,
+        "embedding_norm": 1.2258990064263344,
+        "embedding_std": 1.0617118108272552,
+        "gradient_norm": 22.502059059143065
+      }
+    },
+    {
+      "step": 285,
+      "validation": null,
+      "train": {
+        "loss": 2.8530081622740804,
+        "classification": 2.4679316815207986,
+        "metric": 0.23982364693108726,
+        "consistency": 0.1177126712658826,
+        "embedding_norm": 1.2848208637798533,
+        "embedding_std": 1.1941278990577249,
+        "gradient_norm": 15.271797858967501
+      }
+    },
+    {
+      "step": 400,
+      "validation": null,
+      "train": {
+        "loss": 2.084400951344034,
+        "classification": 1.752677912297456,
+        "metric": 0.20390732165264047,
+        "consistency": 0.1192057727471642,
+        "embedding_norm": 1.2551867163699606,
+        "embedding_std": 1.246387123024982,
+        "gradient_norm": 13.894307136535645
+      }
+    },
+    {
+      "step": 600,
+      "validation": null,
+      "train": {
+        "loss": 1.5964355343580245,
+        "classification": 1.3536740231513977,
+        "metric": 0.14598868342116475,
+        "consistency": 0.10866015646606683,
+        "embedding_norm": 1.231238335967064,
+        "embedding_std": 1.272853491306305,
+        "gradient_norm": 10.432377182245254
+      }
+    },
+    {
+      "step": 800,
+      "validation": null,
+      "train": {
+        "loss": 1.4187801611423492,
+        "classification": 1.2278993791341781,
+        "metric": 0.11239692652598024,
+        "consistency": 0.1012827255949378,
+        "embedding_norm": 1.1967995238304139,
+        "embedding_std": 1.2724800616502763,
+        "gradient_norm": 8.124989676475526
+      }
+    }
+  ],
+  "validation": null,
+  "checkpoints": {
+    "800": {
+      "path": "final/R1_resolution256/seed_20260915/step_00800.pt",
+      "sha256": "2b3619b54d3d35f6f1f22d1f81832f6a9da14f022d784e64f8f8e826699d1620"
+    }
+  },
+  "last_sha256": "1d614cba1d1f3e6e8485316cfa0885e5b6c68ed81500834cee11a10020866ef1"
+}
