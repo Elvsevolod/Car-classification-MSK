@@ -18,6 +18,10 @@ journal_devops
 web-ui/node_modules/
 web-ui/dist/
 reproduction
+reproduction-kit
+presentation
+submission
 notebooks
-tools
+tools/*
+!tools/package_submission.py
 .agents

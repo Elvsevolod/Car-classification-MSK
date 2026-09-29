@@ -1,0 +1,9 @@
+{
+  "profile": "MVP_fusion_v25",
+  "provider": "CPUExecutionProvider",
+  "model_load_seconds": 0.47756470809690654,
+  "full_runtime_seconds": 244.39183745800983,
+  "reused_measurement": false,
+  "includes": "model validation/load, hashes, decode, preprocessing, embeddings, graph, search, files, validation",
+  "official_gpu_verified": false
+}

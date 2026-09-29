@@ -19,6 +19,8 @@ sha256sum vehicle-reid-cuda12.2.tar > vehicle-reid-cuda12.2.tar.sha256
 (включая оба Compose-файла), README и фиксированный обучающий код из
 [исследовательской ветки](BRANCH_LAYOUT.md). Dataset передаётся отдельно.
 Архив образа не коммитится в Git. Запишите `git rev-parse HEAD` и ID образа.
+Используйте заново собранный образ с NVRTC 12.2.140 из актуального GPU lock,
+а не старый TAR: обновление исходников само по себе содержимое образа не меняет.
 
 ## На offline-машине
 
@@ -29,7 +31,8 @@ sha256sum vehicle-reid-cuda12.2.tar > vehicle-reid-cuda12.2.tar.sha256
 sha256sum -c vehicle-reid-cuda12.2.tar.sha256
 docker load -i vehicle-reid-cuda12.2.tar
 docker compose -f docker-compose.yml -f docker-compose.gpu.yml --profile inference \
-  run --rm --no-deps --pull never inference --dataset /data --output /out/contest-run1
+  run --rm --no-deps --pull never inference --dataset /data --output /out/contest-run1 \
+  --profile MVP_fusion_v25 --provider CUDAExecutionProvider
 ```
 
 Это единственная команда inference после загрузки образа. Она не собирает образы,

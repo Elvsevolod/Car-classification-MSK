@@ -1,0 +1,227 @@
+{
+  "schema": 1,
+  "package_id": "MVP_fusion_v25_20260928",
+  "packaged_at_utc": "2026-09-28T15:20:24.613035+00:00",
+  "scope": "Technical results and provenance; presentation and hosted prototype are separate",
+  "profile": "MVP_fusion_v25",
+  "runtime_commit": "91d559c2e0024fd117f74943781b6b9ee84c997d",
+  "runtime_source_sha256": {
+    "backend/__init__.py": "5af81eede658a98211be554f80861a43001c3327e38bc22f0e42a9c934a4030f",
+    "backend/__main__.py": "18cece87551c4efd679e55a5a849eacf9e28c156998aa758ee9dd8cdb9fe4958",
+    "backend/app.py": "187035cdd5a697e17c701a5ee303df02015ec2d141a8b4cea8af653a34e6495a",
+    "backend/artifacts.py": "cc88fe369755c57dd7f9a6144427b89ef5000ee4292103ed6ec4cd38e040e0c6",
+    "backend/benchmark.py": "910e3b4eb63a29d7b19ce9bfcee2ee5cc8c5703720fae5dc04f34210efe25682",
+    "backend/bootstrap.py": "0a963d055dab9db6d11197939fc42739c2b120cd4173f9c973b9d3ebb7211bda",
+    "backend/cache_spaces.py": "7615c580de94d4e009f2eeb86f22dde2c6548f595194b7d912177e83422a139f",
+    "backend/calibration.py": "a97b1b01322cb3fedd96df38d8328bedc0c5cf01a909fdbeed67b4ae05c5e6c5",
+    "backend/compare_exports.py": "68bef1a127b51c5b3e93b8df3bda15f612f147b40951e4b02b4441a06a987e37",
+    "backend/compare_inference.py": "c8d3f393b6c52fe86c2fcabf5bf7e794f2b269051fb4f76a52322bbbab1e9691",
+    "backend/core.py": "bcbc75fffa88b86894fd80d7048f6fb9ee566149ce874ebbf687ffebb0713cf8",
+    "backend/database.py": "ba1da1b43706a8211f6140d2a6b399c0612190bd8a5c354e06426aa9b3429892",
+    "backend/db_probe.py": "1733cab282c6802fc74d12294643544a54293e55a9c5dee229e3d4e0ab5c75f1",
+    "backend/dual_role.py": "d37e58e34c763048bb529736f24b58dbffbb19282439099293ab9fbfabce6b65",
+    "backend/evaluate.py": "54e176004f685a981253c8364f7dce918f60eb519a4a35635864f31cdf591e25",
+    "backend/frozen_encoder.py": "f7abd39ca77b165f5fef41acd26f2cd6b273a4e402e8c0a589a3a53a1df89823",
+    "backend/gallery_repository.py": "d271b16ef3c5de1c56ddf8e96c8e2514c944d8acad80fc8038fb39aa57df1376",
+    "backend/gpu.py": "e0afb92dda8f2d383479cf1f1309b57ba0b3de26df81aa577e046531023ad9d0",
+    "backend/images.py": "6ae43611a3addd8a53d85c242280d00ac5bb8f4158b04106da1861dcdf68f360",
+    "backend/infer.py": "c5c6f28567a43945ac7db869f23294aa6ddc5aaf09ca05bb6f046a5ddd4ee647",
+    "backend/parity.py": "62441f7e3cbf041f063fe2ef7999f142ba7b2d5f60a84c6a7acd970e9595f28a",
+    "backend/postgres_gallery_repository.py": "33e12635200df7630cf433d5cc8662abecbeb2247caefe1e9faab5dceb25e549",
+    "backend/rerank.py": "7490f288e42a8d42540604e2ad165f40805100f0a1ce42967e13e17af09adc7f",
+    "backend/runtime.py": "3c8d5dca17329ecf56fe20692dde58f9bd21a3e67338046191473b1bd0276954",
+    "backend/scoring.py": "3b183baca71086621124777369d7ae12e24e6b0412c58203dc513dd24c898055",
+    "evaluate.py": "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3",
+    "requirements.txt": "7568fe5a640103942c77a7b831a1f00a7e7651367e443f2a21ceba7c8d09a7b2"
+  },
+  "frozen_assets": {
+    "models/MVP_fusion_v25.metrics.json": {
+      "sha256": "630612e80f07cc233fb7e07bbe1c6fcbe3c13f494d974edf4c3f5af5890499ff",
+      "bytes": 777
+    },
+    "models/frozen/OSNet-AIN-x1.0/variant_16_review_protocol/runs/review_v1/final/R1_resolution256/seed_20260915/bundle.json": {
+      "sha256": "4bb0e340d90a5fab1928885e5fb456e4ab3cac6749238aefe09517a92ee99869",
+      "bytes": 1125
+    },
+    "models/frozen/OSNet-AIN-x1.0/variant_16_review_protocol/runs/review_v1/final/R1_resolution256/seed_20260915/encoder.onnx": {
+      "sha256": "6c1f87bdfbd5dbf48012bb2491b660310d76b1800e0a889617a8333230fd6ff4",
+      "bytes": 8767584
+    },
+    "models/frozen/OSNet-AIN-x1.0/variant_17_final_seed_confirmation/runs/final_seeds_v1/final/R1_resolution256/seed_20260916/bundle.json": {
+      "sha256": "8bb3a4c3a9f68ac23ffdbec3d9bb4327ea9684a2d93d9f11d0562c3cc1f312b6",
+      "bytes": 1126
+    },
+    "models/frozen/OSNet-AIN-x1.0/variant_17_final_seed_confirmation/runs/final_seeds_v1/final/R1_resolution256/seed_20260916/encoder.onnx": {
+      "sha256": "c4aaf2edbc291e976873e9c81a65ee5119d310c6077ff7a90d91b2223efc675d",
+      "bytes": 8767584
+    },
+    "models/frozen/OSNet-AIN-x1.0/variant_17_final_seed_confirmation/runs/final_seeds_v1/final/R1_resolution256/seed_20260917/bundle.json": {
+      "sha256": "91ef5d957a1a1d5b73b9444461adce9e7da220ba02c747573771f00469998d52",
+      "bytes": 1126
+    },
+    "models/frozen/OSNet-AIN-x1.0/variant_17_final_seed_confirmation/runs/final_seeds_v1/final/R1_resolution256/seed_20260917/encoder.onnx": {
+      "sha256": "1b7f17e950efa7eb42a12f4eb10b92ccbe54a52d19a818aa3a5dfa5a09db8233",
+      "bytes": 8767584
+    },
+    "models/frozen/OSNet-AIN-x1.0/variant_18_retrieval_policy/runs/policy_v1/final/R1_equal3/less_graph/raw_top1/bundle.json": {
+      "sha256": "f911643a916f4287b0d78941cc1c35db228bef1153a195beb9e9789f580c5fcc",
+      "bytes": 1265
+    },
+    "models/osnet_ain_x1_0_vehicle_reid_hpo_best_map.onnx": {
+      "sha256": "01466f503232467224774b6e3bafe6c4393b1de30b47b1bd714908a62f2006a2",
+      "bytes": 8754346
+    },
+    "models/profiles.json": {
+      "sha256": "b91bd027779247fe6726b4b84229bb5495e5b59daa4ea60788392b073f7207b4",
+      "bytes": 2575
+    }
+  },
+  "profile_spec": {
+    "kind": "dual_role",
+    "size": [
+      208,
+      256
+    ],
+    "dimension": 2048,
+    "bundle": "models/frozen/OSNet-AIN-x1.0/variant_18_retrieval_policy/runs/policy_v1/final/R1_equal3/less_graph/raw_top1/bundle.json",
+    "bundle_sha256": "f911643a916f4287b0d78941cc1c35db228bef1153a195beb9e9789f580c5fcc",
+    "ranking": "legacy",
+    "candidate_policy": "raw_top1",
+    "lambda": 0.5,
+    "metrics": "models/MVP_fusion_v25.metrics.json",
+    "metrics_sha256": "630612e80f07cc233fb7e07bbe1c6fcbe3c13f494d974edf4c3f5af5890499ff",
+    "r1_weight": 0.5
+  },
+  "ranking_parameters": {
+    "k1": 20,
+    "k2": 3,
+    "lambda": 0.5
+  },
+  "refusal_threshold_raw_cosine": 0.534365177154541,
+  "metadata": {
+    "profile": "MVP_fusion_v25",
+    "model": "MVP_fusion_v25",
+    "provider": "CPUExecutionProvider",
+    "dimension": 2048,
+    "image_size": [
+      208,
+      256
+    ],
+    "profile_fingerprint": "3ddbff2bd2ca27fc0801937b7ed802a9eaf38a7c17d559d528ef232e8f8b5f12",
+    "encoder_fingerprint": "3a576f41744f2fceb40b042e5e9f500f75b9194c0f5c52dd142d26002d6bc717",
+    "implementation_sha256": {
+      "core.py": "bcbc75fffa88b86894fd80d7048f6fb9ee566149ce874ebbf687ffebb0713cf8",
+      "frozen_encoder.py": "f7abd39ca77b165f5fef41acd26f2cd6b273a4e402e8c0a589a3a53a1df89823",
+      "runtime.py": "3c8d5dca17329ecf56fe20692dde58f9bd21a3e67338046191473b1bd0276954",
+      "rerank.py": "7490f288e42a8d42540604e2ad165f40805100f0a1ce42967e13e17af09adc7f",
+      "images.py": "6ae43611a3addd8a53d85c242280d00ac5bb8f4158b04106da1861dcdf68f360",
+      "dual_role.py": "d37e58e34c763048bb529736f24b58dbffbb19282439099293ab9fbfabce6b65"
+    },
+    "ranking_policy": "legacy",
+    "candidate_policy": "raw_top1",
+    "frozen_threshold": 0.534365177154541,
+    "preprocessing": {
+      "ranking": "exif-rgb-bbox-bilinear208-imagenet-l2-v1",
+      "candidate": {
+        "image_size": 256,
+        "resize_mode": "square",
+        "interpolation": "bilinear",
+        "decode": "EXIF-oriented RGB",
+        "crop": "organizer xywh before resize",
+        "mean": [
+          0.48500001430511475,
+          0.4560000002384186,
+          0.4059999883174896
+        ],
+        "std": [
+          0.2290000021457672,
+          0.2240000069141388,
+          0.22499999403953552
+        ],
+        "scale": 255,
+        "layout": "NCHW",
+        "l2_normalized": true,
+        "flip_tta": false
+      },
+      "layout": {
+        "ranking": [
+          0,
+          512
+        ],
+        "candidate": [
+          512,
+          2048
+        ],
+        "normalization": "unit blocks, no global renormalization"
+      }
+    },
+    "l2_normalized": false,
+    "embedding_layout": {
+      "ranking": [
+        0,
+        512
+      ],
+      "candidate": [
+        512,
+        2048
+      ],
+      "normalization": "unit blocks, no global renormalization"
+    },
+    "ranking_model": "MVP_legacy + R1_equal3 (50/50)",
+    "ranking_r1_weight": 0.5,
+    "candidate_model": "RC_R1_equal3_v18"
+  },
+  "payload": {
+    "submission.csv": {
+      "sha256": "4403ee30d067574cf20f25d4b4ad2477c19f4f9f25117e2f3173b0a80a25d6fa",
+      "bytes": 404040
+    },
+    "candidates.csv": {
+      "sha256": "eb10560ef4509d59e2760e829b4139953dd8f03d6042b81cc16ea02c6bba04aa",
+      "bytes": 91824
+    },
+    "embeddings.npy": {
+      "sha256": "3f110559041070dba0befa3bae36165a57a88db6dba35cbee55af0fc3a350128",
+      "bytes": 15237248
+    }
+  },
+  "counts": {
+    "queries": 1110,
+    "gallery": 750,
+    "embedding_shape": [
+      1860,
+      2048
+    ],
+    "embedding_dtype": "float32",
+    "submission_rows": 1110,
+    "candidate_rows": 1069,
+    "accepted_queries": 1069,
+    "refused_queries": 41
+  },
+  "reproduction_source_archive": {
+    "name": "vehicle-reid-v25-reproduction.zip",
+    "bytes": 9860088,
+    "sha256": "00d284a75f51674ca6a2ec3f282bd6effe71b835487ec72d56417a976dc3e254"
+  },
+  "verification_environment": {
+    "python": "3.11.9",
+    "platform": "macOS-15.7.3-arm64-arm-64bit",
+    "onnxruntime": "1.30.0",
+    "numpy": "2.4.6",
+    "provider": "CPUExecutionProvider"
+  },
+  "export_reused_without_modification": true,
+  "fresh_full_export_timing_measured": false,
+  "original_export_timing": {
+    "profile": "MVP_fusion_v25",
+    "provider": "CPUExecutionProvider",
+    "model_load_seconds": 0.47756470809690654,
+    "full_runtime_seconds": 244.39183745800983,
+    "reused_measurement": false,
+    "includes": "model validation/load, hashes, decode, preprocessing, embeddings, graph, search, files, validation",
+    "official_gpu_verified": false
+  },
+  "packaging_tool_sha256": "068bad853d42dfd4339624dc6c4972346f8a51494cdc192271bd09446c7bcf14",
+  "dataset_images_included": false,
+  "quality_claim": "No ground-truth labels for the issued test; no test mAP/F1/TNR claimed"
+}

@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "counts": {
+    "queries": 1110,
+    "gallery": 750,
+    "embedding_shape": [
+      1860,
+      2048
+    ],
+    "embedding_dtype": "float32",
+    "submission_rows": 1110,
+    "candidate_rows": 1069,
+    "accepted_queries": 1069,
+    "refused_queries": 41
+  },
+  "input_images_sha256_checked": 1860,
+  "input_csv_hashes_match": true,
+  "embedding_id_order_matches": true,
+  "runtime_metadata_matches": true,
+  "embedding_blocks_are_unit_float32": true,
+  "embedding_sample": {
+    "rows": [
+      0,
+      555,
+      1109,
+      1110,
+      1485,
+      1859
+    ],
+    "image_ids": [
+      "486dd80d22f94a5496b3e670b19399a7",
+      "701794a02e204afbbbd3a8689e7eb5f0",
+      "0e5860811dd84425862213b698237538",
+      "df7ea50171af48df81584ab7e8107d15",
+      "1099cb6f4fac4eb8a1fb6db50e18296b",
+      "5f65785004054c67a618fe43b6a30f56"
+    ],
+    "max_abs_error": 0.0,
+    "atol": 2e-05,
+    "scope": "Six rows re-encoded; remaining rows checked structurally, not re-encoded"
+  },
+  "decision_replay": {
+    "queries_checked": 1110,
+    "top10_exact_match": true,
+    "candidates_and_refusals_match": true,
+    "confidence_max_abs_error": 0.0,
+    "confidence_atol": 1e-07,
+    "minimum_distance_to_threshold": 0.002260923385620117
+  },
+  "hidden_test_quality_evaluated": false
+}

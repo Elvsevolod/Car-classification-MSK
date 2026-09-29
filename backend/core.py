@@ -68,7 +68,12 @@ def crop_image(image, box):
 
 
 def preprocess(image, box):
-    crop = crop_image(image, box).resize((208, 208), Image.Resampling.BILINEAR)
+    return preprocess_crop(crop_image(image, box))
+
+
+def preprocess_crop(crop):
+    """Prepare an already EXIF-oriented, RGB, validated crop without changing pixel math."""
+    crop = crop.resize((208, 208), Image.Resampling.BILINEAR)
     pixels = np.asarray(crop, dtype=np.float32) / np.float32(255)
     pixels = (pixels - np.array([.485, .456, .406], np.float32)) / np.array([.229, .224, .225], np.float32)
     return np.ascontiguousarray(pixels.transpose(2, 0, 1))
@@ -111,6 +116,7 @@ class Encoder:
         self.input_name = self.session.get_inputs()[0].name
 
     preprocess = staticmethod(preprocess)
+    preprocess_crop = staticmethod(preprocess_crop)
 
     def encode_batch(self, batch, flip_tta=False):
         inputs = np.stack(batch)

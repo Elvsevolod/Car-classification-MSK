@@ -90,10 +90,10 @@ class Runtime:
                 "candidate_model": "RC_R1_equal3_v18" if self.spec["kind"] == "dual_role" else self.profile}
 
 
-def encode_rows(runtime, rows, dataset, batch_size=16, progress=None):
+def encode_rows(runtime, rows, dataset, batch_size=16, progress=None, images=None):
     if type(batch_size) is not int or batch_size < 1:
         raise ValueError("batch_size must be positive")
-    images = ImageIndex(Path(dataset) / "images")
+    images = images if images is not None else ImageIndex(Path(dataset) / "images")
     vectors = []
     for start in range(0, len(rows), batch_size):
         batch = []
@@ -173,10 +173,10 @@ class ExactScorer:
 
 
 class RuntimeGallery:
-    def __init__(self, runtime, dataset, repository=None, batch_size=16, progress=None):
+    def __init__(self, runtime, dataset, repository=None, batch_size=16, progress=None, images=None):
         self.runtime, self.dataset = runtime, Path(dataset)
         self.rows = read_rows(self.dataset / "test_gallery.csv")
-        self.images = ImageIndex(self.dataset / "images")
+        self.images = images if images is not None else ImageIndex(self.dataset / "images")
         hashes = {r["image_id"]: sha256(self.images.resolve(r["image_id"])) for r in self.rows}
         ordered = [{"image_id": r["image_id"], "bbox": bbox(r), "sha256": hashes[r["image_id"]]}
                    for r in self.rows]
@@ -192,7 +192,7 @@ class RuntimeGallery:
                                             runtime.dimension, self.build_state)
         self.cache_hit = self.vectors is not None
         if self.vectors is None:
-            self.vectors = encode_rows(runtime, self.rows, self.dataset, batch_size, progress)
+            self.vectors = encode_rows(runtime, self.rows, self.dataset, batch_size, progress, self.images)
             if (hashes != {r["image_id"]: sha256(self.images.resolve(r["image_id"])) for r in self.rows}
                     or sha256(self.dataset / "test_gallery.csv") != self.build_state.csv_sha256):
                 raise ValueError("Gallery inputs changed during build; cache was not published")
@@ -219,8 +219,8 @@ def export(runtime, dataset, output, batch_size=16, repository=None, progress=No
         raise ValueError("Query/gallery IDs must be disjoint")
     images = ImageIndex(dataset / "images")
     image_hashes = {r["image_id"]: sha256(images.resolve(r["image_id"])) for r in queries + rows}
-    gallery = RuntimeGallery(runtime, dataset, repository, batch_size, progress)
-    query_vectors = encode_rows(runtime, queries, dataset, batch_size, progress)
+    gallery = RuntimeGallery(runtime, dataset, repository, batch_size, progress, images)
+    query_vectors = encode_rows(runtime, queries, dataset, batch_size, progress, images)
     output.mkdir(parents=True, exist_ok=True)
     np.save(output / "embeddings.npy", np.concatenate([query_vectors, gallery.vectors]).astype(np.float32))
     with (output / "submission.csv").open("w", newline="") as ranking, (output / "candidates.csv").open("w", newline="") as candidates:

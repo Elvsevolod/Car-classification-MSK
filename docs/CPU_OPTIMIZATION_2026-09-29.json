@@ -1,0 +1,203 @@
+{
+  "byte_identical_sha256": {
+    "embeddings.npy": "3f110559041070dba0befa3bae36165a57a88db6dba35cbee55af0fc3a350128",
+    "submission.csv": "4403ee30d067574cf20f25d4b4ad2477c19f4f9f25117e2f3173b0a80a25d6fa",
+    "candidates.csv": "eb10560ef4509d59e2760e829b4139953dd8f03d6042b81cc16ea02c6bba04aa"
+  },
+  "profile_fingerprints": [
+    "3ddbff2bd2ca27fc0801937b7ed802a9eaf38a7c17d559d528ef232e8f8b5f12",
+    "cf4c356c51c0f3a862f51a0ff93fd56fe8ec67736f888bf4bf71736b5e8de1cc"
+  ],
+  "implementation_sha256": [
+    {
+      "core.py": "bcbc75fffa88b86894fd80d7048f6fb9ee566149ce874ebbf687ffebb0713cf8",
+      "frozen_encoder.py": "f7abd39ca77b165f5fef41acd26f2cd6b273a4e402e8c0a589a3a53a1df89823",
+      "runtime.py": "3c8d5dca17329ecf56fe20692dde58f9bd21a3e67338046191473b1bd0276954",
+      "rerank.py": "7490f288e42a8d42540604e2ad165f40805100f0a1ce42967e13e17af09adc7f",
+      "images.py": "6ae43611a3addd8a53d85c242280d00ac5bb8f4158b04106da1861dcdf68f360",
+      "dual_role.py": "d37e58e34c763048bb529736f24b58dbffbb19282439099293ab9fbfabce6b65"
+    },
+    {
+      "core.py": "4a4359426d6d5ebff8e4a3d268e7dbbb9226811ce82fe9104280c7edf7e5283e",
+      "frozen_encoder.py": "06a3f298e336e8b26a9bb6f2d9bce952888e43e4f2232df952083fe5a4f5943c",
+      "runtime.py": "ed254672395e98339198956c76ee355677a6b0e344b10b7779944e31bfe1d3a1",
+      "rerank.py": "7490f288e42a8d42540604e2ad165f40805100f0a1ce42967e13e17af09adc7f",
+      "images.py": "6ae43611a3addd8a53d85c242280d00ac5bb8f4158b04106da1861dcdf68f360",
+      "dual_role.py": "e7b29f08c8a217bf560f6217a7c1e208937ab4caf8a3395467c90735f64ca001"
+    }
+  ],
+  "full_run_timings": [
+    {
+      "profile": "MVP_fusion_v25",
+      "provider": "CPUExecutionProvider",
+      "model_load_seconds": 0.41818975005298853,
+      "full_runtime_seconds": 185.168235750054,
+      "reused_measurement": false,
+      "includes": "model validation/load, hashes, decode, preprocessing, embeddings, graph, search, files, validation",
+      "official_gpu_verified": false
+    },
+    {
+      "profile": "MVP_fusion_v25",
+      "provider": "CPUExecutionProvider",
+      "model_load_seconds": 0.39550804102327675,
+      "full_runtime_seconds": 180.48909566598013,
+      "reused_measurement": false,
+      "includes": "model validation/load, hashes, decode, preprocessing, embeddings, graph, search, files, validation",
+      "official_gpu_verified": false
+    }
+  ],
+  "validation": {
+    "queries": 1110,
+    "gallery": 750,
+    "embedding_shape": [
+      1860,
+      2048
+    ],
+    "embedding_dtype": "float32",
+    "submission_rows": 1110,
+    "candidate_rows": 1069,
+    "accepted_queries": 1069,
+    "refused_queries": 41
+  },
+  "passed": true,
+  "official_benchmark": false,
+  "gpu_tested": false,
+  "environment": {
+    "platform": "macOS-15.7.3-arm64-arm-64bit",
+    "python": "3.11.9",
+    "numpy": "2.4.6",
+    "pillow": "12.3.0",
+    "onnxruntime": "1.30.0",
+    "thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1"
+    }
+  },
+  "pixel_parity_images": 1860,
+  "pixel_parity_sizes": [
+    208,
+    256
+  ],
+  "sample_ids": [
+    "486dd80d22f94a5496b3e670b19399a7",
+    "107e548bacc844d38e74d9d3d4c6daef",
+    "1d36cd75ee6a4691965cfc6ebdef6a3e",
+    "bca392563d0a45d594ce43a0c540b7c9",
+    "27af2d56825b4ded843852cb1cbe3494",
+    "a340c00c29c84c2e841e61bba8c9b67b",
+    "01ac8202a1f44b648edeaa48d9b3be1c",
+    "cb80f73ab9454fa798342057923edd40",
+    "ca687051622e4c35823d965df0139509",
+    "2a551336cc794909b0a09c92faf75f50",
+    "03b02260fc474ab29d5d6a1398847a2a",
+    "736b602483e04289bedcbe5e6082e394",
+    "e1236162007c4212aaf19e0771d4b741",
+    "76f1a57141c141cf8c82961ec4686a1c",
+    "2e9248c10d1044a2a090d3fa4aa29fe5",
+    "2103b437c3c1452a96d8e7e1e5e20cc9",
+    "b0bed57573cb454590995348d9c3451b",
+    "bc709d8a81a346b5aca36d4ffb49d234",
+    "8b1b59a271e64b7d92225d1479ab0fa0",
+    "6cd0e8707bc64b2a808ed3479ee223ab",
+    "8fb15d3cacbd407bb226320c3829b9d1",
+    "9a11a8c9bd5f451c8babd3c4dde3d9ba",
+    "5ad1f88ed9ed488dafbdf8181733f084",
+    "ea57953406604eb083a4fecc3606c662",
+    "0df5d9aef12b4019955ea3f2f0b2adab",
+    "0c4b7eb545d746869c5419772a6e4392",
+    "341c198c08bf4223af06fe1151b3d336",
+    "b81b07771bcd450f9d8eaba7182f30c7",
+    "a3447d7a1b25452ab7eb7228d9426dbb",
+    "180a003741a9400fb647528c1b5bcccf",
+    "03d5ce4601154cbdad2bd459235427ad",
+    "d80469792ba1435797dbbd8c826c4dcc",
+    "eca00c36492249e08f99875a5e115d84",
+    "d8ec79e0dcba49fcaa2e32c4a56d98fe",
+    "f443d2b48e9f48748ed811a3ffbfeeb0",
+    "7567134f761c40a79567b3f82e31afdc",
+    "9df4eaf2213048e4a4ca33f6d817a0b9",
+    "841cacf592b14de2bc2fcdaf4995bf39",
+    "27fe100af7884932a33bf30f10dacc55",
+    "ee337b5c1ef3431e9c120250bfec4cac",
+    "a0408a6462b24cf18e50a8616359d5ad",
+    "ec4820b018a04967a457a9c032a51dc6",
+    "fc70a4c2c4834e0eba1a14470f563b03",
+    "78d0265d47df4f4cb7153da919763730",
+    "636c21e19a5845e1b8d69a5fca928030",
+    "b585a2970e9f421da236241f603883f2",
+    "4d0a737f396d4a95808085bd1306746c",
+    "45e440d874a54bb591862ff441114cd3",
+    "f5bcc6f48ed2447581b401d453039866",
+    "5d5baf5ce88b4b529e28ab9c7c114148",
+    "56272326c7e94e419ea8c69fb634f610",
+    "ca5add3cbf044a95a5bec88a5841ce98",
+    "191b01e1728e4583a8ead5a86db27370",
+    "3574ab91c29940b3afc62354ae06b73b",
+    "249c2d8d8d2345c6990b3c4d94385b5a",
+    "724a3f6551e74ad585bdeac9a75fd639",
+    "444fa28d9ed54c82a522699041eae592",
+    "eb21a4e2b7bd43efbdf0c365415e7fef",
+    "8b038cd0dafd45d8b1ce75177ca3a76b",
+    "3138244ae91040948d5bd6772e4075ea",
+    "f2cfa68a47ce4a43a0fe1cc7dc860418",
+    "9fd4c00672d84215b3e21812aef3d6ac",
+    "63eab812f3254cccb9631b09725aec3d",
+    "5f65785004054c67a618fe43b6a30f56"
+  ],
+  "batch_size": 16,
+  "extraction_seconds": {
+    "before": [
+      6.324188040918671,
+      6.207806874997914,
+      6.179311666986905,
+      6.196828291984275,
+      6.117633583024144,
+      6.163080207887106
+    ],
+    "after": [
+      6.182495667017065,
+      6.066934417001903,
+      6.137465916923247,
+      6.183866625069641,
+      6.026526333997026,
+      6.055108957923949
+    ]
+  },
+  "extraction_median_seconds": {
+    "before": 6.18806997948559,
+    "after": 6.102200166962575
+  },
+  "extraction_time_reduction_percent": 1.3876671208904678,
+  "preprocessing_seconds": {
+    "before": [
+      0.23165595799218863,
+      0.20212870801333338,
+      0.21685137506574392,
+      0.2265570000745356,
+      0.20363466592971236,
+      0.2050543330842629,
+      0.21740024990867823,
+      0.22065525001380593,
+      0.20149354205932468,
+      0.22036649996880442
+    ],
+    "after": [
+      0.1708235420519486,
+      0.1719633750617504,
+      0.1802933750441298,
+      0.16769591602496803,
+      0.1806685000192374,
+      0.16784795909188688,
+      0.1834537909599021,
+      0.1821862090146169,
+      0.1740327919833362,
+      0.1827705840114504
+    ]
+  },
+  "preprocessing_median_seconds": {
+    "before": 0.21712581248721108,
+    "after": 0.177163083513733
+  },
+  "preprocessing_time_reduction_percent": 18.405333071963483,
+  "method": "Same process, CPU sessions intra=2/inter=1, 16-image warmup each; 6 alternating 64-image extracts. File caches warm, image index/decode/preprocess/4 forwards/L2 included; no reranking. Separate preprocessing-only measurements use decoded copies, 10 alternating repeats. Full exports are separate fresh processes; single timings are descriptive, not a stable speed claim."
+}

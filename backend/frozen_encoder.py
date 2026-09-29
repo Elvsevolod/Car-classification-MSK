@@ -168,7 +168,10 @@ class FrozenEncoder:
         self.fingerprint = hashlib.sha256(json.dumps(self.bundle, sort_keys=True).encode()).hexdigest()
 
     def preprocess(self, image, box):
-        crop = resize_crop(crop_image(image, box), self.bundle["preprocessing"]["resize_mode"], self.size)
+        return self.preprocess_crop(crop_image(image, box))
+
+    def preprocess_crop(self, crop):
+        crop = resize_crop(crop, self.bundle["preprocessing"]["resize_mode"], self.size)
         pixels = (np.asarray(crop, dtype=np.float32) / np.float32(255) - IMAGENET_MEAN) / IMAGENET_STD
         return np.ascontiguousarray(pixels.transpose(2, 0, 1))
 
@@ -225,8 +228,13 @@ class PolicyEncoder:
     def preprocess(self, image, box):
         return self.members[0].preprocess(image, box)
 
+    def preprocess_crop(self, crop):
+        return self.members[0].preprocess_crop(crop)
+
     def encode_batch(self, batch):
-        return combine_members([e.encode_batch(batch) for e in self.members])
+        # Materialize one shared CPU batch; each member still validates and runs synchronously.
+        inputs = np.asarray(batch, dtype=np.float32)
+        return combine_members([e.encode_batch(inputs) for e in self.members])
 
     def encode(self, image, box):
         return self.encode_batch([self.preprocess(image, box)])[0]

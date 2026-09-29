@@ -1,2 +1,8 @@
 # Runtime fingerprints and evidence use exact source/asset bytes.
 * -text
+# Do not treat presentation/PDF payloads as source text in diffs.
+*.pdf binary
+*.pptx binary
+*.ttf binary
+*.npy binary
+submission/MVP_fusion_v25/*.csv -text whitespace=cr-at-eol

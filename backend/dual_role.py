@@ -1,7 +1,7 @@
 """v24 inference port: lossless MVP512/R1_1536 blocks, separate ranking and acceptance."""
 import numpy as np
 
-from .core import Encoder, PREPROCESS, normalize
+from .core import Encoder, PREPROCESS, crop_image, normalize
 from .frozen_encoder import PolicyEncoder, digest
 
 LAYOUT = {"ranking": [0, 512], "candidate": [512, 2048], "normalization": "unit blocks, no global renormalization"}
@@ -30,7 +30,8 @@ class DualRoleEncoder:
                                    "r1": self.r1.fingerprint, "preprocessing": self.preprocessing})
 
     def preprocess(self, image, box):
-        return self.mvp.preprocess(image, box), self.r1.preprocess(image, box)
+        crop = crop_image(image, box)
+        return self.mvp.preprocess_crop(crop), self.r1.preprocess_crop(crop)
 
     def encode_batch(self, batch):
         mvp, r1 = zip(*batch)

@@ -4,11 +4,52 @@
 
 **Основной конкурсный путь:** каталог изображений + два CSV → одна команда offline inference → `submission.csv`, `embeddings.npy`, `candidates.csv`. Web/API с PostgreSQL — отдельное демонстрационное приложение. Для inference не нужны `train.csv`, исследовательская ветка или обучение.
 
-Текущий статус проверки и незакрытые условия: [GPU_READINESS.md](docs/GPU_READINESS.md). RTX 4060 позволяет проверить CUDA и получить замеры на своём компьютере. Эти цифры нельзя выдавать за результат на конкурсной RTX A5000 24 ГБ.
+Текущий статус проверки и незакрытые условия: [GPU_READINESS.md](docs/GPU_READINESS.md). Изменения без замены модели и локальное сравнение скорости: [CPU_OPTIMIZATION_2026-09-29.md](docs/CPU_OPTIMIZATION_2026-09-29.md). Замеры Mac или RTX 4060 нельзя выдавать за результат на конкурсной RTX A5000 24 ГБ.
 
 Для передачи проверки другой нейросети: [готовый промпт для RTX 4060](docs/RTX_4060_TEST_PROMPT.md) с командами запуска, критериями проверки и форматом отчёта в Git.
 
-## 1. Подготовка Windows + RTX 4060
+## Материалы для сдачи
+
+- [Документация решения](docs/DOCUMENTATION.md), [пошаговый запуск](docs/RUNBOOK.md) и [PDF-снимок документации от 28 сентября](docs/ASU_Team_Vehicle_ReID.pdf). Актуальные команды после оптимизации 29 сентября — в README и Runbook.
+- Презентация ASU Team: [PDF](presentation/ASU_Team_Product_Ensemble.pdf) и [редактируемый PPTX](presentation/ASU_Team_Product_Ensemble.pptx), версия от 29 сентября.
+- [Готовые конкурсные результаты v25](submission/MVP_fusion_v25/README.md): три файла, паспорт, проверка и контрольные суммы. Это результаты на выданных изображениях, не оценка скрытого теста.
+- [Исходники воспроизведения четырёх моделей, коммит 35e6e1f ветки fine-tuning](https://github.com/Elvsevolod/Car-classification-MSK/tree/35e6e1f0ffc6f378e924da930fdeccc5841273d1/reproduction-kit), [история экспериментов](docs/EXPERIMENT_HISTORY.md).
+- [Памятка по ссылкам для формы сдачи](docs/SUBMISSION_PACKAGE_GUIDE.md). Адрес размещённого прототипа команда указывает отдельно; localhost не является публичной ссылкой.
+
+## Быстрый запуск для экспертов: Linux amd64 + NVIDIA
+
+Нужны Docker с Compose, NVIDIA driver и настроенный [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html). Python, CUDA Toolkit и Node.js отдельно на хосте не нужны. Команды выполняются из корня поставленной версии `main` в Bash.
+
+1. Поместите выданные тестовые данные в `dataset/`: `images/`, `test_query.csv`, `test_gallery.csv` (подробный формат ниже).
+2. Один раз соберите образ с доступом к сети:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.gpu.yml build inference
+```
+
+3. Выполните конкурсный запуск одной командой:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.gpu.yml --profile inference \
+  run --rm --no-deps --pull never inference \
+  --dataset /data --output /out/contest-run1 \
+  --profile MVP_fusion_v25 --provider CUDAExecutionProvider
+```
+
+Результаты: `artifacts/contest-run1/{submission.csv,candidates.csv,embeddings.npy}`. Программа обрабатывает весь набор, сама проверяет форматы и сохраняет дополнительные manifest/timing-файлы. Повторный запуск требует нового выходного каталога. Inference работает **без сети, обучения, калибровки, PostgreSQL и UI**; отсутствие CUDA — ошибка, не скрытый переход на CPU. Для полностью offline-стенда вместо сборки загрузите заранее переданный образ: [инструкция поставки](docs/CONTEST_IMAGE_DELIVERY.md).
+
+Для измерения скорости extractor по методике организаторов есть отдельная команда; время полного экспорта её не заменяет:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.gpu.yml --profile inference \
+  run --rm --no-deps --pull never --entrypoint python inference \
+  -m backend.benchmark --dataset /data --profile MVP_fusion_v25 \
+  --provider CUDAExecutionProvider --output /out/contest-benchmark.json
+```
+
+UI предназначен для демонстрации поиска оператором: загрузка отдельного фото/BBox и просмотр результатов. Эксперт передаёт новую gallery через входной каталог и CSV; загружать библиотеку через браузер для конкурсного тестирования не требуется.
+
+## 1. Входные данные и альтернативный запуск Windows + RTX 4060
 
 1. Установите актуальный Windows-драйвер NVIDIA с поддержкой WSL2 и Docker Desktop. В PowerShell выполните `wsl --update`; если WSL ещё не установлен — сначала `wsl --install`, затем завершите настройку Ubuntu и перезагрузку, если она запрошена.
 2. В Docker Desktop включите **Use the WSL 2 based engine**, Linux containers и **Resources → WSL Integration → Ubuntu**. GPU поддерживается именно через WSL2: [инструкция Docker](https://docs.docker.com/desktop/features/gpu/).
@@ -52,7 +93,7 @@ dcgpu() { docker compose -f docker-compose.yml -f docker-compose.gpu.yml "$@"; }
 dcgpu build inference
 ```
 
-Сборка требует сети. Она создаёт `vehicle-reid:cuda12.2` для **linux/amd64**, включает UI, все веса и точные версии зависимостей из [requirements-gpu.txt](requirements-gpu.txt). ONNX Runtime GPU 1.20.2 использует CUDA 12.2/cuDNN 9.1. Он выбран с учётом заявленного организаторами драйвера CUDA 12.2; нельзя без повторной проверки заменять его последним GPU-пакетом. В одном окружении не устанавливаются одновременно CPU и GPU пакеты ONNX Runtime. Матрица совместимости: [ONNX Runtime](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements).
+Сборка требует сети. Она создаёт `vehicle-reid:cuda12.2` для **linux/amd64**, включает UI, все веса и точные версии зависимостей из [requirements-gpu.txt](requirements-gpu.txt). ONNX Runtime GPU 1.20.2 использует CUDA 12.2/cuDNN 9.1, включая NVRTC 12.2.140 и путь к `libnvrtc.so.12` внутри образа. Он выбран с учётом заявленного организаторами драйвера CUDA 12.2; нельзя без повторной проверки заменять его последним GPU-пакетом. После обновления зависимостей пересоберите образ: старый образ не получает исправления из нового README. В одном окружении не устанавливаются одновременно CPU и GPU пакеты ONNX Runtime. Матрица совместимости: [ONNX Runtime](https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements).
 
 Проверьте доступ к GPU и запуск всех четырёх моделей без сети:
 
@@ -142,7 +183,7 @@ curl http://127.0.0.1:8017/api/health
 - Swagger: <http://127.0.0.1:8017/docs> — assets включены в образ, CDN не нужен.
 - Health: <http://127.0.0.1:8017/api/health> — `status=ready`, `profile=MVP_fusion_v25`, `provider=CUDAExecutionProvider`, `embedding_dim=2048`, gallery соответствует CSV.
 
-Порт по умолчанию **8017**, другой задаётся `PORT` в `.env`. При первом запуске `dataset-init` копирует dataset во внутренний volume (понадобится дополнительное место примерно размером dataset), затем выполняются миграции и индексирование gallery. Дождитесь healthy; первое индексирование может занять несколько минут. Кэш учитывает байты изображений, BBox, модель и provider; смена CPU/GPU создаёт совместимое пространство заново.
+Порт по умолчанию **8017**, другой задаётся `PORT` в `.env`. При первом запуске `dataset-init` копирует dataset во внутренний volume (понадобится дополнительное место примерно размером dataset), затем выполняются миграции и индексирование gallery. Дождитесь healthy; первое индексирование может занять несколько минут. Кэш учитывает байты изображений, BBox, модель, provider и реализацию preprocessing/runtime. Обновление кода оптимизации или смена CPU/GPU создаёт новое пространство кэша; прежние таблицы и результаты сохраняются. Первое построение после обновления не является замером поиска с готовым кэшем.
 
 В UI выберите query либо загрузите JPEG/PNG, задайте BBox и выполните поиск. Ranking — смесь MVP/R1 50/50 и streaming k-reciprocal (20/3/0.50). Решение «совпадение/отказ» принимает отдельная ветвь R1 с порогом **0.534365177154541**. Принятый кандидат может отличаться от первого в ranking и показывается отдельно. При отказе `accepted_candidate=null`; ranking остаётся доступным для просмотра. Ручной threshold в UI — только демо и не меняет конкурсный профиль.
 
@@ -174,7 +215,7 @@ docker compose --profile inference run --rm --no-deps --pull never inference \
 
 - Backbone OSNet-AIN x1.0, публичная инициализация OpenVINO Open Model Zoo **vehicle-reid-0001, 2022.1**, авторы исходного vehicle-ReID порта: [sovrasov/deep-person-reid](https://github.com/sovrasov/deep-person-reid/tree/vehicle_reid). MIT, локально [LICENSE.osnet](models/LICENSE.osnet). URL весов, SHA-256/SHA-384 и preprocessing: [models/README.md](models/README.md). Четыре дообученных ONNX имеют проверяемые checksum в frozen bundles; [ASSET_PROVENANCE.json](docs/ASSET_PROVENANCE.json) хранит их происхождение.
 - Дообучение активных весов: выданный организаторами dataset. Внешние экспериментальные NiVe/TransReID не входят в активный v25. Данные организаторов получают отдельно; пути прошлой разработки в provenance не нужны для запуска.
-- Полный обучающий код и воспроизведение модели: [зафиксированный исследовательский коммит 8fc310c](https://github.com/Elvsevolod/Car-classification-MSK/tree/8fc310ca6ac1d8467ef8bfdc5ce4c1d1afa4498b), папка `reproduction/source/`. При сдаче приложите этот код/архив вместе с main, а не только контейнер inference. [Разделение веток](docs/BRANCH_LAYOUT.md).
+- Обучающий код и команды воспроизведения: [зафиксированный комплект в fine-tuning, 35e6e1f](https://github.com/Elvsevolod/Car-classification-MSK/tree/35e6e1f0ffc6f378e924da930fdeccc5841273d1/reproduction-kit). В нём сохранены исторические исходники [8fc310c](https://github.com/Elvsevolod/Car-classification-MSK/tree/8fc310ca6ac1d8467ef8bfdc5ce4c1d1afa4498b), точные рецепты и хеши. При сдаче передайте ссылку на этот код/архив вместе с main, а не только контейнер inference. [Разделение веток](docs/BRANCH_LAYOUT.md).
 - Полный список Python-библиотек с точными версиями: [CPU requirements.txt](requirements.txt), [GPU requirements-gpu.txt](requirements-gpu.txt). Ключевые: Python 3.11, FastAPI 0.141.1, NumPy 2.4.6, Pillow 12.3.0, ONNX 1.22.0; версии ORT и CUDA описаны выше. Node 24.15.0 нужен только при сборке UI. Полный список frontend-зависимостей и версий: [package-lock.json](web-ui/package-lock.json); `npm ci` использует lock. Версии и digest контейнеров зафиксированы в Dockerfile/Compose.
 
 ## 8. Проверки и границы готовности

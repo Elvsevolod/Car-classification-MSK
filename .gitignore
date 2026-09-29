@@ -22,6 +22,7 @@ skills-lock.json
 !.env.example
 /NiVe1303/
 /reproduction/
+/reproduction-kit/
 /training/
 /OSNet-AIN-x1.0/
 /CLIP-ReID-ViT-B-16/

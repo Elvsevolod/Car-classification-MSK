@@ -20,6 +20,8 @@ Docker и автономный трёхфайловый экспорт. Все �
 зафиксированных SHA256 файлов `reproduction/source/`.
 Точный коммит этого снимка указан в `BRANCH_PUBLICATION.md`.
 
+Для сдачи подготовлен отдельный [reproduction-kit, коммит 35e6e1f](https://github.com/Elvsevolod/Car-classification-MSK/tree/35e6e1f0ffc6f378e924da930fdeccc5841273d1/reproduction-kit): команды обучения четырёх компонентов v25, исторические исходники, хеши и проверки. Он находится только в fine-tuning. В main находятся документация, презентация и готовые конкурсные результаты в `submission/`; изображения датасетов туда не входят.
+
 Префикс `models/frozen/OSNet-AIN-x1.0/.../runs/...` в main сохраняет относительные
 связи опубликованных моделей, а не полную историю исследований.
 Новых train-checkpoint, optimizer-resume, NiVe и embedding-кэшей в main нет.

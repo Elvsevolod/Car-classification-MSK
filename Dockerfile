@@ -43,6 +43,8 @@ COPY --from=frontend-builder /web-ui/dist ./frontend/dist
 COPY models ./models
 COPY example_submission ./example_submission
 COPY tests ./tests
+COPY tools/package_submission.py ./tools/package_submission.py
+COPY Dockerfile requirements-gpu.txt release_decision.json ./
 COPY docker ./docker
 
 CMD ["sh", "-c", "/opt/venv/bin/alembic upgrade head && /opt/venv/bin/python -m pytest -q"]
@@ -54,7 +56,7 @@ FROM python:3.11-slim@sha256:e41613d42d4891e4930f79523f93f81bbc7632584ec65e36ab0
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PATH="/opt/venv/bin:$PATH" \
-    LD_LIBRARY_PATH="/opt/venv/lib/python3.11/site-packages/nvidia/cuda_runtime/lib:/opt/venv/lib/python3.11/site-packages/nvidia/cublas/lib:/opt/venv/lib/python3.11/site-packages/nvidia/cudnn/lib:/opt/venv/lib/python3.11/site-packages/nvidia/cufft/lib:/opt/venv/lib/python3.11/site-packages/nvidia/curand/lib:/opt/venv/lib/python3.11/site-packages/nvidia/nvjitlink/lib:/usr/local/nvidia/lib:/usr/local/nvidia/lib64"
+    LD_LIBRARY_PATH="/opt/venv/lib/python3.11/site-packages/nvidia/cuda_runtime/lib:/opt/venv/lib/python3.11/site-packages/nvidia/cuda_nvrtc/lib:/opt/venv/lib/python3.11/site-packages/nvidia/cublas/lib:/opt/venv/lib/python3.11/site-packages/nvidia/cudnn/lib:/opt/venv/lib/python3.11/site-packages/nvidia/cufft/lib:/opt/venv/lib/python3.11/site-packages/nvidia/curand/lib:/opt/venv/lib/python3.11/site-packages/nvidia/nvjitlink/lib:/usr/local/nvidia/lib:/usr/local/nvidia/lib64"
 
 WORKDIR /app
 

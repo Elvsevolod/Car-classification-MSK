@@ -1,8 +1,7 @@
 # Активная модель MVP_fusion_v25
 
 Профиль по умолчанию в runtime, Docker Compose и `release_decision.json` —
-**MVP_fusion_v25**. Это перенос существующей проверенной модели, без нового обучения,
-изменения весов, bbox, порога, preprocessing или evaluator.
+**MVP_fusion_v25**. Метод и инструкция запуска описаны в [документации](DOCUMENTATION.md).
 
 ## Два назначения признаков
 
@@ -61,7 +60,8 @@ python -m backend.infer --dataset /absolute/dataset --output /absolute/new_outpu
 ```
 
 Docker-эквиваленты и web-приложение описаны в [README](../README.md).
-Обучающий код находится в ветке fine-tuning, см. [BRANCH_LAYOUT.md](BRANCH_LAYOUT.md).
+Исходники выбранных рецептов находятся в [reproduction-kit ветки fine-tuning, коммит 35e6e1f](https://github.com/Elvsevolod/Car-classification-MSK/tree/35e6e1f0ffc6f378e924da930fdeccc5841273d1/reproduction-kit).
+История поиска сохранена отдельно: [EXPERIMENT_HISTORY.md](EXPERIMENT_HISTORY.md).
 `backend.evaluate` сохранён как отдельный legacy-инструмент разработки;
 его результат не заменяет оценку ансамбля v25.
 
