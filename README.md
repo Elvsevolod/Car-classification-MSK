@@ -11,7 +11,7 @@
 ## Материалы для сдачи
 
 - [Документация решения](docs/DOCUMENTATION.md), [пошаговый запуск](docs/RUNBOOK.md) и [PDF-снимок документации от 28 сентября](docs/ASU_Team_Vehicle_ReID.pdf). Актуальные команды после оптимизации 29 сентября — в README и Runbook.
-- Презентация ASU Team: [PDF](presentation/ASU_Team_Product_Ensemble.pdf) и [редактируемый PPTX](presentation/ASU_Team_Product_Ensemble.pptx), версия от 29 сентября.
+- Презентация ASU Team: [PDF](presentation/ASU_Team.pdf) и [редактируемый PPTX](presentation/ASU_Team.pptx), 15 слайдов, версия от 29 сентября.
 - [Готовые конкурсные результаты v25](submission/MVP_fusion_v25/README.md): три файла, паспорт, проверка и контрольные суммы. Это результаты на выданных изображениях, не оценка скрытого теста.
 - [Исходники воспроизведения четырёх моделей, коммит 35e6e1f ветки fine-tuning](https://github.com/Elvsevolod/Car-classification-MSK/tree/35e6e1f0ffc6f378e924da930fdeccc5841273d1/reproduction-kit), [история экспериментов](docs/EXPERIMENT_HISTORY.md).
 - [Памятка по ссылкам для формы сдачи](docs/SUBMISSION_PACKAGE_GUIDE.md). Адрес размещённого прототипа команда указывает отдельно; localhost не является публичной ссылкой.

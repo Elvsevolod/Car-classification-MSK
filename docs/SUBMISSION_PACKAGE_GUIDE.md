@@ -8,7 +8,7 @@
 | --- | --- |
 | Репозиторий | Ссылка на опубликованную версию с кодом, моделями и корневым README |
 | Документация | [Актуальная документация](DOCUMENTATION.md) и [PDF-снимок от 28 сентября](ASU_Team_Vehicle_ReID.pdf); обновлённый запуск — [Runbook](RUNBOOK.md) |
-| Презентация | [PDF](../presentation/ASU_Team_Product_Ensemble.pdf) или [PPTX](../presentation/ASU_Team_Product_Ensemble.pptx), версия от 29 сентября |
+| Презентация | [PDF](../presentation/ASU_Team.pdf) или [PPTX](../presentation/ASU_Team.pptx), 15 слайдов, версия от 29 сентября |
 | Прототип | Адрес работающего сервиса после размещения |
 | Дополнительные материалы | Ссылка на `docs/EXPERIMENT_HISTORY.md` и при необходимости папку результатов |
 
