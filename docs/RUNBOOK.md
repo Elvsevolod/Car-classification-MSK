@@ -87,16 +87,22 @@ dcgpu --profile inference run --rm --no-deps --pull never --entrypoint python in
 CPU:
 
 ```bash
-docker compose up -d --build
+# Подготовка с интернетом: приложение и PostgreSQL.
+docker compose build
+# Выполнение без интернета:
+docker compose up -d --no-build --pull never
 ```
 
 GPU, после определения `dcgpu` из предыдущего раздела:
 
 ```bash
-dcgpu up -d --build
+dcgpu build
+dcgpu up -d --no-build --pull never
 ```
 
 Откройте <http://127.0.0.1:8017>. Swagger доступен по <http://127.0.0.1:8017/docs>.
+
+Полная сборка обязательна: `build inference` из разделов 2–3 не готовит PostgreSQL. Цель `postgres` в Dockerfile фиксирует образ pgvector/PostgreSQL по SHA256; Compose собирает его под локальным тегом `vehicle-reid-postgres:pg16-pgvector0.8.6`. В runtime скачивание образов запрещено. Web/БД используют локальную сеть Compose и могут работать на отключённом от интернета стенде; `dataset-init` и batch не имеют сети. Для web интернет отключается на уровне стенда, не правилом Compose `internal`.
 
 Первый запуск копирует датасет во внутренний volume, запускает PostgreSQL, применяет миграции и строит gallery. Понадобится дополнительное место примерно размером датасета. До завершения индексации сервис может быть не готов.
 
@@ -112,7 +118,7 @@ curl http://127.0.0.1:8017/api/health
 
 ## 5. Запуск без интернета
 
-Заранее соберите и перенесите образы по [инструкции передачи Docker](CONTEST_IMAGE_DELIVERY.md). После `docker load`:
+На той же машине достаточно заранее выполнить полную сборку из раздела 4. Для другого компьютера перенесите **приложение и PostgreSQL**, а не только образ приложения, по [инструкции передачи Docker](CONTEST_IMAGE_DELIVERY.md). После `docker load`:
 
 ```bash
 docker compose up -d --no-build --pull never

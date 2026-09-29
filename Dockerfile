@@ -1,3 +1,7 @@
+# Отдельный образ БД: Compose собирает/тегирует его заранее, пока доступна сеть.
+# PostgreSQL остаётся отдельным сервисом; в inference-образ он не включается.
+FROM pgvector/pgvector:0.8.6-pg16-bookworm@sha256:ccc6e83d6e35e931dc7c5def2022729d5a6c370318d099181995567ff1fb4d6b AS postgres
+
 # Этап 1: собирает статический React bundle; Node не попадает в конечный образ.
 FROM node:24.15.0-alpine@sha256:d1b3b4da11eefd5941e7f0b9cf17783fc99d9c6fc34884a665f40a06dbdfc94f AS frontend-builder
 
@@ -45,6 +49,7 @@ COPY example_submission ./example_submission
 COPY tests ./tests
 COPY tools/package_submission.py ./tools/package_submission.py
 COPY Dockerfile requirements-gpu.txt release_decision.json ./
+COPY docker-compose.yml docker-compose.gpu.yml .env.example ./
 COPY docker ./docker
 
 CMD ["sh", "-c", "/opt/venv/bin/alembic upgrade head && /opt/venv/bin/python -m pytest -q"]

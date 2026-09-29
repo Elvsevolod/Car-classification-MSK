@@ -174,8 +174,16 @@ dcgpu --profile inference run --rm --no-deps --pull never --entrypoint python in
 
 ## 5. Новый web-интерфейс на GPU
 
+Подготовка с интернетом (собирает **и приложение, и PostgreSQL**):
+
 ```bash
-dcgpu up -d --build
+dcgpu build
+```
+
+После сборки интернет больше не нужен. Запуск всех сервисов одной командой:
+
+```bash
+dcgpu up -d --no-build --pull never
 dcgpu ps
 curl http://127.0.0.1:8017/api/health
 ```
@@ -197,14 +205,19 @@ curl http://127.0.0.1:8017/api/health
 На macOS или компьютере без NVIDIA используйте основной Compose без GPU overlay:
 
 ```bash
-docker compose up -d --build
+# Один раз, пока есть интернет: все образы, включая PostgreSQL.
+docker compose build
+# Запуск без сборки и без скачивания образов:
+docker compose up -d --no-build --pull never
 # Или только конкурсный экспорт, без web/БД:
 docker compose build inference
 docker compose --profile inference run --rm --no-deps --pull never inference \
   --dataset /data --output /out/cpu-run1
 ```
 
-Для стенда без сети заранее соберите и перенесите Linux amd64 GPU-образ через `docker save`/`docker load`. На стенде используйте `--pull never` и `--no-build` для web. Точная процедура и контрольная сумма архива — [CONTEST_IMAGE_DELIVERY.md](docs/CONTEST_IMAGE_DELIVERY.md). Сеть разрешена при сборке; конкурсный inference выполняется с полностью отключённой сетью. Web использует локальную сеть Compose для PostgreSQL.
+PostgreSQL — отдельная цель `postgres` в Dockerfile и отдельный контейнер. `docker compose build` готовит его локальный образ `vehicle-reid-postgres:pg16-pgvector0.8.6`; версия исходного образа закреплена SHA256. Только `docker build .` или `docker compose build inference` готовят приложение, **но не БД**: этого достаточно для batch, недостаточно для web.
+
+Для переноса полного демо на другой offline-стенд сохраните **оба образа**: приложение и PostgreSQL. При сборке на той же машине перенос не нужен. Точные команды CPU/GPU и контрольные суммы — [CONTEST_IMAGE_DELIVERY.md](docs/CONTEST_IMAGE_DELIVERY.md). При запуске pull запрещён; отсутствующий образ — ошибка, а не попытка скачивания. Batch и подготовка данных работают с `network_mode: none`. Web и PostgreSQL используют локальную сеть Compose; UI доступен через опубликованный порт хоста. Интернет для работы демо не требуется. Обычная bridge-сеть не является запретом внешнего трафика: отключение интернета для web-стенда обеспечивает окружение организаторов.
 
 ## 7. Модель, качество и источники
 

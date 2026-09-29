@@ -17,6 +17,9 @@ x-gpu-device: &gpu-device
           capabilities: [gpu]
 
 services:
+  postgres:
+    platform: linux/amd64
+
   dataset-init:
     <<: *gpu-image
 

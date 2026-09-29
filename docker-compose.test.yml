@@ -1,6 +1,11 @@
 services:
   postgres-test:
-    image: pgvector/pgvector:0.8.6-pg16-bookworm
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: postgres
+    image: vehicle-reid-postgres:pg16-pgvector0.8.6
+    pull_policy: never
     environment:
       POSTGRES_DB: reid_integration_test
       POSTGRES_USER: vehicle_reid_test

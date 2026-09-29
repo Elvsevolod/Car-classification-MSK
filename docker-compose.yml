@@ -5,6 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
     image: vehicle-reid:release-integration
+    pull_policy: never
+    network_mode: none
     user: "0:0"
     entrypoint: ["/usr/local/bin/vehicle-reid-dataset-init"]
     environment:
@@ -17,7 +19,12 @@ services:
 
   # Единственное постоянное runtime-хранилище gallery и pgvector-эмбеддингов.
   postgres:
-    image: pgvector/pgvector:0.8.6-pg16-bookworm@sha256:ccc6e83d6e35e931dc7c5def2022729d5a6c370318d099181995567ff1fb4d6b
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: postgres
+    image: vehicle-reid-postgres:pg16-pgvector0.8.6
+    pull_policy: never
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-vehicle_reid}
       POSTGRES_USER: ${POSTGRES_USER:-vehicle_reid}
@@ -39,6 +46,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: vehicle-reid:release-integration
+    pull_policy: never
     profiles: ["inference"]
     # One-shot export creates files in the host bind mount; root avoids host UID/GID permission dependence.
     user: "0:0"
@@ -57,6 +65,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: vehicle-reid:release-integration
+    pull_policy: never
     ports:
       - "${PORT:-8017}:8000"
     environment:
